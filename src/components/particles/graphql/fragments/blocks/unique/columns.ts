@@ -1,17 +1,4 @@
-import {
-  coreEmbedVimeo,
-  coreEmbedYouTube,
-  coreHeading,
-  coreParagraph,
-  coreVideo,
-  acfBanner,
-  acfContact,
-  acfHero,
-  acfLogos,
-  acfStories,
-  acfWorks,
-  acfTestimonials,
-} from '../index';
+import { coreEmbedVimeo, coreEmbedYouTube, coreHeading, coreParagraph, coreVideo } from '../index';
 
 export const gqlSnippet = /* GraphQL */ `
  ... on CoreColumnsBlock {
@@ -26,13 +13,6 @@ export const gqlSnippet = /* GraphQL */ `
 				${coreHeading}
 				${coreParagraph}
 				${coreVideo}
-				${acfBanner}
-				${acfContact}
-				${acfHero}
-				${acfLogos}
-				${acfStories}
-				${acfWorks}
-				${acfTestimonials}
 			}
 		}
 	}

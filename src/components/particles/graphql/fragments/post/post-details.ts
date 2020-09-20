@@ -18,23 +18,6 @@ featuredImage {
 	}
 }
 ${SEOFragment}
-postFields {
-	relatedPosts {
-		... on Post {
-			id
-			featuredImage {
-				node {
-					${MediaFragment}
-				}
-			}
-			${SEOFragment}
-			slug
-			status
-			title
-			uri
-		}
-	}
-}
 slug
 status
 title

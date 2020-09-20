@@ -11,19 +11,6 @@ export const MediaFragment = /* GraphQL */ `
       width
     }
   }
-  mediaFields {
-    mediaLink {
-      ...on Post {
-        uri
-      }
-      ...on Page {
-        uri
-      }
-      ...on Work {
-        uri
-      }
-    }
-  }
   mediaItemUrl
   mediaType
   status

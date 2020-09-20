@@ -10,7 +10,6 @@ export const POSTS = /* GraphQL */ `
     posts(first: 500) {
       nodes {
         id
-        ${AllBlocksFragment}
         categories {
           nodes {
             name

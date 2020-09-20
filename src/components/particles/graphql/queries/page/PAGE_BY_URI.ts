@@ -8,7 +8,6 @@ export const PAGE_BY_URI = /* GraphQL */ `
   query PAGE_BY_URI($uri: String!) {
     pageBy(uri: $uri) {
       id
-      ${AllBlocksFragment}
       date
       pageFields {
         headerTransparent

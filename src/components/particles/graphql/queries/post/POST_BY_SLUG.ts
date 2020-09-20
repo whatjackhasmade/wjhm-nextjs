@@ -6,7 +6,6 @@ import { PostDetailsFragment } from '../../fragments/post/post-details';
 export const POST_BY_SLUG = /* GraphQL */ `
   query POST_BY_SLUG($slug: String!) {
     postBy(slug: $slug) {
-     ${AllBlocksFragment}
      ${PostDetailsFragment}
     }
   }

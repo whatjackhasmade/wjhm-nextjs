@@ -1,11 +1,3 @@
-import acfBanner from './acf/banner';
-import acfContact from './acf/contact';
-import acfHero from './acf/hero';
-import acfLogos from './acf/logos';
-import acfStories from './acf/stories';
-import acfTestimonials from './acf/Testimonials';
-import acfWorks from './acf/works';
-
 import coreEmbedVimeo from './core/embed-vimeo';
 import coreEmbedYouTube from './core/embed-youtube';
 import coreHeading from './core/heading';
@@ -25,13 +17,6 @@ export const AllBlocksFragment = /* GraphQL */ `
     ${coreHeading}
     ${coreParagraph}
     ${coreVideo}
-    ${acfBanner}
-    ${acfContact}
-    ${acfHero}
-    ${acfLogos}
-    ${acfStories}
-    ${acfWorks}
-    ${acfTestimonials}
   }
 `;
 
@@ -44,13 +29,6 @@ export {
   coreParagraph,
   coreVideo,
   /* ACF Blocks */
-  acfBanner,
-  acfContact,
-  acfHero,
-  acfLogos,
-  acfStories,
-  acfWorks,
-  acfTestimonials,
 };
 
 export default AllBlocksFragment;

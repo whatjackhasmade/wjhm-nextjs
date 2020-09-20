@@ -8,7 +8,6 @@ export const PAGE_BY_ID = /* GraphQL */ `
   query PAGE_BY_ID($id: ID!) {
     pageBy(id: $id) {
       id
-      ${AllBlocksFragment}
       date
       pageFields {
         headerTransparent
