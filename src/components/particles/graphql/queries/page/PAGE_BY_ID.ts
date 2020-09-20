@@ -9,9 +9,6 @@ export const PAGE_BY_ID = /* GraphQL */ `
     pageBy(id: $id) {
       id
       date
-      pageFields {
-        headerTransparent
-      }
       ${SEOFragment}
       uri
     }

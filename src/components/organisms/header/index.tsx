@@ -24,13 +24,19 @@ const Header = (props: HeaderProps) => {
   const [menuOpen, toggleMenu] = useState(false);
 
   const hasMenus = menus?.length > 0;
-  if (!hasMenus) return;
+  if (!hasMenus) return null;
 
   const headerMenu = menus.nodes.find(menu => menu.slug === `header-menu`);
-  if (!headerMenu) return;
+  if (!headerMenu) return null;
 
   const menuLength = headerMenu.menuItems.nodes.length;
   const lastItem = headerMenu.menuItems.nodes[menuLength - 1];
+  const otherItems = headerMenu.menuItems.nodes.filter((item, index) => index !== menuLength - 1);
+
+  const handleClick = e => {
+    e.preventDefault();
+    toggleMenu(!menuOpen);
+  };
 
   return (
     <HeaderComponent>
@@ -39,14 +45,14 @@ const Header = (props: HeaderProps) => {
           <Logo />
         </Link>
         <nav className={menuOpen ? `header__menu--show` : undefined}>
-          {headerMenu.menuItems.nodes.map(
-            (item, index) => index !== menuLength - 1 && <MenuItem key={`header-nav-${index}`} {...item} />,
-          )}
+          {otherItems.map(item => (
+            <MenuItem key={`header-nav-${item?.id}`} {...item} />
+          ))}
         </nav>
         <a className="mailtoui" href={lastItem.url}>
           {lastItem.label}
         </a>
-        <button onClick={() => toggleMenu(!menuOpen)}>
+        <button onClick={handleClick}>
           <span>{menuOpen ? `Close` : `Open`} Menu</span>
           <span> Navigation</span>
           {menuOpen ? <Times /> : <Bars />}
