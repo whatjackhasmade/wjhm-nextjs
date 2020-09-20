@@ -1,0 +1,18 @@
+import { Meta, Preview, Props, Story } from '@storybook/addon-docs/blocks';
+import { text } from '@storybook/addon-knobs';
+
+import Paragraph from './index';
+import knobData from './paragraph.knobs.json';
+const { paragraph_text } = knobData;
+
+<Meta title="Atoms/Paragraph" component={Paragraph} />
+
+# Paragraph
+
+The HTML `<p>` element represents a paragraph. Paragraphs are usually represented in visual media as blocks of text separated from adjacent blocks by blank lines and/or first-line indentation, but HTML paragraphs can be any structural grouping of related content, such as images or form fields.
+
+<Preview>
+  <Story name="Paragraph">
+    <Paragraph content={text(...Object.values(paragraph_text))}></Paragraph>
+  </Story>
+</Preview>

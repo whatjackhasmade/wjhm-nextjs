@@ -1,0 +1,47 @@
+import { Meta, Preview, Props, Story } from '@storybook/addon-docs/blocks';
+import { boolean, text } from '@storybook/addon-knobs';
+
+import Video from './index';
+import { autoplay, controls, loop, muted, src, vimeo, youtube } from './video.knobs.json';
+
+<Meta title="Atoms/Video" component={Video} />
+
+# Video
+
+<Props of={Video} />
+
+<Preview>
+  <Story name="Video URL">
+    <Video
+      autoplay={boolean(...Object.values(autoplay))}
+      controls={boolean(...Object.values(controls))}
+      loop={boolean(...Object.values(loop))}
+      muted={boolean(...Object.values(muted))}
+      src={text(...Object.values(src))}
+    />
+  </Story>
+</Preview>
+
+<Preview>
+  <Story name="Video Vimeo">
+    <Video
+      autoplay={boolean(...Object.values(autoplay))}
+      controls={boolean(...Object.values(controls))}
+      loop={boolean(...Object.values(loop))}
+      muted={boolean(...Object.values(muted))}
+      vimeo={text(...Object.values(vimeo))}
+    />
+  </Story>
+</Preview>
+
+<Preview>
+  <Story name="Video YouTube">
+    <Video
+      autoplay={boolean(...Object.values(autoplay))}
+      controls={boolean(...Object.values(controls))}
+      loop={boolean(...Object.values(loop))}
+      muted={boolean(...Object.values(muted))}
+      youtube={text(...Object.values(youtube))}
+    />
+  </Story>
+</Preview>

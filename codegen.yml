@@ -1,0 +1,8 @@
+overwrite: true
+schema: ${NEXT_PUBLIC_GRAPHQL_API}
+generates:
+  src/generated/graphql/wjhm/index.tsx:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'

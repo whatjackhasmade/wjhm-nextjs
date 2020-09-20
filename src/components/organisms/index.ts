@@ -1,0 +1,13 @@
+export { default as Contact } from './contact';
+export { default as Dribbble } from './dribbble';
+export { default as Footer } from './footer';
+export { default as GitHub } from './github';
+export { default as Grid } from './grid';
+export { default as Header } from './header';
+export { default as Hero } from './hero';
+export { default as Intro } from './intro';
+export { default as Presentations } from './presentations';
+export { default as Related } from './related';
+export { default as Row } from './row';
+export { default as Testimonials } from './testimonials';
+export { default as YouTubeChannel } from './youtube';
