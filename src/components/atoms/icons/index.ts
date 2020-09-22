@@ -7,4 +7,4 @@ export { Youtube as IconYouTube } from './brands';
 
 export * from './solid';
 
-export { default as Logo } from './logo';
+export { default as Logo } from './Logo';

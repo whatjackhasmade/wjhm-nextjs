@@ -10,38 +10,23 @@ import { Base } from 'wjhm';
 
 import { Intro } from 'wjhm';
 
-function orderByDate(posts) {
-  return posts.sort((a, b) => new Date(b['date']) - new Date(a['date']));
-}
-
-function datesGroupByComponent(dates, token) {
-  return dates.reduce((val, obj) => {
-    let comp = moment(obj['date']).format(token);
-    (val[comp] = val[comp] || []).push(obj);
-    return val;
-  }, {});
-}
-
 declare type ArchiveProps = {
   posts: any[];
 };
 
 const Archive = (props: ArchiveProps) => {
   const posts = props?.posts;
-  const hasPosts = posts?.length > 0;
 
-  if (!hasPosts) return null;
-
-  const postsSorted = orderByDate(posts);
-  const postsArchive = datesGroupByComponent(postsSorted, 'YYYY-MM');
-
-  const datesArray = Object.keys(postsArchive).map(key => {
-    if (postsArchive[key] !== undefined) return key;
-  });
+  let datesArray = null;
+  if (posts) {
+    datesArray = Object.keys(posts).map(key => {
+      if (posts[key] !== undefined) return key;
+    });
+  }
 
   return (
     <Base>
-      <Intro heading={`Insights`} subheading={`Insights`}>
+      <Intro heading="Insights" subheading="Insights">
         <p>
           Welcome one and all! With over 200 blog posts, in 14 different categories, it's safe to say I can get carried
           away with my posts.
@@ -54,9 +39,10 @@ const Archive = (props: ArchiveProps) => {
       </Intro>
       <CollectionNavigation ids={datesArray} />
       <CollectionWrapper>
-        {Object.keys(postsArchive).map((key, index) => (
-          <Collection date={key} key={`Collection-${index}`} posts={postsArchive[key]} />
-        ))}
+        {posts &&
+          Object.keys(posts).map((key, index) => (
+            <Collection date={key} key={`Collection-${index}`} posts={posts[key]} />
+          ))}
       </CollectionWrapper>
     </Base>
   );

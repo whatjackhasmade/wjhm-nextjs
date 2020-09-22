@@ -25,10 +25,15 @@ const Four0Four = (props: Four0FourProps) => {
 
 export async function getStaticProps() {
   // Call an external API endpoint to get pages
-  const { footerMenu, headerMenu, postSummaries } = await getStaticData();
+  const { footerMenu, headerMenu } = await getStaticData();
+
+  const props = {
+    ...(footerMenu && { footerMenu }),
+    ...(headerMenu && { headerMenu }),
+  };
 
   return {
-    props: { footerMenu, headerMenu, postSummaries }, // will be passed to the page component as props
+    props, // will be passed to the page component as props
   };
 }
 

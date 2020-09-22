@@ -1,14 +1,14 @@
 import { requestor } from 'wjhm';
 
-import { PAGES } from 'wjhm';
+import { POSTS } from 'wjhm';
 
-import { Page } from 'wjhm';
+import { Post } from 'wjhm';
 
 import { pageGetStaticProps as getStaticProps } from 'wjhm';
 
 import { ContentType } from 'wjhmtypes';
 
-interface PageCollection extends Array<ContentType> {}
+interface PostCollection extends Array<ContentType> {}
 
 // This function gets called at build time
 export async function getStaticPaths() {
@@ -16,19 +16,10 @@ export async function getStaticPaths() {
 
   try {
     // Call an external API endpoint to get pages
-    const data = await requestor.request(PAGES);
-    const nodes: PageCollection = data.pages.nodes;
+    const data = await requestor.request(POSTS);
+    const nodes: PostCollection = data.posts.nodes;
 
-    // Remove Homepage
-    const validNodes = nodes.filter(n => {
-      const { isFrontPage, uri } = n;
-      const isAnIndex = uri === `/work/` || uri === `/stories/`;
-      const notFrontPage = isFrontPage === false;
-      const isValid = notFrontPage && !isAnIndex;
-      return isValid;
-    });
-
-    const pathsSlashed = validNodes.map(node => {
+    const pathsSlashed = nodes.map(node => {
       const { uri } = node;
 
       return {
@@ -57,4 +48,4 @@ export async function getStaticPaths() {
 
 export { getStaticProps };
 
-export default Page;
+export default Post;

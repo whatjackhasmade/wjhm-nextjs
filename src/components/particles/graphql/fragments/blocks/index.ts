@@ -1,3 +1,17 @@
+/* ACF Blocks */
+import acfCode from './acf/code';
+import acfDribbble from './acf/dribbble';
+import acfGithub from './acf/github';
+import acfHero from './acf/hero';
+import acfIntro from './acf/intro';
+import acfLink from './acf/link';
+import acfPresentations from './acf/presentations';
+import acfRow from './acf/row';
+import acfTestimonials from './acf/testimonials';
+import acfYoutube from './acf/youtube';
+import acfYoutubeChannel from './acf/youtubeChannel';
+
+/* Core Blocks */
 import coreEmbedVimeo from './core/embed-vimeo';
 import coreEmbedYouTube from './core/embed-youtube';
 import coreHeading from './core/heading';
@@ -17,6 +31,17 @@ export const AllBlocksFragment = /* GraphQL */ `
     ${coreHeading}
     ${coreParagraph}
     ${coreVideo}
+    ${acfCode}
+    ${acfDribbble}
+    ${acfGithub}
+    ${acfHero}
+    ${acfIntro}
+    ${acfLink}
+    ${acfPresentations}
+    ${acfRow}
+    ${acfTestimonials}
+    ${acfYoutube}
+    ${acfYoutubeChannel}
   }
 `;
 
@@ -29,6 +54,17 @@ export {
   coreParagraph,
   coreVideo,
   /* ACF Blocks */
+  acfCode,
+  acfDribbble,
+  acfGithub,
+  acfHero,
+  acfIntro,
+  acfLink,
+  acfPresentations,
+  acfRow,
+  acfTestimonials,
+  acfYoutube,
+  acfYoutubeChannel,
 };
 
 export default AllBlocksFragment;

@@ -9,6 +9,7 @@ export const PAGE_BY_URI = /* GraphQL */ `
     pageBy(uri: $uri) {
       id
       date
+      ${AllBlocksFragment}
       ${SEOFragment}
       uri
     }

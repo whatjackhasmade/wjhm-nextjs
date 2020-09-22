@@ -6,7 +6,8 @@ import { PostDetailsFragment } from '../../fragments/post/post-details';
 export const POST_BY_URI = /* GraphQL */ `
   query POST_BY_URI($uri: String!) {
     postBy(uri: $uri) {
-     ${PostDetailsFragment}
+      ${AllBlocksFragment}
+      ${PostDetailsFragment}
     }
   }
 `;

@@ -8,11 +8,6 @@ export const POSTS_SUMMARY = /* GraphQL */ `
       nodes {
         id
         date
-        featuredImage {
-          node {
-            ${MediaFragment}
-          }
-        }
         modified
         status
         slug
