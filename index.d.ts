@@ -13,3 +13,11 @@ interface ObjectLiteral {
 }
 
 declare type HeadingLevels = 1 | 2 | 3 | 4 | 5 | 6;
+
+// TODO Set generated type defs to global app
+
+declare type BaseProps = {
+  footerMenu: Menu;
+  headerMenu: Menu;
+  seo: SeoConfig;
+};

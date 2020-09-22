@@ -17,46 +17,28 @@ import { Related } from 'wjhm';
 
 import { Base } from 'wjhm';
 
-type PostProps = {
-  pageContext: {
-    acf: {
-      learn?: {
-        items: [
-          {
-            id?: string;
-            value: string;
-          },
-        ];
-        title?: string;
-      };
-      relatedPosts?: [];
-    };
-    blocks: [];
-    content: string;
-    date: string;
-    title: string;
-  };
-};
+import { Post } from 'wjhmtypes';
 
-const PostTemplate = ({
-  pageContext,
-  pageContext: {
-    acf: { learn, relatedPosts },
-    blocks,
-    content,
-    date,
-    title,
-  },
-}: PostProps) => {
+declare type PostTemplateProps = Post & BaseProps;
+
+const PostTemplate = (props: PostTemplateProps) => {
+  console.log(props);
+  const { blocks, content, date, PostFields, title } = props;
+  const { relatedPosts } = PostFields;
+  const learn = PostFields?.learn;
+  const lessons = learn?.items;
+
+  const hasBlocks = blocks?.length > 0;
+  const hasLessons = lessons?.length > 0;
+  const hasRelated = relatedPosts?.length > 0;
+
   useEffect(() => {
     // call the highlightAll() function to style our code blocks
     Prism.highlightAll();
   }, []);
 
-  const lessons = learn.items;
-
   return (
-    <Base context={pageContext}>
+    <Base {...props}>
       <ArticleIntro>
         <nav className="article__meta">
           <Link to="/posts">Insights</Link>
@@ -64,22 +46,19 @@ const PostTemplate = ({
         </nav>
         <h1>{decodeHTML(title)}</h1>
       </ArticleIntro>
-      {blocks.length > 0 ? (
+      {hasBlocks && (
         <Article>
-          {lessons && lessons.length && (
-            <OverviewList items={lessons} title={learn.title ? learn.title : `What you will learn`} />
-          )}
+          {hasLessons && <OverviewList items={lessons} title={learn.title ? learn.title : `What you will learn`} />}
           <ComponentParser content={blocks} />
         </Article>
-      ) : (
+      )}
+      {!hasBlocks && (
         <Article>
-          {lessons && lessons.length && (
-            <OverviewList items={lessons} title={learn.title ? learn.title : `What you will learn`} />
-          )}
+          {hasLessons && <OverviewList items={lessons} title={learn.title ? learn.title : `What you will learn`} />}
           {parseHTML(content)}
         </Article>
       )}
-      {relatedPosts && relatedPosts.length > 0 && <Related data={relatedPosts} />}
+      {hasRelated && <Related data={relatedPosts} />}
     </Base>
   );
 };

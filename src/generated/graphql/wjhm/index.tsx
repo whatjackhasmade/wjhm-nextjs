@@ -16043,90 +16043,6 @@ export type AcfCodeBlock_Code = {
   language?: Maybe<Scalars['String']>;
 };
 
-/** Field Group */
-export type AcfCodeBlock_Github = {
-  __typename?: 'AcfCodeBlock_Github';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfCodeBlock_Link = {
-  __typename?: 'AcfCodeBlock_Link';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  url?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfCodeBlock_Presentations = {
-  __typename?: 'AcfCodeBlock_Presentations';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  count?: Maybe<Scalars['Int']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfCodeBlock_Row = {
-  __typename?: 'AcfCodeBlock_Row';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  link?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
-};
-
-/** Field Group */
-export type AcfCodeBlock_Testimonials = {
-  __typename?: 'AcfCodeBlock_Testimonials';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonials?: Maybe<Array<Maybe<AcfCodeBlock_Testimonials_Testimonials>>>;
-};
-
-/** Field Group */
-export type AcfCodeBlock_Testimonials_Testimonials = {
-  __typename?: 'AcfCodeBlock_Testimonials_testimonials';
-  /** @deprecated  */
-  author?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  logo?: Maybe<MediaItem>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
-  /** @deprecated  */
-  role?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonial?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfCodeBlock_Youtube = {
-  __typename?: 'AcfCodeBlock_Youtube';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfCodeBlock_Youtubechannel = {
-  __typename?: 'AcfCodeBlock_Youtubechannel';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
 /** acf/code block */
 export type AcfCodeBlock = Block & {
   __typename?: 'AcfCodeBlock';
@@ -16139,8 +16055,6 @@ export type AcfCodeBlock = Block & {
    * @deprecated 
    */
   dynamicContent?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  github?: Maybe<AcfCodeBlock_Github>;
   /**
    * Gutenberg blocks
    * @deprecated 
@@ -16151,8 +16065,6 @@ export type AcfCodeBlock = Block & {
    * @deprecated 
    */
   isDynamic: Scalars['Boolean'];
-  /** @deprecated  */
-  link?: Maybe<AcfCodeBlock_Link>;
   /**
    * Name of the block.
    * @deprecated 
@@ -16175,21 +16087,11 @@ export type AcfCodeBlock = Block & {
    * @deprecated 
    */
   parentNodeDatabaseId: Scalars['Int'];
-  /** @deprecated  */
-  presentations?: Maybe<AcfCodeBlock_Presentations>;
-  /** @deprecated  */
-  row?: Maybe<AcfCodeBlock_Row>;
   /**
    * Original HTML content with inner blocks.
    * @deprecated 
    */
   saveContent?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonials?: Maybe<AcfCodeBlock_Testimonials>;
-  /** @deprecated  */
-  youtube?: Maybe<AcfCodeBlock_Youtube>;
-  /** @deprecated  */
-  youtubeChannel?: Maybe<AcfCodeBlock_Youtubechannel>;
 };
 
 export type AcfDribbbleBlockAttributes = {
@@ -16209,17 +16111,6 @@ export type AcfDribbbleBlockAttributes = {
 };
 
 /** Field Group */
-export type AcfDribbbleBlock_Code = {
-  __typename?: 'AcfDribbbleBlock_Code';
-  /** @deprecated  */
-  code?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  language?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
 export type AcfDribbbleBlock_Dribbble = {
   __typename?: 'AcfDribbbleBlock_Dribbble';
   /** @deprecated  */
@@ -16230,97 +16121,11 @@ export type AcfDribbbleBlock_Dribbble = {
   fieldGroupName?: Maybe<Scalars['String']>;
 };
 
-/** Field Group */
-export type AcfDribbbleBlock_Github = {
-  __typename?: 'AcfDribbbleBlock_Github';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfDribbbleBlock_Link = {
-  __typename?: 'AcfDribbbleBlock_Link';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  url?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfDribbbleBlock_Presentations = {
-  __typename?: 'AcfDribbbleBlock_Presentations';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  count?: Maybe<Scalars['Int']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfDribbbleBlock_Row = {
-  __typename?: 'AcfDribbbleBlock_Row';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  link?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
-};
-
-/** Field Group */
-export type AcfDribbbleBlock_Testimonials = {
-  __typename?: 'AcfDribbbleBlock_Testimonials';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonials?: Maybe<Array<Maybe<AcfDribbbleBlock_Testimonials_Testimonials>>>;
-};
-
-/** Field Group */
-export type AcfDribbbleBlock_Testimonials_Testimonials = {
-  __typename?: 'AcfDribbbleBlock_Testimonials_testimonials';
-  /** @deprecated  */
-  author?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  logo?: Maybe<MediaItem>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
-  /** @deprecated  */
-  role?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonial?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfDribbbleBlock_Youtube = {
-  __typename?: 'AcfDribbbleBlock_Youtube';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfDribbbleBlock_Youtubechannel = {
-  __typename?: 'AcfDribbbleBlock_Youtubechannel';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
 /** acf/dribbble block */
 export type AcfDribbbleBlock = Block & {
   __typename?: 'AcfDribbbleBlock';
   /** @deprecated  */
   attributes?: Maybe<AcfDribbbleBlockAttributes>;
-  /** @deprecated  */
-  code?: Maybe<AcfDribbbleBlock_Code>;
   /** @deprecated  */
   dribbble?: Maybe<AcfDribbbleBlock_Dribbble>;
   /**
@@ -16328,8 +16133,6 @@ export type AcfDribbbleBlock = Block & {
    * @deprecated 
    */
   dynamicContent?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  github?: Maybe<AcfDribbbleBlock_Github>;
   /**
    * Gutenberg blocks
    * @deprecated 
@@ -16340,8 +16143,6 @@ export type AcfDribbbleBlock = Block & {
    * @deprecated 
    */
   isDynamic: Scalars['Boolean'];
-  /** @deprecated  */
-  link?: Maybe<AcfDribbbleBlock_Link>;
   /**
    * Name of the block.
    * @deprecated 
@@ -16364,21 +16165,11 @@ export type AcfDribbbleBlock = Block & {
    * @deprecated 
    */
   parentNodeDatabaseId: Scalars['Int'];
-  /** @deprecated  */
-  presentations?: Maybe<AcfDribbbleBlock_Presentations>;
-  /** @deprecated  */
-  row?: Maybe<AcfDribbbleBlock_Row>;
   /**
    * Original HTML content with inner blocks.
    * @deprecated 
    */
   saveContent?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonials?: Maybe<AcfDribbbleBlock_Testimonials>;
-  /** @deprecated  */
-  youtube?: Maybe<AcfDribbbleBlock_Youtube>;
-  /** @deprecated  */
-  youtubeChannel?: Maybe<AcfDribbbleBlock_Youtubechannel>;
 };
 
 export type AcfGithubBlockAttributes = {
@@ -16398,96 +16189,10 @@ export type AcfGithubBlockAttributes = {
 };
 
 /** Field Group */
-export type AcfGithubBlock_Code = {
-  __typename?: 'AcfGithubBlock_Code';
-  /** @deprecated  */
-  code?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  language?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
 export type AcfGithubBlock_Github = {
   __typename?: 'AcfGithubBlock_Github';
   /** @deprecated  */
   content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfGithubBlock_Link = {
-  __typename?: 'AcfGithubBlock_Link';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  url?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfGithubBlock_Presentations = {
-  __typename?: 'AcfGithubBlock_Presentations';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  count?: Maybe<Scalars['Int']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfGithubBlock_Row = {
-  __typename?: 'AcfGithubBlock_Row';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  link?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
-};
-
-/** Field Group */
-export type AcfGithubBlock_Testimonials = {
-  __typename?: 'AcfGithubBlock_Testimonials';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonials?: Maybe<Array<Maybe<AcfGithubBlock_Testimonials_Testimonials>>>;
-};
-
-/** Field Group */
-export type AcfGithubBlock_Testimonials_Testimonials = {
-  __typename?: 'AcfGithubBlock_Testimonials_testimonials';
-  /** @deprecated  */
-  author?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  logo?: Maybe<MediaItem>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
-  /** @deprecated  */
-  role?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonial?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfGithubBlock_Youtube = {
-  __typename?: 'AcfGithubBlock_Youtube';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfGithubBlock_Youtubechannel = {
-  __typename?: 'AcfGithubBlock_Youtubechannel';
   /** @deprecated  */
   fieldGroupName?: Maybe<Scalars['String']>;
 };
@@ -16497,8 +16202,6 @@ export type AcfGithubBlock = Block & {
   __typename?: 'AcfGithubBlock';
   /** @deprecated  */
   attributes?: Maybe<AcfGithubBlockAttributes>;
-  /** @deprecated  */
-  code?: Maybe<AcfGithubBlock_Code>;
   /**
    * Server side rendered content.
    * @deprecated 
@@ -16516,8 +16219,6 @@ export type AcfGithubBlock = Block & {
    * @deprecated 
    */
   isDynamic: Scalars['Boolean'];
-  /** @deprecated  */
-  link?: Maybe<AcfGithubBlock_Link>;
   /**
    * Name of the block.
    * @deprecated 
@@ -16540,21 +16241,11 @@ export type AcfGithubBlock = Block & {
    * @deprecated 
    */
   parentNodeDatabaseId: Scalars['Int'];
-  /** @deprecated  */
-  presentations?: Maybe<AcfGithubBlock_Presentations>;
-  /** @deprecated  */
-  row?: Maybe<AcfGithubBlock_Row>;
   /**
    * Original HTML content with inner blocks.
    * @deprecated 
    */
   saveContent?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonials?: Maybe<AcfGithubBlock_Testimonials>;
-  /** @deprecated  */
-  youtube?: Maybe<AcfGithubBlock_Youtube>;
-  /** @deprecated  */
-  youtubeChannel?: Maybe<AcfGithubBlock_Youtubechannel>;
 };
 
 export type AcfHeroBlockAttributes = {
@@ -16574,26 +16265,6 @@ export type AcfHeroBlockAttributes = {
 };
 
 /** Field Group */
-export type AcfHeroBlock_Code = {
-  __typename?: 'AcfHeroBlock_Code';
-  /** @deprecated  */
-  code?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  language?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfHeroBlock_Github = {
-  __typename?: 'AcfHeroBlock_Github';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
 export type AcfHeroBlock_Hero = {
   __typename?: 'AcfHeroBlock_Hero';
   /** @deprecated  */
@@ -16610,95 +16281,16 @@ export type AcfHeroBlock_Hero = {
   overlay?: Maybe<Scalars['Boolean']>;
 };
 
-/** Field Group */
-export type AcfHeroBlock_Link = {
-  __typename?: 'AcfHeroBlock_Link';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  url?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfHeroBlock_Presentations = {
-  __typename?: 'AcfHeroBlock_Presentations';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  count?: Maybe<Scalars['Int']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfHeroBlock_Row = {
-  __typename?: 'AcfHeroBlock_Row';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  link?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
-};
-
-/** Field Group */
-export type AcfHeroBlock_Testimonials = {
-  __typename?: 'AcfHeroBlock_Testimonials';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonials?: Maybe<Array<Maybe<AcfHeroBlock_Testimonials_Testimonials>>>;
-};
-
-/** Field Group */
-export type AcfHeroBlock_Testimonials_Testimonials = {
-  __typename?: 'AcfHeroBlock_Testimonials_testimonials';
-  /** @deprecated  */
-  author?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  logo?: Maybe<MediaItem>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
-  /** @deprecated  */
-  role?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonial?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfHeroBlock_Youtube = {
-  __typename?: 'AcfHeroBlock_Youtube';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfHeroBlock_Youtubechannel = {
-  __typename?: 'AcfHeroBlock_Youtubechannel';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
 /** acf/hero block */
 export type AcfHeroBlock = Block & {
   __typename?: 'AcfHeroBlock';
   /** @deprecated  */
   attributes?: Maybe<AcfHeroBlockAttributes>;
-  /** @deprecated  */
-  code?: Maybe<AcfHeroBlock_Code>;
   /**
    * Server side rendered content.
    * @deprecated 
    */
   dynamicContent?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  github?: Maybe<AcfHeroBlock_Github>;
   /** @deprecated  */
   hero?: Maybe<AcfHeroBlock_Hero>;
   /**
@@ -16711,8 +16303,6 @@ export type AcfHeroBlock = Block & {
    * @deprecated 
    */
   isDynamic: Scalars['Boolean'];
-  /** @deprecated  */
-  link?: Maybe<AcfHeroBlock_Link>;
   /**
    * Name of the block.
    * @deprecated 
@@ -16735,21 +16325,11 @@ export type AcfHeroBlock = Block & {
    * @deprecated 
    */
   parentNodeDatabaseId: Scalars['Int'];
-  /** @deprecated  */
-  presentations?: Maybe<AcfHeroBlock_Presentations>;
-  /** @deprecated  */
-  row?: Maybe<AcfHeroBlock_Row>;
   /**
    * Original HTML content with inner blocks.
    * @deprecated 
    */
   saveContent?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonials?: Maybe<AcfHeroBlock_Testimonials>;
-  /** @deprecated  */
-  youtube?: Maybe<AcfHeroBlock_Youtube>;
-  /** @deprecated  */
-  youtubeChannel?: Maybe<AcfHeroBlock_Youtubechannel>;
 };
 
 export type AcfIntroBlockAttributes = {
@@ -16769,26 +16349,6 @@ export type AcfIntroBlockAttributes = {
 };
 
 /** Field Group */
-export type AcfIntroBlock_Code = {
-  __typename?: 'AcfIntroBlock_Code';
-  /** @deprecated  */
-  code?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  language?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfIntroBlock_Github = {
-  __typename?: 'AcfIntroBlock_Github';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
 export type AcfIntroBlock_Intro = {
   __typename?: 'AcfIntroBlock_Intro';
   /** @deprecated  */
@@ -16801,95 +16361,16 @@ export type AcfIntroBlock_Intro = {
   subheading?: Maybe<Scalars['String']>;
 };
 
-/** Field Group */
-export type AcfIntroBlock_Link = {
-  __typename?: 'AcfIntroBlock_Link';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  url?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfIntroBlock_Presentations = {
-  __typename?: 'AcfIntroBlock_Presentations';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  count?: Maybe<Scalars['Int']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfIntroBlock_Row = {
-  __typename?: 'AcfIntroBlock_Row';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  link?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
-};
-
-/** Field Group */
-export type AcfIntroBlock_Testimonials = {
-  __typename?: 'AcfIntroBlock_Testimonials';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonials?: Maybe<Array<Maybe<AcfIntroBlock_Testimonials_Testimonials>>>;
-};
-
-/** Field Group */
-export type AcfIntroBlock_Testimonials_Testimonials = {
-  __typename?: 'AcfIntroBlock_Testimonials_testimonials';
-  /** @deprecated  */
-  author?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  logo?: Maybe<MediaItem>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
-  /** @deprecated  */
-  role?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonial?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfIntroBlock_Youtube = {
-  __typename?: 'AcfIntroBlock_Youtube';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfIntroBlock_Youtubechannel = {
-  __typename?: 'AcfIntroBlock_Youtubechannel';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
 /** acf/intro block */
 export type AcfIntroBlock = Block & {
   __typename?: 'AcfIntroBlock';
   /** @deprecated  */
   attributes?: Maybe<AcfIntroBlockAttributes>;
-  /** @deprecated  */
-  code?: Maybe<AcfIntroBlock_Code>;
   /**
    * Server side rendered content.
    * @deprecated 
    */
   dynamicContent?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  github?: Maybe<AcfIntroBlock_Github>;
   /**
    * Gutenberg blocks
    * @deprecated 
@@ -16902,8 +16383,6 @@ export type AcfIntroBlock = Block & {
    * @deprecated 
    */
   isDynamic: Scalars['Boolean'];
-  /** @deprecated  */
-  link?: Maybe<AcfIntroBlock_Link>;
   /**
    * Name of the block.
    * @deprecated 
@@ -16926,21 +16405,11 @@ export type AcfIntroBlock = Block & {
    * @deprecated 
    */
   parentNodeDatabaseId: Scalars['Int'];
-  /** @deprecated  */
-  presentations?: Maybe<AcfIntroBlock_Presentations>;
-  /** @deprecated  */
-  row?: Maybe<AcfIntroBlock_Row>;
   /**
    * Original HTML content with inner blocks.
    * @deprecated 
    */
   saveContent?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonials?: Maybe<AcfIntroBlock_Testimonials>;
-  /** @deprecated  */
-  youtube?: Maybe<AcfIntroBlock_Youtube>;
-  /** @deprecated  */
-  youtubeChannel?: Maybe<AcfIntroBlock_Youtubechannel>;
 };
 
 export type AcfLinkBlockAttributes = {
@@ -16960,26 +16429,6 @@ export type AcfLinkBlockAttributes = {
 };
 
 /** Field Group */
-export type AcfLinkBlock_Code = {
-  __typename?: 'AcfLinkBlock_Code';
-  /** @deprecated  */
-  code?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  language?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfLinkBlock_Github = {
-  __typename?: 'AcfLinkBlock_Github';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
 export type AcfLinkBlock_Link = {
   __typename?: 'AcfLinkBlock_Link';
   /** @deprecated  */
@@ -16988,86 +16437,16 @@ export type AcfLinkBlock_Link = {
   url?: Maybe<Scalars['String']>;
 };
 
-/** Field Group */
-export type AcfLinkBlock_Presentations = {
-  __typename?: 'AcfLinkBlock_Presentations';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  count?: Maybe<Scalars['Int']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfLinkBlock_Row = {
-  __typename?: 'AcfLinkBlock_Row';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  link?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
-};
-
-/** Field Group */
-export type AcfLinkBlock_Testimonials = {
-  __typename?: 'AcfLinkBlock_Testimonials';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonials?: Maybe<Array<Maybe<AcfLinkBlock_Testimonials_Testimonials>>>;
-};
-
-/** Field Group */
-export type AcfLinkBlock_Testimonials_Testimonials = {
-  __typename?: 'AcfLinkBlock_Testimonials_testimonials';
-  /** @deprecated  */
-  author?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  logo?: Maybe<MediaItem>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
-  /** @deprecated  */
-  role?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonial?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfLinkBlock_Youtube = {
-  __typename?: 'AcfLinkBlock_Youtube';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfLinkBlock_Youtubechannel = {
-  __typename?: 'AcfLinkBlock_Youtubechannel';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
 /** acf/link block */
 export type AcfLinkBlock = Block & {
   __typename?: 'AcfLinkBlock';
   /** @deprecated  */
   attributes?: Maybe<AcfLinkBlockAttributes>;
-  /** @deprecated  */
-  code?: Maybe<AcfLinkBlock_Code>;
   /**
    * Server side rendered content.
    * @deprecated 
    */
   dynamicContent?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  github?: Maybe<AcfLinkBlock_Github>;
   /**
    * Gutenberg blocks
    * @deprecated 
@@ -17102,21 +16481,11 @@ export type AcfLinkBlock = Block & {
    * @deprecated 
    */
   parentNodeDatabaseId: Scalars['Int'];
-  /** @deprecated  */
-  presentations?: Maybe<AcfLinkBlock_Presentations>;
-  /** @deprecated  */
-  row?: Maybe<AcfLinkBlock_Row>;
   /**
    * Original HTML content with inner blocks.
    * @deprecated 
    */
   saveContent?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonials?: Maybe<AcfLinkBlock_Testimonials>;
-  /** @deprecated  */
-  youtube?: Maybe<AcfLinkBlock_Youtube>;
-  /** @deprecated  */
-  youtubeChannel?: Maybe<AcfLinkBlock_Youtubechannel>;
 };
 
 export type AcfPresentationsBlockAttributes = {
@@ -17136,35 +16505,6 @@ export type AcfPresentationsBlockAttributes = {
 };
 
 /** Field Group */
-export type AcfPresentationsBlock_Code = {
-  __typename?: 'AcfPresentationsBlock_Code';
-  /** @deprecated  */
-  code?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  language?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfPresentationsBlock_Github = {
-  __typename?: 'AcfPresentationsBlock_Github';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfPresentationsBlock_Link = {
-  __typename?: 'AcfPresentationsBlock_Link';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  url?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
 export type AcfPresentationsBlock_Presentations = {
   __typename?: 'AcfPresentationsBlock_Presentations';
   /** @deprecated  */
@@ -17175,75 +16515,16 @@ export type AcfPresentationsBlock_Presentations = {
   fieldGroupName?: Maybe<Scalars['String']>;
 };
 
-/** Field Group */
-export type AcfPresentationsBlock_Row = {
-  __typename?: 'AcfPresentationsBlock_Row';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  link?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
-};
-
-/** Field Group */
-export type AcfPresentationsBlock_Testimonials = {
-  __typename?: 'AcfPresentationsBlock_Testimonials';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonials?: Maybe<Array<Maybe<AcfPresentationsBlock_Testimonials_Testimonials>>>;
-};
-
-/** Field Group */
-export type AcfPresentationsBlock_Testimonials_Testimonials = {
-  __typename?: 'AcfPresentationsBlock_Testimonials_testimonials';
-  /** @deprecated  */
-  author?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  logo?: Maybe<MediaItem>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
-  /** @deprecated  */
-  role?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonial?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfPresentationsBlock_Youtube = {
-  __typename?: 'AcfPresentationsBlock_Youtube';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfPresentationsBlock_Youtubechannel = {
-  __typename?: 'AcfPresentationsBlock_Youtubechannel';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
 /** acf/presentations block */
 export type AcfPresentationsBlock = Block & {
   __typename?: 'AcfPresentationsBlock';
   /** @deprecated  */
   attributes?: Maybe<AcfPresentationsBlockAttributes>;
-  /** @deprecated  */
-  code?: Maybe<AcfPresentationsBlock_Code>;
   /**
    * Server side rendered content.
    * @deprecated 
    */
   dynamicContent?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  github?: Maybe<AcfPresentationsBlock_Github>;
   /**
    * Gutenberg blocks
    * @deprecated 
@@ -17254,8 +16535,6 @@ export type AcfPresentationsBlock = Block & {
    * @deprecated 
    */
   isDynamic: Scalars['Boolean'];
-  /** @deprecated  */
-  link?: Maybe<AcfPresentationsBlock_Link>;
   /**
    * Name of the block.
    * @deprecated 
@@ -17280,19 +16559,11 @@ export type AcfPresentationsBlock = Block & {
   parentNodeDatabaseId: Scalars['Int'];
   /** @deprecated  */
   presentations?: Maybe<AcfPresentationsBlock_Presentations>;
-  /** @deprecated  */
-  row?: Maybe<AcfPresentationsBlock_Row>;
   /**
    * Original HTML content with inner blocks.
    * @deprecated 
    */
   saveContent?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonials?: Maybe<AcfPresentationsBlock_Testimonials>;
-  /** @deprecated  */
-  youtube?: Maybe<AcfPresentationsBlock_Youtube>;
-  /** @deprecated  */
-  youtubeChannel?: Maybe<AcfPresentationsBlock_Youtubechannel>;
 };
 
 export type AcfRowBlockAttributes = {
@@ -17312,46 +16583,6 @@ export type AcfRowBlockAttributes = {
 };
 
 /** Field Group */
-export type AcfRowBlock_Code = {
-  __typename?: 'AcfRowBlock_Code';
-  /** @deprecated  */
-  code?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  language?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfRowBlock_Github = {
-  __typename?: 'AcfRowBlock_Github';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfRowBlock_Link = {
-  __typename?: 'AcfRowBlock_Link';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  url?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfRowBlock_Presentations = {
-  __typename?: 'AcfRowBlock_Presentations';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  count?: Maybe<Scalars['Int']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
 export type AcfRowBlock_Row = {
   __typename?: 'AcfRowBlock_Row';
   /** @deprecated  */
@@ -17364,62 +16595,16 @@ export type AcfRowBlock_Row = {
   media?: Maybe<MediaItem>;
 };
 
-/** Field Group */
-export type AcfRowBlock_Testimonials = {
-  __typename?: 'AcfRowBlock_Testimonials';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonials?: Maybe<Array<Maybe<AcfRowBlock_Testimonials_Testimonials>>>;
-};
-
-/** Field Group */
-export type AcfRowBlock_Testimonials_Testimonials = {
-  __typename?: 'AcfRowBlock_Testimonials_testimonials';
-  /** @deprecated  */
-  author?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  logo?: Maybe<MediaItem>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
-  /** @deprecated  */
-  role?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonial?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfRowBlock_Youtube = {
-  __typename?: 'AcfRowBlock_Youtube';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfRowBlock_Youtubechannel = {
-  __typename?: 'AcfRowBlock_Youtubechannel';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
 /** acf/row block */
 export type AcfRowBlock = Block & {
   __typename?: 'AcfRowBlock';
   /** @deprecated  */
   attributes?: Maybe<AcfRowBlockAttributes>;
-  /** @deprecated  */
-  code?: Maybe<AcfRowBlock_Code>;
   /**
    * Server side rendered content.
    * @deprecated 
    */
   dynamicContent?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  github?: Maybe<AcfRowBlock_Github>;
   /**
    * Gutenberg blocks
    * @deprecated 
@@ -17430,8 +16615,6 @@ export type AcfRowBlock = Block & {
    * @deprecated 
    */
   isDynamic: Scalars['Boolean'];
-  /** @deprecated  */
-  link?: Maybe<AcfRowBlock_Link>;
   /**
    * Name of the block.
    * @deprecated 
@@ -17455,20 +16638,12 @@ export type AcfRowBlock = Block & {
    */
   parentNodeDatabaseId: Scalars['Int'];
   /** @deprecated  */
-  presentations?: Maybe<AcfRowBlock_Presentations>;
-  /** @deprecated  */
   row?: Maybe<AcfRowBlock_Row>;
   /**
    * Original HTML content with inner blocks.
    * @deprecated 
    */
   saveContent?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonials?: Maybe<AcfRowBlock_Testimonials>;
-  /** @deprecated  */
-  youtube?: Maybe<AcfRowBlock_Youtube>;
-  /** @deprecated  */
-  youtubeChannel?: Maybe<AcfRowBlock_Youtubechannel>;
 };
 
 export type AcfTestimonialsBlockAttributes = {
@@ -17485,59 +16660,6 @@ export type AcfTestimonialsBlockAttributes = {
   mode?: Maybe<Scalars['String']>;
   /** @deprecated  */
   name?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfTestimonialsBlock_Code = {
-  __typename?: 'AcfTestimonialsBlock_Code';
-  /** @deprecated  */
-  code?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  language?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfTestimonialsBlock_Github = {
-  __typename?: 'AcfTestimonialsBlock_Github';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfTestimonialsBlock_Link = {
-  __typename?: 'AcfTestimonialsBlock_Link';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  url?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfTestimonialsBlock_Presentations = {
-  __typename?: 'AcfTestimonialsBlock_Presentations';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  count?: Maybe<Scalars['Int']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfTestimonialsBlock_Row = {
-  __typename?: 'AcfTestimonialsBlock_Row';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  link?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
 };
 
 /** Field Group */
@@ -17566,36 +16688,16 @@ export type AcfTestimonialsBlock_Testimonials_Testimonials = {
   testimonial?: Maybe<Scalars['String']>;
 };
 
-/** Field Group */
-export type AcfTestimonialsBlock_Youtube = {
-  __typename?: 'AcfTestimonialsBlock_Youtube';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfTestimonialsBlock_Youtubechannel = {
-  __typename?: 'AcfTestimonialsBlock_Youtubechannel';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
 /** acf/testimonials block */
 export type AcfTestimonialsBlock = Block & {
   __typename?: 'AcfTestimonialsBlock';
   /** @deprecated  */
   attributes?: Maybe<AcfTestimonialsBlockAttributes>;
-  /** @deprecated  */
-  code?: Maybe<AcfTestimonialsBlock_Code>;
   /**
    * Server side rendered content.
    * @deprecated 
    */
   dynamicContent?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  github?: Maybe<AcfTestimonialsBlock_Github>;
   /**
    * Gutenberg blocks
    * @deprecated 
@@ -17606,8 +16708,6 @@ export type AcfTestimonialsBlock = Block & {
    * @deprecated 
    */
   isDynamic: Scalars['Boolean'];
-  /** @deprecated  */
-  link?: Maybe<AcfTestimonialsBlock_Link>;
   /**
    * Name of the block.
    * @deprecated 
@@ -17630,10 +16730,6 @@ export type AcfTestimonialsBlock = Block & {
    * @deprecated 
    */
   parentNodeDatabaseId: Scalars['Int'];
-  /** @deprecated  */
-  presentations?: Maybe<AcfTestimonialsBlock_Presentations>;
-  /** @deprecated  */
-  row?: Maybe<AcfTestimonialsBlock_Row>;
   /**
    * Original HTML content with inner blocks.
    * @deprecated 
@@ -17641,10 +16737,6 @@ export type AcfTestimonialsBlock = Block & {
   saveContent?: Maybe<Scalars['String']>;
   /** @deprecated  */
   testimonials?: Maybe<AcfTestimonialsBlock_Testimonials>;
-  /** @deprecated  */
-  youtube?: Maybe<AcfTestimonialsBlock_Youtube>;
-  /** @deprecated  */
-  youtubeChannel?: Maybe<AcfTestimonialsBlock_Youtubechannel>;
 };
 
 export type AcfYoutubeBlockAttributes = {
@@ -17664,85 +16756,6 @@ export type AcfYoutubeBlockAttributes = {
 };
 
 /** Field Group */
-export type AcfYoutubeBlock_Code = {
-  __typename?: 'AcfYoutubeBlock_Code';
-  /** @deprecated  */
-  code?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  language?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfYoutubeBlock_Github = {
-  __typename?: 'AcfYoutubeBlock_Github';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfYoutubeBlock_Link = {
-  __typename?: 'AcfYoutubeBlock_Link';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  url?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfYoutubeBlock_Presentations = {
-  __typename?: 'AcfYoutubeBlock_Presentations';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  count?: Maybe<Scalars['Int']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfYoutubeBlock_Row = {
-  __typename?: 'AcfYoutubeBlock_Row';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  link?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
-};
-
-/** Field Group */
-export type AcfYoutubeBlock_Testimonials = {
-  __typename?: 'AcfYoutubeBlock_Testimonials';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonials?: Maybe<Array<Maybe<AcfYoutubeBlock_Testimonials_Testimonials>>>;
-};
-
-/** Field Group */
-export type AcfYoutubeBlock_Testimonials_Testimonials = {
-  __typename?: 'AcfYoutubeBlock_Testimonials_testimonials';
-  /** @deprecated  */
-  author?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  logo?: Maybe<MediaItem>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
-  /** @deprecated  */
-  role?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonial?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
 export type AcfYoutubeBlock_Youtube = {
   __typename?: 'AcfYoutubeBlock_Youtube';
   /** @deprecated  */
@@ -17751,27 +16764,16 @@ export type AcfYoutubeBlock_Youtube = {
   media?: Maybe<Scalars['String']>;
 };
 
-/** Field Group */
-export type AcfYoutubeBlock_Youtubechannel = {
-  __typename?: 'AcfYoutubeBlock_Youtubechannel';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
 /** acf/youtube block */
 export type AcfYoutubeBlock = Block & {
   __typename?: 'AcfYoutubeBlock';
   /** @deprecated  */
   attributes?: Maybe<AcfYoutubeBlockAttributes>;
-  /** @deprecated  */
-  code?: Maybe<AcfYoutubeBlock_Code>;
   /**
    * Server side rendered content.
    * @deprecated 
    */
   dynamicContent?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  github?: Maybe<AcfYoutubeBlock_Github>;
   /**
    * Gutenberg blocks
    * @deprecated 
@@ -17782,8 +16784,6 @@ export type AcfYoutubeBlock = Block & {
    * @deprecated 
    */
   isDynamic: Scalars['Boolean'];
-  /** @deprecated  */
-  link?: Maybe<AcfYoutubeBlock_Link>;
   /**
    * Name of the block.
    * @deprecated 
@@ -17806,21 +16806,13 @@ export type AcfYoutubeBlock = Block & {
    * @deprecated 
    */
   parentNodeDatabaseId: Scalars['Int'];
-  /** @deprecated  */
-  presentations?: Maybe<AcfYoutubeBlock_Presentations>;
-  /** @deprecated  */
-  row?: Maybe<AcfYoutubeBlock_Row>;
   /**
    * Original HTML content with inner blocks.
    * @deprecated 
    */
   saveContent?: Maybe<Scalars['String']>;
   /** @deprecated  */
-  testimonials?: Maybe<AcfYoutubeBlock_Testimonials>;
-  /** @deprecated  */
   youtube?: Maybe<AcfYoutubeBlock_Youtube>;
-  /** @deprecated  */
-  youtubeChannel?: Maybe<AcfYoutubeBlock_Youtubechannel>;
 };
 
 export type AcfYoutubechannelBlockAttributes = {
@@ -17840,94 +16832,6 @@ export type AcfYoutubechannelBlockAttributes = {
 };
 
 /** Field Group */
-export type AcfYoutubechannelBlock_Code = {
-  __typename?: 'AcfYoutubechannelBlock_Code';
-  /** @deprecated  */
-  code?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  language?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfYoutubechannelBlock_Github = {
-  __typename?: 'AcfYoutubechannelBlock_Github';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfYoutubechannelBlock_Link = {
-  __typename?: 'AcfYoutubechannelBlock_Link';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  url?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfYoutubechannelBlock_Presentations = {
-  __typename?: 'AcfYoutubechannelBlock_Presentations';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  count?: Maybe<Scalars['Int']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfYoutubechannelBlock_Row = {
-  __typename?: 'AcfYoutubechannelBlock_Row';
-  /** @deprecated  */
-  content?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  link?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
-};
-
-/** Field Group */
-export type AcfYoutubechannelBlock_Testimonials = {
-  __typename?: 'AcfYoutubechannelBlock_Testimonials';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonials?: Maybe<Array<Maybe<AcfYoutubechannelBlock_Testimonials_Testimonials>>>;
-};
-
-/** Field Group */
-export type AcfYoutubechannelBlock_Testimonials_Testimonials = {
-  __typename?: 'AcfYoutubechannelBlock_Testimonials_testimonials';
-  /** @deprecated  */
-  author?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  logo?: Maybe<MediaItem>;
-  /** @deprecated  */
-  media?: Maybe<MediaItem>;
-  /** @deprecated  */
-  role?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonial?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
-export type AcfYoutubechannelBlock_Youtube = {
-  __typename?: 'AcfYoutubechannelBlock_Youtube';
-  /** @deprecated  */
-  fieldGroupName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  media?: Maybe<Scalars['String']>;
-};
-
-/** Field Group */
 export type AcfYoutubechannelBlock_Youtubechannel = {
   __typename?: 'AcfYoutubechannelBlock_Youtubechannel';
   /** @deprecated  */
@@ -17939,15 +16843,11 @@ export type AcfYoutubechannelBlock = Block & {
   __typename?: 'AcfYoutubechannelBlock';
   /** @deprecated  */
   attributes?: Maybe<AcfYoutubechannelBlockAttributes>;
-  /** @deprecated  */
-  code?: Maybe<AcfYoutubechannelBlock_Code>;
   /**
    * Server side rendered content.
    * @deprecated 
    */
   dynamicContent?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  github?: Maybe<AcfYoutubechannelBlock_Github>;
   /**
    * Gutenberg blocks
    * @deprecated 
@@ -17958,8 +16858,6 @@ export type AcfYoutubechannelBlock = Block & {
    * @deprecated 
    */
   isDynamic: Scalars['Boolean'];
-  /** @deprecated  */
-  link?: Maybe<AcfYoutubechannelBlock_Link>;
   /**
    * Name of the block.
    * @deprecated 
@@ -17982,19 +16880,11 @@ export type AcfYoutubechannelBlock = Block & {
    * @deprecated 
    */
   parentNodeDatabaseId: Scalars['Int'];
-  /** @deprecated  */
-  presentations?: Maybe<AcfYoutubechannelBlock_Presentations>;
-  /** @deprecated  */
-  row?: Maybe<AcfYoutubechannelBlock_Row>;
   /**
    * Original HTML content with inner blocks.
    * @deprecated 
    */
   saveContent?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  testimonials?: Maybe<AcfYoutubechannelBlock_Testimonials>;
-  /** @deprecated  */
-  youtube?: Maybe<AcfYoutubechannelBlock_Youtube>;
   /** @deprecated  */
   youtubeChannel?: Maybe<AcfYoutubechannelBlock_Youtubechannel>;
 };

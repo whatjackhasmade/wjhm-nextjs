@@ -30,7 +30,7 @@ const InspiratioNavigation = styled.nav`
   }
 `;
 
-const Inspiration = () => {
+const Inspiration = props => {
   const allInspiration = []; // TODO: Fetch
   const hasInspiration = allInspiration?.length > 0;
   if (!hasInspiration) return null;
@@ -55,7 +55,7 @@ const Inspiration = () => {
   };
 
   return (
-    <Base>
+    <Base {...props}>
       <Hero>
         <h1>Get Inspired</h1>
         <p>You are only limited by your imagination.</p>

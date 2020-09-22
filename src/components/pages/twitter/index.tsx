@@ -13,7 +13,7 @@ type TweetProps = {
   text: string;
 };
 
-const Twitter = ({}: TwitterPageProps) => {
+const Twitter = (props: TwitterPageProps) => {
   const [tweets, setTweets] = useState([]);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Twitter = ({}: TwitterPageProps) => {
   };
 
   return (
-    <Base cta={false}>
+    <Base {...props} cta={false}>
       <Hero>
         <h1>Tweets</h1>
         <h3>Some of my social media ramblings</h3>

@@ -17,6 +17,8 @@ import Row from '../organisms/row';
 import Testimonials from '../organisms/testimonials';
 import YouTubeChannel from '../organisms/youtube';
 
+import { Maybe, Block } from 'wjhmtypes';
+
 const components = {
   'acf/code': Code,
   'acf/dribbble': Dribbble,
@@ -46,7 +48,7 @@ const convertACFProps = component => {
 };
 
 declare type ComponentParserProps = {
-  content: any[];
+  content: Maybe<Block>[];
 };
 
 const ComponentParser = (props: ComponentParserProps) => {

@@ -25,8 +25,8 @@ const VideosArray = [
 
 type AnimationPrinciplesProps = {};
 
-const AnimationPrinciples = ({}: AnimationPrinciplesProps) => (
-  <Base>
+const AnimationPrinciples = (props: AnimationPrinciplesProps) => (
+  <Base {...props}>
     <Hero>
       <h1>The 12 Principles of UX in Motion</h1>
       <p>

@@ -1,6 +1,11 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
-// import MailtoUI from 'mailtoui/dist/mailtoui-min.js';
+import { useState } from 'react';
+
+// if (typeof window !== `undefined`) {
+//   // Make scroll behavior of internal links smooth
+//   // eslint-disable-next-line global-require
+//   require(`mailtoui/dist/mailtoui-min.js`)(`MailtoUI.run()`);
+// }
 
 import HeaderComponent from './header.styles';
 
@@ -11,27 +16,22 @@ import { Times } from '../../atoms/icons/solid';
 
 import { MenuItem } from 'wjhm';
 
-type HeaderProps = {};
+import { Menu } from 'wjhmtypes';
+
+type HeaderProps = {
+  menu: Menu;
+};
 
 const Header = (props: HeaderProps) => {
-  useEffect(() => {
-    // if (typeof window !== `undefined`) {
-    //   MailtoUI.run(); // <--- Run MailtoUI manually
-    // }
-  });
+  const headerMenu = props?.menu;
+  const menuItems = headerMenu?.menuItems?.nodes;
 
-  const menus = [];
   const [menuOpen, toggleMenu] = useState(false);
 
-  const hasMenus = menus?.length > 0;
-  if (!hasMenus) return null;
-
-  const headerMenu = menus.nodes.find(menu => menu.slug === `header-menu`);
-  if (!headerMenu) return null;
-
-  const menuLength = headerMenu.menuItems.nodes.length;
-  const lastItem = headerMenu.menuItems.nodes[menuLength - 1];
-  const otherItems = headerMenu.menuItems.nodes.filter((item, index) => index !== menuLength - 1);
+  const menuLength = menuItems?.length;
+  const hasItems = menuLength > 0;
+  const lastItem = !hasItems ? null : menuItems[menuLength - 1];
+  const otherItems = !hasItems ? null : menuItems.filter((item, index) => index !== menuLength - 1);
 
   const handleClick = e => {
     e.preventDefault();
@@ -44,14 +44,18 @@ const Header = (props: HeaderProps) => {
         <Link to="/" className="header__logo">
           <Logo />
         </Link>
-        <nav className={menuOpen ? `header__menu--show` : undefined}>
-          {otherItems.map(item => (
-            <MenuItem key={`header-nav-${item?.id}`} {...item} />
-          ))}
-        </nav>
-        <a className="mailtoui" href={lastItem.url}>
-          {lastItem.label}
-        </a>
+        {hasItems && (
+          <nav className={menuOpen ? `header__menu--show` : undefined}>
+            {otherItems.map(item => (
+              <MenuItem key={`header-nav-${item?.id}`} {...item} />
+            ))}
+          </nav>
+        )}
+        {hasItems && (
+          <a className="mailtoui" href={lastItem.url}>
+            {lastItem.label}
+          </a>
+        )}
         <button onClick={handleClick}>
           <span>{menuOpen ? `Close` : `Open`} Menu</span>
           <span> Navigation</span>

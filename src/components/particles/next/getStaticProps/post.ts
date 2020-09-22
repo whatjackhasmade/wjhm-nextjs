@@ -9,14 +9,23 @@ export const getStaticProps: GetStaticProps = async context => {
   const { params } = context;
   const { slug } = params;
 
+  const preview = context?.previewData;
+
   try {
     // Call an external API endpoint to get pages
     const data = await requestor.request(POST_BY_SLUG, { slug });
     const postBy = data.postBy;
     const { footerMenu, headerMenu } = await getStaticData();
 
+    const props = {
+      ...(postBy && { postBy }),
+      ...(footerMenu && { footerMenu }),
+      ...(headerMenu && { headerMenu }),
+      ...(preview && { preview }),
+    };
+
     // Pass page data to the page via props
-    return { props: { ...postBy, footerMenu, headerMenu } };
+    return { props };
   } catch (error) {
     console.error(error.message);
     return { props: null };

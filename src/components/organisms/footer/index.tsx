@@ -1,5 +1,10 @@
-import React, { useEffect } from 'react';
-// import MailtoUI from 'mailtoui/dist/mailtoui-min.js';
+import React from 'react';
+
+// if (typeof window !== `undefined`) {
+//   // Make scroll behavior of internal links smooth
+//   // eslint-disable-next-line global-require
+//   require(`mailtoui/dist/mailtoui-min.js`)(`MailtoUI.run()`);
+// }
 
 import FooterComponent from './footer.styles';
 
@@ -8,15 +13,13 @@ import { Linkedin as IconLinkedIn } from '../../atoms/icons/brands';
 import { Twitter as IconTwitter } from '../../atoms/icons/brands';
 import { Youtube as IconYouTube } from '../../atoms/icons/brands';
 
-type FooterProps = {};
+import { Menu } from 'wjhmtypes';
+
+type FooterProps = {
+  menu: Menu;
+};
 
 const Footer = (props: FooterProps) => {
-  useEffect(() => {
-    // if (typeof window !== `undefined`) {
-    //   MailtoUI.run(); // <--- Run MailtoUI manually
-    // }
-  });
-
   return (
     <FooterComponent>
       <div className="footer__contents">

@@ -9,15 +9,12 @@ import { NotFound } from 'wjhm';
 type Four0FourProps = {};
 
 const Four0Four = (props: Four0FourProps) => {
-  const seoPropped = {
-    ...props,
-    seo: {
-      title: `Page Not Found - Fred & Eric`,
-    },
+  const seo = {
+    title: `Page Not Found - WhatJackHasMade`,
   };
 
   return (
-    <Base context={seoPropped}>
+    <Base {...props} cta={false} seo={seo}>
       <NotFound {...props} />
     </Base>
   );

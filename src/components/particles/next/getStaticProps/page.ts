@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps = async context => {
     const pageData = data.pageBy;
 
     const props = {
-      ...pageData,
+      ...(pageData && { pageData }),
       ...(footerMenu && { footerMenu }),
       ...(headerMenu && { headerMenu }),
       ...(preview && { preview }),

@@ -19,6 +19,7 @@ function datesGroupByComponent(dates, token) {
 
 const getStaticData = async () => {
   const header = await requestor.request(MENU_BY_SLUG, { slug: `header-menu` });
+  console.log(header);
   const footer = await requestor.request(MENU_BY_SLUG, { slug: `footer-menu` });
   const postsResponse = await requestor.request(POSTS_SUMMARY);
   const [headerMenu] = header?.menus?.nodes;

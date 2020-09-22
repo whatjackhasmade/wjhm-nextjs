@@ -9,7 +9,9 @@ type PageProps = {
   };
 };
 
-const PageTemplate = ({ pageContext }: PageProps) => {
+const PageTemplate = (props: PageProps) => {
+  console.log(props);
+  const { pageContext } = props;
   const hasBlocks = pageContext?.blocks?.length > 0;
 
   return <Base context={pageContext}>{hasBlocks && <ComponentParser content={pageContext.blocks} />}</Base>;

@@ -50,9 +50,9 @@ const BrandColours = [
   },
 ];
 
-const Assets = () => {
+const Assets = props => {
   return (
-    <Base>
+    <Base {...props}>
       <Hero>
         <h1>Assets</h1>
       </Hero>

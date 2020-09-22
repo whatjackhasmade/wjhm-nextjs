@@ -25,7 +25,7 @@ const Archive = (props: ArchiveProps) => {
   }
 
   return (
-    <Base>
+    <Base {...props}>
       <Intro heading="Insights" subheading="Insights">
         <p>
           Welcome one and all! With over 200 blog posts, in 14 different categories, it's safe to say I can get carried

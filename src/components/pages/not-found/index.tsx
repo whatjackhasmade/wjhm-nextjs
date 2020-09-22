@@ -6,8 +6,6 @@ import { Hero } from 'wjhm';
 import { ImageLoader } from 'wjhm';
 import { Related } from 'wjhm';
 
-import { Base } from 'wjhm';
-
 type NotFoundProps = {};
 
 const NotFound = (props: NotFoundProps) => {
@@ -18,7 +16,7 @@ const NotFound = (props: NotFoundProps) => {
   const hasPosts = latestPosts?.length > 0;
 
   return (
-    <Base>
+    <React.Fragment>
       <Hero align="center" maxWidth="890px">
         <Container fluid>
           <Row>
@@ -43,7 +41,7 @@ const NotFound = (props: NotFoundProps) => {
         </Container>
       </Hero>
       {hasPosts && <Related data={latestPosts} title="Find something that... works!" />}
-    </Base>
+    </React.Fragment>
   );
 };
 
