@@ -17,12 +17,9 @@ import { Related } from 'wjhm';
 
 import { Base } from 'wjhm';
 
-import { Post } from 'wjhmtypes';
-
 declare type PostTemplateProps = Post & BaseProps;
 
 const PostTemplate = (props: PostTemplateProps) => {
-  console.log(props);
   const { blocks, content, date, PostFields, title } = props;
   const { relatedPosts } = PostFields;
   const learn = PostFields?.learn;

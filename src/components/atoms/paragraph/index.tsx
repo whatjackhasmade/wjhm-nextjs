@@ -2,8 +2,6 @@ import React from 'react';
 
 import { parseHTML } from 'wjhm';
 
-import { CoreParagraphBlockAttributes } from 'wjhmtypes';
-
 type ParagraphProps = {
   children?: React.ReactNode;
 } & CoreParagraphBlockAttributes &

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { device } from 'wjhm';
+import { device } from 'particles';
 
 const FooterComponent = styled.footer`
   position: relative;
   z-index: 10;
 
-  background: ${props => props.theme.offWhite};
-  color: ${props => props.theme.black};
+  background: var(--offWhite);
+  color: var(--black);
 
   .footer__contents {
     align-items: center;
@@ -33,7 +33,7 @@ const FooterComponent = styled.footer`
     display: flex;
     justify-content: center;
 
-    color: ${props => props.theme.black};
+    color: var(--black);
     font-weight: 400;
     text-decoration: none;
     transition: 0.2s all ease;
@@ -50,7 +50,7 @@ const FooterComponent = styled.footer`
   }
 
   svg {
-    fill: ${props => props.theme.black};
+    fill: var(--black);
     width: 24px;
 
     transition: 0.2s all ease;
@@ -58,7 +58,7 @@ const FooterComponent = styled.footer`
     &:active,
     &:focus,
     &:hover {
-      fill: ${props => props.theme.grey400};
+      fill: var(--grey400);
     }
   }
 
@@ -68,7 +68,7 @@ const FooterComponent = styled.footer`
     position: relative;
     width: 60px;
 
-    background: ${props => props.theme.black};
+    background: var(--black);
     transition: 0.2s all ease;
 
     &:after {
@@ -80,7 +80,7 @@ const FooterComponent = styled.footer`
       top: -7px;
       width: 16px;
 
-      border: 2px solid ${props => props.theme.black};
+      border: 2px solid var(--black);
       border-bottom: none;
       border-left: none;
       transform: rotate(45deg);
@@ -182,7 +182,7 @@ const FooterComponent = styled.footer`
   }
 
   .footer__tagline {
-    font-family: ${props => props.theme.fontSecondary};
+    font-family: var(--fontSecondary);
     font-size: 18px;
     font-style: italic;
 

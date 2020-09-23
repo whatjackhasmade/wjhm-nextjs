@@ -2,7 +2,7 @@ import { css } from 'styled-components';
 
 const exportedCSS = css`
   a {
-    color: ${props => props.theme.primary};
+    color: var(--primary);
     text-decoration: none;
 
     &:active,

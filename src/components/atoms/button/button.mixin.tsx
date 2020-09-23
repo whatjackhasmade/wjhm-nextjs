@@ -2,10 +2,10 @@ const ButtonMixin = props => `
  	display: inline-flex;
   padding: 16px 24px;
 
-  background-color: ${props => props.theme.primary};
+  background-color: var(--primary);
   border: none;
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-  color: ${props => props.theme.white};
+  color: var(--white);
   cursor: pointer;
   font-weight: 700;
   line-height: 1;
@@ -25,26 +25,26 @@ const ButtonMixin = props => `
   }
 
   &.active {
-    background: ${props => props.theme.primary};
+    background: var(--primary);
     color: white;
   }
 
   &.secondary {
-    border: 1px solid ${props => props.theme.secondary};
-    color: ${props => props.theme.secondary};
+    border: 1px solid var(--secondary);
+    color: var(--secondary);
 
     &:active,
     &:hover,
     &:focus {
-      background: ${props => props.theme.secondary};
+      background: var(--secondary);
       color: white;
     }
 
     &.active {
-      background: ${props => props.theme.secondary};
+      background: var(--secondary);
       color: white;
     }
   }
-`
+`;
 
-export default ButtonMixin
+export default ButtonMixin;

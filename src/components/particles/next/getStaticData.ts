@@ -3,10 +3,11 @@ import moment from 'moment';
 import { requestor } from 'wjhm';
 
 import { MENU_BY_SLUG } from 'wjhm';
+import { PAGE_BY_URI } from 'wjhm';
 import { POSTS_SUMMARY } from 'wjhm';
 
 function orderByDate(posts) {
-  return posts.sort((a, b) => new Date(b['date']) - new Date(a['date']));
+  return posts.sort((a, b) => new Date(b['date']).valueOf() - new Date(a['date']).valueOf());
 }
 
 function datesGroupByComponent(dates, token) {
@@ -19,7 +20,6 @@ function datesGroupByComponent(dates, token) {
 
 const getStaticData = async () => {
   const header = await requestor.request(MENU_BY_SLUG, { slug: `header-menu` });
-  console.log(header);
   const footer = await requestor.request(MENU_BY_SLUG, { slug: `footer-menu` });
   const postsResponse = await requestor.request(POSTS_SUMMARY);
   const [headerMenu] = header?.menus?.nodes;

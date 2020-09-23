@@ -1,10 +1,10 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
 const StyledOverviewList = styled.nav`
   display: block;
   margin: 32px 0 48px;
 
-  color: ${props => props.theme.black};
+  color: var(--black);
 
   a {
     color: inherit;
@@ -13,7 +13,7 @@ const StyledOverviewList = styled.nav`
     &:active,
     &:focus,
     &:hover {
-      color: ${props => props.theme.primary};
+      color: var(--primary);
       text-decoration: underline;
     }
   }
@@ -37,8 +37,8 @@ const StyledOverviewList = styled.nav`
     padding: 24px 48px;
     padding-right: 24px;
 
-    background-color: ${props => props.theme.blue000};
-    border-left: 8px solid ${props => props.theme.primary};
+    background-color: var(--blue000);
+    border-left: 8px solid var(--primary);
     line-height: 1.5;
   }
 
@@ -50,6 +50,6 @@ const StyledOverviewList = styled.nav`
   .overview-list__title {
     display: flex;
   }
-`
+`;
 
-export default StyledOverviewList
+export default StyledOverviewList;

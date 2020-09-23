@@ -16,8 +16,6 @@ import { Times } from '../../atoms/icons/solid';
 
 import { MenuItem } from 'wjhm';
 
-import { Menu } from 'wjhmtypes';
-
 type HeaderProps = {
   menu: Menu;
 };

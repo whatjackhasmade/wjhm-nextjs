@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { device } from 'wjhm';
+import { device } from 'particles';
 
 const HeaderComponent = styled.header`
   position: relative;
@@ -31,7 +31,7 @@ const HeaderComponent = styled.header`
     padding: 8px;
     position: relative;
 
-    color: ${props => props.theme.grey600};
+    color: var(--grey600);
     font-weight: 500;
     letter-spacing: 1px;
     text-decoration: none;
@@ -43,7 +43,7 @@ const HeaderComponent = styled.header`
     &:focus,
     &:hover {
       box-shadow: none;
-      color: ${props => props.theme.black};
+      color: var(--black);
       text-decoration: none;
 
       &:after {
@@ -61,7 +61,7 @@ const HeaderComponent = styled.header`
         position: absolute;
         width: 100%;
 
-        background: ${props => props.theme.grey600};
+        background: var(--grey600);
         transform: scaleX(0);
         transition: 0.2s all ease;
       }
@@ -116,7 +116,7 @@ const HeaderComponent = styled.header`
   nav + a {
     display: none;
 
-    color: ${props => props.theme.black};
+    color: var(--black);
     font-weight: 900;
 
     @media ${device?.md} {

@@ -6,8 +6,6 @@ import { Page } from 'wjhm';
 
 import { pageGetStaticProps as getStaticProps } from 'wjhm';
 
-import { ContentType } from 'wjhmtypes';
-
 interface PageCollection extends Array<ContentType> {}
 
 // This function gets called at build time
@@ -22,7 +20,7 @@ export async function getStaticPaths() {
     // Remove Homepage
     const validNodes = nodes.filter(n => {
       const { isFrontPage, uri } = n;
-      const isAnIndex = uri === `/work/` || uri === `/stories/`;
+      const isAnIndex = uri === `/work/` || uri === `/insights/`;
       const notFrontPage = isFrontPage === false;
       const isValid = notFrontPage && !isAnIndex;
       return isValid;

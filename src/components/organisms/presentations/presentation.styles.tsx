@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { device } from 'wjhm';
+import { device } from 'particles';
 
 const PresentationsComponent = styled.section`
   margin: 32px 0;
@@ -74,7 +74,7 @@ const PresentationsComponent = styled.section`
   .presentations__event {
     border-radius: 0 0 3px 3px;
 
-    background: ${props => props.white};
+    background: var(--white);
     box-shadow: 0px 2px 6px rgba(20, 18, 19, 0.1);
     transition: 0.2s all ease;
 
@@ -92,7 +92,7 @@ const PresentationsComponent = styled.section`
   .subheading {
     margin: 0 0 8px;
 
-    color: ${props => props.theme.primary};
+    color: var(--primary);
     font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.1em;

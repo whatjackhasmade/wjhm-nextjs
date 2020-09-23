@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { device } from 'wjhm';
+import { device } from 'particles';
 
 // Create the keyframes
 const bounce = keyframes`

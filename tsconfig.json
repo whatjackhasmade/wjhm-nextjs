@@ -15,8 +15,7 @@
     "paths": {
       "wjhm": ["src/components"],
       "atoms": ["src/components/atoms"],
-      "particles": ["src/components/particles"],
-      "wjhmtypes": ["src/generated/graphql/wjhm/index.tsx"]
+      "particles": ["src/components/particles"]
     },
     "resolveJsonModule": true,
     "rootDir": "src",
@@ -26,5 +25,5 @@
     "types": ["node", "react", "react-youtube"]
   },
   "exclude": ["node_modules"],
-  "include": ["src", "index.d.ts"]
+  "include": ["src", "index.d.ts", "wjhm.d.ts"]
 }

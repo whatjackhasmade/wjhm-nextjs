@@ -1,6 +1,6 @@
 // @ts-ignore
 const fs = require('fs');
-const schemaFile = './src/generated/graphql/wjhm/index.tsx';
+const schemaFile = './wjhm.d.ts';
 
 fs.readFile(schemaFile, 'utf8', function (err, data) {
   if (err) return console.log(err);

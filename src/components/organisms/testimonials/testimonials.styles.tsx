@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { device } from 'wjhm';
+import { device } from 'particles';
 
 const TestimonialsComponent = styled.section`
   display: flex;
@@ -61,7 +61,7 @@ const TestimonialsComponent = styled.section`
       margin-left: 16px;
       width: 24px;
 
-      fill: ${props => props.theme.white};
+      fill: var(--white);
 
       @supports (object-fit: cover) {
         width: auto;
@@ -88,8 +88,8 @@ const TestimonialsComponent = styled.section`
     grid-column: 7 / 13;
     padding: 8px;
 
-    background-color: ${props => props.theme.black};
-    color: ${props => props.theme.white};
+    background-color: var(--black);
+    color: var(--white);
 
     @media ${device?.xs} {
       padding: 16px;

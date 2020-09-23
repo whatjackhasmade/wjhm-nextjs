@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { device } from 'wjhm';
+import { device } from 'particles';
 
 const HeroMediaComponent = styled.div`
   height: 100%;

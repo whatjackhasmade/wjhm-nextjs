@@ -13,8 +13,6 @@ import { Linkedin as IconLinkedIn } from '../../atoms/icons/brands';
 import { Twitter as IconTwitter } from '../../atoms/icons/brands';
 import { Youtube as IconYouTube } from '../../atoms/icons/brands';
 
-import { Menu } from 'wjhmtypes';
-
 type FooterProps = {
   menu: Menu;
 };

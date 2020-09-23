@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import { MediaItem, MediaSize } from 'wjhmtypes';
-
 declare type FeaturedImageProps = {
   className?: string;
 } & MediaItem;

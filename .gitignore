@@ -35,6 +35,7 @@ yarn.lock
 .env.test.local
 .env.production.local
 .vercel
+
 # Local Netlify folder
 .netlify
 

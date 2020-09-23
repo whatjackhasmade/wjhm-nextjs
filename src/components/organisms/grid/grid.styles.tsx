@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { device } from 'wjhm';
+import { device } from 'particles';
 
 const GridComponent = styled.section`
   display: flex;
@@ -65,7 +65,7 @@ const GridComponent = styled.section`
     top: 0;
     width: 100%;
 
-    background: ${props => props.theme.black};
+    background: var(--black);
     color: white;
     opacity: 0;
     transition: 0.2s all ease;

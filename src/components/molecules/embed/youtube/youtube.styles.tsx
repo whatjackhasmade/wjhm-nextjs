@@ -4,8 +4,8 @@ const YouTubeComponent = styled.div`
   position: relative;
   z-index: 10;
 
-  background: ${props => props.theme.offWhite};
-  color: ${props => props.theme.black};
+  background: var(--offWhite);
+  color: var(--black);
 
   .youtube__wrapper {
 		margin-bottom: 32px;

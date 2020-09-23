@@ -34,7 +34,7 @@ const Colour = styled.div`
   padding: 24px;
 
   background-color: ${props => props.hex};
-  color: ${props => props.theme.white};
+  color: var(--white);
   text-align: center;
 
   h4 {

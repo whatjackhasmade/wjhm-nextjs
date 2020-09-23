@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { device } from 'wjhm';
+import { device } from 'particles';
 
 const ContactComponent = styled.section`
   margin-top: 32px;
@@ -9,8 +9,8 @@ const ContactComponent = styled.section`
   width: 100vw;
   z-index: 9;
 
-  background-color: ${props => props.theme.primary};
-  color: ${props => props.theme.white};
+  background-color: var(--primary);
+  color: var(--white);
 
   button {
     @media ${device?.MXxs} {

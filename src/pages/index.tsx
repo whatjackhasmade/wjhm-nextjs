@@ -11,7 +11,7 @@ const Homepage = props => <Page {...props} />;
 
 export async function getStaticProps() {
   // Call an external API endpoint to get pages
-  const data = await requestor.request(PAGE_BY_URI, { uri: `/` });
+  const data = await requestor.request(PAGE_BY_URI, { uri: `/homepage/` });
   const pageData = data.pageBy;
   const { footerMenu, headerMenu } = await getStaticData();
 

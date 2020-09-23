@@ -4,17 +4,13 @@ import { ComponentParser } from 'wjhm';
 import { Base } from 'wjhm';
 
 type PageProps = {
-  pageContext: {
-    blocks: any[];
-  };
+  pageData: any;
 };
 
 const PageTemplate = (props: PageProps) => {
-  console.log(props);
-  const { pageContext } = props;
-  const hasBlocks = pageContext?.blocks?.length > 0;
+  const hasBlocks = props?.pageData?.blocks?.length > 0;
 
-  return <Base context={pageContext}>{hasBlocks && <ComponentParser content={pageContext.blocks} />}</Base>;
+  return <Base {...props}>{hasBlocks && <ComponentParser content={props?.pageData?.blocks} />}</Base>;
 };
 
 export default PageTemplate;

@@ -1,7 +1,7 @@
 overwrite: true
 schema: ${NEXT_PUBLIC_GRAPHQL_API}
 generates:
-  src/generated/graphql/wjhm/index.tsx:
+  wjhm.d.ts:
     plugins:
       - 'typescript'
       - 'typescript-operations'

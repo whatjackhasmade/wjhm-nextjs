@@ -7,7 +7,6 @@ module.exports = {
     config.resolve.alias[`wjhm`] = buildPath(`src/components`);
     config.resolve.alias[`atoms`] = buildPath(`src/components/atoms`);
     config.resolve.alias[`particles`] = buildPath(`src/components/particles`);
-    config.resolve.alias[`wjhmtypes`] = buildPath(`src/generated/graphql/wjhm`);
 
     // Support SVG loading https://stackoverflow.com/a/55180310
     config.module.rules.push({

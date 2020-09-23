@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { device } from 'wjhm';
+import { device } from 'particles';
 
 export const CollectionMenu = styled.nav`
   display: none;
@@ -21,14 +21,14 @@ export const CollectionMenu = styled.nav`
   }
 
   a {
-    color: ${props => props.theme.grey100};
+    color: var(--grey100);
     text-decoration: none;
     transition: 0.2s color ease;
 
     &:active,
     &:focus,
     &:hover {
-      color: ${props => props.theme.black};
+      color: var(--black);
     }
 
     + a {
@@ -36,7 +36,7 @@ export const CollectionMenu = styled.nav`
     }
 
     &[data-current='true'] {
-      color: ${props => props.theme.black};
+      color: var(--black);
     }
   }
 `;
@@ -55,8 +55,8 @@ export const CollectionWrapper = styled.section`
     padding-top: 64px;
     margin-top: 64px;
 
-    border-top: 1px solid ${props => props.theme.grey600};
-    color: ${props => props.theme.black};
+    border-top: 1px solid var(--grey600);
+    color: var(--black);
     font-size: 12px;
     font-weight: 400;
     letter-spacing: 1px;

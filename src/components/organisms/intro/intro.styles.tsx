@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { device } from 'wjhm';
+import { device } from 'particles';
 
 const IntroComponent = styled.section`
   align-items: flex-start;
@@ -7,7 +7,7 @@ const IntroComponent = styled.section`
   justify-content: space-between;
   margin: ${props => (props.marginReduced === true ? `64px 0 32px 0` : `32px 0 16px`)};
 
-  color: ${props => props.theme.black};
+  color: var(--black);
 
   @media ${device?.xs} {
     margin: ${props => (props.marginReduced === true ? `64px 0` : `32px 0`)};
@@ -22,7 +22,7 @@ const IntroComponent = styled.section`
     margin: 0 0 24px;
     position: relative;
 
-    color: ${props => props.theme.primary};
+    color: var(--primary);
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0.1em;
@@ -36,7 +36,7 @@ const IntroComponent = styled.section`
       left: 0;
       height: 100%;
       width: 2px;
-      background: ${props => props.theme.primary};
+      background: var(--primary);
 
       @media ${device?.xs} {
         content: '';

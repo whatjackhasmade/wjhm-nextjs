@@ -17,8 +17,6 @@ import Row from '../organisms/row';
 import Testimonials from '../organisms/testimonials';
 import YouTubeChannel from '../organisms/youtube';
 
-import { Maybe, Block } from 'wjhmtypes';
-
 const components = {
   'acf/code': Code,
   'acf/dribbble': Dribbble,

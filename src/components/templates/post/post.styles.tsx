@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { device } from 'wjhm';
+import { device } from 'particles';
 
 export const ArticleIntro = styled.header`
   max-width: 800px;
@@ -27,38 +27,6 @@ export const ArticleIntro = styled.header`
   }
 `;
 
-export const ArticleProgress = styled.div(
-  ({ left, percentage, theme }) => `
-  bottom: 24px;
-  display: none;
-  left: 30px;
-  position: fixed;
-  z-index: 1;
-
-  transition: 0.2s opacity ease;
-
-  @media ${device?.lg} {
-    display: inline-block;
-    opacity: ${left > 0 ? 1 : 0};
-  }
-
-  &::after {
-    bottom: 0;
-    content: "";
-    display: block
-    height: 2px;
-    left: 0;
-    position: absolute;
-    width: 100%;
-
-    background-color: ${theme.primary};
-    transform: scaleX(${!percentage ? 0 : percentage.toPrecision(2)});
-    transform-origin: left center;
-    transition: 0.2s transform ease;
-  }
-`,
-);
-
 export const Article = styled.article`
   /* Advanced vertical rhythym based off of https://medium.com/@sebastian.eberlein/advanced-vertical-margins-4ac69f032f79 */
   max-width: 800px;
@@ -78,7 +46,7 @@ export const Article = styled.article`
     outline: none;
     text-align: center;
 
-    color: ${props => props.theme.black};
+    color: var(--black);
     quotes: '“' '”' '‘' '’';
 
     p:last-of-type {
@@ -95,7 +63,7 @@ export const Article = styled.article`
   cite {
     position: relative;
 
-    color: ${props => props.theme.grey600};
+    color: var(--grey600);
     font-size: 20px;
     font-style: normal;
 
@@ -108,7 +76,7 @@ export const Article = styled.article`
       position: absolute;
       right: 0;
 
-      color: ${props => props.theme.grey400};
+      color: var(--grey400);
       font-size: 16px;
     }
   }
@@ -132,7 +100,7 @@ export const Article = styled.article`
   figcaption {
     padding: 8px;
 
-    background-color: ${props => props.theme.grey100};
+    background-color: var(--grey100);
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 12px;
@@ -206,7 +174,7 @@ export const Article = styled.article`
 
   :not(pre) > code[class*='language-'],
   pre[class*='language-'] {
-    background-color: ${props => props.theme.black};
+    background-color: var(--black);
   }
 
   .wp-block-image {
