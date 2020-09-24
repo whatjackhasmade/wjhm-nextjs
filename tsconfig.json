@@ -14,6 +14,7 @@
     "noImplicitAny": false,
     "paths": {
       "wjhm": ["src/components"],
+      "wjhmtypes": ["src/generated/types/wjhm.tsx"],
       "atoms": ["src/components/atoms"],
       "particles": ["src/components/particles"]
     },
@@ -25,5 +26,5 @@
     "types": ["node", "react", "react-youtube"]
   },
   "exclude": ["node_modules"],
-  "include": ["src", "index.d.ts", "wjhm.d.ts"]
+  "include": ["src", "index.d.ts"]
 }

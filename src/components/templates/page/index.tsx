@@ -3,9 +3,8 @@ import React from 'react';
 import { ComponentParser } from 'wjhm';
 import { Base } from 'wjhm';
 
-type PageProps = {
-  pageData: any;
-};
+import type { Page } from 'wjhmtypes';
+declare type PageProps = { pageData: Page };
 
 const PageTemplate = (props: PageProps) => {
   const hasBlocks = props?.pageData?.blocks?.length > 0;

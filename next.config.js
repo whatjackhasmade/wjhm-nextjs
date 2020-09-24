@@ -5,6 +5,7 @@ const buildPath = stringDirectory => path.resolve(__dirname + `/` + stringDirect
 module.exports = {
   webpack: config => {
     config.resolve.alias[`wjhm`] = buildPath(`src/components`);
+    config.resolve.alias[`wjhmtypes`] = buildPath(`src/generated/types/wjhm.tsx`);
     config.resolve.alias[`atoms`] = buildPath(`src/components/atoms`);
     config.resolve.alias[`particles`] = buildPath(`src/components/particles`);
 

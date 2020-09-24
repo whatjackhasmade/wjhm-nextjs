@@ -38,7 +38,11 @@ const ReactAnchor = ({ attribs, children }) => {
   if (!isInternal(href)) return <a href={`${href}`}>{children && children.length > 0 && children[0].data}</a>;
 };
 
+const isString = val => typeof val === 'string' || val instanceof String;
+
 const parseHTML = html => {
+  if (!html) return html;
+  if (!isString(html)) return html;
   const clean = parser(html, config);
   return clean;
 };

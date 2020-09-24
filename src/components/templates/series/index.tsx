@@ -1,4 +1,5 @@
 import React from 'react';
+import { useMemo } from 'react';
 import he from 'he';
 
 import { SeriesIntro, SeriesWrapper } from './series.styles';
@@ -11,65 +12,50 @@ import { Button } from 'wjhm';
 import { HR } from 'wjhm';
 import { Base } from 'wjhm';
 
-type SeriesProps = {
-  pageContext: {
-    description: string;
-    name: string;
-    posts: {
-      nodes: any[];
-    };
-    SeriesFields: {
-      seriesImage: {
-        altText: string;
-        xs: string;
-        sm: string;
-        md: string;
-        lg: string;
-        xl: string;
-        xxl: string;
-      };
-      youtubePlaylist?: string;
-    };
-  };
+import type { Series } from 'wjhmtypes';
+type SeriesProps = Series;
+
+const SeriesTemplate = (props: SeriesProps) => {
+  const { description, name, posts, SeriesFields } = props;
+  const seriesImage = SeriesFields?.seriesImage;
+  const youtubePlaylist = SeriesFields?.youtubePlaylist;
+
+  const hasPosts = posts?.nodes?.length > 0;
+
+  return (
+    <Base {...props}>
+      <SeriesWrapper>
+        {SeriesFields && (
+          <SeriesIntro>
+            <div>
+              <a href={youtubePlaylist} rel="noopener noreferrer" target="_blank">
+                <h1>{he.decode(name)}</h1>
+              </a>
+              {parseHTML(autoParagraph(description))}
+              {youtubePlaylist && (
+                <Button href={youtubePlaylist} rel="noopener noreferrer" target="_blank">
+                  View YouTube Playlist
+                </Button>
+              )}
+            </div>
+            <a className="intro__image" href={youtubePlaylist} rel="noopener noreferrer" target="_blank">
+              <img alt={seriesImage.altText} src={seriesImage.xl} />
+            </a>
+          </SeriesIntro>
+        )}
+        <HR />
+        {hasPosts && <SeriesPosts posts={posts} />}
+      </SeriesWrapper>
+    </Base>
+  );
 };
 
-const SeriesTemplate = ({
-  pageContext,
-  pageContext: { description, name, posts, SeriesFields },
-  pageContext: {
-    SeriesFields: { seriesImage, youtubePlaylist },
-  },
-}: SeriesProps) => (
-  <Base context={pageContext}>
-    <SeriesWrapper>
-      {SeriesFields && (
-        <SeriesIntro>
-          <div>
-            <a href={youtubePlaylist} rel="noopener noreferrer" target="_blank">
-              <h1>{he.decode(name)}</h1>
-            </a>
-            {parseHTML(autoParagraph(description))}
-            {youtubePlaylist && (
-              <Button href={youtubePlaylist} rel="noopener noreferrer" target="_blank">
-                View YouTube Playlist
-              </Button>
-            )}
-          </div>
-          <a className="intro__image" href={youtubePlaylist} rel="noopener noreferrer" target="_blank">
-            <img alt={seriesImage.altText} src={seriesImage.xl} />
-          </a>
-        </SeriesIntro>
-      )}
-      <HR />
-      {pageContext.posts.nodes.length > 0 && (
-        <section className="series__grid">
-          {pageContext.posts.nodes.reverse().map(post => (
-            <SeriesPost key={post.id} {...post} />
-          ))}
-        </section>
-      )}
-    </SeriesWrapper>
-  </Base>
-);
+const SeriesPosts = ({ posts }) => {
+  const orderedPosts = useMemo(() => {
+    return posts?.nodes?.reverse()?.map(post => <SeriesPost key={post.id} {...post} />);
+  }, [posts]);
+
+  return orderedPosts;
+};
 
 export default SeriesTemplate;

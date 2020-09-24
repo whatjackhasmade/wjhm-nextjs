@@ -1,6 +1,6 @@
 // @ts-ignore
 const fs = require('fs');
-const schemaFile = './wjhm.d.ts';
+const schemaFile = 'src/generated/types/wjhm.tsx';
 
 fs.readFile(schemaFile, 'utf8', function (err, data) {
   if (err) return console.log(err);

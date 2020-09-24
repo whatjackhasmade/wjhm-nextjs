@@ -6,6 +6,7 @@ import { Post } from 'wjhm';
 
 import { pageGetStaticProps as getStaticProps } from 'wjhm';
 
+import type { ContentType } from 'wjhmtypes';
 interface PostCollection extends Array<ContentType> {}
 
 // This function gets called at build time

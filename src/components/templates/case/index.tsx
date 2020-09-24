@@ -23,36 +23,8 @@ const breakpoints = {
   xxl: 1800,
 };
 
-type CaseProps = {
-  pageContext: {
-    CaseStudyFields: {
-      blocks: [];
-      devices: {
-        desktop: string;
-        mobile: string;
-      };
-      devicePreviews: boolean;
-      gallery: [];
-      intro: {
-        description: string;
-        title: string;
-        subtitle: string;
-        illustration: {
-          altText: string;
-          md: string;
-          mediaItemUrl: string;
-        };
-      };
-      related: [];
-      siteUrl: string;
-      testimonials: [
-        {
-          testimonial: object;
-        },
-      ];
-    };
-  };
-};
+import type { CaseStudy } from 'wjhmtypes';
+type CaseProps = CaseStudy;
 
 const CaseTemplate = ({ pageContext }: CaseProps) => {
   const { CaseStudyFields } = pageContext;

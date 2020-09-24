@@ -17,21 +17,25 @@ import { Related } from 'wjhm';
 
 import { Base } from 'wjhm';
 
+import type { Post } from 'wjhmtypes';
 declare type PostTemplateProps = Post & BaseProps;
 
 const PostTemplate = (props: PostTemplateProps) => {
   const { blocks, content, date, PostFields, title } = props;
-  const { relatedPosts } = PostFields;
+  const relatedPosts = PostFields?.relatedPosts;
   const learn = PostFields?.learn;
   const lessons = learn?.items;
 
   const hasBlocks = blocks?.length > 0;
+  const hasDate = date;
   const hasLessons = lessons?.length > 0;
   const hasRelated = relatedPosts?.length > 0;
 
+  const overviewTitle = learn?.title ? learn.title : `What you will learn`;
+
   useEffect(() => {
     // call the highlightAll() function to style our code blocks
-    Prism.highlightAll();
+    // Prism.highlightAll();
   }, []);
 
   return (
@@ -39,22 +43,17 @@ const PostTemplate = (props: PostTemplateProps) => {
       <ArticleIntro>
         <nav className="article__meta">
           <Link to="/posts">Insights</Link>
-          <h4 className="article__meta__date">{moment(new Date(date)).format(`DD/MM/YYYY`)} by Jack Pritchard</h4>
+          {hasDate && (
+            <h4 className="article__meta__date">{moment(new Date(date)).format(`DD/MM/YYYY`)} by Jack Pritchard</h4>
+          )}
         </nav>
         <h1>{decodeHTML(title)}</h1>
       </ArticleIntro>
-      {hasBlocks && (
-        <Article>
-          {hasLessons && <OverviewList items={lessons} title={learn.title ? learn.title : `What you will learn`} />}
-          <ComponentParser content={blocks} />
-        </Article>
-      )}
-      {!hasBlocks && (
-        <Article>
-          {hasLessons && <OverviewList items={lessons} title={learn.title ? learn.title : `What you will learn`} />}
-          {parseHTML(content)}
-        </Article>
-      )}
+      <Article>
+        {hasLessons && <OverviewList items={lessons} title={overviewTitle} />}
+        {hasBlocks && <ComponentParser content={blocks} />}
+        {!hasBlocks && parseHTML(content)}
+      </Article>
       {hasRelated && <Related data={relatedPosts} />}
     </Base>
   );

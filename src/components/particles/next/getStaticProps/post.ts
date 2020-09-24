@@ -8,6 +8,7 @@ import { getStaticData } from 'wjhm';
 export const getStaticProps: GetStaticProps = async context => {
   const { params } = context;
   const { slug } = params;
+  console.log(params);
 
   const preview = context?.previewData;
 
@@ -18,7 +19,7 @@ export const getStaticProps: GetStaticProps = async context => {
     const { footerMenu, headerMenu } = await getStaticData();
 
     const props = {
-      ...(postBy && { postBy }),
+      ...(postBy && { ...postBy }),
       ...(footerMenu && { footerMenu }),
       ...(headerMenu && { headerMenu }),
       ...(preview && { preview }),

@@ -15,6 +15,7 @@ import { Contact } from 'wjhm';
 import { Footer } from 'wjhm';
 import { Header } from 'wjhm';
 
+import type { Menu, PostTypeSeo } from 'wjhmtypes';
 declare type BaseProps = {
   children: any;
   cta: boolean;
