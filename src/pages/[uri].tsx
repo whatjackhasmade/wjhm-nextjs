@@ -6,6 +6,7 @@ import { Page } from 'wjhm';
 
 import { pageGetStaticProps as getStaticProps } from 'wjhm';
 
+import type { ContentType } from 'wjhmtypes';
 interface PageCollection extends Array<ContentType> {}
 
 // This function gets called at build time
