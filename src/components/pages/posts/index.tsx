@@ -24,8 +24,19 @@ const Archive = (props: ArchiveProps) => {
     });
   }
 
+  const footerMenu = null;
+  const headerMenu = null;
+  const seo = null;
+
+  const allProps = {
+    ...props,
+    footerMenu,
+    headerMenu,
+    seo,
+  };
+
   return (
-    <Base {...props}>
+    <Base {...allProps}>
       <Intro heading="Insights" subheading="Insights">
         <p>
           Welcome one and all! With over 200 blog posts, in 14 different categories, it's safe to say I can get carried

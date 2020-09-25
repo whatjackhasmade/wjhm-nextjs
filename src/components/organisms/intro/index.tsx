@@ -8,7 +8,7 @@ type IntroProps = {
   content?: string;
   heading: string;
   illustration?: {
-    mediaItemUrl: string;
+    mediaItemUrl?: string;
   };
   index?: number;
   maxWidth?: string;
@@ -16,16 +16,8 @@ type IntroProps = {
   subheading: string;
 };
 
-const Intro = ({
-  children,
-  content,
-  heading,
-  illustration,
-  index,
-  maxWidth,
-  marginReduced,
-  subheading,
-}: IntroProps) => {
+const Intro = (props: IntroProps) => {
+  const { children, content, heading, illustration, index, maxWidth, marginReduced, subheading } = props;
   const Subheading = index === 0 ? `h1` : `h2`;
   const Heading = index === 0 ? `h2` : `h3`;
 

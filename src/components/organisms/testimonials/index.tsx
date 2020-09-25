@@ -5,6 +5,8 @@ import { AngleRight } from '../../atoms/icons/solid';
 
 import TestimonialsComponent from './testimonials.styles';
 
+import type { AcfTestimonialsBlock_Testimonials } from 'wjhmtypes';
+
 const settings = {
   draggable: false,
   infinite: true,
@@ -18,45 +20,32 @@ const settings = {
   swipeToSlide: false,
 };
 
-type TestimonialProps = {
-  author: string;
-  logo?: string;
-  media: {
-    mediaItemUrl: string;
-  };
-  role?: string;
-  testimonial: string;
-};
-
-type TestimonialsProps = {
-  testimonials: TestimonialProps[];
-};
-
-const Testimonials = ({ testimonials }: TestimonialsProps) => {
+const Testimonials = (props: AcfTestimonialsBlock_Testimonials) => {
+  const { testimonials } = props;
   const sliderImages = useRef(null);
   const sliderTestimonials = useRef(null);
 
   const nextTestimonial = e => {
     e.preventDefault();
-    if (sliderImages) sliderImages.current.slickNext();
-    if (sliderImages) sliderTestimonials.current.slickNext();
+    if (sliderImages) sliderImages?.current?.slickNext();
+    if (sliderImages) sliderTestimonials?.current?.slickNext();
   };
 
   return (
     <TestimonialsComponent>
       <div className="testimonial__media">
         <Slider ref={sliderImages} {...settings}>
-          {testimonials.map(({ author, media }: TestimonialProps) => (
+          {testimonials.map(({ author, media }) => (
             <img src={media.mediaItemUrl} alt={author} key={author} />
           ))}
         </Slider>
       </div>
-      {Testimonials && Testimonials.length > 1 && (
+      {testimonials?.length > 1 && (
         <button className="testimonial__next" onClick={nextTestimonial}>
           Next <AngleRight />
         </button>
       )}
-      <div className="Testimonials">
+      <div className="testimonials">
         <Slider ref={sliderTestimonials} {...settings}>
           {testimonials.map(({ author, logo, role, testimonial }) => (
             <div className="testimonial" key={`testimonial-${author}`}>
@@ -65,7 +54,7 @@ const Testimonials = ({ testimonials }: TestimonialsProps) => {
                   <h3 className="testimonial__author">{author}</h3>
                   <h4 className="testimonial__role">{role}</h4>
                 </div>
-                <img className="testimonial__logo" src={logo} alt="" />
+                <img className="testimonial__logo" src={logo?.sourceUrl} alt={logo?.altText} />
               </header>
               <p className="testimonial__quote">&quot;{testimonial}&quot;</p>
             </div>

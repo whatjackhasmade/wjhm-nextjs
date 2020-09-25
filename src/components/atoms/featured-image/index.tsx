@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import type { MediaItem, MediaSize } from 'wjhmtypes';
 declare type FeaturedImageProps = {
   className?: string;
 } & MediaItem;
@@ -25,8 +26,8 @@ const FeaturedImage = (props: FeaturedImageProps) => {
 };
 
 declare type ImageSizesProps = {
-  mediaDetails: {
-    sizes: any;
+  mediaDetails?: {
+    sizes?: any;
   };
 };
 

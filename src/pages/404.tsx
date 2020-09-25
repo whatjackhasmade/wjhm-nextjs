@@ -6,16 +6,25 @@ import { Base } from 'wjhm';
 
 import { NotFound } from 'wjhm';
 
-type Four0FourProps = {};
+import type { Menu } from 'wjhmtypes';
+declare type Four0FourProps = {
+  footerMenu: Menu;
+  headerMenu: Menu;
+};
 
 const Four0Four = (props: Four0FourProps) => {
   const seo = {
     title: `Page Not Found - WhatJackHasMade`,
   };
 
+  const allProps = {
+    ...props,
+    seo,
+  };
+
   return (
-    <Base {...props} cta={false} seo={seo}>
-      <NotFound {...props} />
+    <Base {...allProps} cta={false}>
+      <NotFound />
     </Base>
   );
 };

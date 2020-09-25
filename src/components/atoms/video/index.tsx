@@ -23,7 +23,9 @@ const Video = (props: VideoProps) => {
   const isVimeo = props?.vimeo;
   const isYouTube = props?.youtube;
 
+  /* @ts-ignore */
   if (isVimeo) return <VideoVimeo {...props} />;
+  /* @ts-ignore */
   if (isYouTube) return <VideoYouTube {...props} />;
 
   const safe = { ...props };

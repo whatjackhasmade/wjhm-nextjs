@@ -6,8 +6,8 @@ import { Base } from 'wjhm';
 
 import TweetsContainer from './twitter.styles';
 
-type TwitterPageProps = {};
-type TweetProps = {
+declare type TwitterPageProps = {};
+declare type TweetProps = {
   favorite_count: number;
   id: string;
   text: string;
@@ -34,8 +34,19 @@ const Twitter = (props: TwitterPageProps) => {
     return hearts;
   };
 
+  const footerMenu = null;
+  const headerMenu = null;
+  const seo = null;
+
+  const allProps = {
+    ...props,
+    footerMenu,
+    headerMenu,
+    seo,
+  };
+
   return (
-    <Base {...props} cta={false}>
+    <Base {...allProps}>
       <Hero>
         <h1>Tweets</h1>
         <h3>Some of my social media ramblings</h3>

@@ -13,7 +13,9 @@ import { Linkedin as IconLinkedIn } from '../../atoms/icons/brands';
 import { Twitter as IconTwitter } from '../../atoms/icons/brands';
 import { Youtube as IconYouTube } from '../../atoms/icons/brands';
 
-type FooterProps = {
+import type { Menu } from 'wjhmtypes';
+
+declare type FooterProps = {
   menu: Menu;
 };
 

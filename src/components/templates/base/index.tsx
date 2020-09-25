@@ -17,7 +17,7 @@ import { Header } from 'wjhm';
 
 import type { Menu, PostTypeSeo } from 'wjhmtypes';
 declare type BaseProps = {
-  children: any;
+  children: JSX.Element | JSX.Element[];
   cta: boolean;
   footerMenu: Menu;
   headerMenu: Menu;

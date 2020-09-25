@@ -16,4 +16,4 @@ export { default as ThemeDefault } from './ThemeDefault';
 
 export { default as getStaticData } from './next/getStaticData';
 export { default as pageGetStaticProps } from './next/getStaticProps/page';
-export { default as storyGetStaticProps } from './next/getStaticProps/post';
+export { default as postGetStaticProps } from './next/getStaticProps/post';

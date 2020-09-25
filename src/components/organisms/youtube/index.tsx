@@ -70,6 +70,7 @@ const YouTubeChannel = (props: YouTubeChannelProps) => {
           </a>
           {hasVideos && firstVideo.snippet && (
             <div className="youtube__video" title={firstVideo.snippet.title}>
+              {/* @ts-ignore */}
               <YouTube videoId={firstVideo.snippet.resourceId.videoId} opts={opts} onReady={_onReady} />
             </div>
           )}

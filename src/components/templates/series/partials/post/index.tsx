@@ -13,11 +13,11 @@ const SeriesPost = (props: SeriesPostProps) => {
     <Link className="post" to={`/${slug}`}>
       {featuredImage && (
         <div className="post__image">
-          <img alt={featuredImage?.altText} src={featuredImage?.md} />
+          <img alt={featuredImage?.node?.altText} src={featuredImage?.node?.mediaItemUrl} />
         </div>
       )}
       {title && <h2 className="h4">{he.decode(title)}</h2>}
-      {seo && <p>{seo?.metaDesc}</p>}
+      {seo?.metaDesc && <p>{seo.metaDesc}</p>}
     </Link>
   );
 };

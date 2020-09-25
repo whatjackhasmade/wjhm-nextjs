@@ -7,45 +7,57 @@ import { RelatedItem, RelatedWrapper } from './related.styles';
 import { Link } from 'wjhm';
 import { ImageLoader } from 'wjhm';
 
-type RelatedProps = {
+declare type RelatedProps = {
   data: any;
   relatedRef?: any;
   title?: string;
 };
 
-const Related = ({ data, relatedRef, title = `Continue Reading` }: RelatedProps) => (
-  <RelatedWrapper ref={relatedRef}>
-    <h2>
-      {title}{` `}
-      <span aria-label="book pile emoji" role="img">
-        📚
-      </span>
-    </h2>
-    <div className="related__items">
-      {data.map(
-        item =>
-          item &&
-          item.featuredImage && (
-            <InView key={item.uri} threshold={0} triggerOnce={true}>
-              {({ inView, ref }) => (
-                <RelatedItem ref={ref}>
-                  <Link to={`/${item.uri}`}>
-                    <div className="related__media related__media--fallback">
-                      <ImageLoader
-                        alt={item.featuredImage.altText ? item.featuredImage.altText : item.title}
-                        src={item.featuredImage.md}
-                      />
-                    </div>
-                    {item.title && <h3>{decodeHTML(item.title)}</h3>}
-                    {item.seo.metaDesc && <p>{item.seo.metaDesc}</p>}
-                  </Link>
-                </RelatedItem>
-              )}
-            </InView>
-          ),
-      )}
-    </div>
-  </RelatedWrapper>
-);
+const Related = (props: RelatedProps) => {
+  const { data, relatedRef, title = `Continue Reading` } = props;
+  return (
+    <RelatedWrapper ref={relatedRef}>
+      <h2>
+        {title}
+        {` `}
+        <span aria-label="book pile emoji" role="img">
+          📚
+        </span>
+      </h2>
+      <div className="related__items">
+        {data
+          .map(item => {
+            const hasImage = item?.featuredImage;
+            if (!hasImage) return null;
+
+            const image = item?.featuredImage?.md;
+            const seo = item?.seo?.metaDesc;
+            const title = item?.title;
+
+            const hasSEO = seo;
+            const hasTitle = title;
+            const altText = item?.featuredImage?.altText;
+
+            return (
+              <InView key={item.uri} threshold={0} triggerOnce={true}>
+                {({ inView, ref }) => (
+                  <RelatedItem ref={ref}>
+                    <Link to={`/${item.uri}`}>
+                      <div className="related__media related__media--fallback">
+                        <ImageLoader alt={altText ? altText : title} src={image} />
+                      </div>
+                      {hasTitle && <h3>{decodeHTML(title)}</h3>}
+                      {hasSEO && <p>{seo}</p>}
+                    </Link>
+                  </RelatedItem>
+                )}
+              </InView>
+            );
+          })
+          .filter(Boolean)}
+      </div>
+    </RelatedWrapper>
+  );
+};
 
 export default Related;

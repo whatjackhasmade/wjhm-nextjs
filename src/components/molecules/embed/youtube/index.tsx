@@ -23,7 +23,10 @@ type YouTubeProps = {
   children: any;
 };
 
-const YouTubeBlock = ({ attributes: { url }, children }: YouTubeProps) => {
+const YouTubeBlock = (props: YouTubeProps) => {
+  const { attributes, children } = props;
+  const url = attributes?.url;
+
   if (!url) {
     return (
       <YouTubeComponent>
@@ -35,6 +38,7 @@ const YouTubeBlock = ({ attributes: { url }, children }: YouTubeProps) => {
   return (
     <YouTubeComponent>
       <div className="youtube__wrapper">
+        {/* @ts-ignore */}
         <YouTube videoId={youtubeID(url)} opts={opts} onReady={_onReady} />
       </div>
     </YouTubeComponent>

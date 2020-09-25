@@ -40,6 +40,7 @@ const CaseYouTube = ({ url }: CaseYouTubeProps) => {
     e.target.playVideo();
   };
 
+  // @ts-ignore
   return <YouTube videoId={ID} opts={opts} onReady={onReady} onEnd={onEnd} />;
 };
 

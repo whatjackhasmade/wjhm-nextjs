@@ -26,8 +26,8 @@ const breakpoints = {
 import type { CaseStudy } from 'wjhmtypes';
 type CaseProps = CaseStudy;
 
-const CaseTemplate = ({ pageContext }: CaseProps) => {
-  const { CaseStudyFields } = pageContext;
+const CaseTemplate = (props: CaseProps) => {
+  const { CaseStudyFields } = props;
   const { blocks, devices, devicePreviews, gallery, intro, related, siteUrl, testimonials } = CaseStudyFields;
   const processedTestimonials = testimonials.map(testimonial => {
     return { ...testimonial.testimonial };
@@ -60,9 +60,20 @@ const CaseTemplate = ({ pageContext }: CaseProps) => {
     gallerySix.push(gallery[i]);
   }
 
+  const footerMenu = null;
+  const headerMenu = null;
+  const seo = null;
+
+  const allProps = {
+    ...props,
+    footerMenu,
+    headerMenu,
+    seo,
+  };
+
   return (
     <ReactBreakpoints breakpoints={breakpoints}>
-      <Base context={pageContext}>
+      <Base {...allProps}>
         <Intro
           content={intro.description}
           heading={intro.title}
@@ -127,6 +138,7 @@ const CaseTemplate = ({ pageContext }: CaseProps) => {
             {blocks.length > 6 && <CaseRow data={blocks[6].fields} />}
           </>
         )}
+        {/* @ts-ignore */}
         {testimonials[0] && <Testimonials testimonials={processedTestimonials} />}
         {related[0] && <Related data={related} title="Continue Viewing My Case Studies" />}
       </Base>

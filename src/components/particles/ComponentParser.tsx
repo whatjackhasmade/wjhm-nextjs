@@ -17,6 +17,17 @@ import Row from '../organisms/row';
 import Testimonials from '../organisms/testimonials';
 import YouTubeChannel from '../organisms/youtube';
 
+import type { Block, Maybe } from 'wjhmtypes';
+
+declare type ExtendedBlock = {
+  attributes: any;
+  data: any;
+} & Block;
+
+declare type ComponentParserProps = {
+  content: Block[] | Maybe<ExtendedBlock>[];
+};
+
 const components = {
   'acf/code': Code,
   'acf/dribbble': Dribbble,
@@ -45,10 +56,6 @@ const convertACFProps = component => {
   return component;
 };
 
-declare type ComponentParserProps = {
-  content: Maybe<Block>[];
-};
-
 const ComponentParser = (props: ComponentParserProps) => {
   const { content } = props;
 
@@ -70,15 +77,15 @@ const ComponentParser = (props: ComponentParserProps) => {
           index={index}
           key={`component-${randomID()}`}
           {...component}
-          {...component.data}
+          // @ts-ignore
           {...component.attributes}
+          // @ts-ignore
+          {...component.data}
         />
       );
     });
 
-    if (pageComponents) {
-      return pageComponents;
-    }
+    if (pageComponents) return <React.Fragment>{pageComponents}</React.Fragment>;
   }
   return null;
 };

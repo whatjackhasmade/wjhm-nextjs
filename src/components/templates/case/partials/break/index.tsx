@@ -6,9 +6,9 @@ import { BreakImage } from '../../case.styles';
 import ImageLoader from '../../../../molecules/image-loader';
 
 type CaseBreakProps = {
-  image: {
-    altText: string;
-    mediaItemUrl: string;
+  image?: {
+    altText?: string;
+    mediaItemUrl?: string;
   };
 };
 

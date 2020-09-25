@@ -30,7 +30,8 @@ type PresentationProps = {
 };
 
 const Presentations = ({ content }: PresentationsProps) => {
-  const presentations = useQueryPresentations();
+  // const presentations = useQueryPresentations();
+  const presentations = [];
   const hasPresentations = presentations?.length > 0;
 
   return (

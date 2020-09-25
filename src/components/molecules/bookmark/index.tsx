@@ -39,13 +39,13 @@ const Bookmark = ({ url }: BookmarkProps) => {
   return null;
 };
 
-declare type BookmarkImageProps = {
-  altText?: string;
-  image?: BookmarkImageSingleProps | BookmarkImageSingleProps[];
-};
-
 declare type BookmarkImageSingleProps = {
   url: string;
+};
+
+declare type BookmarkImageProps = {
+  altText?: string;
+  image?: any | BookmarkImageSingleProps | BookmarkImageSingleProps[];
 };
 
 const BookmarkImage = (props: BookmarkImageProps) => {

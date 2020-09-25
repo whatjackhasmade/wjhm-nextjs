@@ -7,6 +7,8 @@ import { getStaticData } from 'wjhm';
 // This also gets called at build time
 export const getStaticProps: GetStaticProps = async context => {
   let pageProps = { props: null };
+  console.log(context);
+
   const { params } = context;
   const { uri } = params;
 

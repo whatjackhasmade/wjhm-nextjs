@@ -18,12 +18,24 @@ type SeriesProps = Series;
 const SeriesTemplate = (props: SeriesProps) => {
   const { description, name, posts, SeriesFields } = props;
   const seriesImage = SeriesFields?.seriesImage;
+  // @ts-ignore
   const youtubePlaylist = SeriesFields?.youtubePlaylist;
 
   const hasPosts = posts?.nodes?.length > 0;
 
+  const footerMenu = null;
+  const headerMenu = null;
+  const seo = null;
+
+  const allProps = {
+    ...props,
+    footerMenu,
+    headerMenu,
+    seo,
+  };
+
   return (
-    <Base {...props}>
+    <Base {...allProps}>
       <SeriesWrapper>
         {SeriesFields && (
           <SeriesIntro>
@@ -39,7 +51,7 @@ const SeriesTemplate = (props: SeriesProps) => {
               )}
             </div>
             <a className="intro__image" href={youtubePlaylist} rel="noopener noreferrer" target="_blank">
-              <img alt={seriesImage.altText} src={seriesImage.xl} />
+              <img alt={seriesImage.altText} src={seriesImage.mediaItemUrl} />
             </a>
           </SeriesIntro>
         )}

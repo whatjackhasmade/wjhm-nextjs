@@ -6,10 +6,10 @@ import { parseHTML } from 'wjhm';
 import { BlockContainer } from '../../case.styles';
 
 type CaseRowProps = {
-  data: {
-    columnOne: any;
-    columnTwo: any;
-    title: any;
+  data?: {
+    columnOne?: any;
+    columnTwo?: any;
+    title?: any;
   };
 };
 

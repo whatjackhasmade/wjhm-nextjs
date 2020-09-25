@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import moment from 'moment';
 import Prism from 'prismjs';
 
@@ -21,9 +22,9 @@ import type { Post } from 'wjhmtypes';
 declare type PostTemplateProps = Post & BaseProps;
 
 const PostTemplate = (props: PostTemplateProps) => {
-  const { blocks, content, date, PostFields, title } = props;
+  const { blocks, content, date, PostFields, slug, title } = props;
   const relatedPosts = PostFields?.relatedPosts;
-  const learn = PostFields?.learn;
+  const learn = null;
   const lessons = learn?.items;
 
   const hasBlocks = blocks?.length > 0;
@@ -32,6 +33,13 @@ const PostTemplate = (props: PostTemplateProps) => {
   const hasRelated = relatedPosts?.length > 0;
 
   const overviewTitle = learn?.title ? learn.title : `What you will learn`;
+
+  const router = useRouter();
+
+  useEffect(() => {
+    // Always do navigations after the first render
+    router.push(`/${slug}`, undefined, { shallow: true });
+  }, []);
 
   useEffect(() => {
     // call the highlightAll() function to style our code blocks

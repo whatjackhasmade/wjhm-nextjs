@@ -5,15 +5,14 @@ import { GalleryContainer } from '../../case.styles';
 
 import { ImageLoader } from 'wjhm';
 
-type CaseGalleryProps = {
-  images: [
-    {
-      altText: string;
-      md: string;
-      mediaItemUrl: string;
-    },
-  ];
-  small: boolean;
+declare type CaseImage = {
+  altText?: string;
+  md?: string;
+  mediaItemUrl?: string;
+};
+declare type CaseGalleryProps = {
+  images?: CaseImage[];
+  small?: boolean;
 };
 
 const CaseGallery = ({ images, small }: CaseGalleryProps) => {
