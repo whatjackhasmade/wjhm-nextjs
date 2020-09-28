@@ -12,7 +12,6 @@ import CaseYouTube from './partials/youtube';
 import { Intro } from 'wjhm';
 import { Related } from 'wjhm';
 import { Testimonials } from 'wjhm';
-import { Base } from 'wjhm';
 
 const breakpoints = {
   xs: 576,
@@ -72,8 +71,8 @@ const CaseTemplate = (props: CaseProps) => {
   };
 
   return (
-    <ReactBreakpoints breakpoints={breakpoints}>
-      <Base {...allProps}>
+    <React.Fragment>
+      <ReactBreakpoints breakpoints={breakpoints}>
         <Intro
           content={intro.description}
           heading={intro.title}
@@ -141,8 +140,8 @@ const CaseTemplate = (props: CaseProps) => {
         {/* @ts-ignore */}
         {testimonials[0] && <Testimonials testimonials={processedTestimonials} />}
         {related[0] && <Related data={related} title="Continue Viewing My Case Studies" />}
-      </Base>
-    </ReactBreakpoints>
+      </ReactBreakpoints>
+    </React.Fragment>
   );
 };
 

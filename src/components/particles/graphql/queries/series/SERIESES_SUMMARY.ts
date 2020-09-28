@@ -1,18 +1,15 @@
 import { parse } from 'graphql';
 
-import { MediaFragment } from '../../fragments/general/media';
+import { SEOFragment } from '../../fragments/general/seo';
 
 export const SERIESES_SUMMARY = /* GraphQL */ `
   query SERIESES_SUMMARY {
     serieses(first: 500) {
       nodes {
         id
-        date
-        modified
-        status
+        ${SEOFragment}
         slug
         uri
-        title
       }
     }
   }

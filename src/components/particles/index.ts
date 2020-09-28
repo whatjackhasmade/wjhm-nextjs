@@ -15,4 +15,6 @@ export { default as SEO } from './SEO';
 export { default as ThemeDefault } from './ThemeDefault';
 
 export { default as getStaticData } from './next/getStaticData';
-export { default as postGetStaticProps } from './next/getStaticProps/post';
+export { default as eventGetStaticProps } from './next/getStaticProps/event';
+export { default as nodeGetStaticProps } from './next/getStaticProps/node';
+export { default as reviewGetStaticProps } from './next/getStaticProps/review';

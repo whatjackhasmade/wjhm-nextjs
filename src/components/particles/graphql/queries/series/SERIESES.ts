@@ -1,8 +1,5 @@
 import { parse } from 'graphql';
 
-import { AllBlocksFragment } from '../../fragments';
-
-import { MediaFragment } from '../../fragments/general/media';
 import { SEOFragment } from '../../fragments/general/seo';
 
 export const SERIESES = /* GraphQL */ `
@@ -10,25 +7,9 @@ export const SERIESES = /* GraphQL */ `
     serieses(first: 500) {
       nodes {
         id
-        categories {
-          nodes {
-            name
-            slug
-            termTaxonomyId
-          }
-        }
-        content
-        date
-        featuredImage {
-          node {
-            ${MediaFragment}
-          }
-        }
         ${SEOFragment}
-        status
         slug
         uri
-        title
       }
     }
   }

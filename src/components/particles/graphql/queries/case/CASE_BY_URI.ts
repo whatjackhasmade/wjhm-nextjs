@@ -5,7 +5,7 @@ import { CaseDetailsFragment } from '../../fragments/case/case-details';
 
 export const CASE_BY_URI = /* GraphQL */ `
   query CASE_BY_URI($uri: String!) {
-    caseBy(uri: $uri) {
+    caseStudyBy(uri: $uri) {
       ${AllBlocksFragment}
       ${CaseDetailsFragment}
     }

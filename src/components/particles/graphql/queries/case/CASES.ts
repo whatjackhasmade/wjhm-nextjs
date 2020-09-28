@@ -7,7 +7,7 @@ import { SEOFragment } from '../../fragments/general/seo';
 
 export const CASES = /* GraphQL */ `
   query CASES {
-    cases(first: 500) {
+    caseStudies(first: 500) {
       nodes {
         id
         categories {

@@ -1,13 +1,13 @@
 import { requestor } from 'wjhm';
 
-import { POSTS } from 'wjhm';
+import { REVIEWS } from 'wjhm';
 
-import { Post } from 'wjhm';
+import { Base } from 'wjhm';
 
-import { postGetStaticProps as getStaticProps } from 'wjhm';
+import { reviewGetStaticProps as getStaticProps } from 'wjhm';
 
 import type { Post as PostType } from 'wjhmtypes';
-interface PostCollection extends Array<PostType> {}
+interface ReviewCollection extends Array<PostType> {}
 
 // This function gets called at build time
 export async function getStaticPaths() {
@@ -15,10 +15,10 @@ export async function getStaticPaths() {
 
   try {
     // Call an external API endpoint to get pages
-    const data = await requestor.request(POSTS);
-    const nodes: PostCollection = data.posts.nodes;
+    const reviewData = await requestor.request(REVIEWS);
+    const reviewNodes: ReviewCollection = reviewData.reviews.nodes;
 
-    const paths = nodes.map(node => {
+    const paths = reviewNodes.map(node => {
       const { slug } = node;
 
       return {
@@ -38,4 +38,4 @@ export async function getStaticPaths() {
 
 export { getStaticProps };
 
-export default Post;
+export default Base;

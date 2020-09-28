@@ -4,7 +4,7 @@ import { MediaFragment } from '../../fragments/general/media';
 
 export const CASES_SUMMARY = /* GraphQL */ `
   query CASES_SUMMARY {
-    cases(first: 500) {
+    caseStudies(first: 500) {
       nodes {
         id
         date

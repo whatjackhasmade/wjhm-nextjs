@@ -3,7 +3,6 @@ import moment from 'moment';
 import { requestor } from 'wjhm';
 
 import { MENU_BY_SLUG } from 'wjhm';
-import { PAGE_BY_URI } from 'wjhm';
 import { POSTS_SUMMARY } from 'wjhm';
 
 function orderByDate(posts) {

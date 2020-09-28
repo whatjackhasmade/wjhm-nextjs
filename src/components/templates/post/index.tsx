@@ -16,8 +16,6 @@ import { OverviewList } from 'wjhm';
 
 import { Related } from 'wjhm';
 
-import { Base } from 'wjhm';
-
 import type { Post } from 'wjhmtypes';
 declare type PostTemplateProps = Post & BaseProps;
 
@@ -47,7 +45,7 @@ const PostTemplate = (props: PostTemplateProps) => {
   }, []);
 
   return (
-    <Base {...props}>
+    <React.Fragment>
       <ArticleIntro>
         <nav className="article__meta">
           <Link to="/posts">Insights</Link>
@@ -63,7 +61,7 @@ const PostTemplate = (props: PostTemplateProps) => {
         {!hasBlocks && parseHTML(content)}
       </Article>
       {hasRelated && <Related data={relatedPosts} />}
-    </Base>
+    </React.Fragment>
   );
 };
 

@@ -10,7 +10,6 @@ import { parseHTML } from 'wjhm';
 
 import { Button } from 'wjhm';
 import { HR } from 'wjhm';
-import { Base } from 'wjhm';
 
 import type { Series } from 'wjhmtypes';
 type SeriesProps = Series;
@@ -23,19 +22,8 @@ const SeriesTemplate = (props: SeriesProps) => {
 
   const hasPosts = posts?.nodes?.length > 0;
 
-  const footerMenu = null;
-  const headerMenu = null;
-  const seo = null;
-
-  const allProps = {
-    ...props,
-    footerMenu,
-    headerMenu,
-    seo,
-  };
-
   return (
-    <Base {...allProps}>
+    <React.Fragment>
       <SeriesWrapper>
         {SeriesFields && (
           <SeriesIntro>
@@ -58,7 +46,7 @@ const SeriesTemplate = (props: SeriesProps) => {
         <HR />
         {hasPosts && <SeriesPosts posts={posts} />}
       </SeriesWrapper>
-    </Base>
+    </React.Fragment>
   );
 };
 

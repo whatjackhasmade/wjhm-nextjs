@@ -3,6 +3,7 @@ const path = require(`path`);
 const buildPath = stringDirectory => path.resolve(__dirname + `/` + stringDirectory);
 
 module.exports = {
+  trailingSlash: true,
   webpack: config => {
     config.resolve.alias[`wjhm`] = buildPath(`src/components`);
     config.resolve.alias[`wjhmtypes`] = buildPath(`src/generated/types/wjhm.tsx`);
