@@ -82,7 +82,7 @@ const Collection = ({ date, posts }: CollectionProps) => {
               )}
             </InView>
           )}
-          <Link to={`/posts/${slug}`}>
+          <Link to={`/${slug}`}>
             <h3 className="h5" key={id}>
               {decodeHTML(title)}
             </h3>

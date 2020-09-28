@@ -122,7 +122,7 @@ const CaseTemplate = (props: CaseProps) => {
         )}
 
         {blocks && (
-          <>
+          <React.Fragment>
             {blocks.length > 0 && <CaseRow data={blocks[0].fields} />}
             {galleryOne[0] && <CaseGallery images={galleryOne} />}
             {blocks.length > 1 && <CaseRow data={blocks[1].fields} />}
@@ -136,7 +136,7 @@ const CaseTemplate = (props: CaseProps) => {
             {blocks.length > 5 && <CaseRow data={blocks[5].fields} />}
             {gallerySix[0] && <CaseGallery images={gallerySix} small={true} />}
             {blocks.length > 6 && <CaseRow data={blocks[6].fields} />}
-          </>
+          </React.Fragment>
         )}
         {/* @ts-ignore */}
         {testimonials[0] && <Testimonials testimonials={processedTestimonials} />}

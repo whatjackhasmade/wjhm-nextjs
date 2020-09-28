@@ -6,33 +6,24 @@ import { Post } from 'wjhm';
 
 import { postGetStaticProps as getStaticProps } from 'wjhm';
 
-import type { ContentType } from 'wjhmtypes';
-interface PostCollection extends Array<ContentType> {}
+import type { Post as PostType } from 'wjhmtypes';
+interface PostCollection extends Array<PostType> {}
 
 // This function gets called at build time
 export async function getStaticPaths() {
-  let staticObject = { paths: [{ params: { id: `` } }], fallback: false };
+  let staticObject = { paths: [{ params: { slug: `` } }], fallback: false };
 
   try {
     // Call an external API endpoint to get pages
     const data = await requestor.request(POSTS);
     const nodes: PostCollection = data.posts.nodes;
 
-    const pathsSlashed = nodes.map(node => {
-      const { id } = node;
+    const paths = nodes.map(node => {
+      const { slug } = node;
 
       return {
-        params: { id },
+        params: { slug },
       };
-    });
-
-    const paths = pathsSlashed.filter(Boolean).map(({ params }) => {
-      const removeSlashes = params.id;
-      // .split(`/`)
-      // .filter(x => x)
-      // .join(`/`);
-
-      return { params: { id: removeSlashes } };
     });
 
     // We'll pre-render only these paths at build time.
