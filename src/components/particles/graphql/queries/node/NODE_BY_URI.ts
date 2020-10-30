@@ -10,7 +10,6 @@ export const NODE_BY_URI = /* GraphQL */ `
     nodeByUri(uri: $uri) {
       __typename
 			id
-      slug
       ... on CaseStudy {
         ${CaseDetailsFragment}
       }

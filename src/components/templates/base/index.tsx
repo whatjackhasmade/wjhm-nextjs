@@ -22,11 +22,12 @@ import { Series } from 'wjhm';
 
 import type { Menu, PostTypeSeo } from 'wjhmtypes';
 declare type BaseProps = {
-  cta: boolean;
+  children: any;
+  cta?: boolean;
   footerMenu: Menu;
   headerMenu: Menu;
   seo: PostTypeSeo;
-  __typename: string;
+  __typename?: string;
 };
 
 const Base = (props: BaseProps) => {

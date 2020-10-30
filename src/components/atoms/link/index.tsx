@@ -39,7 +39,7 @@ const DynamicLink = (props: DynamicLinkProps) => {
     if (isWork) href = `/work/[slug]`;
 
     return (
-      <Link as={isHardcoded ? null : relativeAs} href={isHardcoded ? relativeAs : href}>
+      <Link href={isHardcoded ? relativeAs : href}>
         {/* tslint:disable-next-line */}
         <a aria-current={isActive} className={className}>
           {children}

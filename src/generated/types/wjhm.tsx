@@ -3854,9 +3854,9 @@ export enum MediaItemSizeEnum {
   /** MediaItem with the thumbnail size */
   Thumbnail = 'THUMBNAIL',
   /** MediaItem with the 1536x1536 size */
-  
+  '1536X1536' = '_1536X1536',
   /** MediaItem with the 2048x2048 size */
-  
+  '2048X2048' = '_2048X2048'
 }
 
 /** Connection between the ContentNode type and the User type */
@@ -4030,6 +4030,14 @@ export type SeoPostTypeSchema = {
   articleType?: Maybe<Array<Maybe<Scalars['String']>>>;
   /** @deprecated  */
   pageType?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+/** The template assigned to a node of content */
+export type ContentTemplate = {
+  /** The file the template uses */
+  templateFile?: Maybe<Scalars['String']>;
+  /** The name of the template */
+  templateName?: Maybe<Scalars['String']>;
 };
 
 /** Arguments for filtering the ContentNodeToTermNodeConnection connection */
@@ -25224,12 +25232,4 @@ export type DeleteBlockEditorPreviewInput = {
   forceDelete?: Maybe<Scalars['Boolean']>;
   /** The ID of the BlockEditorPreview to delete */
   id: Scalars['ID'];
-};
-
-/** The template assigned to a node of content */
-export type ContentTemplate = {
-  /** The file the template uses */
-  templateFile?: Maybe<Scalars['String']>;
-  /** The name of the template */
-  templateName?: Maybe<Scalars['String']>;
 };

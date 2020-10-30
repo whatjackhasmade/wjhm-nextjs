@@ -28,7 +28,8 @@ export async function getStaticPaths() {
 
     // We'll pre-render only these paths at build time.
     // { fallback: false } means other routes should 404.
-    staticObject = { paths, fallback: false };
+    // @ts-ignore
+    staticObject = { paths, fallback: 'blocking' };
   } catch (error) {
     console.error(error.message);
   }
