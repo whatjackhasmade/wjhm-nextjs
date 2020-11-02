@@ -3,13 +3,6 @@ import { SEOFragment } from '../general/seo';
 
 export const PageDetailsFragment = /* GraphQL */ `
 id
-categories {
-	nodes {
-		name
-		slug
-		termTaxonomyId
-	}
-}
 content
 date
 featuredImage {
