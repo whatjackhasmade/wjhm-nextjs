@@ -31,7 +31,7 @@ declare type BaseProps = {
 };
 
 const Base = (props: BaseProps) => {
-  const { cta = true, footerMenu, headerMenu, seo } = props;
+  const { children, cta = true, footerMenu, headerMenu, seo } = props;
   const includeContact = cta !== false;
 
   return (
@@ -40,6 +40,7 @@ const Base = (props: BaseProps) => {
       <SEO {...seo} />
       <div className="wrapper">
         <Header menu={headerMenu} />
+        {children?.length > 0 && children}
         <InnerContent {...props} />
         {includeContact && <Contact />}
         <Footer menu={footerMenu} />
