@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ReactQueryDevtools } from 'react-query-devtools';
 
 if (typeof window !== `undefined`) {
   // Make scroll behavior of internal links smooth
