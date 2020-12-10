@@ -1,39 +1,36 @@
-import React from 'react';
 import { useState } from 'react';
-
-// if (typeof window !== `undefined`) {
-//   // Make scroll behavior of internal links smooth
-//   // eslint-disable-next-line global-require
-//   require(`mailtoui/dist/mailtoui-min.js`)(`MailtoUI.run()`);
-// }
-
-import HeaderComponent from './header.styles';
+import { useQuery } from 'react-query';
 
 import { Link } from 'wjhm';
 import { Logo } from 'wjhm';
 import { Bars } from '../../atoms/icons/solid';
 import { Times } from '../../atoms/icons/solid';
 
+import { callGetMenu } from 'wjhm';
+
 import { MenuItem } from 'wjhm';
+
+import HeaderComponent from './header.styles';
 
 import type { Menu } from 'wjhmtypes';
 
-declare type HeaderProps = {
-  menu: Menu;
-};
+declare type HeaderProps = {};
 
-const Header = (props: HeaderProps) => {
-  const headerMenu = props?.menu;
-  const menuItems = headerMenu?.menuItems?.nodes;
+const args: { slug: string } = { slug: `header-menu` };
+const options = {};
 
+const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
   const [menuOpen, toggleMenu] = useState(false);
+  const { data, error, isLoading: loading } = useQuery(args, callGetMenu, options);
+  const headerMenu: Menu = data?.menus?.nodes?.[0];
+  const menuItems = headerMenu?.menuItems?.nodes;
 
   const menuLength = menuItems?.length;
   const hasItems = menuLength > 0;
   const lastItem = !hasItems ? null : menuItems[menuLength - 1];
   const otherItems = !hasItems ? null : menuItems.filter((item, index) => index !== menuLength - 1);
 
-  const handleClick = e => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     toggleMenu(!menuOpen);
   };

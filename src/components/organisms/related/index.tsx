@@ -1,4 +1,3 @@
-import React from 'react';
 import { InView } from 'react-intersection-observer';
 import { decodeHTML } from 'wjhm';
 

@@ -1,6 +1,8 @@
 import { gql } from '@apollo/client';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -906,7 +908,7 @@ export enum BlockEditorPreviewIdType {
 }
 
 /** The BlockEditorPreview type */
-export type BlockEditorPreview = Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTitle & NodeWithContentEditor & NodeWithAuthor & {
+export type BlockEditorPreview = Node & ContentNode & DatabaseIdentifier & NodeWithTemplate & NodeWithTitle & NodeWithContentEditor & NodeWithAuthor & {
   __typename?: 'BlockEditorPreview';
   /**
    * The id field matches the WP_Post-&gt;ID field.
@@ -1061,15 +1063,10 @@ export type BlockEditorPreview = Node & ContentNode & UniformResourceIdentifiabl
    */
   status?: Maybe<Scalars['String']>;
   /**
-   * The template assigned to the node
+   * The template assigned to a node of content
    * @deprecated 
    */
   template?: Maybe<ContentTemplate>;
-  /**
-   * Connection between the ContentNode type and the TermNode type
-   * @deprecated 
-   */
-  terms?: Maybe<ContentNodeToTermNodeConnection>;
   /**
    * The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made.
    * @deprecated 
@@ -1104,16 +1101,6 @@ export type BlockEditorPreviewEnqueuedStylesheetsArgs = {
   last?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
-};
-
-
-/** The BlockEditorPreview type */
-export type BlockEditorPreviewTermsArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  where?: Maybe<ContentNodeToTermNodeConnectionWhereArgs>;
 };
 
 
@@ -1170,8 +1157,8 @@ export type ContentNode = {
   slug?: Maybe<Scalars['String']>;
   /** The current status of the object */
   status?: Maybe<Scalars['String']>;
-  /** Connection between the ContentNode type and the TermNode type */
-  terms?: Maybe<ContentNodeToTermNodeConnection>;
+  /** The template assigned to a node of content */
+  template?: Maybe<ContentTemplate>;
   /** URI path for the resource */
   uri: Scalars['String'];
 };
@@ -1192,16 +1179,6 @@ export type ContentNodeEnqueuedStylesheetsArgs = {
   last?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
-};
-
-
-/** Nodes used to manage content */
-export type ContentNodeTermsArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  where?: Maybe<ContentNodeToTermNodeConnectionWhereArgs>;
 };
 
 /** Connection between the ContentNode type and the User type */
@@ -1992,11 +1969,7 @@ export enum ContentTypeEnum {
   /** The Type of Content object */
   Post = 'POST',
   /** The Type of Content object */
-  Review = 'REVIEW',
-  /** The Type of Content object */
-  WggPreview = 'WGG_PREVIEW',
-  /** The Type of Content object */
-  WpBlock = 'WP_BLOCK'
+  Review = 'REVIEW'
 }
 
 /** Options for ordering the connection */
@@ -2127,6 +2100,16 @@ export type Comment = Node & DatabaseIdentifier & {
    * @deprecated 
    */
   parent?: Maybe<CommentToParentCommentConnectionEdge>;
+  /**
+   * The database id of the parent comment node or null if it is the root comment
+   * @deprecated 
+   */
+  parentDatabaseId?: Maybe<Scalars['Int']>;
+  /**
+   * The globally unique identifier of the parent comment node.
+   * @deprecated 
+   */
+  parentId?: Maybe<Scalars['ID']>;
   /**
    * Connection between the Comment type and the Comment type
    * @deprecated 
@@ -2606,7 +2589,7 @@ export type UserToMediaItemConnectionEdge = {
 };
 
 /** The mediaItem type */
-export type MediaItem = Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTitle & NodeWithAuthor & NodeWithComments & HierarchicalContentNode & {
+export type MediaItem = Node & ContentNode & DatabaseIdentifier & NodeWithTemplate & UniformResourceIdentifiable & NodeWithTitle & NodeWithAuthor & NodeWithComments & HierarchicalContentNode & {
   __typename?: 'MediaItem';
   /**
    * Alternative text to display when resource is not displayed
@@ -2617,7 +2600,7 @@ export type MediaItem = Node & ContentNode & UniformResourceIdentifiable & Datab
    * Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root).
    * @deprecated 
    */
-  ancestors?: Maybe<HierarchicalContentNodeToContentNodeConnection>;
+  ancestors?: Maybe<HierarchicalContentNodeToContentNodeAncestorsConnection>;
   /**
    * Connection between the NodeWithAuthor type and the User type
    * @deprecated 
@@ -2642,7 +2625,7 @@ export type MediaItem = Node & ContentNode & UniformResourceIdentifiable & Datab
    * Connection between the HierarchicalContentNode type and the ContentNode type
    * @deprecated 
    */
-  children?: Maybe<HierarchicalContentNodeToContentNodeConnection>;
+  children?: Maybe<HierarchicalContentNodeToContentNodeChildrenConnection>;
   /**
    * The number of comments. Even though WPGraphQL denotes this field as an integer, in WordPress this field should be saved as a numeric string for compatibility.
    * @deprecated 
@@ -2782,7 +2765,7 @@ export type MediaItem = Node & ContentNode & UniformResourceIdentifiable & Datab
    * The parent of the node. The parent object can be of various types
    * @deprecated 
    */
-  parent?: Maybe<HierarchicalContentNodeToContentNodeConnectionEdge>;
+  parent?: Maybe<HierarchicalContentNodeToParentContentNodeConnectionEdge>;
   /**
    * Database id of the parent node
    * @deprecated 
@@ -2834,15 +2817,10 @@ export type MediaItem = Node & ContentNode & UniformResourceIdentifiable & Datab
    */
   status?: Maybe<Scalars['String']>;
   /**
-   * The template assigned to the node
+   * The template assigned to a node of content
    * @deprecated 
    */
   template?: Maybe<ContentTemplate>;
-  /**
-   * Connection between the ContentNode type and the TermNode type
-   * @deprecated 
-   */
-  terms?: Maybe<ContentNodeToTermNodeConnection>;
   /**
    * The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made.
    * @deprecated 
@@ -2862,7 +2840,7 @@ export type MediaItemAncestorsArgs = {
   last?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
-  where?: Maybe<HierarchicalContentNodeToContentNodeConnectionWhereArgs>;
+  where?: Maybe<HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs>;
 };
 
 
@@ -2878,7 +2856,7 @@ export type MediaItemChildrenArgs = {
   last?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
-  where?: Maybe<HierarchicalContentNodeToContentNodeConnectionWhereArgs>;
+  where?: Maybe<HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs>;
 };
 
 
@@ -2941,18 +2919,20 @@ export type MediaItemSrcSetArgs = {
 
 
 /** The mediaItem type */
-export type MediaItemTermsArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  where?: Maybe<ContentNodeToTermNodeConnectionWhereArgs>;
-};
-
-
-/** The mediaItem type */
 export type MediaItemTitleArgs = {
   format?: Maybe<PostObjectFieldFormatEnum>;
+};
+
+/** A node that can have a template associated with it */
+export type NodeWithTemplate = {
+  /** The template assigned to the node */
+  template?: Maybe<ContentTemplate>;
+};
+
+/** The template assigned to a node of content */
+export type ContentTemplate = {
+  /** The name of the template */
+  templateName?: Maybe<Scalars['String']>;
 };
 
 /** A node that NodeWith a title */
@@ -2998,11 +2978,11 @@ export type NodeWithComments = {
 /** Content node with hierarchical (parent/child) relationships */
 export type HierarchicalContentNode = {
   /** Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root). */
-  ancestors?: Maybe<HierarchicalContentNodeToContentNodeConnection>;
+  ancestors?: Maybe<HierarchicalContentNodeToContentNodeAncestorsConnection>;
   /** Connection between the HierarchicalContentNode type and the ContentNode type */
-  children?: Maybe<HierarchicalContentNodeToContentNodeConnection>;
+  children?: Maybe<HierarchicalContentNodeToContentNodeChildrenConnection>;
   /** The parent of the node. The parent object can be of various types */
-  parent?: Maybe<HierarchicalContentNodeToContentNodeConnectionEdge>;
+  parent?: Maybe<HierarchicalContentNodeToParentContentNodeConnectionEdge>;
   /** Database id of the parent node */
   parentDatabaseId?: Maybe<Scalars['Int']>;
   /** The globally unique identifier of the parent node. */
@@ -3016,7 +2996,7 @@ export type HierarchicalContentNodeAncestorsArgs = {
   last?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
-  where?: Maybe<HierarchicalContentNodeToContentNodeConnectionWhereArgs>;
+  where?: Maybe<HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs>;
 };
 
 
@@ -3026,11 +3006,11 @@ export type HierarchicalContentNodeChildrenArgs = {
   last?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
-  where?: Maybe<HierarchicalContentNodeToContentNodeConnectionWhereArgs>;
+  where?: Maybe<HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs>;
 };
 
-/** Arguments for filtering the HierarchicalContentNodeToContentNodeConnection connection */
-export type HierarchicalContentNodeToContentNodeConnectionWhereArgs = {
+/** Arguments for filtering the HierarchicalContentNodeToContentNodeAncestorsConnection connection */
+export type HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs = {
   /** Filter the connection based on dates */
   dateQuery?: Maybe<DateQueryInput>;
   /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
@@ -3066,13 +3046,13 @@ export type HierarchicalContentNodeToContentNodeConnectionWhereArgs = {
 };
 
 /** Connection between the HierarchicalContentNode type and the ContentNode type */
-export type HierarchicalContentNodeToContentNodeConnection = {
-  __typename?: 'HierarchicalContentNodeToContentNodeConnection';
+export type HierarchicalContentNodeToContentNodeAncestorsConnection = {
+  __typename?: 'HierarchicalContentNodeToContentNodeAncestorsConnection';
   /**
-   * Edges for the HierarchicalContentNodeToContentNodeConnection connection
+   * Edges for the HierarchicalContentNodeToContentNodeAncestorsConnection connection
    * @deprecated 
    */
-  edges?: Maybe<Array<Maybe<HierarchicalContentNodeToContentNodeConnectionEdge>>>;
+  edges?: Maybe<Array<Maybe<HierarchicalContentNodeToContentNodeAncestorsConnectionEdge>>>;
   /**
    * The nodes of the connection, without the edges
    * @deprecated 
@@ -3085,9 +3065,95 @@ export type HierarchicalContentNodeToContentNodeConnection = {
   pageInfo?: Maybe<WpPageInfo>;
 };
 
+/** An edge in a connection */
+export type HierarchicalContentNodeToContentNodeAncestorsConnectionEdge = {
+  __typename?: 'HierarchicalContentNodeToContentNodeAncestorsConnectionEdge';
+  /**
+   * A cursor for use in pagination
+   * @deprecated 
+   */
+  cursor?: Maybe<Scalars['String']>;
+  /**
+   * The item at the end of the edge
+   * @deprecated 
+   */
+  node?: Maybe<ContentNode>;
+};
+
+/** Arguments for filtering the HierarchicalContentNodeToContentNodeChildrenConnection connection */
+export type HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: Maybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: Maybe<Scalars['Boolean']>;
+  /** Specific ID of the object */
+  id?: Maybe<Scalars['Int']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: Maybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: Maybe<Scalars['String']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: Maybe<Array<Maybe<Scalars['String']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** What paramater to use to order the objects by. */
+  orderby?: Maybe<Array<Maybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: Maybe<Scalars['ID']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Show posts with a specific password. */
+  password?: Maybe<Scalars['String']>;
+  /** Show Posts based on a keyword search */
+  search?: Maybe<Scalars['String']>;
+  stati?: Maybe<Array<Maybe<PostStatusEnum>>>;
+  status?: Maybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: Maybe<Scalars['String']>;
+};
+
 /** Connection between the HierarchicalContentNode type and the ContentNode type */
-export type HierarchicalContentNodeToContentNodeConnectionEdge = {
-  __typename?: 'HierarchicalContentNodeToContentNodeConnectionEdge';
+export type HierarchicalContentNodeToContentNodeChildrenConnection = {
+  __typename?: 'HierarchicalContentNodeToContentNodeChildrenConnection';
+  /**
+   * Edges for the HierarchicalContentNodeToContentNodeChildrenConnection connection
+   * @deprecated 
+   */
+  edges?: Maybe<Array<Maybe<HierarchicalContentNodeToContentNodeChildrenConnectionEdge>>>;
+  /**
+   * The nodes of the connection, without the edges
+   * @deprecated 
+   */
+  nodes?: Maybe<Array<Maybe<ContentNode>>>;
+  /**
+   * Information about pagination in a connection.
+   * @deprecated 
+   */
+  pageInfo?: Maybe<WpPageInfo>;
+};
+
+/** An edge in a connection */
+export type HierarchicalContentNodeToContentNodeChildrenConnectionEdge = {
+  __typename?: 'HierarchicalContentNodeToContentNodeChildrenConnectionEdge';
+  /**
+   * A cursor for use in pagination
+   * @deprecated 
+   */
+  cursor?: Maybe<Scalars['String']>;
+  /**
+   * The item at the end of the edge
+   * @deprecated 
+   */
+  node?: Maybe<ContentNode>;
+};
+
+/** Connection between the HierarchicalContentNode type and the ContentNode type */
+export type HierarchicalContentNodeToParentContentNodeConnectionEdge = {
+  __typename?: 'HierarchicalContentNodeToParentContentNodeConnectionEdge';
   /**
    * The nodes of the connection, without the edges
    * @deprecated 
@@ -4032,230 +4098,6 @@ export type SeoPostTypeSchema = {
   pageType?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
-/** The template assigned to a node of content */
-export type ContentTemplate = {
-  /** The file the template uses */
-  templateFile?: Maybe<Scalars['String']>;
-  /** The name of the template */
-  templateName?: Maybe<Scalars['String']>;
-};
-
-/** Arguments for filtering the ContentNodeToTermNodeConnection connection */
-export type ContentNodeToTermNodeConnectionWhereArgs = {
-  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
-  cacheDomain?: Maybe<Scalars['String']>;
-  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
-  childOf?: Maybe<Scalars['Int']>;
-  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
-  childless?: Maybe<Scalars['Boolean']>;
-  /** Retrieve terms where the description is LIKE the input value. Default empty. */
-  descriptionLike?: Maybe<Scalars['String']>;
-  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
-  exclude?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
-  excludeTree?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
-  hideEmpty?: Maybe<Scalars['Boolean']>;
-  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
-  hierarchical?: Maybe<Scalars['Boolean']>;
-  /** Array of term ids to include. Default empty array. */
-  include?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  /** Array of names to return term(s) for. Default empty. */
-  name?: Maybe<Array<Maybe<Scalars['String']>>>;
-  /** Retrieve terms where the name is LIKE the input value. Default empty. */
-  nameLike?: Maybe<Scalars['String']>;
-  /** Array of object IDs. Results will be limited to terms associated with these objects. */
-  objectIds?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  /** Field(s) to order terms by. Defaults to 'name'. */
-  orderby?: Maybe<TermObjectsConnectionOrderbyEnum>;
-  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
-  padCounts?: Maybe<Scalars['Boolean']>;
-  /** Parent term ID to retrieve direct-child terms of. Default empty. */
-  parent?: Maybe<Scalars['Int']>;
-  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
-  search?: Maybe<Scalars['String']>;
-  /** Array of slugs to return term(s) for. Default empty. */
-  slug?: Maybe<Array<Maybe<Scalars['String']>>>;
-  /** The Taxonomy to filter terms by */
-  taxonomies?: Maybe<Array<Maybe<TaxonomyEnum>>>;
-  /** Array of term taxonomy IDs, to match when querying terms. */
-  termTaxonomId?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  /** Whether to prime meta caches for matched terms. Default true. */
-  updateTermMetaCache?: Maybe<Scalars['Boolean']>;
-};
-
-/** Options for ordering the connection by */
-export enum TermObjectsConnectionOrderbyEnum {
-  Count = 'COUNT',
-  Description = 'DESCRIPTION',
-  Name = 'NAME',
-  Slug = 'SLUG',
-  TermGroup = 'TERM_GROUP',
-  TermId = 'TERM_ID',
-  TermOrder = 'TERM_ORDER'
-}
-
-/** Allowed taxonomies */
-export enum TaxonomyEnum {
-  Category = 'CATEGORY',
-  Postformat = 'POSTFORMAT',
-  Series = 'SERIES',
-  Tag = 'TAG'
-}
-
-/** Connection between the ContentNode type and the TermNode type */
-export type ContentNodeToTermNodeConnection = {
-  __typename?: 'ContentNodeToTermNodeConnection';
-  /**
-   * Edges for the ContentNodeToTermNodeConnection connection
-   * @deprecated 
-   */
-  edges?: Maybe<Array<Maybe<ContentNodeToTermNodeConnectionEdge>>>;
-  /**
-   * The nodes of the connection, without the edges
-   * @deprecated 
-   */
-  nodes?: Maybe<Array<Maybe<TermNode>>>;
-  /**
-   * Information about pagination in a connection.
-   * @deprecated 
-   */
-  pageInfo?: Maybe<WpPageInfo>;
-};
-
-/** An edge in a connection */
-export type ContentNodeToTermNodeConnectionEdge = {
-  __typename?: 'ContentNodeToTermNodeConnectionEdge';
-  /**
-   * A cursor for use in pagination
-   * @deprecated 
-   */
-  cursor?: Maybe<Scalars['String']>;
-  /**
-   * The item at the end of the edge
-   * @deprecated 
-   */
-  node?: Maybe<TermNode>;
-};
-
-/** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
-export type TermNode = {
-  /** The number of objects connected to the object */
-  count?: Maybe<Scalars['Int']>;
-  /** Identifies the primary key from the database. */
-  databaseId: Scalars['Int'];
-  /** The description of the object */
-  description?: Maybe<Scalars['String']>;
-  /** Connection between the TermNode type and the EnqueuedScript type */
-  enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
-  /** Connection between the TermNode type and the EnqueuedStylesheet type */
-  enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
-  /** Unique identifier for the term */
-  id: Scalars['ID'];
-  /** Whether the object is restricted from the current viewer */
-  isRestricted?: Maybe<Scalars['Boolean']>;
-  /** The link to the term */
-  link?: Maybe<Scalars['String']>;
-  /** The human friendly name of the object. */
-  name?: Maybe<Scalars['String']>;
-  /** An alphanumeric identifier for the object unique to its type. */
-  slug?: Maybe<Scalars['String']>;
-  /** The ID of the term group that this term object belongs to */
-  termGroupId?: Maybe<Scalars['Int']>;
-  /** The taxonomy ID that the object is associated with */
-  termTaxonomyId?: Maybe<Scalars['Int']>;
-  /** The unique resource identifier path */
-  uri: Scalars['String'];
-};
-
-
-/** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
-export type TermNodeEnqueuedScriptsArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-};
-
-
-/** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
-export type TermNodeEnqueuedStylesheetsArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-};
-
-/** Connection between the TermNode type and the EnqueuedScript type */
-export type TermNodeToEnqueuedScriptConnection = {
-  __typename?: 'TermNodeToEnqueuedScriptConnection';
-  /**
-   * Edges for the TermNodeToEnqueuedScriptConnection connection
-   * @deprecated 
-   */
-  edges?: Maybe<Array<Maybe<TermNodeToEnqueuedScriptConnectionEdge>>>;
-  /**
-   * The nodes of the connection, without the edges
-   * @deprecated 
-   */
-  nodes?: Maybe<Array<Maybe<EnqueuedScript>>>;
-  /**
-   * Information about pagination in a connection.
-   * @deprecated 
-   */
-  pageInfo?: Maybe<WpPageInfo>;
-};
-
-/** An edge in a connection */
-export type TermNodeToEnqueuedScriptConnectionEdge = {
-  __typename?: 'TermNodeToEnqueuedScriptConnectionEdge';
-  /**
-   * A cursor for use in pagination
-   * @deprecated 
-   */
-  cursor?: Maybe<Scalars['String']>;
-  /**
-   * The item at the end of the edge
-   * @deprecated 
-   */
-  node?: Maybe<EnqueuedScript>;
-};
-
-/** Connection between the TermNode type and the EnqueuedStylesheet type */
-export type TermNodeToEnqueuedStylesheetConnection = {
-  __typename?: 'TermNodeToEnqueuedStylesheetConnection';
-  /**
-   * Edges for the TermNodeToEnqueuedStylesheetConnection connection
-   * @deprecated 
-   */
-  edges?: Maybe<Array<Maybe<TermNodeToEnqueuedStylesheetConnectionEdge>>>;
-  /**
-   * The nodes of the connection, without the edges
-   * @deprecated 
-   */
-  nodes?: Maybe<Array<Maybe<EnqueuedStylesheet>>>;
-  /**
-   * Information about pagination in a connection.
-   * @deprecated 
-   */
-  pageInfo?: Maybe<WpPageInfo>;
-};
-
-/** An edge in a connection */
-export type TermNodeToEnqueuedStylesheetConnectionEdge = {
-  __typename?: 'TermNodeToEnqueuedStylesheetConnectionEdge';
-  /**
-   * A cursor for use in pagination
-   * @deprecated 
-   */
-  cursor?: Maybe<Scalars['String']>;
-  /**
-   * The item at the end of the edge
-   * @deprecated 
-   */
-  node?: Maybe<EnqueuedStylesheet>;
-};
-
 /** Arguments for filtering the UserToPageConnection connection */
 export type UserToPageConnectionWhereArgs = {
   /** The user that's connected as the author of the object. Use the userId for the author object. */
@@ -4336,13 +4178,13 @@ export type UserToPageConnectionEdge = {
 };
 
 /** The page type */
-export type Page = Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTitle & NodeWithContentEditor & NodeWithAuthor & NodeWithFeaturedImage & NodeWithComments & NodeWithRevisions & NodeWithPageAttributes & HierarchicalContentNode & MenuItemLinkable & BlockEditorContentNode & {
+export type Page = Node & ContentNode & DatabaseIdentifier & NodeWithTemplate & UniformResourceIdentifiable & NodeWithTitle & NodeWithContentEditor & NodeWithAuthor & NodeWithFeaturedImage & NodeWithComments & NodeWithRevisions & NodeWithPageAttributes & HierarchicalContentNode & MenuItemLinkable & BlockEditorContentNode & {
   __typename?: 'Page';
   /**
    * Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root).
    * @deprecated 
    */
-  ancestors?: Maybe<HierarchicalContentNodeToContentNodeConnection>;
+  ancestors?: Maybe<HierarchicalContentNodeToContentNodeAncestorsConnection>;
   /**
    * Connection between the NodeWithAuthor type and the User type
    * @deprecated 
@@ -4372,7 +4214,7 @@ export type Page = Node & ContentNode & UniformResourceIdentifiable & DatabaseId
    * Connection between the HierarchicalContentNode type and the ContentNode type
    * @deprecated 
    */
-  children?: Maybe<HierarchicalContentNodeToContentNodeConnection>;
+  children?: Maybe<HierarchicalContentNodeToContentNodeChildrenConnection>;
   /**
    * The number of comments. Even though WPGraphQL denotes this field as an integer, in WordPress this field should be saved as a numeric string for compatibility.
    * @deprecated 
@@ -4522,7 +4364,7 @@ export type Page = Node & ContentNode & UniformResourceIdentifiable & DatabaseId
    * The parent of the node. The parent object can be of various types
    * @deprecated 
    */
-  parent?: Maybe<HierarchicalContentNodeToContentNodeConnectionEdge>;
+  parent?: Maybe<HierarchicalContentNodeToParentContentNodeConnectionEdge>;
   /**
    * Database id of the parent node
    * @deprecated 
@@ -4584,15 +4426,10 @@ export type Page = Node & ContentNode & UniformResourceIdentifiable & DatabaseId
    */
   status?: Maybe<Scalars['String']>;
   /**
-   * The template assigned to the node
+   * The template assigned to a node of content
    * @deprecated 
    */
   template?: Maybe<ContentTemplate>;
-  /**
-   * Connection between the ContentNode type and the TermNode type
-   * @deprecated 
-   */
-  terms?: Maybe<ContentNodeToTermNodeConnection>;
   /**
    * The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made.
    * @deprecated 
@@ -4612,7 +4449,7 @@ export type PageAncestorsArgs = {
   last?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
-  where?: Maybe<HierarchicalContentNodeToContentNodeConnectionWhereArgs>;
+  where?: Maybe<HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs>;
 };
 
 
@@ -4622,7 +4459,7 @@ export type PageChildrenArgs = {
   last?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
-  where?: Maybe<HierarchicalContentNodeToContentNodeConnectionWhereArgs>;
+  where?: Maybe<HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs>;
 };
 
 
@@ -4667,16 +4504,6 @@ export type PageRevisionsArgs = {
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   where?: Maybe<PageToRevisionConnectionWhereArgs>;
-};
-
-
-/** The page type */
-export type PageTermsArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  where?: Maybe<ContentNodeToTermNodeConnectionWhereArgs>;
 };
 
 
@@ -5080,7 +4907,7 @@ export type UserToPostConnectionEdge = {
 };
 
 /** The post type */
-export type Post = Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTitle & NodeWithContentEditor & NodeWithAuthor & NodeWithFeaturedImage & NodeWithExcerpt & NodeWithComments & NodeWithTrackbacks & NodeWithRevisions & MenuItemLinkable & BlockEditorContentNode & {
+export type Post = Node & ContentNode & DatabaseIdentifier & NodeWithTemplate & UniformResourceIdentifiable & NodeWithTitle & NodeWithContentEditor & NodeWithAuthor & NodeWithFeaturedImage & NodeWithExcerpt & NodeWithComments & NodeWithTrackbacks & NodeWithRevisions & MenuItemLinkable & BlockEditorContentNode & {
   __typename?: 'Post';
   /** @deprecated  */
   PostFields?: Maybe<Post_Postfields>;
@@ -5230,6 +5057,11 @@ export type Post = Node & ContentNode & UniformResourceIdentifiable & DatabaseId
    */
   isRevision?: Maybe<Scalars['Boolean']>;
   /**
+   * Whether this page is sticky
+   * @deprecated 
+   */
+  isSticky: Scalars['Boolean'];
+  /**
    * The user that most recently edited the node
    * @deprecated 
    */
@@ -5325,15 +5157,15 @@ export type Post = Node & ContentNode & UniformResourceIdentifiable & DatabaseId
    */
   tags?: Maybe<PostToTagConnection>;
   /**
-   * The template assigned to the node
+   * The template assigned to a node of content
    * @deprecated 
    */
   template?: Maybe<ContentTemplate>;
   /**
-   * Connection between the ContentNode type and the TermNode type
+   * Connection between the post type and the TermNode type
    * @deprecated 
    */
-  terms?: Maybe<ContentNodeToTermNodeConnection>;
+  terms?: Maybe<PostToTermNodeConnection>;
   /**
    * The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made.
    * @deprecated 
@@ -5448,7 +5280,7 @@ export type PostTermsArgs = {
   last?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
-  where?: Maybe<ContentNodeToTermNodeConnectionWhereArgs>;
+  where?: Maybe<PostToTermNodeConnectionWhereArgs>;
 };
 
 
@@ -5532,6 +5364,17 @@ export type PostToSeriesConnectionWhereArgs = {
   updateTermMetaCache?: Maybe<Scalars['Boolean']>;
 };
 
+/** Options for ordering the connection by */
+export enum TermObjectsConnectionOrderbyEnum {
+  Count = 'COUNT',
+  Description = 'DESCRIPTION',
+  Name = 'NAME',
+  Slug = 'SLUG',
+  TermGroup = 'TERM_GROUP',
+  TermId = 'TERM_ID',
+  TermOrder = 'TERM_ORDER'
+}
+
 /** Connection between the post type and the Series type */
 export type PostToSeriesConnection = {
   __typename?: 'PostToSeriesConnection';
@@ -5561,6 +5404,11 @@ export type PostToSeriesConnectionEdge = {
    */
   cursor?: Maybe<Scalars['String']>;
   /**
+   * The Yoast SEO Primary taxonomy_series
+   * @deprecated 
+   */
+  isPrimary?: Maybe<Scalars['Boolean']>;
+  /**
    * The item at the end of the edge
    * @deprecated 
    */
@@ -5568,7 +5416,7 @@ export type PostToSeriesConnectionEdge = {
 };
 
 /** The Series type */
-export type Series = Node & TermNode & UniformResourceIdentifiable & DatabaseIdentifier & HierarchicalTermNode & MenuItemLinkable & {
+export type Series = Node & TermNode & DatabaseIdentifier & UniformResourceIdentifiable & HierarchicalTermNode & MenuItemLinkable & {
   __typename?: 'Series';
   /**
    * Added to the GraphQL Schema because the ACF Field Group &quot;Taxonomy: Series&quot; was assigned to the &quot;taxonomy_series&quot; taxonomy
@@ -5590,6 +5438,11 @@ export type Series = Node & TermNode & UniformResourceIdentifiable & DatabaseIde
    * @deprecated 
    */
   children?: Maybe<SeriesToSeriesConnection>;
+  /**
+   * Connection between the Series type and the ContentNode type
+   * @deprecated 
+   */
+  contentNodes?: Maybe<SeriesToContentNodeConnection>;
   /**
    * The number of objects connected to the object
    * @deprecated 
@@ -5708,6 +5561,16 @@ export type SeriesChildrenArgs = {
 
 
 /** The Series type */
+export type SeriesContentNodesArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  where?: Maybe<SeriesToContentNodeConnectionWhereArgs>;
+};
+
+
+/** The Series type */
 export type SeriesEnqueuedScriptsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -5732,6 +5595,124 @@ export type SeriesPostsArgs = {
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   where?: Maybe<SeriesToPostConnectionWhereArgs>;
+};
+
+/** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
+export type TermNode = {
+  /** The number of objects connected to the object */
+  count?: Maybe<Scalars['Int']>;
+  /** Identifies the primary key from the database. */
+  databaseId: Scalars['Int'];
+  /** The description of the object */
+  description?: Maybe<Scalars['String']>;
+  /** Connection between the TermNode type and the EnqueuedScript type */
+  enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
+  /** Connection between the TermNode type and the EnqueuedStylesheet type */
+  enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
+  /** Unique identifier for the term */
+  id: Scalars['ID'];
+  /** Whether the object is restricted from the current viewer */
+  isRestricted?: Maybe<Scalars['Boolean']>;
+  /** The link to the term */
+  link?: Maybe<Scalars['String']>;
+  /** The human friendly name of the object. */
+  name?: Maybe<Scalars['String']>;
+  /** An alphanumeric identifier for the object unique to its type. */
+  slug?: Maybe<Scalars['String']>;
+  /** The ID of the term group that this term object belongs to */
+  termGroupId?: Maybe<Scalars['Int']>;
+  /** The taxonomy ID that the object is associated with */
+  termTaxonomyId?: Maybe<Scalars['Int']>;
+  /** The unique resource identifier path */
+  uri: Scalars['String'];
+};
+
+
+/** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
+export type TermNodeEnqueuedScriptsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+};
+
+
+/** Terms are nodes within a Taxonomy, used to group and relate other nodes. */
+export type TermNodeEnqueuedStylesheetsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+};
+
+/** Connection between the TermNode type and the EnqueuedScript type */
+export type TermNodeToEnqueuedScriptConnection = {
+  __typename?: 'TermNodeToEnqueuedScriptConnection';
+  /**
+   * Edges for the TermNodeToEnqueuedScriptConnection connection
+   * @deprecated 
+   */
+  edges?: Maybe<Array<Maybe<TermNodeToEnqueuedScriptConnectionEdge>>>;
+  /**
+   * The nodes of the connection, without the edges
+   * @deprecated 
+   */
+  nodes?: Maybe<Array<Maybe<EnqueuedScript>>>;
+  /**
+   * Information about pagination in a connection.
+   * @deprecated 
+   */
+  pageInfo?: Maybe<WpPageInfo>;
+};
+
+/** An edge in a connection */
+export type TermNodeToEnqueuedScriptConnectionEdge = {
+  __typename?: 'TermNodeToEnqueuedScriptConnectionEdge';
+  /**
+   * A cursor for use in pagination
+   * @deprecated 
+   */
+  cursor?: Maybe<Scalars['String']>;
+  /**
+   * The item at the end of the edge
+   * @deprecated 
+   */
+  node?: Maybe<EnqueuedScript>;
+};
+
+/** Connection between the TermNode type and the EnqueuedStylesheet type */
+export type TermNodeToEnqueuedStylesheetConnection = {
+  __typename?: 'TermNodeToEnqueuedStylesheetConnection';
+  /**
+   * Edges for the TermNodeToEnqueuedStylesheetConnection connection
+   * @deprecated 
+   */
+  edges?: Maybe<Array<Maybe<TermNodeToEnqueuedStylesheetConnectionEdge>>>;
+  /**
+   * The nodes of the connection, without the edges
+   * @deprecated 
+   */
+  nodes?: Maybe<Array<Maybe<EnqueuedStylesheet>>>;
+  /**
+   * Information about pagination in a connection.
+   * @deprecated 
+   */
+  pageInfo?: Maybe<WpPageInfo>;
+};
+
+/** An edge in a connection */
+export type TermNodeToEnqueuedStylesheetConnectionEdge = {
+  __typename?: 'TermNodeToEnqueuedStylesheetConnectionEdge';
+  /**
+   * A cursor for use in pagination
+   * @deprecated 
+   */
+  cursor?: Maybe<Scalars['String']>;
+  /**
+   * The item at the end of the edge
+   * @deprecated 
+   */
+  node?: Maybe<EnqueuedStylesheet>;
 };
 
 /** Term node with hierarchical (parent/child) relationships */
@@ -5861,6 +5842,77 @@ export type SeriesToSeriesConnectionEdge = {
    * @deprecated 
    */
   node?: Maybe<Series>;
+};
+
+/** Arguments for filtering the SeriesToContentNodeConnection connection */
+export type SeriesToContentNodeConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: Maybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: Maybe<Scalars['Boolean']>;
+  /** Specific ID of the object */
+  id?: Maybe<Scalars['Int']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: Maybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: Maybe<Scalars['String']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: Maybe<Array<Maybe<Scalars['String']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** What paramater to use to order the objects by. */
+  orderby?: Maybe<Array<Maybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: Maybe<Scalars['ID']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Show posts with a specific password. */
+  password?: Maybe<Scalars['String']>;
+  /** Show Posts based on a keyword search */
+  search?: Maybe<Scalars['String']>;
+  stati?: Maybe<Array<Maybe<PostStatusEnum>>>;
+  status?: Maybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: Maybe<Scalars['String']>;
+};
+
+/** Connection between the Series type and the ContentNode type */
+export type SeriesToContentNodeConnection = {
+  __typename?: 'SeriesToContentNodeConnection';
+  /**
+   * Edges for the SeriesToContentNodeConnection connection
+   * @deprecated 
+   */
+  edges?: Maybe<Array<Maybe<SeriesToContentNodeConnectionEdge>>>;
+  /**
+   * The nodes of the connection, without the edges
+   * @deprecated 
+   */
+  nodes?: Maybe<Array<Maybe<ContentNode>>>;
+  /**
+   * Information about pagination in a connection.
+   * @deprecated 
+   */
+  pageInfo?: Maybe<WpPageInfo>;
+};
+
+/** An edge in a connection */
+export type SeriesToContentNodeConnectionEdge = {
+  __typename?: 'SeriesToContentNodeConnectionEdge';
+  /**
+   * A cursor for use in pagination
+   * @deprecated 
+   */
+  cursor?: Maybe<Scalars['String']>;
+  /**
+   * The item at the end of the edge
+   * @deprecated 
+   */
+  node?: Maybe<ContentNode>;
 };
 
 /** Connection between the Series type and the Series type */
@@ -6101,6 +6153,11 @@ export type PostToCategoryConnectionEdge = {
    */
   cursor?: Maybe<Scalars['String']>;
   /**
+   * The Yoast SEO Primary category
+   * @deprecated 
+   */
+  isPrimary?: Maybe<Scalars['Boolean']>;
+  /**
    * The item at the end of the edge
    * @deprecated 
    */
@@ -6108,7 +6165,7 @@ export type PostToCategoryConnectionEdge = {
 };
 
 /** The category type */
-export type Category = Node & TermNode & UniformResourceIdentifiable & DatabaseIdentifier & HierarchicalTermNode & MenuItemLinkable & {
+export type Category = Node & TermNode & DatabaseIdentifier & UniformResourceIdentifiable & HierarchicalTermNode & MenuItemLinkable & {
   __typename?: 'Category';
   /**
    * The ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root).
@@ -6130,6 +6187,11 @@ export type Category = Node & TermNode & UniformResourceIdentifiable & DatabaseI
    * @deprecated 
    */
   children?: Maybe<CategoryToCategoryConnection>;
+  /**
+   * Connection between the category type and the ContentNode type
+   * @deprecated 
+   */
+  contentNodes?: Maybe<CategoryToContentNodeConnection>;
   /**
    * The number of objects connected to the object
    * @deprecated 
@@ -6269,6 +6331,16 @@ export type CategoryChildrenArgs = {
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   where?: Maybe<CategoryToCategoryConnectionWhereArgs>;
+};
+
+
+/** The category type */
+export type CategoryContentNodesArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  where?: Maybe<CategoryToContentNodeConnectionWhereArgs>;
 };
 
 
@@ -6456,7 +6528,7 @@ export type CategoryToCaseStudyConnectionEdge = {
 };
 
 /** The CaseStudy type */
-export type CaseStudy = Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTitle & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & MenuItemLinkable & BlockEditorContentNode & {
+export type CaseStudy = Node & ContentNode & DatabaseIdentifier & NodeWithTemplate & UniformResourceIdentifiable & NodeWithTitle & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & MenuItemLinkable & BlockEditorContentNode & {
   __typename?: 'CaseStudy';
   /** @deprecated  */
   CaseStudyFields?: Maybe<CaseStudy_Casestudyfields>;
@@ -6636,15 +6708,10 @@ export type CaseStudy = Node & ContentNode & UniformResourceIdentifiable & Datab
    */
   tags?: Maybe<CaseStudyToTagConnection>;
   /**
-   * The template assigned to the node
+   * The template assigned to a node of content
    * @deprecated 
    */
   template?: Maybe<ContentTemplate>;
-  /**
-   * Connection between the ContentNode type and the TermNode type
-   * @deprecated 
-   */
-  terms?: Maybe<ContentNodeToTermNodeConnection>;
   /**
    * The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made.
    * @deprecated 
@@ -6699,16 +6766,6 @@ export type CaseStudyTagsArgs = {
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   where?: Maybe<CaseStudyToTagConnectionWhereArgs>;
-};
-
-
-/** The CaseStudy type */
-export type CaseStudyTermsArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  where?: Maybe<ContentNodeToTermNodeConnectionWhereArgs>;
 };
 
 
@@ -6791,7 +6848,7 @@ export type CaseStudy_Casestudyfields_Intro = {
 export type PostObjectUnion = Post | Page | MediaItem | ReusableBlock | BlockEditorPreview | CaseStudy | Event | Inspiration | Review;
 
 /** The ReusableBlock type */
-export type ReusableBlock = Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTitle & NodeWithContentEditor & BlockEditorContentNode & {
+export type ReusableBlock = Node & ContentNode & DatabaseIdentifier & NodeWithTemplate & NodeWithTitle & NodeWithContentEditor & BlockEditorContentNode & {
   __typename?: 'ReusableBlock';
   /**
    * The id field matches the WP_Post-&gt;ID field.
@@ -6949,15 +7006,10 @@ export type ReusableBlock = Node & ContentNode & UniformResourceIdentifiable & D
    */
   status?: Maybe<Scalars['String']>;
   /**
-   * The template assigned to the node
+   * The template assigned to a node of content
    * @deprecated 
    */
   template?: Maybe<ContentTemplate>;
-  /**
-   * Connection between the ContentNode type and the TermNode type
-   * @deprecated 
-   */
-  terms?: Maybe<ContentNodeToTermNodeConnection>;
   /**
    * The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made.
    * @deprecated 
@@ -7008,16 +7060,6 @@ export type ReusableBlockPreviewBlocksFromJsonArgs = {
 
 
 /** The ReusableBlock type */
-export type ReusableBlockTermsArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  where?: Maybe<ContentNodeToTermNodeConnectionWhereArgs>;
-};
-
-
-/** The ReusableBlock type */
 export type ReusableBlockTitleArgs = {
   format?: Maybe<PostObjectFieldFormatEnum>;
 };
@@ -7043,7 +7085,7 @@ export type ReusableBlockToPreviewConnectionEdge = {
 };
 
 /** The Event type */
-export type Event = Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTitle & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & MenuItemLinkable & BlockEditorContentNode & {
+export type Event = Node & ContentNode & DatabaseIdentifier & NodeWithTemplate & UniformResourceIdentifiable & NodeWithTitle & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & MenuItemLinkable & BlockEditorContentNode & {
   __typename?: 'Event';
   /**
    * The id field matches the WP_Post-&gt;ID field.
@@ -7223,15 +7265,10 @@ export type Event = Node & ContentNode & UniformResourceIdentifiable & DatabaseI
    */
   tags?: Maybe<EventToTagConnection>;
   /**
-   * The template assigned to the node
+   * The template assigned to a node of content
    * @deprecated 
    */
   template?: Maybe<ContentTemplate>;
-  /**
-   * Connection between the ContentNode type and the TermNode type
-   * @deprecated 
-   */
-  terms?: Maybe<ContentNodeToTermNodeConnection>;
   /**
    * The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made.
    * @deprecated 
@@ -7286,16 +7323,6 @@ export type EventTagsArgs = {
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   where?: Maybe<EventToTagConnectionWhereArgs>;
-};
-
-
-/** The Event type */
-export type EventTermsArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  where?: Maybe<ContentNodeToTermNodeConnectionWhereArgs>;
 };
 
 
@@ -7387,6 +7414,11 @@ export type EventToCategoryConnectionEdge = {
    * @deprecated 
    */
   cursor?: Maybe<Scalars['String']>;
+  /**
+   * The Yoast SEO Primary category
+   * @deprecated 
+   */
+  isPrimary?: Maybe<Scalars['Boolean']>;
   /**
    * The item at the end of the edge
    * @deprecated 
@@ -7492,13 +7524,18 @@ export type EventToTagConnectionEdge = {
 };
 
 /** The tag type */
-export type Tag = Node & TermNode & UniformResourceIdentifiable & DatabaseIdentifier & MenuItemLinkable & {
+export type Tag = Node & TermNode & DatabaseIdentifier & UniformResourceIdentifiable & MenuItemLinkable & {
   __typename?: 'Tag';
   /**
    * Connection between the tag type and the CaseStudy type
    * @deprecated 
    */
   caseStudies?: Maybe<TagToCaseStudyConnection>;
+  /**
+   * Connection between the tag type and the ContentNode type
+   * @deprecated 
+   */
+  contentNodes?: Maybe<TagToContentNodeConnection>;
   /**
    * The number of objects connected to the object
    * @deprecated 
@@ -7609,6 +7646,16 @@ export type TagCaseStudiesArgs = {
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   where?: Maybe<TagToCaseStudyConnectionWhereArgs>;
+};
+
+
+/** The tag type */
+export type TagContentNodesArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  where?: Maybe<TagToContentNodeConnectionWhereArgs>;
 };
 
 
@@ -7758,6 +7805,77 @@ export type TagToCaseStudyConnectionEdge = {
    * @deprecated 
    */
   node?: Maybe<CaseStudy>;
+};
+
+/** Arguments for filtering the TagToContentNodeConnection connection */
+export type TagToContentNodeConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: Maybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: Maybe<Scalars['Boolean']>;
+  /** Specific ID of the object */
+  id?: Maybe<Scalars['Int']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: Maybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: Maybe<Scalars['String']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: Maybe<Array<Maybe<Scalars['String']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** What paramater to use to order the objects by. */
+  orderby?: Maybe<Array<Maybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: Maybe<Scalars['ID']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Show posts with a specific password. */
+  password?: Maybe<Scalars['String']>;
+  /** Show Posts based on a keyword search */
+  search?: Maybe<Scalars['String']>;
+  stati?: Maybe<Array<Maybe<PostStatusEnum>>>;
+  status?: Maybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: Maybe<Scalars['String']>;
+};
+
+/** Connection between the tag type and the ContentNode type */
+export type TagToContentNodeConnection = {
+  __typename?: 'TagToContentNodeConnection';
+  /**
+   * Edges for the TagToContentNodeConnection connection
+   * @deprecated 
+   */
+  edges?: Maybe<Array<Maybe<TagToContentNodeConnectionEdge>>>;
+  /**
+   * The nodes of the connection, without the edges
+   * @deprecated 
+   */
+  nodes?: Maybe<Array<Maybe<ContentNode>>>;
+  /**
+   * Information about pagination in a connection.
+   * @deprecated 
+   */
+  pageInfo?: Maybe<WpPageInfo>;
+};
+
+/** An edge in a connection */
+export type TagToContentNodeConnectionEdge = {
+  __typename?: 'TagToContentNodeConnectionEdge';
+  /**
+   * A cursor for use in pagination
+   * @deprecated 
+   */
+  cursor?: Maybe<Scalars['String']>;
+  /**
+   * The item at the end of the edge
+   * @deprecated 
+   */
+  node?: Maybe<ContentNode>;
 };
 
 /** Arguments for filtering the TagToEventConnection connection */
@@ -7943,7 +8061,7 @@ export type TagToInspirationConnectionEdge = {
 };
 
 /** The Inspiration type */
-export type Inspiration = Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTitle & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & MenuItemLinkable & BlockEditorContentNode & {
+export type Inspiration = Node & ContentNode & DatabaseIdentifier & NodeWithTemplate & UniformResourceIdentifiable & NodeWithTitle & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & MenuItemLinkable & BlockEditorContentNode & {
   __typename?: 'Inspiration';
   /** @deprecated  */
   InspirationFields?: Maybe<Inspiration_Inspirationfields>;
@@ -8123,15 +8241,10 @@ export type Inspiration = Node & ContentNode & UniformResourceIdentifiable & Dat
    */
   tags?: Maybe<InspirationToTagConnection>;
   /**
-   * The template assigned to the node
+   * The template assigned to a node of content
    * @deprecated 
    */
   template?: Maybe<ContentTemplate>;
-  /**
-   * Connection between the ContentNode type and the TermNode type
-   * @deprecated 
-   */
-  terms?: Maybe<ContentNodeToTermNodeConnection>;
   /**
    * The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made.
    * @deprecated 
@@ -8186,16 +8299,6 @@ export type InspirationTagsArgs = {
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   where?: Maybe<InspirationToTagConnectionWhereArgs>;
-};
-
-
-/** The Inspiration type */
-export type InspirationTermsArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  where?: Maybe<ContentNodeToTermNodeConnectionWhereArgs>;
 };
 
 
@@ -8285,6 +8388,11 @@ export type InspirationToCategoryConnectionEdge = {
    * @deprecated 
    */
   cursor?: Maybe<Scalars['String']>;
+  /**
+   * The Yoast SEO Primary category
+   * @deprecated 
+   */
+  isPrimary?: Maybe<Scalars['Boolean']>;
   /**
    * The item at the end of the edge
    * @deprecated 
@@ -8580,7 +8688,7 @@ export type TagToReviewConnectionEdge = {
 };
 
 /** The Review type */
-export type Review = Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTitle & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & MenuItemLinkable & BlockEditorContentNode & {
+export type Review = Node & ContentNode & DatabaseIdentifier & NodeWithTemplate & UniformResourceIdentifiable & NodeWithTitle & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & MenuItemLinkable & BlockEditorContentNode & {
   __typename?: 'Review';
   /** @deprecated  */
   ReviewFields?: Maybe<Review_Reviewfields>;
@@ -8760,15 +8868,10 @@ export type Review = Node & ContentNode & UniformResourceIdentifiable & Database
    */
   tags?: Maybe<ReviewToTagConnection>;
   /**
-   * The template assigned to the node
+   * The template assigned to a node of content
    * @deprecated 
    */
   template?: Maybe<ContentTemplate>;
-  /**
-   * Connection between the ContentNode type and the TermNode type
-   * @deprecated 
-   */
-  terms?: Maybe<ContentNodeToTermNodeConnection>;
   /**
    * The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made.
    * @deprecated 
@@ -8823,16 +8926,6 @@ export type ReviewTagsArgs = {
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   where?: Maybe<ReviewToTagConnectionWhereArgs>;
-};
-
-
-/** The Review type */
-export type ReviewTermsArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  where?: Maybe<ContentNodeToTermNodeConnectionWhereArgs>;
 };
 
 
@@ -8920,6 +9013,11 @@ export type ReviewToCategoryConnectionEdge = {
    * @deprecated 
    */
   cursor?: Maybe<Scalars['String']>;
+  /**
+   * The Yoast SEO Primary category
+   * @deprecated 
+   */
+  isPrimary?: Maybe<Scalars['Boolean']>;
   /**
    * The item at the end of the edge
    * @deprecated 
@@ -9131,6 +9229,11 @@ export type CaseStudyToCategoryConnectionEdge = {
    */
   cursor?: Maybe<Scalars['String']>;
   /**
+   * The Yoast SEO Primary category
+   * @deprecated 
+   */
+  isPrimary?: Maybe<Scalars['Boolean']>;
+  /**
    * The item at the end of the edge
    * @deprecated 
    */
@@ -9309,6 +9412,77 @@ export type CategoryToCategoryConnectionEdge = {
    * @deprecated 
    */
   node?: Maybe<Category>;
+};
+
+/** Arguments for filtering the CategoryToContentNodeConnection connection */
+export type CategoryToContentNodeConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: Maybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: Maybe<Scalars['Boolean']>;
+  /** Specific ID of the object */
+  id?: Maybe<Scalars['Int']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: Maybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: Maybe<Scalars['String']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: Maybe<Array<Maybe<Scalars['String']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** What paramater to use to order the objects by. */
+  orderby?: Maybe<Array<Maybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: Maybe<Scalars['ID']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Show posts with a specific password. */
+  password?: Maybe<Scalars['String']>;
+  /** Show Posts based on a keyword search */
+  search?: Maybe<Scalars['String']>;
+  stati?: Maybe<Array<Maybe<PostStatusEnum>>>;
+  status?: Maybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: Maybe<Scalars['String']>;
+};
+
+/** Connection between the category type and the ContentNode type */
+export type CategoryToContentNodeConnection = {
+  __typename?: 'CategoryToContentNodeConnection';
+  /**
+   * Edges for the CategoryToContentNodeConnection connection
+   * @deprecated 
+   */
+  edges?: Maybe<Array<Maybe<CategoryToContentNodeConnectionEdge>>>;
+  /**
+   * The nodes of the connection, without the edges
+   * @deprecated 
+   */
+  nodes?: Maybe<Array<Maybe<ContentNode>>>;
+  /**
+   * Information about pagination in a connection.
+   * @deprecated 
+   */
+  pageInfo?: Maybe<WpPageInfo>;
+};
+
+/** An edge in a connection */
+export type CategoryToContentNodeConnectionEdge = {
+  __typename?: 'CategoryToContentNodeConnectionEdge';
+  /**
+   * A cursor for use in pagination
+   * @deprecated 
+   */
+  cursor?: Maybe<Scalars['String']>;
+  /**
+   * The item at the end of the edge
+   * @deprecated 
+   */
+  node?: Maybe<ContentNode>;
 };
 
 /** Arguments for filtering the CategoryToEventConnection connection */
@@ -9888,8 +10062,13 @@ export type PostToPostFormatConnectionEdge = {
 };
 
 /** The postFormat type */
-export type PostFormat = Node & TermNode & UniformResourceIdentifiable & DatabaseIdentifier & MenuItemLinkable & {
+export type PostFormat = Node & TermNode & DatabaseIdentifier & UniformResourceIdentifiable & MenuItemLinkable & {
   __typename?: 'PostFormat';
+  /**
+   * Connection between the postFormat type and the ContentNode type
+   * @deprecated 
+   */
+  contentNodes?: Maybe<PostFormatToContentNodeConnection>;
   /**
    * The number of objects connected to the object
    * @deprecated 
@@ -9979,6 +10158,16 @@ export type PostFormat = Node & TermNode & UniformResourceIdentifiable & Databas
 
 
 /** The postFormat type */
+export type PostFormatContentNodesArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  where?: Maybe<PostFormatToContentNodeConnectionWhereArgs>;
+};
+
+
+/** The postFormat type */
 export type PostFormatEnqueuedScriptsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -10003,6 +10192,77 @@ export type PostFormatPostsArgs = {
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   where?: Maybe<PostFormatToPostConnectionWhereArgs>;
+};
+
+/** Arguments for filtering the PostFormatToContentNodeConnection connection */
+export type PostFormatToContentNodeConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: Maybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: Maybe<Scalars['Boolean']>;
+  /** Specific ID of the object */
+  id?: Maybe<Scalars['Int']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: Maybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: Maybe<Scalars['String']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: Maybe<Array<Maybe<Scalars['String']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** What paramater to use to order the objects by. */
+  orderby?: Maybe<Array<Maybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: Maybe<Scalars['ID']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Show posts with a specific password. */
+  password?: Maybe<Scalars['String']>;
+  /** Show Posts based on a keyword search */
+  search?: Maybe<Scalars['String']>;
+  stati?: Maybe<Array<Maybe<PostStatusEnum>>>;
+  status?: Maybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: Maybe<Scalars['String']>;
+};
+
+/** Connection between the postFormat type and the ContentNode type */
+export type PostFormatToContentNodeConnection = {
+  __typename?: 'PostFormatToContentNodeConnection';
+  /**
+   * Edges for the PostFormatToContentNodeConnection connection
+   * @deprecated 
+   */
+  edges?: Maybe<Array<Maybe<PostFormatToContentNodeConnectionEdge>>>;
+  /**
+   * The nodes of the connection, without the edges
+   * @deprecated 
+   */
+  nodes?: Maybe<Array<Maybe<ContentNode>>>;
+  /**
+   * Information about pagination in a connection.
+   * @deprecated 
+   */
+  pageInfo?: Maybe<WpPageInfo>;
+};
+
+/** An edge in a connection */
+export type PostFormatToContentNodeConnectionEdge = {
+  __typename?: 'PostFormatToContentNodeConnectionEdge';
+  /**
+   * A cursor for use in pagination
+   * @deprecated 
+   */
+  cursor?: Maybe<Scalars['String']>;
+  /**
+   * The item at the end of the edge
+   * @deprecated 
+   */
+  node?: Maybe<ContentNode>;
 };
 
 /** Arguments for filtering the PostFormatToPostConnection connection */
@@ -10298,6 +10558,93 @@ export type PostToTagConnectionEdge = {
    * @deprecated 
    */
   node?: Maybe<Tag>;
+};
+
+/** Arguments for filtering the PostToTermNodeConnection connection */
+export type PostToTermNodeConnectionWhereArgs = {
+  /** Unique cache key to be produced when this query is stored in an object cache. Default is 'core'. */
+  cacheDomain?: Maybe<Scalars['String']>;
+  /** Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0. */
+  childOf?: Maybe<Scalars['Int']>;
+  /** True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false. */
+  childless?: Maybe<Scalars['Boolean']>;
+  /** Retrieve terms where the description is LIKE the input value. Default empty. */
+  descriptionLike?: Maybe<Scalars['String']>;
+  /** Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array. */
+  exclude?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array. */
+  excludeTree?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Whether to hide terms not assigned to any posts. Accepts true or false. Default false */
+  hideEmpty?: Maybe<Scalars['Boolean']>;
+  /** Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true. */
+  hierarchical?: Maybe<Scalars['Boolean']>;
+  /** Array of term ids to include. Default empty array. */
+  include?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Array of names to return term(s) for. Default empty. */
+  name?: Maybe<Array<Maybe<Scalars['String']>>>;
+  /** Retrieve terms where the name is LIKE the input value. Default empty. */
+  nameLike?: Maybe<Scalars['String']>;
+  /** Array of object IDs. Results will be limited to terms associated with these objects. */
+  objectIds?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Field(s) to order terms by. Defaults to 'name'. */
+  orderby?: Maybe<TermObjectsConnectionOrderbyEnum>;
+  /** Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false. */
+  padCounts?: Maybe<Scalars['Boolean']>;
+  /** Parent term ID to retrieve direct-child terms of. Default empty. */
+  parent?: Maybe<Scalars['Int']>;
+  /** Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty. */
+  search?: Maybe<Scalars['String']>;
+  /** Array of slugs to return term(s) for. Default empty. */
+  slug?: Maybe<Array<Maybe<Scalars['String']>>>;
+  /** The Taxonomy to filter terms by */
+  taxonomies?: Maybe<Array<Maybe<TaxonomyEnum>>>;
+  /** Array of term taxonomy IDs, to match when querying terms. */
+  termTaxonomId?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Whether to prime meta caches for matched terms. Default true. */
+  updateTermMetaCache?: Maybe<Scalars['Boolean']>;
+};
+
+/** Allowed taxonomies */
+export enum TaxonomyEnum {
+  Category = 'CATEGORY',
+  Postformat = 'POSTFORMAT',
+  Series = 'SERIES',
+  Tag = 'TAG'
+}
+
+/** Connection between the post type and the TermNode type */
+export type PostToTermNodeConnection = {
+  __typename?: 'PostToTermNodeConnection';
+  /**
+   * Edges for the PostToTermNodeConnection connection
+   * @deprecated 
+   */
+  edges?: Maybe<Array<Maybe<PostToTermNodeConnectionEdge>>>;
+  /**
+   * The nodes of the connection, without the edges
+   * @deprecated 
+   */
+  nodes?: Maybe<Array<Maybe<TermNode>>>;
+  /**
+   * Information about pagination in a connection.
+   * @deprecated 
+   */
+  pageInfo?: Maybe<WpPageInfo>;
+};
+
+/** An edge in a connection */
+export type PostToTermNodeConnectionEdge = {
+  __typename?: 'PostToTermNodeConnectionEdge';
+  /**
+   * A cursor for use in pagination
+   * @deprecated 
+   */
+  cursor?: Maybe<Scalars['String']>;
+  /**
+   * The item at the end of the edge
+   * @deprecated 
+   */
+  node?: Maybe<TermNode>;
 };
 
 /** Arguments for filtering the UserToContentRevisionUnionConnection connection */
@@ -12723,6 +13070,8 @@ export type SeoConfig = {
   /** @deprecated  */
   breadcrumbs?: Maybe<SeoBreadcrumbs>;
   /** @deprecated  */
+  contentTypes?: Maybe<SeoContentTypes>;
+  /** @deprecated  */
   openGraph?: Maybe<SeoOpenGraph>;
   /** @deprecated  */
   redirects?: Maybe<Array<Maybe<SeoRedirect>>>;
@@ -12755,6 +13104,42 @@ export type SeoBreadcrumbs = {
   separator?: Maybe<Scalars['String']>;
   /** @deprecated  */
   showBlogPage?: Maybe<Scalars['Boolean']>;
+};
+
+/** The Yoast SEO search appearance content types */
+export type SeoContentTypes = {
+  __typename?: 'SEOContentTypes';
+  /** @deprecated  */
+  blockEditorPreview?: Maybe<SeoContentType>;
+  /** @deprecated  */
+  caseStudy?: Maybe<SeoContentType>;
+  /** @deprecated  */
+  event?: Maybe<SeoContentType>;
+  /** @deprecated  */
+  inspiration?: Maybe<SeoContentType>;
+  /** @deprecated  */
+  mediaItem?: Maybe<SeoContentType>;
+  /** @deprecated  */
+  page?: Maybe<SeoContentType>;
+  /** @deprecated  */
+  post?: Maybe<SeoContentType>;
+  /** @deprecated  */
+  reusableBlock?: Maybe<SeoContentType>;
+  /** @deprecated  */
+  review?: Maybe<SeoContentType>;
+};
+
+/** he Yoast SEO search appearance content types fields */
+export type SeoContentType = {
+  __typename?: 'SEOContentType';
+  /** @deprecated  */
+  metaDesc?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  metaRobotsNoindex?: Maybe<Scalars['Boolean']>;
+  /** @deprecated  */
+  schemaType?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  title?: Maybe<Scalars['String']>;
 };
 
 /** The Open Graph data */
@@ -13313,7 +13698,7 @@ export type RootQueryToUserConnectionWhereArgs = {
   /** Search keyword. Searches for possible string matches on columns. When "searchColumns" is left empty, it tries to determine which column to search in based on search string. */
   search?: Maybe<Scalars['String']>;
   /** Array of column names to be searched. Accepts 'ID', 'login', 'nicename', 'email', 'url'. */
-  searchColumns?: Maybe<Array<Maybe<Scalars['String']>>>;
+  searchColumns?: Maybe<Array<Maybe<UsersConnectionSearchColumnEnum>>>;
 };
 
 /** Options for ordering the connection */
@@ -13344,6 +13729,17 @@ export enum UsersConnectionOrderbyEnum {
 
 /** Names of available user roles */
 export enum UserRoleEnum {
+  Administrator = 'ADMINISTRATOR',
+  Author = 'AUTHOR',
+  Contributor = 'CONTRIBUTOR',
+  Editor = 'EDITOR',
+  SeoEditor = 'SEO_EDITOR',
+  SeoManager = 'SEO_MANAGER',
+  Subscriber = 'SUBSCRIBER'
+}
+
+/** Names of available user roles */
+export enum UsersConnectionSearchColumnEnum {
   Administrator = 'ADMINISTRATOR',
   Author = 'AUTHOR',
   Contributor = 'CONTRIBUTOR',
@@ -13964,7 +14360,7 @@ export type RootMutationUpdateUserArgs = {
 export type UpdateCategoryInput = {
   /** The slug that the category will be an alias of */
   aliasOf?: Maybe<Scalars['String']>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The description of the category object */
   description?: Maybe<Scalars['String']>;
   /** The ID of the category object to update */
@@ -13986,14 +14382,14 @@ export type UpdateCategoryPayload = {
    */
   category?: Maybe<Category>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 /** Input for the UpdatePostFormat mutation */
 export type UpdatePostFormatInput = {
   /** The slug that the post_format will be an alias of */
   aliasOf?: Maybe<Scalars['String']>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The description of the post_format object */
   description?: Maybe<Scalars['String']>;
   /** The ID of the postFormat object to update */
@@ -14008,7 +14404,7 @@ export type UpdatePostFormatInput = {
 export type UpdatePostFormatPayload = {
   __typename?: 'UpdatePostFormatPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The created post_format
    * @deprecated 
@@ -14020,7 +14416,7 @@ export type UpdatePostFormatPayload = {
 export type UpdateSeriesInput = {
   /** The slug that the taxonomy_series will be an alias of */
   aliasOf?: Maybe<Scalars['String']>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The description of the taxonomy_series object */
   description?: Maybe<Scalars['String']>;
   /** The ID of the Series object to update */
@@ -14042,14 +14438,14 @@ export type UpdateSeriesPayload = {
    */
   series?: Maybe<Series>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 /** Input for the UpdateTag mutation */
 export type UpdateTagInput = {
   /** The slug that the post_tag will be an alias of */
   aliasOf?: Maybe<Scalars['String']>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The description of the post_tag object */
   description?: Maybe<Scalars['String']>;
   /** The ID of the tag object to update */
@@ -14064,7 +14460,7 @@ export type UpdateTagInput = {
 export type UpdateTagPayload = {
   __typename?: 'UpdateTagPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The created post_tag
    * @deprecated 
@@ -14076,7 +14472,7 @@ export type UpdateTagPayload = {
 export type CreateCaseStudyInput = {
   /** Set connections between the CaseStudy and categories */
   categories?: Maybe<CaseStudyCategoriesInput>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The content of the object */
   content?: Maybe<Scalars['String']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
@@ -14139,14 +14535,14 @@ export type CreateCaseStudyPayload = {
   /** @deprecated  */
   caseStudy?: Maybe<CaseStudy>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 /** Input for the createCategory mutation */
 export type CreateCategoryInput = {
   /** The slug that the category will be an alias of */
   aliasOf?: Maybe<Scalars['String']>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The description of the category object */
   description?: Maybe<Scalars['String']>;
   /** The name of the category object to mutate */
@@ -14166,24 +14562,20 @@ export type CreateCategoryPayload = {
    */
   category?: Maybe<Category>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 /** Input for the createComment mutation */
 export type CreateCommentInput = {
-  /** User agent used to post the comment. */
-  agent?: Maybe<Scalars['String']>;
   /** The approval status of the comment. */
   approved?: Maybe<Scalars['String']>;
   /** The name of the comment's author. */
   author?: Maybe<Scalars['String']>;
   /** The email of the comment's author. */
   authorEmail?: Maybe<Scalars['String']>;
-  /** IP address for the comment's author. */
-  authorIp?: Maybe<Scalars['String']>;
   /** The url of the comment's author. */
   authorUrl?: Maybe<Scalars['String']>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The ID of the post object the comment belongs to. */
   commentOn?: Maybe<Scalars['Int']>;
   /** Content of the comment. */
@@ -14194,15 +14586,13 @@ export type CreateCommentInput = {
   parent?: Maybe<Scalars['ID']>;
   /** Type of comment. */
   type?: Maybe<Scalars['String']>;
-  /** The userID of the comment's author. */
-  userId?: Maybe<Scalars['Int']>;
 };
 
 /** The payload for the createComment mutation */
 export type CreateCommentPayload = {
   __typename?: 'CreateCommentPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The comment that was created
    * @deprecated 
@@ -14219,7 +14609,7 @@ export type CreateCommentPayload = {
 export type CreateEventInput = {
   /** Set connections between the Event and categories */
   categories?: Maybe<EventCategoriesInput>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The content of the object */
   content?: Maybe<Scalars['String']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
@@ -14282,14 +14672,14 @@ export type CreateEventPayload = {
   /** @deprecated  */
   event?: Maybe<Event>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 /** Input for the createInspiration mutation */
 export type CreateInspirationInput = {
   /** Set connections between the Inspiration and categories */
   categories?: Maybe<InspirationCategoriesInput>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The content of the object */
   content?: Maybe<Scalars['String']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
@@ -14352,7 +14742,7 @@ export type CreateInspirationPayload = {
   /** @deprecated  */
   inspiration?: Maybe<Inspiration>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 /** Input for the createMediaItem mutation */
@@ -14363,7 +14753,7 @@ export type CreateMediaItemInput = {
   authorId?: Maybe<Scalars['ID']>;
   /** The caption for the mediaItem */
   caption?: Maybe<Scalars['String']>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The comment status for the mediaItem */
   commentStatus?: Maybe<Scalars['String']>;
   /** The date of the mediaItem */
@@ -14404,7 +14794,7 @@ export enum MediaItemStatusEnum {
 export type CreateMediaItemPayload = {
   __typename?: 'CreateMediaItemPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** @deprecated  */
   mediaItem?: Maybe<MediaItem>;
 };
@@ -14413,7 +14803,7 @@ export type CreateMediaItemPayload = {
 export type CreatePageInput = {
   /** The userId to assign as the author of the object */
   authorId?: Maybe<Scalars['ID']>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The comment status for the object */
   commentStatus?: Maybe<Scalars['String']>;
   /** The content of the object */
@@ -14438,7 +14828,7 @@ export type CreatePageInput = {
 export type CreatePagePayload = {
   __typename?: 'CreatePagePayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** @deprecated  */
   page?: Maybe<Page>;
 };
@@ -14451,7 +14841,7 @@ export type CreatePostInput = {
   authorId?: Maybe<Scalars['ID']>;
   /** Set connections between the post and categories */
   categories?: Maybe<PostCategoriesInput>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The comment status for the object */
   commentStatus?: Maybe<Scalars['String']>;
   /** The content of the object */
@@ -14562,7 +14952,7 @@ export type PostTagsNodeInput = {
 export type CreatePostPayload = {
   __typename?: 'CreatePostPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** @deprecated  */
   post?: Maybe<Post>;
 };
@@ -14571,7 +14961,7 @@ export type CreatePostPayload = {
 export type CreatePostFormatInput = {
   /** The slug that the post_format will be an alias of */
   aliasOf?: Maybe<Scalars['String']>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The description of the post_format object */
   description?: Maybe<Scalars['String']>;
   /** The name of the post_format object to mutate */
@@ -14584,7 +14974,7 @@ export type CreatePostFormatInput = {
 export type CreatePostFormatPayload = {
   __typename?: 'CreatePostFormatPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The created post_format
    * @deprecated 
@@ -14594,7 +14984,7 @@ export type CreatePostFormatPayload = {
 
 /** Input for the createReusableBlock mutation */
 export type CreateReusableBlockInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The content of the object */
   content?: Maybe<Scalars['String']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
@@ -14617,14 +15007,14 @@ export type CreateReusableBlockPayload = {
   /** @deprecated  */
   reusableBlock?: Maybe<ReusableBlock>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 /** Input for the createReview mutation */
 export type CreateReviewInput = {
   /** Set connections between the Review and categories */
   categories?: Maybe<ReviewCategoriesInput>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The content of the object */
   content?: Maybe<Scalars['String']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
@@ -14687,14 +15077,14 @@ export type CreateReviewPayload = {
   /** @deprecated  */
   review?: Maybe<Review>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 /** Input for the createSeries mutation */
 export type CreateSeriesInput = {
   /** The slug that the taxonomy_series will be an alias of */
   aliasOf?: Maybe<Scalars['String']>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The description of the taxonomy_series object */
   description?: Maybe<Scalars['String']>;
   /** The name of the taxonomy_series object to mutate */
@@ -14714,14 +15104,14 @@ export type CreateSeriesPayload = {
    */
   series?: Maybe<Series>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 /** Input for the createTag mutation */
 export type CreateTagInput = {
   /** The slug that the post_tag will be an alias of */
   aliasOf?: Maybe<Scalars['String']>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The description of the post_tag object */
   description?: Maybe<Scalars['String']>;
   /** The name of the post_tag object to mutate */
@@ -14734,7 +15124,7 @@ export type CreateTagInput = {
 export type CreateTagPayload = {
   __typename?: 'CreateTagPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The created post_tag
    * @deprecated 
@@ -14746,7 +15136,7 @@ export type CreateTagPayload = {
 export type CreateUserInput = {
   /** User's AOL IM account. */
   aim?: Maybe<Scalars['String']>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** A string containing content about the user. */
   description?: Maybe<Scalars['String']>;
   /** A string that will be shown on the site. Defaults to user's username. It is likely that you will want to change this, for both appearance and security through obscurity (that is if you dont use and delete the default admin user). */
@@ -14789,14 +15179,14 @@ export type CreateUserInput = {
 export type CreateUserPayload = {
   __typename?: 'CreateUserPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** @deprecated  */
   user?: Maybe<User>;
 };
 
 /** Input for the deleteCaseStudy mutation */
 export type DeleteCaseStudyInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** Whether the object should be force deleted instead of being moved to the trash */
   forceDelete?: Maybe<Scalars['Boolean']>;
   /** The ID of the CaseStudy to delete */
@@ -14812,7 +15202,7 @@ export type DeleteCaseStudyPayload = {
    */
   caseStudy?: Maybe<CaseStudy>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The ID of the deleted object
    * @deprecated 
@@ -14822,7 +15212,7 @@ export type DeleteCaseStudyPayload = {
 
 /** Input for the deleteCategory mutation */
 export type DeleteCategoryInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The ID of the category to delete */
   id: Scalars['ID'];
 };
@@ -14836,7 +15226,7 @@ export type DeleteCategoryPayload = {
    */
   category?: Maybe<Category>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The ID of the deleted object
    * @deprecated 
@@ -14846,7 +15236,7 @@ export type DeleteCategoryPayload = {
 
 /** Input for the deleteComment mutation */
 export type DeleteCommentInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** Whether the comment should be force deleted instead of being moved to the trash */
   forceDelete?: Maybe<Scalars['Boolean']>;
   /** The deleted comment ID */
@@ -14857,7 +15247,7 @@ export type DeleteCommentInput = {
 export type DeleteCommentPayload = {
   __typename?: 'DeleteCommentPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The deleted comment object
    * @deprecated 
@@ -14872,7 +15262,7 @@ export type DeleteCommentPayload = {
 
 /** Input for the deleteEvent mutation */
 export type DeleteEventInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** Whether the object should be force deleted instead of being moved to the trash */
   forceDelete?: Maybe<Scalars['Boolean']>;
   /** The ID of the Event to delete */
@@ -14888,7 +15278,7 @@ export type DeleteEventPayload = {
    */
   event?: Maybe<Event>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The ID of the deleted object
    * @deprecated 
@@ -14898,7 +15288,7 @@ export type DeleteEventPayload = {
 
 /** Input for the deleteInspiration mutation */
 export type DeleteInspirationInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** Whether the object should be force deleted instead of being moved to the trash */
   forceDelete?: Maybe<Scalars['Boolean']>;
   /** The ID of the Inspiration to delete */
@@ -14914,7 +15304,7 @@ export type DeleteInspirationPayload = {
    */
   inspiration?: Maybe<Inspiration>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The ID of the deleted object
    * @deprecated 
@@ -14924,7 +15314,7 @@ export type DeleteInspirationPayload = {
 
 /** Input for the deleteMediaItem mutation */
 export type DeleteMediaItemInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** Whether the mediaItem should be force deleted instead of being moved to the trash */
   forceDelete?: Maybe<Scalars['Boolean']>;
   /** The ID of the mediaItem to delete */
@@ -14935,7 +15325,7 @@ export type DeleteMediaItemInput = {
 export type DeleteMediaItemPayload = {
   __typename?: 'DeleteMediaItemPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The ID of the deleted mediaItem
    * @deprecated 
@@ -14950,7 +15340,7 @@ export type DeleteMediaItemPayload = {
 
 /** Input for the deletePage mutation */
 export type DeletePageInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** Whether the object should be force deleted instead of being moved to the trash */
   forceDelete?: Maybe<Scalars['Boolean']>;
   /** The ID of the page to delete */
@@ -14961,7 +15351,7 @@ export type DeletePageInput = {
 export type DeletePagePayload = {
   __typename?: 'DeletePagePayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The ID of the deleted object
    * @deprecated 
@@ -14976,7 +15366,7 @@ export type DeletePagePayload = {
 
 /** Input for the deletePost mutation */
 export type DeletePostInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** Whether the object should be force deleted instead of being moved to the trash */
   forceDelete?: Maybe<Scalars['Boolean']>;
   /** The ID of the post to delete */
@@ -14987,7 +15377,7 @@ export type DeletePostInput = {
 export type DeletePostPayload = {
   __typename?: 'DeletePostPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The ID of the deleted object
    * @deprecated 
@@ -15002,7 +15392,7 @@ export type DeletePostPayload = {
 
 /** Input for the deletePostFormat mutation */
 export type DeletePostFormatInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The ID of the postFormat to delete */
   id: Scalars['ID'];
 };
@@ -15011,7 +15401,7 @@ export type DeletePostFormatInput = {
 export type DeletePostFormatPayload = {
   __typename?: 'DeletePostFormatPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The ID of the deleted object
    * @deprecated 
@@ -15026,7 +15416,7 @@ export type DeletePostFormatPayload = {
 
 /** Input for the deleteReusableBlock mutation */
 export type DeleteReusableBlockInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** Whether the object should be force deleted instead of being moved to the trash */
   forceDelete?: Maybe<Scalars['Boolean']>;
   /** The ID of the ReusableBlock to delete */
@@ -15042,7 +15432,7 @@ export type DeleteReusableBlockPayload = {
    */
   reusableBlock?: Maybe<ReusableBlock>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The ID of the deleted object
    * @deprecated 
@@ -15052,7 +15442,7 @@ export type DeleteReusableBlockPayload = {
 
 /** Input for the deleteReview mutation */
 export type DeleteReviewInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** Whether the object should be force deleted instead of being moved to the trash */
   forceDelete?: Maybe<Scalars['Boolean']>;
   /** The ID of the Review to delete */
@@ -15068,7 +15458,7 @@ export type DeleteReviewPayload = {
    */
   review?: Maybe<Review>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The ID of the deleted object
    * @deprecated 
@@ -15078,7 +15468,7 @@ export type DeleteReviewPayload = {
 
 /** Input for the deleteSeries mutation */
 export type DeleteSeriesInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The ID of the Series to delete */
   id: Scalars['ID'];
 };
@@ -15092,7 +15482,7 @@ export type DeleteSeriesPayload = {
    */
   series?: Maybe<Series>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The ID of the deleted object
    * @deprecated 
@@ -15102,7 +15492,7 @@ export type DeleteSeriesPayload = {
 
 /** Input for the deleteTag mutation */
 export type DeleteTagInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The ID of the tag to delete */
   id: Scalars['ID'];
 };
@@ -15111,7 +15501,7 @@ export type DeleteTagInput = {
 export type DeleteTagPayload = {
   __typename?: 'DeleteTagPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The ID of the deleted object
    * @deprecated 
@@ -15126,7 +15516,7 @@ export type DeleteTagPayload = {
 
 /** Input for the deleteUser mutation */
 export type DeleteUserInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The ID of the user you want to delete */
   id: Scalars['ID'];
   /** Reassign posts and links to new User ID. */
@@ -15137,7 +15527,7 @@ export type DeleteUserInput = {
 export type DeleteUserPayload = {
   __typename?: 'DeleteUserPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The ID of the user that you just deleted
    * @deprecated 
@@ -15152,7 +15542,7 @@ export type DeleteUserPayload = {
 
 /** Input for the login mutation */
 export type LoginInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The plain-text password for the user logging in. */
   password: Scalars['String'];
   /** The username used for login. Typically a unique or email address depending on specific configuration */
@@ -15168,7 +15558,7 @@ export type LoginPayload = {
    */
   authToken?: Maybe<Scalars['String']>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * A JWT token that can be used in future requests to get a refreshed jwtAuthToken. If the refresh token used in a request is revoked or otherwise invalid, a valid Auth token will NOT be issued in the response headers.
    * @deprecated 
@@ -15183,7 +15573,7 @@ export type LoginPayload = {
 
 /** Input for the refreshJwtAuthToken mutation */
 export type RefreshJwtAuthTokenInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** A valid, previously issued JWT refresh token. If valid a new Auth token will be provided. If invalid, expired, revoked or otherwise invalid, a new AuthToken will not be provided. */
   jwtRefreshToken: Scalars['String'];
 };
@@ -15197,14 +15587,14 @@ export type RefreshJwtAuthTokenPayload = {
    */
   authToken?: Maybe<Scalars['String']>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 /** Input for the registerUser mutation */
 export type RegisterUserInput = {
   /** User's AOL IM account. */
   aim?: Maybe<Scalars['String']>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** A string containing content about the user. */
   description?: Maybe<Scalars['String']>;
   /** A string that will be shown on the site. Defaults to user's username. It is likely that you will want to change this, for both appearance and security through obscurity (that is if you dont use and delete the default admin user). */
@@ -15245,14 +15635,14 @@ export type RegisterUserInput = {
 export type RegisterUserPayload = {
   __typename?: 'RegisterUserPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** @deprecated  */
   user?: Maybe<User>;
 };
 
 /** Input for the resetUserPassword mutation */
 export type ResetUserPasswordInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** Password reset key */
   key?: Maybe<Scalars['String']>;
   /** The user's login (username). */
@@ -15265,14 +15655,14 @@ export type ResetUserPasswordInput = {
 export type ResetUserPasswordPayload = {
   __typename?: 'ResetUserPasswordPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** @deprecated  */
   user?: Maybe<User>;
 };
 
 /** Input for the restoreComment mutation */
 export type RestoreCommentInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The ID of the comment to be restored */
   id: Scalars['ID'];
 };
@@ -15281,7 +15671,7 @@ export type RestoreCommentInput = {
 export type RestoreCommentPayload = {
   __typename?: 'RestoreCommentPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The restored comment object
    * @deprecated 
@@ -15296,7 +15686,7 @@ export type RestoreCommentPayload = {
 
 /** Input for the sendPasswordResetEmail mutation */
 export type SendPasswordResetEmailInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** A string that contains the user's username or email address. */
   username: Scalars['String'];
 };
@@ -15305,7 +15695,7 @@ export type SendPasswordResetEmailInput = {
 export type SendPasswordResetEmailPayload = {
   __typename?: 'SendPasswordResetEmailPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The user that the password reset email was sent to
    * @deprecated 
@@ -15317,7 +15707,7 @@ export type SendPasswordResetEmailPayload = {
 export type UpdateCaseStudyInput = {
   /** Set connections between the CaseStudy and categories */
   categories?: Maybe<CaseStudyCategoriesInput>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The content of the object */
   content?: Maybe<Scalars['String']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
@@ -15344,24 +15734,20 @@ export type UpdateCaseStudyPayload = {
   /** @deprecated  */
   caseStudy?: Maybe<CaseStudy>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 /** Input for the updateComment mutation */
 export type UpdateCommentInput = {
-  /** User agent used to post the comment. */
-  agent?: Maybe<Scalars['String']>;
   /** The approval status of the comment. */
   approved?: Maybe<Scalars['String']>;
   /** The name of the comment's author. */
   author?: Maybe<Scalars['String']>;
   /** The email of the comment's author. */
   authorEmail?: Maybe<Scalars['String']>;
-  /** IP address for the comment's author. */
-  authorIp?: Maybe<Scalars['String']>;
   /** The url of the comment's author. */
   authorUrl?: Maybe<Scalars['String']>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The ID of the post object the comment belongs to. */
   commentOn?: Maybe<Scalars['Int']>;
   /** Content of the comment. */
@@ -15374,15 +15760,13 @@ export type UpdateCommentInput = {
   parent?: Maybe<Scalars['ID']>;
   /** Type of comment. */
   type?: Maybe<Scalars['String']>;
-  /** The userID of the comment's author. */
-  userId?: Maybe<Scalars['Int']>;
 };
 
 /** The payload for the updateComment mutation */
 export type UpdateCommentPayload = {
   __typename?: 'UpdateCommentPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /**
    * The comment that was created
    * @deprecated 
@@ -15399,7 +15783,7 @@ export type UpdateCommentPayload = {
 export type UpdateEventInput = {
   /** Set connections between the Event and categories */
   categories?: Maybe<EventCategoriesInput>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The content of the object */
   content?: Maybe<Scalars['String']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
@@ -15426,14 +15810,14 @@ export type UpdateEventPayload = {
   /** @deprecated  */
   event?: Maybe<Event>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 /** Input for the updateInspiration mutation */
 export type UpdateInspirationInput = {
   /** Set connections between the Inspiration and categories */
   categories?: Maybe<InspirationCategoriesInput>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The content of the object */
   content?: Maybe<Scalars['String']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
@@ -15460,7 +15844,7 @@ export type UpdateInspirationPayload = {
   /** @deprecated  */
   inspiration?: Maybe<Inspiration>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 /** Input for the updateMediaItem mutation */
@@ -15471,7 +15855,7 @@ export type UpdateMediaItemInput = {
   authorId?: Maybe<Scalars['ID']>;
   /** The caption for the mediaItem */
   caption?: Maybe<Scalars['String']>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The comment status for the mediaItem */
   commentStatus?: Maybe<Scalars['String']>;
   /** The date of the mediaItem */
@@ -15502,7 +15886,7 @@ export type UpdateMediaItemInput = {
 export type UpdateMediaItemPayload = {
   __typename?: 'UpdateMediaItemPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** @deprecated  */
   mediaItem?: Maybe<MediaItem>;
 };
@@ -15511,7 +15895,7 @@ export type UpdateMediaItemPayload = {
 export type UpdatePageInput = {
   /** The userId to assign as the author of the object */
   authorId?: Maybe<Scalars['ID']>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The comment status for the object */
   commentStatus?: Maybe<Scalars['String']>;
   /** The content of the object */
@@ -15538,7 +15922,7 @@ export type UpdatePageInput = {
 export type UpdatePagePayload = {
   __typename?: 'UpdatePagePayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** @deprecated  */
   page?: Maybe<Page>;
 };
@@ -15551,7 +15935,7 @@ export type UpdatePostInput = {
   authorId?: Maybe<Scalars['ID']>;
   /** Set connections between the post and categories */
   categories?: Maybe<PostCategoriesInput>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The comment status for the object */
   commentStatus?: Maybe<Scalars['String']>;
   /** The content of the object */
@@ -15588,14 +15972,14 @@ export type UpdatePostInput = {
 export type UpdatePostPayload = {
   __typename?: 'UpdatePostPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** @deprecated  */
   post?: Maybe<Post>;
 };
 
 /** Input for the updateReusableBlock mutation */
 export type UpdateReusableBlockInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The content of the object */
   content?: Maybe<Scalars['String']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
@@ -15620,14 +16004,14 @@ export type UpdateReusableBlockPayload = {
   /** @deprecated  */
   reusableBlock?: Maybe<ReusableBlock>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 /** Input for the updateReview mutation */
 export type UpdateReviewInput = {
   /** Set connections between the Review and categories */
   categories?: Maybe<ReviewCategoriesInput>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** The content of the object */
   content?: Maybe<Scalars['String']>;
   /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
@@ -15654,12 +16038,12 @@ export type UpdateReviewPayload = {
   /** @deprecated  */
   review?: Maybe<Review>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 /** Input for the updateSettings mutation */
 export type UpdateSettingsInput = {
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** Allow people to submit comments on new posts. */
   discussionSettingsDefaultCommentStatus?: Maybe<Scalars['String']>;
   /** Allow link notifications from other blogs (pingbacks and trackbacks) on new articles. */
@@ -15698,7 +16082,7 @@ export type UpdateSettingsPayload = {
   /** @deprecated  */
   allSettings?: Maybe<Settings>;
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** @deprecated  */
   discussionSettings?: Maybe<DiscussionSettings>;
   /** @deprecated  */
@@ -15713,7 +16097,7 @@ export type UpdateSettingsPayload = {
 export type UpdateUserInput = {
   /** User's AOL IM account. */
   aim?: Maybe<Scalars['String']>;
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** A string containing content about the user. */
   description?: Maybe<Scalars['String']>;
   /** A string that will be shown on the site. Defaults to user's username. It is likely that you will want to change this, for both appearance and security through obscurity (that is if you dont use and delete the default admin user). */
@@ -15756,9 +16140,1056 @@ export type UpdateUserInput = {
 export type UpdateUserPayload = {
   __typename?: 'UpdateUserPayload';
   /** @deprecated  */
-  clientMutationId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
   /** @deprecated  */
   user?: Maybe<User>;
+};
+
+/** A Comment Author object */
+export type CommentAuthor = Node & Commenter & {
+  __typename?: 'CommentAuthor';
+  /**
+   * Identifies the primary key from the database.
+   * @deprecated 
+   */
+  databaseId: Scalars['Int'];
+  /**
+   * The email for the comment author
+   * @deprecated 
+   */
+  email?: Maybe<Scalars['String']>;
+  /**
+   * The globally unique identifier for the comment author object
+   * @deprecated 
+   */
+  id: Scalars['ID'];
+  /**
+   * Whether the object is restricted from the current viewer
+   * @deprecated 
+   */
+  isRestricted?: Maybe<Scalars['Boolean']>;
+  /**
+   * The name for the comment author.
+   * @deprecated 
+   */
+  name?: Maybe<Scalars['String']>;
+  /**
+   * The url the comment author.
+   * @deprecated 
+   */
+  url?: Maybe<Scalars['String']>;
+};
+
+/** Available timezones */
+export enum TimezoneEnum {
+  /** Abidjan */
+  AfricaAbidjan = 'AFRICA_ABIDJAN',
+  /** Accra */
+  AfricaAccra = 'AFRICA_ACCRA',
+  /** Addis Ababa */
+  AfricaAddisAbaba = 'AFRICA_ADDIS_ABABA',
+  /** Algiers */
+  AfricaAlgiers = 'AFRICA_ALGIERS',
+  /** Asmara */
+  AfricaAsmara = 'AFRICA_ASMARA',
+  /** Bamako */
+  AfricaBamako = 'AFRICA_BAMAKO',
+  /** Bangui */
+  AfricaBangui = 'AFRICA_BANGUI',
+  /** Banjul */
+  AfricaBanjul = 'AFRICA_BANJUL',
+  /** Bissau */
+  AfricaBissau = 'AFRICA_BISSAU',
+  /** Blantyre */
+  AfricaBlantyre = 'AFRICA_BLANTYRE',
+  /** Brazzaville */
+  AfricaBrazzaville = 'AFRICA_BRAZZAVILLE',
+  /** Bujumbura */
+  AfricaBujumbura = 'AFRICA_BUJUMBURA',
+  /** Cairo */
+  AfricaCairo = 'AFRICA_CAIRO',
+  /** Casablanca */
+  AfricaCasablanca = 'AFRICA_CASABLANCA',
+  /** Ceuta */
+  AfricaCeuta = 'AFRICA_CEUTA',
+  /** Conakry */
+  AfricaConakry = 'AFRICA_CONAKRY',
+  /** Dakar */
+  AfricaDakar = 'AFRICA_DAKAR',
+  /** Dar es Salaam */
+  AfricaDarEsSalaam = 'AFRICA_DAR_ES_SALAAM',
+  /** Djibouti */
+  AfricaDjibouti = 'AFRICA_DJIBOUTI',
+  /** Douala */
+  AfricaDouala = 'AFRICA_DOUALA',
+  /** El Aaiun */
+  AfricaElAaiun = 'AFRICA_EL_AAIUN',
+  /** Freetown */
+  AfricaFreetown = 'AFRICA_FREETOWN',
+  /** Gaborone */
+  AfricaGaborone = 'AFRICA_GABORONE',
+  /** Harare */
+  AfricaHarare = 'AFRICA_HARARE',
+  /** Johannesburg */
+  AfricaJohannesburg = 'AFRICA_JOHANNESBURG',
+  /** Juba */
+  AfricaJuba = 'AFRICA_JUBA',
+  /** Kampala */
+  AfricaKampala = 'AFRICA_KAMPALA',
+  /** Khartoum */
+  AfricaKhartoum = 'AFRICA_KHARTOUM',
+  /** Kigali */
+  AfricaKigali = 'AFRICA_KIGALI',
+  /** Kinshasa */
+  AfricaKinshasa = 'AFRICA_KINSHASA',
+  /** Lagos */
+  AfricaLagos = 'AFRICA_LAGOS',
+  /** Libreville */
+  AfricaLibreville = 'AFRICA_LIBREVILLE',
+  /** Lome */
+  AfricaLome = 'AFRICA_LOME',
+  /** Luanda */
+  AfricaLuanda = 'AFRICA_LUANDA',
+  /** Lubumbashi */
+  AfricaLubumbashi = 'AFRICA_LUBUMBASHI',
+  /** Lusaka */
+  AfricaLusaka = 'AFRICA_LUSAKA',
+  /** Malabo */
+  AfricaMalabo = 'AFRICA_MALABO',
+  /** Maputo */
+  AfricaMaputo = 'AFRICA_MAPUTO',
+  /** Maseru */
+  AfricaMaseru = 'AFRICA_MASERU',
+  /** Mbabane */
+  AfricaMbabane = 'AFRICA_MBABANE',
+  /** Mogadishu */
+  AfricaMogadishu = 'AFRICA_MOGADISHU',
+  /** Monrovia */
+  AfricaMonrovia = 'AFRICA_MONROVIA',
+  /** Nairobi */
+  AfricaNairobi = 'AFRICA_NAIROBI',
+  /** Ndjamena */
+  AfricaNdjamena = 'AFRICA_NDJAMENA',
+  /** Niamey */
+  AfricaNiamey = 'AFRICA_NIAMEY',
+  /** Nouakchott */
+  AfricaNouakchott = 'AFRICA_NOUAKCHOTT',
+  /** Ouagadougou */
+  AfricaOuagadougou = 'AFRICA_OUAGADOUGOU',
+  /** Porto-Novo */
+  AfricaPortoNovo = 'AFRICA_PORTO_NOVO',
+  /** Sao Tome */
+  AfricaSaoTome = 'AFRICA_SAO_TOME',
+  /** Tripoli */
+  AfricaTripoli = 'AFRICA_TRIPOLI',
+  /** Tunis */
+  AfricaTunis = 'AFRICA_TUNIS',
+  /** Windhoek */
+  AfricaWindhoek = 'AFRICA_WINDHOEK',
+  /** Adak */
+  AmericaAdak = 'AMERICA_ADAK',
+  /** Anchorage */
+  AmericaAnchorage = 'AMERICA_ANCHORAGE',
+  /** Anguilla */
+  AmericaAnguilla = 'AMERICA_ANGUILLA',
+  /** Antigua */
+  AmericaAntigua = 'AMERICA_ANTIGUA',
+  /** Araguaina */
+  AmericaAraguaina = 'AMERICA_ARAGUAINA',
+  /** Argentina - Buenos Aires */
+  AmericaArgentinaBuenosAires = 'AMERICA_ARGENTINA_BUENOS_AIRES',
+  /** Argentina - Catamarca */
+  AmericaArgentinaCatamarca = 'AMERICA_ARGENTINA_CATAMARCA',
+  /** Argentina - Cordoba */
+  AmericaArgentinaCordoba = 'AMERICA_ARGENTINA_CORDOBA',
+  /** Argentina - Jujuy */
+  AmericaArgentinaJujuy = 'AMERICA_ARGENTINA_JUJUY',
+  /** Argentina - La Rioja */
+  AmericaArgentinaLaRioja = 'AMERICA_ARGENTINA_LA_RIOJA',
+  /** Argentina - Mendoza */
+  AmericaArgentinaMendoza = 'AMERICA_ARGENTINA_MENDOZA',
+  /** Argentina - Rio Gallegos */
+  AmericaArgentinaRioGallegos = 'AMERICA_ARGENTINA_RIO_GALLEGOS',
+  /** Argentina - Salta */
+  AmericaArgentinaSalta = 'AMERICA_ARGENTINA_SALTA',
+  /** Argentina - San Juan */
+  AmericaArgentinaSanJuan = 'AMERICA_ARGENTINA_SAN_JUAN',
+  /** Argentina - San Luis */
+  AmericaArgentinaSanLuis = 'AMERICA_ARGENTINA_SAN_LUIS',
+  /** Argentina - Tucuman */
+  AmericaArgentinaTucuman = 'AMERICA_ARGENTINA_TUCUMAN',
+  /** Argentina - Ushuaia */
+  AmericaArgentinaUshuaia = 'AMERICA_ARGENTINA_USHUAIA',
+  /** Aruba */
+  AmericaAruba = 'AMERICA_ARUBA',
+  /** Asuncion */
+  AmericaAsuncion = 'AMERICA_ASUNCION',
+  /** Atikokan */
+  AmericaAtikokan = 'AMERICA_ATIKOKAN',
+  /** Bahia */
+  AmericaBahia = 'AMERICA_BAHIA',
+  /** Bahia Banderas */
+  AmericaBahiaBanderas = 'AMERICA_BAHIA_BANDERAS',
+  /** Barbados */
+  AmericaBarbados = 'AMERICA_BARBADOS',
+  /** Belem */
+  AmericaBelem = 'AMERICA_BELEM',
+  /** Belize */
+  AmericaBelize = 'AMERICA_BELIZE',
+  /** Blanc-Sablon */
+  AmericaBlancSablon = 'AMERICA_BLANC_SABLON',
+  /** Boa Vista */
+  AmericaBoaVista = 'AMERICA_BOA_VISTA',
+  /** Bogota */
+  AmericaBogota = 'AMERICA_BOGOTA',
+  /** Boise */
+  AmericaBoise = 'AMERICA_BOISE',
+  /** Cambridge Bay */
+  AmericaCambridgeBay = 'AMERICA_CAMBRIDGE_BAY',
+  /** Campo Grande */
+  AmericaCampoGrande = 'AMERICA_CAMPO_GRANDE',
+  /** Cancun */
+  AmericaCancun = 'AMERICA_CANCUN',
+  /** Caracas */
+  AmericaCaracas = 'AMERICA_CARACAS',
+  /** Cayenne */
+  AmericaCayenne = 'AMERICA_CAYENNE',
+  /** Cayman */
+  AmericaCayman = 'AMERICA_CAYMAN',
+  /** Chicago */
+  AmericaChicago = 'AMERICA_CHICAGO',
+  /** Chihuahua */
+  AmericaChihuahua = 'AMERICA_CHIHUAHUA',
+  /** Costa Rica */
+  AmericaCostaRica = 'AMERICA_COSTA_RICA',
+  /** Creston */
+  AmericaCreston = 'AMERICA_CRESTON',
+  /** Cuiaba */
+  AmericaCuiaba = 'AMERICA_CUIABA',
+  /** Curacao */
+  AmericaCuracao = 'AMERICA_CURACAO',
+  /** Danmarkshavn */
+  AmericaDanmarkshavn = 'AMERICA_DANMARKSHAVN',
+  /** Dawson */
+  AmericaDawson = 'AMERICA_DAWSON',
+  /** Dawson Creek */
+  AmericaDawsonCreek = 'AMERICA_DAWSON_CREEK',
+  /** Denver */
+  AmericaDenver = 'AMERICA_DENVER',
+  /** Detroit */
+  AmericaDetroit = 'AMERICA_DETROIT',
+  /** Dominica */
+  AmericaDominica = 'AMERICA_DOMINICA',
+  /** Edmonton */
+  AmericaEdmonton = 'AMERICA_EDMONTON',
+  /** Eirunepe */
+  AmericaEirunepe = 'AMERICA_EIRUNEPE',
+  /** El Salvador */
+  AmericaElSalvador = 'AMERICA_EL_SALVADOR',
+  /** Fortaleza */
+  AmericaFortaleza = 'AMERICA_FORTALEZA',
+  /** Fort Nelson */
+  AmericaFortNelson = 'AMERICA_FORT_NELSON',
+  /** Glace Bay */
+  AmericaGlaceBay = 'AMERICA_GLACE_BAY',
+  /** Godthab */
+  AmericaGodthab = 'AMERICA_GODTHAB',
+  /** Goose Bay */
+  AmericaGooseBay = 'AMERICA_GOOSE_BAY',
+  /** Grand Turk */
+  AmericaGrandTurk = 'AMERICA_GRAND_TURK',
+  /** Grenada */
+  AmericaGrenada = 'AMERICA_GRENADA',
+  /** Guadeloupe */
+  AmericaGuadeloupe = 'AMERICA_GUADELOUPE',
+  /** Guatemala */
+  AmericaGuatemala = 'AMERICA_GUATEMALA',
+  /** Guayaquil */
+  AmericaGuayaquil = 'AMERICA_GUAYAQUIL',
+  /** Guyana */
+  AmericaGuyana = 'AMERICA_GUYANA',
+  /** Halifax */
+  AmericaHalifax = 'AMERICA_HALIFAX',
+  /** Havana */
+  AmericaHavana = 'AMERICA_HAVANA',
+  /** Hermosillo */
+  AmericaHermosillo = 'AMERICA_HERMOSILLO',
+  /** Indiana - Indianapolis */
+  AmericaIndianaIndianapolis = 'AMERICA_INDIANA_INDIANAPOLIS',
+  /** Indiana - Knox */
+  AmericaIndianaKnox = 'AMERICA_INDIANA_KNOX',
+  /** Indiana - Marengo */
+  AmericaIndianaMarengo = 'AMERICA_INDIANA_MARENGO',
+  /** Indiana - Petersburg */
+  AmericaIndianaPetersburg = 'AMERICA_INDIANA_PETERSBURG',
+  /** Indiana - Tell City */
+  AmericaIndianaTellCity = 'AMERICA_INDIANA_TELL_CITY',
+  /** Indiana - Vevay */
+  AmericaIndianaVevay = 'AMERICA_INDIANA_VEVAY',
+  /** Indiana - Vincennes */
+  AmericaIndianaVincennes = 'AMERICA_INDIANA_VINCENNES',
+  /** Indiana - Winamac */
+  AmericaIndianaWinamac = 'AMERICA_INDIANA_WINAMAC',
+  /** Inuvik */
+  AmericaInuvik = 'AMERICA_INUVIK',
+  /** Iqaluit */
+  AmericaIqaluit = 'AMERICA_IQALUIT',
+  /** Jamaica */
+  AmericaJamaica = 'AMERICA_JAMAICA',
+  /** Juneau */
+  AmericaJuneau = 'AMERICA_JUNEAU',
+  /** Kentucky - Louisville */
+  AmericaKentuckyLouisville = 'AMERICA_KENTUCKY_LOUISVILLE',
+  /** Kentucky - Monticello */
+  AmericaKentuckyMonticello = 'AMERICA_KENTUCKY_MONTICELLO',
+  /** Kralendijk */
+  AmericaKralendijk = 'AMERICA_KRALENDIJK',
+  /** La Paz */
+  AmericaLaPaz = 'AMERICA_LA_PAZ',
+  /** Lima */
+  AmericaLima = 'AMERICA_LIMA',
+  /** Los Angeles */
+  AmericaLosAngeles = 'AMERICA_LOS_ANGELES',
+  /** Lower Princes */
+  AmericaLowerPrinces = 'AMERICA_LOWER_PRINCES',
+  /** Maceio */
+  AmericaMaceio = 'AMERICA_MACEIO',
+  /** Managua */
+  AmericaManagua = 'AMERICA_MANAGUA',
+  /** Manaus */
+  AmericaManaus = 'AMERICA_MANAUS',
+  /** Marigot */
+  AmericaMarigot = 'AMERICA_MARIGOT',
+  /** Martinique */
+  AmericaMartinique = 'AMERICA_MARTINIQUE',
+  /** Matamoros */
+  AmericaMatamoros = 'AMERICA_MATAMOROS',
+  /** Mazatlan */
+  AmericaMazatlan = 'AMERICA_MAZATLAN',
+  /** Menominee */
+  AmericaMenominee = 'AMERICA_MENOMINEE',
+  /** Merida */
+  AmericaMerida = 'AMERICA_MERIDA',
+  /** Metlakatla */
+  AmericaMetlakatla = 'AMERICA_METLAKATLA',
+  /** Mexico City */
+  AmericaMexicoCity = 'AMERICA_MEXICO_CITY',
+  /** Miquelon */
+  AmericaMiquelon = 'AMERICA_MIQUELON',
+  /** Moncton */
+  AmericaMoncton = 'AMERICA_MONCTON',
+  /** Monterrey */
+  AmericaMonterrey = 'AMERICA_MONTERREY',
+  /** Montevideo */
+  AmericaMontevideo = 'AMERICA_MONTEVIDEO',
+  /** Montserrat */
+  AmericaMontserrat = 'AMERICA_MONTSERRAT',
+  /** Nassau */
+  AmericaNassau = 'AMERICA_NASSAU',
+  /** New York */
+  AmericaNewYork = 'AMERICA_NEW_YORK',
+  /** Nipigon */
+  AmericaNipigon = 'AMERICA_NIPIGON',
+  /** Nome */
+  AmericaNome = 'AMERICA_NOME',
+  /** Noronha */
+  AmericaNoronha = 'AMERICA_NORONHA',
+  /** North Dakota - Beulah */
+  AmericaNorthDakotaBeulah = 'AMERICA_NORTH_DAKOTA_BEULAH',
+  /** North Dakota - Center */
+  AmericaNorthDakotaCenter = 'AMERICA_NORTH_DAKOTA_CENTER',
+  /** North Dakota - New Salem */
+  AmericaNorthDakotaNewSalem = 'AMERICA_NORTH_DAKOTA_NEW_SALEM',
+  /** Ojinaga */
+  AmericaOjinaga = 'AMERICA_OJINAGA',
+  /** Panama */
+  AmericaPanama = 'AMERICA_PANAMA',
+  /** Pangnirtung */
+  AmericaPangnirtung = 'AMERICA_PANGNIRTUNG',
+  /** Paramaribo */
+  AmericaParamaribo = 'AMERICA_PARAMARIBO',
+  /** Phoenix */
+  AmericaPhoenix = 'AMERICA_PHOENIX',
+  /** Porto Velho */
+  AmericaPortoVelho = 'AMERICA_PORTO_VELHO',
+  /** Port-au-Prince */
+  AmericaPortAuPrince = 'AMERICA_PORT_AU_PRINCE',
+  /** Port of Spain */
+  AmericaPortOfSpain = 'AMERICA_PORT_OF_SPAIN',
+  /** Puerto Rico */
+  AmericaPuertoRico = 'AMERICA_PUERTO_RICO',
+  /** Punta Arenas */
+  AmericaPuntaArenas = 'AMERICA_PUNTA_ARENAS',
+  /** Rainy River */
+  AmericaRainyRiver = 'AMERICA_RAINY_RIVER',
+  /** Rankin Inlet */
+  AmericaRankinInlet = 'AMERICA_RANKIN_INLET',
+  /** Recife */
+  AmericaRecife = 'AMERICA_RECIFE',
+  /** Regina */
+  AmericaRegina = 'AMERICA_REGINA',
+  /** Resolute */
+  AmericaResolute = 'AMERICA_RESOLUTE',
+  /** Rio Branco */
+  AmericaRioBranco = 'AMERICA_RIO_BRANCO',
+  /** Santarem */
+  AmericaSantarem = 'AMERICA_SANTAREM',
+  /** Santiago */
+  AmericaSantiago = 'AMERICA_SANTIAGO',
+  /** Santo Domingo */
+  AmericaSantoDomingo = 'AMERICA_SANTO_DOMINGO',
+  /** Sao Paulo */
+  AmericaSaoPaulo = 'AMERICA_SAO_PAULO',
+  /** Scoresbysund */
+  AmericaScoresbysund = 'AMERICA_SCORESBYSUND',
+  /** Sitka */
+  AmericaSitka = 'AMERICA_SITKA',
+  /** St Barthelemy */
+  AmericaStBarthelemy = 'AMERICA_ST_BARTHELEMY',
+  /** St Johns */
+  AmericaStJohns = 'AMERICA_ST_JOHNS',
+  /** St Kitts */
+  AmericaStKitts = 'AMERICA_ST_KITTS',
+  /** St Lucia */
+  AmericaStLucia = 'AMERICA_ST_LUCIA',
+  /** St Thomas */
+  AmericaStThomas = 'AMERICA_ST_THOMAS',
+  /** St Vincent */
+  AmericaStVincent = 'AMERICA_ST_VINCENT',
+  /** Swift Current */
+  AmericaSwiftCurrent = 'AMERICA_SWIFT_CURRENT',
+  /** Tegucigalpa */
+  AmericaTegucigalpa = 'AMERICA_TEGUCIGALPA',
+  /** Thule */
+  AmericaThule = 'AMERICA_THULE',
+  /** Thunder Bay */
+  AmericaThunderBay = 'AMERICA_THUNDER_BAY',
+  /** Tijuana */
+  AmericaTijuana = 'AMERICA_TIJUANA',
+  /** Toronto */
+  AmericaToronto = 'AMERICA_TORONTO',
+  /** Tortola */
+  AmericaTortola = 'AMERICA_TORTOLA',
+  /** Vancouver */
+  AmericaVancouver = 'AMERICA_VANCOUVER',
+  /** Whitehorse */
+  AmericaWhitehorse = 'AMERICA_WHITEHORSE',
+  /** Winnipeg */
+  AmericaWinnipeg = 'AMERICA_WINNIPEG',
+  /** Yakutat */
+  AmericaYakutat = 'AMERICA_YAKUTAT',
+  /** Yellowknife */
+  AmericaYellowknife = 'AMERICA_YELLOWKNIFE',
+  /** Casey */
+  AntarcticaCasey = 'ANTARCTICA_CASEY',
+  /** Davis */
+  AntarcticaDavis = 'ANTARCTICA_DAVIS',
+  /** DumontDUrville */
+  AntarcticaDumontdurville = 'ANTARCTICA_DUMONTDURVILLE',
+  /** Macquarie */
+  AntarcticaMacquarie = 'ANTARCTICA_MACQUARIE',
+  /** Mawson */
+  AntarcticaMawson = 'ANTARCTICA_MAWSON',
+  /** McMurdo */
+  AntarcticaMcmurdo = 'ANTARCTICA_MCMURDO',
+  /** Palmer */
+  AntarcticaPalmer = 'ANTARCTICA_PALMER',
+  /** Rothera */
+  AntarcticaRothera = 'ANTARCTICA_ROTHERA',
+  /** Syowa */
+  AntarcticaSyowa = 'ANTARCTICA_SYOWA',
+  /** Troll */
+  AntarcticaTroll = 'ANTARCTICA_TROLL',
+  /** Vostok */
+  AntarcticaVostok = 'ANTARCTICA_VOSTOK',
+  /** Longyearbyen */
+  ArcticLongyearbyen = 'ARCTIC_LONGYEARBYEN',
+  /** Aden */
+  AsiaAden = 'ASIA_ADEN',
+  /** Almaty */
+  AsiaAlmaty = 'ASIA_ALMATY',
+  /** Amman */
+  AsiaAmman = 'ASIA_AMMAN',
+  /** Anadyr */
+  AsiaAnadyr = 'ASIA_ANADYR',
+  /** Aqtau */
+  AsiaAqtau = 'ASIA_AQTAU',
+  /** Aqtobe */
+  AsiaAqtobe = 'ASIA_AQTOBE',
+  /** Ashgabat */
+  AsiaAshgabat = 'ASIA_ASHGABAT',
+  /** Atyrau */
+  AsiaAtyrau = 'ASIA_ATYRAU',
+  /** Baghdad */
+  AsiaBaghdad = 'ASIA_BAGHDAD',
+  /** Bahrain */
+  AsiaBahrain = 'ASIA_BAHRAIN',
+  /** Baku */
+  AsiaBaku = 'ASIA_BAKU',
+  /** Bangkok */
+  AsiaBangkok = 'ASIA_BANGKOK',
+  /** Barnaul */
+  AsiaBarnaul = 'ASIA_BARNAUL',
+  /** Beirut */
+  AsiaBeirut = 'ASIA_BEIRUT',
+  /** Bishkek */
+  AsiaBishkek = 'ASIA_BISHKEK',
+  /** Brunei */
+  AsiaBrunei = 'ASIA_BRUNEI',
+  /** Chita */
+  AsiaChita = 'ASIA_CHITA',
+  /** Choibalsan */
+  AsiaChoibalsan = 'ASIA_CHOIBALSAN',
+  /** Colombo */
+  AsiaColombo = 'ASIA_COLOMBO',
+  /** Damascus */
+  AsiaDamascus = 'ASIA_DAMASCUS',
+  /** Dhaka */
+  AsiaDhaka = 'ASIA_DHAKA',
+  /** Dili */
+  AsiaDili = 'ASIA_DILI',
+  /** Dubai */
+  AsiaDubai = 'ASIA_DUBAI',
+  /** Dushanbe */
+  AsiaDushanbe = 'ASIA_DUSHANBE',
+  /** Famagusta */
+  AsiaFamagusta = 'ASIA_FAMAGUSTA',
+  /** Gaza */
+  AsiaGaza = 'ASIA_GAZA',
+  /** Hebron */
+  AsiaHebron = 'ASIA_HEBRON',
+  /** Hong Kong */
+  AsiaHongKong = 'ASIA_HONG_KONG',
+  /** Hovd */
+  AsiaHovd = 'ASIA_HOVD',
+  /** Ho Chi Minh */
+  AsiaHoChiMinh = 'ASIA_HO_CHI_MINH',
+  /** Irkutsk */
+  AsiaIrkutsk = 'ASIA_IRKUTSK',
+  /** Jakarta */
+  AsiaJakarta = 'ASIA_JAKARTA',
+  /** Jayapura */
+  AsiaJayapura = 'ASIA_JAYAPURA',
+  /** Jerusalem */
+  AsiaJerusalem = 'ASIA_JERUSALEM',
+  /** Kabul */
+  AsiaKabul = 'ASIA_KABUL',
+  /** Kamchatka */
+  AsiaKamchatka = 'ASIA_KAMCHATKA',
+  /** Karachi */
+  AsiaKarachi = 'ASIA_KARACHI',
+  /** Kathmandu */
+  AsiaKathmandu = 'ASIA_KATHMANDU',
+  /** Khandyga */
+  AsiaKhandyga = 'ASIA_KHANDYGA',
+  /** Kolkata */
+  AsiaKolkata = 'ASIA_KOLKATA',
+  /** Krasnoyarsk */
+  AsiaKrasnoyarsk = 'ASIA_KRASNOYARSK',
+  /** Kuala Lumpur */
+  AsiaKualaLumpur = 'ASIA_KUALA_LUMPUR',
+  /** Kuching */
+  AsiaKuching = 'ASIA_KUCHING',
+  /** Kuwait */
+  AsiaKuwait = 'ASIA_KUWAIT',
+  /** Macau */
+  AsiaMacau = 'ASIA_MACAU',
+  /** Magadan */
+  AsiaMagadan = 'ASIA_MAGADAN',
+  /** Makassar */
+  AsiaMakassar = 'ASIA_MAKASSAR',
+  /** Manila */
+  AsiaManila = 'ASIA_MANILA',
+  /** Muscat */
+  AsiaMuscat = 'ASIA_MUSCAT',
+  /** Nicosia */
+  AsiaNicosia = 'ASIA_NICOSIA',
+  /** Novokuznetsk */
+  AsiaNovokuznetsk = 'ASIA_NOVOKUZNETSK',
+  /** Novosibirsk */
+  AsiaNovosibirsk = 'ASIA_NOVOSIBIRSK',
+  /** Omsk */
+  AsiaOmsk = 'ASIA_OMSK',
+  /** Oral */
+  AsiaOral = 'ASIA_ORAL',
+  /** Phnom Penh */
+  AsiaPhnomPenh = 'ASIA_PHNOM_PENH',
+  /** Pontianak */
+  AsiaPontianak = 'ASIA_PONTIANAK',
+  /** Pyongyang */
+  AsiaPyongyang = 'ASIA_PYONGYANG',
+  /** Qatar */
+  AsiaQatar = 'ASIA_QATAR',
+  /** Qyzylorda */
+  AsiaQyzylorda = 'ASIA_QYZYLORDA',
+  /** Riyadh */
+  AsiaRiyadh = 'ASIA_RIYADH',
+  /** Sakhalin */
+  AsiaSakhalin = 'ASIA_SAKHALIN',
+  /** Samarkand */
+  AsiaSamarkand = 'ASIA_SAMARKAND',
+  /** Seoul */
+  AsiaSeoul = 'ASIA_SEOUL',
+  /** Shanghai */
+  AsiaShanghai = 'ASIA_SHANGHAI',
+  /** Singapore */
+  AsiaSingapore = 'ASIA_SINGAPORE',
+  /** Srednekolymsk */
+  AsiaSrednekolymsk = 'ASIA_SREDNEKOLYMSK',
+  /** Taipei */
+  AsiaTaipei = 'ASIA_TAIPEI',
+  /** Tashkent */
+  AsiaTashkent = 'ASIA_TASHKENT',
+  /** Tbilisi */
+  AsiaTbilisi = 'ASIA_TBILISI',
+  /** Tehran */
+  AsiaTehran = 'ASIA_TEHRAN',
+  /** Thimphu */
+  AsiaThimphu = 'ASIA_THIMPHU',
+  /** Tokyo */
+  AsiaTokyo = 'ASIA_TOKYO',
+  /** Tomsk */
+  AsiaTomsk = 'ASIA_TOMSK',
+  /** Ulaanbaatar */
+  AsiaUlaanbaatar = 'ASIA_ULAANBAATAR',
+  /** Urumqi */
+  AsiaUrumqi = 'ASIA_URUMQI',
+  /** Ust-Nera */
+  AsiaUstNera = 'ASIA_UST_NERA',
+  /** Vientiane */
+  AsiaVientiane = 'ASIA_VIENTIANE',
+  /** Vladivostok */
+  AsiaVladivostok = 'ASIA_VLADIVOSTOK',
+  /** Yakutsk */
+  AsiaYakutsk = 'ASIA_YAKUTSK',
+  /** Yangon */
+  AsiaYangon = 'ASIA_YANGON',
+  /** Yekaterinburg */
+  AsiaYekaterinburg = 'ASIA_YEKATERINBURG',
+  /** Yerevan */
+  AsiaYerevan = 'ASIA_YEREVAN',
+  /** Azores */
+  AtlanticAzores = 'ATLANTIC_AZORES',
+  /** Bermuda */
+  AtlanticBermuda = 'ATLANTIC_BERMUDA',
+  /** Canary */
+  AtlanticCanary = 'ATLANTIC_CANARY',
+  /** Cape Verde */
+  AtlanticCapeVerde = 'ATLANTIC_CAPE_VERDE',
+  /** Faroe */
+  AtlanticFaroe = 'ATLANTIC_FAROE',
+  /** Madeira */
+  AtlanticMadeira = 'ATLANTIC_MADEIRA',
+  /** Reykjavik */
+  AtlanticReykjavik = 'ATLANTIC_REYKJAVIK',
+  /** South Georgia */
+  AtlanticSouthGeorgia = 'ATLANTIC_SOUTH_GEORGIA',
+  /** Stanley */
+  AtlanticStanley = 'ATLANTIC_STANLEY',
+  /** St Helena */
+  AtlanticStHelena = 'ATLANTIC_ST_HELENA',
+  /** Adelaide */
+  AustraliaAdelaide = 'AUSTRALIA_ADELAIDE',
+  /** Brisbane */
+  AustraliaBrisbane = 'AUSTRALIA_BRISBANE',
+  /** Broken Hill */
+  AustraliaBrokenHill = 'AUSTRALIA_BROKEN_HILL',
+  /** Currie */
+  AustraliaCurrie = 'AUSTRALIA_CURRIE',
+  /** Darwin */
+  AustraliaDarwin = 'AUSTRALIA_DARWIN',
+  /** Eucla */
+  AustraliaEucla = 'AUSTRALIA_EUCLA',
+  /** Hobart */
+  AustraliaHobart = 'AUSTRALIA_HOBART',
+  /** Lindeman */
+  AustraliaLindeman = 'AUSTRALIA_LINDEMAN',
+  /** Lord Howe */
+  AustraliaLordHowe = 'AUSTRALIA_LORD_HOWE',
+  /** Melbourne */
+  AustraliaMelbourne = 'AUSTRALIA_MELBOURNE',
+  /** Perth */
+  AustraliaPerth = 'AUSTRALIA_PERTH',
+  /** Sydney */
+  AustraliaSydney = 'AUSTRALIA_SYDNEY',
+  /** Amsterdam */
+  EuropeAmsterdam = 'EUROPE_AMSTERDAM',
+  /** Andorra */
+  EuropeAndorra = 'EUROPE_ANDORRA',
+  /** Astrakhan */
+  EuropeAstrakhan = 'EUROPE_ASTRAKHAN',
+  /** Athens */
+  EuropeAthens = 'EUROPE_ATHENS',
+  /** Belgrade */
+  EuropeBelgrade = 'EUROPE_BELGRADE',
+  /** Berlin */
+  EuropeBerlin = 'EUROPE_BERLIN',
+  /** Bratislava */
+  EuropeBratislava = 'EUROPE_BRATISLAVA',
+  /** Brussels */
+  EuropeBrussels = 'EUROPE_BRUSSELS',
+  /** Bucharest */
+  EuropeBucharest = 'EUROPE_BUCHAREST',
+  /** Budapest */
+  EuropeBudapest = 'EUROPE_BUDAPEST',
+  /** Busingen */
+  EuropeBusingen = 'EUROPE_BUSINGEN',
+  /** Chisinau */
+  EuropeChisinau = 'EUROPE_CHISINAU',
+  /** Copenhagen */
+  EuropeCopenhagen = 'EUROPE_COPENHAGEN',
+  /** Dublin */
+  EuropeDublin = 'EUROPE_DUBLIN',
+  /** Gibraltar */
+  EuropeGibraltar = 'EUROPE_GIBRALTAR',
+  /** Guernsey */
+  EuropeGuernsey = 'EUROPE_GUERNSEY',
+  /** Helsinki */
+  EuropeHelsinki = 'EUROPE_HELSINKI',
+  /** Isle of Man */
+  EuropeIsleOfMan = 'EUROPE_ISLE_OF_MAN',
+  /** Istanbul */
+  EuropeIstanbul = 'EUROPE_ISTANBUL',
+  /** Jersey */
+  EuropeJersey = 'EUROPE_JERSEY',
+  /** Kaliningrad */
+  EuropeKaliningrad = 'EUROPE_KALININGRAD',
+  /** Kiev */
+  EuropeKiev = 'EUROPE_KIEV',
+  /** Kirov */
+  EuropeKirov = 'EUROPE_KIROV',
+  /** Lisbon */
+  EuropeLisbon = 'EUROPE_LISBON',
+  /** Ljubljana */
+  EuropeLjubljana = 'EUROPE_LJUBLJANA',
+  /** London */
+  EuropeLondon = 'EUROPE_LONDON',
+  /** Luxembourg */
+  EuropeLuxembourg = 'EUROPE_LUXEMBOURG',
+  /** Madrid */
+  EuropeMadrid = 'EUROPE_MADRID',
+  /** Malta */
+  EuropeMalta = 'EUROPE_MALTA',
+  /** Mariehamn */
+  EuropeMariehamn = 'EUROPE_MARIEHAMN',
+  /** Minsk */
+  EuropeMinsk = 'EUROPE_MINSK',
+  /** Monaco */
+  EuropeMonaco = 'EUROPE_MONACO',
+  /** Moscow */
+  EuropeMoscow = 'EUROPE_MOSCOW',
+  /** Oslo */
+  EuropeOslo = 'EUROPE_OSLO',
+  /** Paris */
+  EuropeParis = 'EUROPE_PARIS',
+  /** Podgorica */
+  EuropePodgorica = 'EUROPE_PODGORICA',
+  /** Prague */
+  EuropePrague = 'EUROPE_PRAGUE',
+  /** Riga */
+  EuropeRiga = 'EUROPE_RIGA',
+  /** Rome */
+  EuropeRome = 'EUROPE_ROME',
+  /** Samara */
+  EuropeSamara = 'EUROPE_SAMARA',
+  /** San Marino */
+  EuropeSanMarino = 'EUROPE_SAN_MARINO',
+  /** Sarajevo */
+  EuropeSarajevo = 'EUROPE_SARAJEVO',
+  /** Saratov */
+  EuropeSaratov = 'EUROPE_SARATOV',
+  /** Simferopol */
+  EuropeSimferopol = 'EUROPE_SIMFEROPOL',
+  /** Skopje */
+  EuropeSkopje = 'EUROPE_SKOPJE',
+  /** Sofia */
+  EuropeSofia = 'EUROPE_SOFIA',
+  /** Stockholm */
+  EuropeStockholm = 'EUROPE_STOCKHOLM',
+  /** Tallinn */
+  EuropeTallinn = 'EUROPE_TALLINN',
+  /** Tirane */
+  EuropeTirane = 'EUROPE_TIRANE',
+  /** Ulyanovsk */
+  EuropeUlyanovsk = 'EUROPE_ULYANOVSK',
+  /** Uzhgorod */
+  EuropeUzhgorod = 'EUROPE_UZHGOROD',
+  /** Vaduz */
+  EuropeVaduz = 'EUROPE_VADUZ',
+  /** Vatican */
+  EuropeVatican = 'EUROPE_VATICAN',
+  /** Vienna */
+  EuropeVienna = 'EUROPE_VIENNA',
+  /** Vilnius */
+  EuropeVilnius = 'EUROPE_VILNIUS',
+  /** Volgograd */
+  EuropeVolgograd = 'EUROPE_VOLGOGRAD',
+  /** Warsaw */
+  EuropeWarsaw = 'EUROPE_WARSAW',
+  /** Zagreb */
+  EuropeZagreb = 'EUROPE_ZAGREB',
+  /** Zaporozhye */
+  EuropeZaporozhye = 'EUROPE_ZAPOROZHYE',
+  /** Zurich */
+  EuropeZurich = 'EUROPE_ZURICH',
+  /** Antananarivo */
+  IndianAntananarivo = 'INDIAN_ANTANANARIVO',
+  /** Chagos */
+  IndianChagos = 'INDIAN_CHAGOS',
+  /** Christmas */
+  IndianChristmas = 'INDIAN_CHRISTMAS',
+  /** Cocos */
+  IndianCocos = 'INDIAN_COCOS',
+  /** Comoro */
+  IndianComoro = 'INDIAN_COMORO',
+  /** Kerguelen */
+  IndianKerguelen = 'INDIAN_KERGUELEN',
+  /** Mahe */
+  IndianMahe = 'INDIAN_MAHE',
+  /** Maldives */
+  IndianMaldives = 'INDIAN_MALDIVES',
+  /** Mauritius */
+  IndianMauritius = 'INDIAN_MAURITIUS',
+  /** Mayotte */
+  IndianMayotte = 'INDIAN_MAYOTTE',
+  /** Reunion */
+  IndianReunion = 'INDIAN_REUNION',
+  /** Apia */
+  PacificApia = 'PACIFIC_APIA',
+  /** Auckland */
+  PacificAuckland = 'PACIFIC_AUCKLAND',
+  /** Bougainville */
+  PacificBougainville = 'PACIFIC_BOUGAINVILLE',
+  /** Chatham */
+  PacificChatham = 'PACIFIC_CHATHAM',
+  /** Chuuk */
+  PacificChuuk = 'PACIFIC_CHUUK',
+  /** Easter */
+  PacificEaster = 'PACIFIC_EASTER',
+  /** Efate */
+  PacificEfate = 'PACIFIC_EFATE',
+  /** Enderbury */
+  PacificEnderbury = 'PACIFIC_ENDERBURY',
+  /** Fakaofo */
+  PacificFakaofo = 'PACIFIC_FAKAOFO',
+  /** Fiji */
+  PacificFiji = 'PACIFIC_FIJI',
+  /** Funafuti */
+  PacificFunafuti = 'PACIFIC_FUNAFUTI',
+  /** Galapagos */
+  PacificGalapagos = 'PACIFIC_GALAPAGOS',
+  /** Gambier */
+  PacificGambier = 'PACIFIC_GAMBIER',
+  /** Guadalcanal */
+  PacificGuadalcanal = 'PACIFIC_GUADALCANAL',
+  /** Guam */
+  PacificGuam = 'PACIFIC_GUAM',
+  /** Honolulu */
+  PacificHonolulu = 'PACIFIC_HONOLULU',
+  /** Kiritimati */
+  PacificKiritimati = 'PACIFIC_KIRITIMATI',
+  /** Kosrae */
+  PacificKosrae = 'PACIFIC_KOSRAE',
+  /** Kwajalein */
+  PacificKwajalein = 'PACIFIC_KWAJALEIN',
+  /** Majuro */
+  PacificMajuro = 'PACIFIC_MAJURO',
+  /** Marquesas */
+  PacificMarquesas = 'PACIFIC_MARQUESAS',
+  /** Midway */
+  PacificMidway = 'PACIFIC_MIDWAY',
+  /** Nauru */
+  PacificNauru = 'PACIFIC_NAURU',
+  /** Niue */
+  PacificNiue = 'PACIFIC_NIUE',
+  /** Norfolk */
+  PacificNorfolk = 'PACIFIC_NORFOLK',
+  /** Noumea */
+  PacificNoumea = 'PACIFIC_NOUMEA',
+  /** Pago Pago */
+  PacificPagoPago = 'PACIFIC_PAGO_PAGO',
+  /** Palau */
+  PacificPalau = 'PACIFIC_PALAU',
+  /** Pitcairn */
+  PacificPitcairn = 'PACIFIC_PITCAIRN',
+  /** Pohnpei */
+  PacificPohnpei = 'PACIFIC_POHNPEI',
+  /** Port Moresby */
+  PacificPortMoresby = 'PACIFIC_PORT_MORESBY',
+  /** Rarotonga */
+  PacificRarotonga = 'PACIFIC_RAROTONGA',
+  /** Saipan */
+  PacificSaipan = 'PACIFIC_SAIPAN',
+  /** Tahiti */
+  PacificTahiti = 'PACIFIC_TAHITI',
+  /** Tarawa */
+  PacificTarawa = 'PACIFIC_TARAWA',
+  /** Tongatapu */
+  PacificTongatapu = 'PACIFIC_TONGATAPU',
+  /** Wake */
+  PacificWake = 'PACIFIC_WAKE',
+  /** Wallis */
+  PacificWallis = 'PACIFIC_WALLIS',
+  /** UTC offset: UTC+0 */
+  Utc_0 = 'UTC_0',
+  /** UTC offset: UTC+0:30 */
+  Utc_0_30 = 'UTC_0_30',
+  /** UTC offset: UTC+1 */
+  Utc_1 = 'UTC_1',
+  /** UTC offset: UTC+10 */
+  Utc_10 = 'UTC_10',
+  /** UTC offset: UTC+10:30 */
+  Utc_10_30 = 'UTC_10_30',
+  /** UTC offset: UTC+11 */
+  Utc_11 = 'UTC_11',
+  /** UTC offset: UTC+11:30 */
+  Utc_11_30 = 'UTC_11_30',
+  /** UTC offset: UTC+12 */
+  Utc_12 = 'UTC_12',
+  /** UTC offset: UTC+12:45 */
+  Utc_12_45 = 'UTC_12_45',
+  /** UTC offset: UTC+13 */
+  Utc_13 = 'UTC_13',
+  /** UTC offset: UTC+13:45 */
+  Utc_13_45 = 'UTC_13_45',
+  /** UTC offset: UTC+14 */
+  Utc_14 = 'UTC_14',
+  /** UTC offset: UTC+1:30 */
+  Utc_1_30 = 'UTC_1_30',
+  /** UTC offset: UTC+2 */
+  Utc_2 = 'UTC_2',
+  /** UTC offset: UTC+2:30 */
+  Utc_2_30 = 'UTC_2_30',
+  /** UTC offset: UTC+3 */
+  Utc_3 = 'UTC_3',
+  /** UTC offset: UTC+3:30 */
+  Utc_3_30 = 'UTC_3_30',
+  /** UTC offset: UTC+4 */
+  Utc_4 = 'UTC_4',
+  /** UTC offset: UTC+4:30 */
+  Utc_4_30 = 'UTC_4_30',
+  /** UTC offset: UTC+5 */
+  Utc_5 = 'UTC_5',
+  /** UTC offset: UTC+5:30 */
+  Utc_5_30 = 'UTC_5_30',
+  /** UTC offset: UTC+5:45 */
+  Utc_5_45 = 'UTC_5_45',
+  /** UTC offset: UTC+6 */
+  Utc_6 = 'UTC_6',
+  /** UTC offset: UTC+6:30 */
+  Utc_6_30 = 'UTC_6_30',
+  /** UTC offset: UTC+7 */
+  Utc_7 = 'UTC_7',
+  /** UTC offset: UTC+7:30 */
+  Utc_7_30 = 'UTC_7_30',
+  /** UTC offset: UTC+8 */
+  Utc_8 = 'UTC_8',
+  /** UTC offset: UTC+8:30 */
+  Utc_8_30 = 'UTC_8_30',
+  /** UTC offset: UTC+8:45 */
+  Utc_8_45 = 'UTC_8_45',
+  /** UTC offset: UTC+9 */
+  Utc_9 = 'UTC_9',
+  /** UTC offset: UTC+9:30 */
+  Utc_9_30 = 'UTC_9_30'
+}
+
+/** Options for filtering the connection */
+export type MenuItemsWhereArgs = {
+  /** The ID of the object */
+  id?: Maybe<Scalars['Int']>;
+  /** The menu location for the menu being queried */
+  location?: Maybe<MenuLocationEnum>;
+};
+
+export type TermObjectUnion = Category | Tag | PostFormat | Series;
+
+/** The payload for the createBlockEditorPreview mutation */
+export type CreateBlockEditorPreviewPayload = {
+  __typename?: 'CreateBlockEditorPreviewPayload';
+  /** @deprecated  */
+  blockEditorPreview?: Maybe<BlockEditorPreview>;
+  /** @deprecated  */
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+/** Input for the createBlockEditorPreview mutation */
+export type CreateBlockEditorPreviewInput = {
+  /** The userId to assign as the author of the object */
+  authorId?: Maybe<Scalars['ID']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The content of the object */
+  content?: Maybe<Scalars['String']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: Maybe<Scalars['String']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: Maybe<Scalars['Int']>;
+  /** The password used to protect the content of the object */
+  password?: Maybe<Scalars['String']>;
+  /** The slug of the object */
+  slug?: Maybe<Scalars['String']>;
+  /** The status of the object */
+  status?: Maybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: Maybe<Scalars['String']>;
+};
+
+/** The payload for the updateBlockEditorPreview mutation */
+export type UpdateBlockEditorPreviewPayload = {
+  __typename?: 'UpdateBlockEditorPreviewPayload';
+  /** @deprecated  */
+  blockEditorPreview?: Maybe<BlockEditorPreview>;
+  /** @deprecated  */
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+/** Input for the updateBlockEditorPreview mutation */
+export type UpdateBlockEditorPreviewInput = {
+  /** The userId to assign as the author of the object */
+  authorId?: Maybe<Scalars['ID']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The content of the object */
+  content?: Maybe<Scalars['String']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: Maybe<Scalars['String']>;
+  /** The ID of the BlockEditorPreview object */
+  id: Scalars['ID'];
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: Maybe<Scalars['Int']>;
+  /** The password used to protect the content of the object */
+  password?: Maybe<Scalars['String']>;
+  /** The slug of the object */
+  slug?: Maybe<Scalars['String']>;
+  /** The status of the object */
+  status?: Maybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: Maybe<Scalars['String']>;
+};
+
+/** The payload for the deleteBlockEditorPreview mutation */
+export type DeleteBlockEditorPreviewPayload = {
+  __typename?: 'DeleteBlockEditorPreviewPayload';
+  /**
+   * The object before it was deleted
+   * @deprecated 
+   */
+  blockEditorPreview?: Maybe<BlockEditorPreview>;
+  /** @deprecated  */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /**
+   * The ID of the deleted object
+   * @deprecated 
+   */
+  deletedId?: Maybe<Scalars['ID']>;
+};
+
+/** Input for the deleteBlockEditorPreview mutation */
+export type DeleteBlockEditorPreviewInput = {
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** Whether the object should be force deleted instead of being moved to the trash */
+  forceDelete?: Maybe<Scalars['Boolean']>;
+  /** The ID of the BlockEditorPreview to delete */
+  id: Scalars['ID'];
 };
 
 
@@ -24186,1050 +25617,3 @@ export type CoreVideoBlock = Block & {
 };
 
 export type BlockUnion = YoastHowToBlock | YoastFaqBlock | AcfCodeBlock | AcfDribbbleBlock | AcfGithubBlock | AcfHeroBlock | AcfIntroBlock | AcfLinkBlock | AcfPresentationsBlock | AcfRowBlock | AcfTestimonialsBlock | AcfYoutubeBlock | AcfYoutubechannelBlock | CoreParagraphBlock | CoreImageBlock | CoreHeadingBlock | CoreGalleryBlock | CoreListBlock | CoreQuoteBlock | CoreShortcodeBlock | CoreArchivesBlock | CoreAudioBlock | CoreButtonBlock | CoreButtonsBlock | CoreCalendarBlock | CoreCategoriesBlock | CoreCodeBlock | CoreColumnsBlock | CoreColumnBlock | CoreCoverBlock | CoreEmbedBlock | CoreEmbedTwitterBlock | CoreEmbedYoutubeBlock | CoreEmbedFacebookBlock | CoreEmbedInstagramBlock | CoreEmbedWordpressBlock | CoreEmbedSoundcloudBlock | CoreEmbedSpotifyBlock | CoreEmbedFlickrBlock | CoreEmbedVimeoBlock | CoreEmbedAnimotoBlock | CoreEmbedCloudupBlock | CoreEmbedCollegehumorBlock | CoreEmbedCrowdsignalBlock | CoreEmbedDailymotionBlock | CoreEmbedImgurBlock | CoreEmbedIssuuBlock | CoreEmbedKickstarterBlock | CoreEmbedMeetupComBlock | CoreEmbedMixcloudBlock | CoreEmbedPolldaddyBlock | CoreEmbedRedditBlock | CoreEmbedReverbnationBlock | CoreEmbedScreencastBlock | CoreEmbedScribdBlock | CoreEmbedSlideshareBlock | CoreEmbedSmugmugBlock | CoreEmbedSpeakerBlock | CoreEmbedSpeakerDeckBlock | CoreEmbedTiktokBlock | CoreEmbedTedBlock | CoreEmbedTumblrBlock | CoreEmbedVideopressBlock | CoreEmbedWordpressTvBlock | CoreEmbedAmazonKindleBlock | CoreFileBlock | CoreGroupBlock | CoreFreeformBlock | CoreHtmlBlock | CoreMediaTextBlock | CoreLatestCommentsBlock | CoreLatestPostsBlock | CoreMissingBlock | CoreMoreBlock | CoreNextpageBlock | CorePreformattedBlock | CorePullquoteBlock | CoreRssBlock | CoreSearchBlock | CoreSeparatorBlock | CoreBlock | CoreSocialLinksBlock | CoreSocialLinkBlock | CoreSpacerBlock | CoreSubheadBlock | CoreTableBlock | CoreTagCloudBlock | CoreTextColumnsBlock | CoreVerseBlock | CoreVideoBlock;
-
-/** A Comment Author object */
-export type CommentAuthor = Node & Commenter & {
-  __typename?: 'CommentAuthor';
-  /**
-   * Identifies the primary key from the database.
-   * @deprecated 
-   */
-  databaseId: Scalars['Int'];
-  /**
-   * The email for the comment author
-   * @deprecated 
-   */
-  email?: Maybe<Scalars['String']>;
-  /**
-   * The globally unique identifier for the comment author object
-   * @deprecated 
-   */
-  id: Scalars['ID'];
-  /**
-   * Whether the object is restricted from the current viewer
-   * @deprecated 
-   */
-  isRestricted?: Maybe<Scalars['Boolean']>;
-  /**
-   * The name for the comment author.
-   * @deprecated 
-   */
-  name?: Maybe<Scalars['String']>;
-  /**
-   * The url the comment author.
-   * @deprecated 
-   */
-  url?: Maybe<Scalars['String']>;
-};
-
-/** Available timezones */
-export enum TimezoneEnum {
-  /** Abidjan */
-  AfricaAbidjan = 'AFRICA_ABIDJAN',
-  /** Accra */
-  AfricaAccra = 'AFRICA_ACCRA',
-  /** Addis Ababa */
-  AfricaAddisAbaba = 'AFRICA_ADDIS_ABABA',
-  /** Algiers */
-  AfricaAlgiers = 'AFRICA_ALGIERS',
-  /** Asmara */
-  AfricaAsmara = 'AFRICA_ASMARA',
-  /** Bamako */
-  AfricaBamako = 'AFRICA_BAMAKO',
-  /** Bangui */
-  AfricaBangui = 'AFRICA_BANGUI',
-  /** Banjul */
-  AfricaBanjul = 'AFRICA_BANJUL',
-  /** Bissau */
-  AfricaBissau = 'AFRICA_BISSAU',
-  /** Blantyre */
-  AfricaBlantyre = 'AFRICA_BLANTYRE',
-  /** Brazzaville */
-  AfricaBrazzaville = 'AFRICA_BRAZZAVILLE',
-  /** Bujumbura */
-  AfricaBujumbura = 'AFRICA_BUJUMBURA',
-  /** Cairo */
-  AfricaCairo = 'AFRICA_CAIRO',
-  /** Casablanca */
-  AfricaCasablanca = 'AFRICA_CASABLANCA',
-  /** Ceuta */
-  AfricaCeuta = 'AFRICA_CEUTA',
-  /** Conakry */
-  AfricaConakry = 'AFRICA_CONAKRY',
-  /** Dakar */
-  AfricaDakar = 'AFRICA_DAKAR',
-  /** Dar es Salaam */
-  AfricaDarEsSalaam = 'AFRICA_DAR_ES_SALAAM',
-  /** Djibouti */
-  AfricaDjibouti = 'AFRICA_DJIBOUTI',
-  /** Douala */
-  AfricaDouala = 'AFRICA_DOUALA',
-  /** El Aaiun */
-  AfricaElAaiun = 'AFRICA_EL_AAIUN',
-  /** Freetown */
-  AfricaFreetown = 'AFRICA_FREETOWN',
-  /** Gaborone */
-  AfricaGaborone = 'AFRICA_GABORONE',
-  /** Harare */
-  AfricaHarare = 'AFRICA_HARARE',
-  /** Johannesburg */
-  AfricaJohannesburg = 'AFRICA_JOHANNESBURG',
-  /** Juba */
-  AfricaJuba = 'AFRICA_JUBA',
-  /** Kampala */
-  AfricaKampala = 'AFRICA_KAMPALA',
-  /** Khartoum */
-  AfricaKhartoum = 'AFRICA_KHARTOUM',
-  /** Kigali */
-  AfricaKigali = 'AFRICA_KIGALI',
-  /** Kinshasa */
-  AfricaKinshasa = 'AFRICA_KINSHASA',
-  /** Lagos */
-  AfricaLagos = 'AFRICA_LAGOS',
-  /** Libreville */
-  AfricaLibreville = 'AFRICA_LIBREVILLE',
-  /** Lome */
-  AfricaLome = 'AFRICA_LOME',
-  /** Luanda */
-  AfricaLuanda = 'AFRICA_LUANDA',
-  /** Lubumbashi */
-  AfricaLubumbashi = 'AFRICA_LUBUMBASHI',
-  /** Lusaka */
-  AfricaLusaka = 'AFRICA_LUSAKA',
-  /** Malabo */
-  AfricaMalabo = 'AFRICA_MALABO',
-  /** Maputo */
-  AfricaMaputo = 'AFRICA_MAPUTO',
-  /** Maseru */
-  AfricaMaseru = 'AFRICA_MASERU',
-  /** Mbabane */
-  AfricaMbabane = 'AFRICA_MBABANE',
-  /** Mogadishu */
-  AfricaMogadishu = 'AFRICA_MOGADISHU',
-  /** Monrovia */
-  AfricaMonrovia = 'AFRICA_MONROVIA',
-  /** Nairobi */
-  AfricaNairobi = 'AFRICA_NAIROBI',
-  /** Ndjamena */
-  AfricaNdjamena = 'AFRICA_NDJAMENA',
-  /** Niamey */
-  AfricaNiamey = 'AFRICA_NIAMEY',
-  /** Nouakchott */
-  AfricaNouakchott = 'AFRICA_NOUAKCHOTT',
-  /** Ouagadougou */
-  AfricaOuagadougou = 'AFRICA_OUAGADOUGOU',
-  /** Porto-Novo */
-  AfricaPortoNovo = 'AFRICA_PORTO_NOVO',
-  /** Sao Tome */
-  AfricaSaoTome = 'AFRICA_SAO_TOME',
-  /** Tripoli */
-  AfricaTripoli = 'AFRICA_TRIPOLI',
-  /** Tunis */
-  AfricaTunis = 'AFRICA_TUNIS',
-  /** Windhoek */
-  AfricaWindhoek = 'AFRICA_WINDHOEK',
-  /** Adak */
-  AmericaAdak = 'AMERICA_ADAK',
-  /** Anchorage */
-  AmericaAnchorage = 'AMERICA_ANCHORAGE',
-  /** Anguilla */
-  AmericaAnguilla = 'AMERICA_ANGUILLA',
-  /** Antigua */
-  AmericaAntigua = 'AMERICA_ANTIGUA',
-  /** Araguaina */
-  AmericaAraguaina = 'AMERICA_ARAGUAINA',
-  /** Argentina - Buenos Aires */
-  AmericaArgentinaBuenosAires = 'AMERICA_ARGENTINA_BUENOS_AIRES',
-  /** Argentina - Catamarca */
-  AmericaArgentinaCatamarca = 'AMERICA_ARGENTINA_CATAMARCA',
-  /** Argentina - Cordoba */
-  AmericaArgentinaCordoba = 'AMERICA_ARGENTINA_CORDOBA',
-  /** Argentina - Jujuy */
-  AmericaArgentinaJujuy = 'AMERICA_ARGENTINA_JUJUY',
-  /** Argentina - La Rioja */
-  AmericaArgentinaLaRioja = 'AMERICA_ARGENTINA_LA_RIOJA',
-  /** Argentina - Mendoza */
-  AmericaArgentinaMendoza = 'AMERICA_ARGENTINA_MENDOZA',
-  /** Argentina - Rio Gallegos */
-  AmericaArgentinaRioGallegos = 'AMERICA_ARGENTINA_RIO_GALLEGOS',
-  /** Argentina - Salta */
-  AmericaArgentinaSalta = 'AMERICA_ARGENTINA_SALTA',
-  /** Argentina - San Juan */
-  AmericaArgentinaSanJuan = 'AMERICA_ARGENTINA_SAN_JUAN',
-  /** Argentina - San Luis */
-  AmericaArgentinaSanLuis = 'AMERICA_ARGENTINA_SAN_LUIS',
-  /** Argentina - Tucuman */
-  AmericaArgentinaTucuman = 'AMERICA_ARGENTINA_TUCUMAN',
-  /** Argentina - Ushuaia */
-  AmericaArgentinaUshuaia = 'AMERICA_ARGENTINA_USHUAIA',
-  /** Aruba */
-  AmericaAruba = 'AMERICA_ARUBA',
-  /** Asuncion */
-  AmericaAsuncion = 'AMERICA_ASUNCION',
-  /** Atikokan */
-  AmericaAtikokan = 'AMERICA_ATIKOKAN',
-  /** Bahia */
-  AmericaBahia = 'AMERICA_BAHIA',
-  /** Bahia Banderas */
-  AmericaBahiaBanderas = 'AMERICA_BAHIA_BANDERAS',
-  /** Barbados */
-  AmericaBarbados = 'AMERICA_BARBADOS',
-  /** Belem */
-  AmericaBelem = 'AMERICA_BELEM',
-  /** Belize */
-  AmericaBelize = 'AMERICA_BELIZE',
-  /** Blanc-Sablon */
-  AmericaBlancSablon = 'AMERICA_BLANC_SABLON',
-  /** Boa Vista */
-  AmericaBoaVista = 'AMERICA_BOA_VISTA',
-  /** Bogota */
-  AmericaBogota = 'AMERICA_BOGOTA',
-  /** Boise */
-  AmericaBoise = 'AMERICA_BOISE',
-  /** Cambridge Bay */
-  AmericaCambridgeBay = 'AMERICA_CAMBRIDGE_BAY',
-  /** Campo Grande */
-  AmericaCampoGrande = 'AMERICA_CAMPO_GRANDE',
-  /** Cancun */
-  AmericaCancun = 'AMERICA_CANCUN',
-  /** Caracas */
-  AmericaCaracas = 'AMERICA_CARACAS',
-  /** Cayenne */
-  AmericaCayenne = 'AMERICA_CAYENNE',
-  /** Cayman */
-  AmericaCayman = 'AMERICA_CAYMAN',
-  /** Chicago */
-  AmericaChicago = 'AMERICA_CHICAGO',
-  /** Chihuahua */
-  AmericaChihuahua = 'AMERICA_CHIHUAHUA',
-  /** Costa Rica */
-  AmericaCostaRica = 'AMERICA_COSTA_RICA',
-  /** Creston */
-  AmericaCreston = 'AMERICA_CRESTON',
-  /** Cuiaba */
-  AmericaCuiaba = 'AMERICA_CUIABA',
-  /** Curacao */
-  AmericaCuracao = 'AMERICA_CURACAO',
-  /** Danmarkshavn */
-  AmericaDanmarkshavn = 'AMERICA_DANMARKSHAVN',
-  /** Dawson */
-  AmericaDawson = 'AMERICA_DAWSON',
-  /** Dawson Creek */
-  AmericaDawsonCreek = 'AMERICA_DAWSON_CREEK',
-  /** Denver */
-  AmericaDenver = 'AMERICA_DENVER',
-  /** Detroit */
-  AmericaDetroit = 'AMERICA_DETROIT',
-  /** Dominica */
-  AmericaDominica = 'AMERICA_DOMINICA',
-  /** Edmonton */
-  AmericaEdmonton = 'AMERICA_EDMONTON',
-  /** Eirunepe */
-  AmericaEirunepe = 'AMERICA_EIRUNEPE',
-  /** El Salvador */
-  AmericaElSalvador = 'AMERICA_EL_SALVADOR',
-  /** Fortaleza */
-  AmericaFortaleza = 'AMERICA_FORTALEZA',
-  /** Fort Nelson */
-  AmericaFortNelson = 'AMERICA_FORT_NELSON',
-  /** Glace Bay */
-  AmericaGlaceBay = 'AMERICA_GLACE_BAY',
-  /** Godthab */
-  AmericaGodthab = 'AMERICA_GODTHAB',
-  /** Goose Bay */
-  AmericaGooseBay = 'AMERICA_GOOSE_BAY',
-  /** Grand Turk */
-  AmericaGrandTurk = 'AMERICA_GRAND_TURK',
-  /** Grenada */
-  AmericaGrenada = 'AMERICA_GRENADA',
-  /** Guadeloupe */
-  AmericaGuadeloupe = 'AMERICA_GUADELOUPE',
-  /** Guatemala */
-  AmericaGuatemala = 'AMERICA_GUATEMALA',
-  /** Guayaquil */
-  AmericaGuayaquil = 'AMERICA_GUAYAQUIL',
-  /** Guyana */
-  AmericaGuyana = 'AMERICA_GUYANA',
-  /** Halifax */
-  AmericaHalifax = 'AMERICA_HALIFAX',
-  /** Havana */
-  AmericaHavana = 'AMERICA_HAVANA',
-  /** Hermosillo */
-  AmericaHermosillo = 'AMERICA_HERMOSILLO',
-  /** Indiana - Indianapolis */
-  AmericaIndianaIndianapolis = 'AMERICA_INDIANA_INDIANAPOLIS',
-  /** Indiana - Knox */
-  AmericaIndianaKnox = 'AMERICA_INDIANA_KNOX',
-  /** Indiana - Marengo */
-  AmericaIndianaMarengo = 'AMERICA_INDIANA_MARENGO',
-  /** Indiana - Petersburg */
-  AmericaIndianaPetersburg = 'AMERICA_INDIANA_PETERSBURG',
-  /** Indiana - Tell City */
-  AmericaIndianaTellCity = 'AMERICA_INDIANA_TELL_CITY',
-  /** Indiana - Vevay */
-  AmericaIndianaVevay = 'AMERICA_INDIANA_VEVAY',
-  /** Indiana - Vincennes */
-  AmericaIndianaVincennes = 'AMERICA_INDIANA_VINCENNES',
-  /** Indiana - Winamac */
-  AmericaIndianaWinamac = 'AMERICA_INDIANA_WINAMAC',
-  /** Inuvik */
-  AmericaInuvik = 'AMERICA_INUVIK',
-  /** Iqaluit */
-  AmericaIqaluit = 'AMERICA_IQALUIT',
-  /** Jamaica */
-  AmericaJamaica = 'AMERICA_JAMAICA',
-  /** Juneau */
-  AmericaJuneau = 'AMERICA_JUNEAU',
-  /** Kentucky - Louisville */
-  AmericaKentuckyLouisville = 'AMERICA_KENTUCKY_LOUISVILLE',
-  /** Kentucky - Monticello */
-  AmericaKentuckyMonticello = 'AMERICA_KENTUCKY_MONTICELLO',
-  /** Kralendijk */
-  AmericaKralendijk = 'AMERICA_KRALENDIJK',
-  /** La Paz */
-  AmericaLaPaz = 'AMERICA_LA_PAZ',
-  /** Lima */
-  AmericaLima = 'AMERICA_LIMA',
-  /** Los Angeles */
-  AmericaLosAngeles = 'AMERICA_LOS_ANGELES',
-  /** Lower Princes */
-  AmericaLowerPrinces = 'AMERICA_LOWER_PRINCES',
-  /** Maceio */
-  AmericaMaceio = 'AMERICA_MACEIO',
-  /** Managua */
-  AmericaManagua = 'AMERICA_MANAGUA',
-  /** Manaus */
-  AmericaManaus = 'AMERICA_MANAUS',
-  /** Marigot */
-  AmericaMarigot = 'AMERICA_MARIGOT',
-  /** Martinique */
-  AmericaMartinique = 'AMERICA_MARTINIQUE',
-  /** Matamoros */
-  AmericaMatamoros = 'AMERICA_MATAMOROS',
-  /** Mazatlan */
-  AmericaMazatlan = 'AMERICA_MAZATLAN',
-  /** Menominee */
-  AmericaMenominee = 'AMERICA_MENOMINEE',
-  /** Merida */
-  AmericaMerida = 'AMERICA_MERIDA',
-  /** Metlakatla */
-  AmericaMetlakatla = 'AMERICA_METLAKATLA',
-  /** Mexico City */
-  AmericaMexicoCity = 'AMERICA_MEXICO_CITY',
-  /** Miquelon */
-  AmericaMiquelon = 'AMERICA_MIQUELON',
-  /** Moncton */
-  AmericaMoncton = 'AMERICA_MONCTON',
-  /** Monterrey */
-  AmericaMonterrey = 'AMERICA_MONTERREY',
-  /** Montevideo */
-  AmericaMontevideo = 'AMERICA_MONTEVIDEO',
-  /** Montserrat */
-  AmericaMontserrat = 'AMERICA_MONTSERRAT',
-  /** Nassau */
-  AmericaNassau = 'AMERICA_NASSAU',
-  /** New York */
-  AmericaNewYork = 'AMERICA_NEW_YORK',
-  /** Nipigon */
-  AmericaNipigon = 'AMERICA_NIPIGON',
-  /** Nome */
-  AmericaNome = 'AMERICA_NOME',
-  /** Noronha */
-  AmericaNoronha = 'AMERICA_NORONHA',
-  /** North Dakota - Beulah */
-  AmericaNorthDakotaBeulah = 'AMERICA_NORTH_DAKOTA_BEULAH',
-  /** North Dakota - Center */
-  AmericaNorthDakotaCenter = 'AMERICA_NORTH_DAKOTA_CENTER',
-  /** North Dakota - New Salem */
-  AmericaNorthDakotaNewSalem = 'AMERICA_NORTH_DAKOTA_NEW_SALEM',
-  /** Ojinaga */
-  AmericaOjinaga = 'AMERICA_OJINAGA',
-  /** Panama */
-  AmericaPanama = 'AMERICA_PANAMA',
-  /** Pangnirtung */
-  AmericaPangnirtung = 'AMERICA_PANGNIRTUNG',
-  /** Paramaribo */
-  AmericaParamaribo = 'AMERICA_PARAMARIBO',
-  /** Phoenix */
-  AmericaPhoenix = 'AMERICA_PHOENIX',
-  /** Porto Velho */
-  AmericaPortoVelho = 'AMERICA_PORTO_VELHO',
-  /** Port-au-Prince */
-  AmericaPortAuPrince = 'AMERICA_PORT_AU_PRINCE',
-  /** Port of Spain */
-  AmericaPortOfSpain = 'AMERICA_PORT_OF_SPAIN',
-  /** Puerto Rico */
-  AmericaPuertoRico = 'AMERICA_PUERTO_RICO',
-  /** Punta Arenas */
-  AmericaPuntaArenas = 'AMERICA_PUNTA_ARENAS',
-  /** Rainy River */
-  AmericaRainyRiver = 'AMERICA_RAINY_RIVER',
-  /** Rankin Inlet */
-  AmericaRankinInlet = 'AMERICA_RANKIN_INLET',
-  /** Recife */
-  AmericaRecife = 'AMERICA_RECIFE',
-  /** Regina */
-  AmericaRegina = 'AMERICA_REGINA',
-  /** Resolute */
-  AmericaResolute = 'AMERICA_RESOLUTE',
-  /** Rio Branco */
-  AmericaRioBranco = 'AMERICA_RIO_BRANCO',
-  /** Santarem */
-  AmericaSantarem = 'AMERICA_SANTAREM',
-  /** Santiago */
-  AmericaSantiago = 'AMERICA_SANTIAGO',
-  /** Santo Domingo */
-  AmericaSantoDomingo = 'AMERICA_SANTO_DOMINGO',
-  /** Sao Paulo */
-  AmericaSaoPaulo = 'AMERICA_SAO_PAULO',
-  /** Scoresbysund */
-  AmericaScoresbysund = 'AMERICA_SCORESBYSUND',
-  /** Sitka */
-  AmericaSitka = 'AMERICA_SITKA',
-  /** St Barthelemy */
-  AmericaStBarthelemy = 'AMERICA_ST_BARTHELEMY',
-  /** St Johns */
-  AmericaStJohns = 'AMERICA_ST_JOHNS',
-  /** St Kitts */
-  AmericaStKitts = 'AMERICA_ST_KITTS',
-  /** St Lucia */
-  AmericaStLucia = 'AMERICA_ST_LUCIA',
-  /** St Thomas */
-  AmericaStThomas = 'AMERICA_ST_THOMAS',
-  /** St Vincent */
-  AmericaStVincent = 'AMERICA_ST_VINCENT',
-  /** Swift Current */
-  AmericaSwiftCurrent = 'AMERICA_SWIFT_CURRENT',
-  /** Tegucigalpa */
-  AmericaTegucigalpa = 'AMERICA_TEGUCIGALPA',
-  /** Thule */
-  AmericaThule = 'AMERICA_THULE',
-  /** Thunder Bay */
-  AmericaThunderBay = 'AMERICA_THUNDER_BAY',
-  /** Tijuana */
-  AmericaTijuana = 'AMERICA_TIJUANA',
-  /** Toronto */
-  AmericaToronto = 'AMERICA_TORONTO',
-  /** Tortola */
-  AmericaTortola = 'AMERICA_TORTOLA',
-  /** Vancouver */
-  AmericaVancouver = 'AMERICA_VANCOUVER',
-  /** Whitehorse */
-  AmericaWhitehorse = 'AMERICA_WHITEHORSE',
-  /** Winnipeg */
-  AmericaWinnipeg = 'AMERICA_WINNIPEG',
-  /** Yakutat */
-  AmericaYakutat = 'AMERICA_YAKUTAT',
-  /** Yellowknife */
-  AmericaYellowknife = 'AMERICA_YELLOWKNIFE',
-  /** Casey */
-  AntarcticaCasey = 'ANTARCTICA_CASEY',
-  /** Davis */
-  AntarcticaDavis = 'ANTARCTICA_DAVIS',
-  /** DumontDUrville */
-  AntarcticaDumontdurville = 'ANTARCTICA_DUMONTDURVILLE',
-  /** Macquarie */
-  AntarcticaMacquarie = 'ANTARCTICA_MACQUARIE',
-  /** Mawson */
-  AntarcticaMawson = 'ANTARCTICA_MAWSON',
-  /** McMurdo */
-  AntarcticaMcmurdo = 'ANTARCTICA_MCMURDO',
-  /** Palmer */
-  AntarcticaPalmer = 'ANTARCTICA_PALMER',
-  /** Rothera */
-  AntarcticaRothera = 'ANTARCTICA_ROTHERA',
-  /** Syowa */
-  AntarcticaSyowa = 'ANTARCTICA_SYOWA',
-  /** Troll */
-  AntarcticaTroll = 'ANTARCTICA_TROLL',
-  /** Vostok */
-  AntarcticaVostok = 'ANTARCTICA_VOSTOK',
-  /** Longyearbyen */
-  ArcticLongyearbyen = 'ARCTIC_LONGYEARBYEN',
-  /** Aden */
-  AsiaAden = 'ASIA_ADEN',
-  /** Almaty */
-  AsiaAlmaty = 'ASIA_ALMATY',
-  /** Amman */
-  AsiaAmman = 'ASIA_AMMAN',
-  /** Anadyr */
-  AsiaAnadyr = 'ASIA_ANADYR',
-  /** Aqtau */
-  AsiaAqtau = 'ASIA_AQTAU',
-  /** Aqtobe */
-  AsiaAqtobe = 'ASIA_AQTOBE',
-  /** Ashgabat */
-  AsiaAshgabat = 'ASIA_ASHGABAT',
-  /** Atyrau */
-  AsiaAtyrau = 'ASIA_ATYRAU',
-  /** Baghdad */
-  AsiaBaghdad = 'ASIA_BAGHDAD',
-  /** Bahrain */
-  AsiaBahrain = 'ASIA_BAHRAIN',
-  /** Baku */
-  AsiaBaku = 'ASIA_BAKU',
-  /** Bangkok */
-  AsiaBangkok = 'ASIA_BANGKOK',
-  /** Barnaul */
-  AsiaBarnaul = 'ASIA_BARNAUL',
-  /** Beirut */
-  AsiaBeirut = 'ASIA_BEIRUT',
-  /** Bishkek */
-  AsiaBishkek = 'ASIA_BISHKEK',
-  /** Brunei */
-  AsiaBrunei = 'ASIA_BRUNEI',
-  /** Chita */
-  AsiaChita = 'ASIA_CHITA',
-  /** Choibalsan */
-  AsiaChoibalsan = 'ASIA_CHOIBALSAN',
-  /** Colombo */
-  AsiaColombo = 'ASIA_COLOMBO',
-  /** Damascus */
-  AsiaDamascus = 'ASIA_DAMASCUS',
-  /** Dhaka */
-  AsiaDhaka = 'ASIA_DHAKA',
-  /** Dili */
-  AsiaDili = 'ASIA_DILI',
-  /** Dubai */
-  AsiaDubai = 'ASIA_DUBAI',
-  /** Dushanbe */
-  AsiaDushanbe = 'ASIA_DUSHANBE',
-  /** Famagusta */
-  AsiaFamagusta = 'ASIA_FAMAGUSTA',
-  /** Gaza */
-  AsiaGaza = 'ASIA_GAZA',
-  /** Hebron */
-  AsiaHebron = 'ASIA_HEBRON',
-  /** Hong Kong */
-  AsiaHongKong = 'ASIA_HONG_KONG',
-  /** Hovd */
-  AsiaHovd = 'ASIA_HOVD',
-  /** Ho Chi Minh */
-  AsiaHoChiMinh = 'ASIA_HO_CHI_MINH',
-  /** Irkutsk */
-  AsiaIrkutsk = 'ASIA_IRKUTSK',
-  /** Jakarta */
-  AsiaJakarta = 'ASIA_JAKARTA',
-  /** Jayapura */
-  AsiaJayapura = 'ASIA_JAYAPURA',
-  /** Jerusalem */
-  AsiaJerusalem = 'ASIA_JERUSALEM',
-  /** Kabul */
-  AsiaKabul = 'ASIA_KABUL',
-  /** Kamchatka */
-  AsiaKamchatka = 'ASIA_KAMCHATKA',
-  /** Karachi */
-  AsiaKarachi = 'ASIA_KARACHI',
-  /** Kathmandu */
-  AsiaKathmandu = 'ASIA_KATHMANDU',
-  /** Khandyga */
-  AsiaKhandyga = 'ASIA_KHANDYGA',
-  /** Kolkata */
-  AsiaKolkata = 'ASIA_KOLKATA',
-  /** Krasnoyarsk */
-  AsiaKrasnoyarsk = 'ASIA_KRASNOYARSK',
-  /** Kuala Lumpur */
-  AsiaKualaLumpur = 'ASIA_KUALA_LUMPUR',
-  /** Kuching */
-  AsiaKuching = 'ASIA_KUCHING',
-  /** Kuwait */
-  AsiaKuwait = 'ASIA_KUWAIT',
-  /** Macau */
-  AsiaMacau = 'ASIA_MACAU',
-  /** Magadan */
-  AsiaMagadan = 'ASIA_MAGADAN',
-  /** Makassar */
-  AsiaMakassar = 'ASIA_MAKASSAR',
-  /** Manila */
-  AsiaManila = 'ASIA_MANILA',
-  /** Muscat */
-  AsiaMuscat = 'ASIA_MUSCAT',
-  /** Nicosia */
-  AsiaNicosia = 'ASIA_NICOSIA',
-  /** Novokuznetsk */
-  AsiaNovokuznetsk = 'ASIA_NOVOKUZNETSK',
-  /** Novosibirsk */
-  AsiaNovosibirsk = 'ASIA_NOVOSIBIRSK',
-  /** Omsk */
-  AsiaOmsk = 'ASIA_OMSK',
-  /** Oral */
-  AsiaOral = 'ASIA_ORAL',
-  /** Phnom Penh */
-  AsiaPhnomPenh = 'ASIA_PHNOM_PENH',
-  /** Pontianak */
-  AsiaPontianak = 'ASIA_PONTIANAK',
-  /** Pyongyang */
-  AsiaPyongyang = 'ASIA_PYONGYANG',
-  /** Qatar */
-  AsiaQatar = 'ASIA_QATAR',
-  /** Qyzylorda */
-  AsiaQyzylorda = 'ASIA_QYZYLORDA',
-  /** Riyadh */
-  AsiaRiyadh = 'ASIA_RIYADH',
-  /** Sakhalin */
-  AsiaSakhalin = 'ASIA_SAKHALIN',
-  /** Samarkand */
-  AsiaSamarkand = 'ASIA_SAMARKAND',
-  /** Seoul */
-  AsiaSeoul = 'ASIA_SEOUL',
-  /** Shanghai */
-  AsiaShanghai = 'ASIA_SHANGHAI',
-  /** Singapore */
-  AsiaSingapore = 'ASIA_SINGAPORE',
-  /** Srednekolymsk */
-  AsiaSrednekolymsk = 'ASIA_SREDNEKOLYMSK',
-  /** Taipei */
-  AsiaTaipei = 'ASIA_TAIPEI',
-  /** Tashkent */
-  AsiaTashkent = 'ASIA_TASHKENT',
-  /** Tbilisi */
-  AsiaTbilisi = 'ASIA_TBILISI',
-  /** Tehran */
-  AsiaTehran = 'ASIA_TEHRAN',
-  /** Thimphu */
-  AsiaThimphu = 'ASIA_THIMPHU',
-  /** Tokyo */
-  AsiaTokyo = 'ASIA_TOKYO',
-  /** Tomsk */
-  AsiaTomsk = 'ASIA_TOMSK',
-  /** Ulaanbaatar */
-  AsiaUlaanbaatar = 'ASIA_ULAANBAATAR',
-  /** Urumqi */
-  AsiaUrumqi = 'ASIA_URUMQI',
-  /** Ust-Nera */
-  AsiaUstNera = 'ASIA_UST_NERA',
-  /** Vientiane */
-  AsiaVientiane = 'ASIA_VIENTIANE',
-  /** Vladivostok */
-  AsiaVladivostok = 'ASIA_VLADIVOSTOK',
-  /** Yakutsk */
-  AsiaYakutsk = 'ASIA_YAKUTSK',
-  /** Yangon */
-  AsiaYangon = 'ASIA_YANGON',
-  /** Yekaterinburg */
-  AsiaYekaterinburg = 'ASIA_YEKATERINBURG',
-  /** Yerevan */
-  AsiaYerevan = 'ASIA_YEREVAN',
-  /** Azores */
-  AtlanticAzores = 'ATLANTIC_AZORES',
-  /** Bermuda */
-  AtlanticBermuda = 'ATLANTIC_BERMUDA',
-  /** Canary */
-  AtlanticCanary = 'ATLANTIC_CANARY',
-  /** Cape Verde */
-  AtlanticCapeVerde = 'ATLANTIC_CAPE_VERDE',
-  /** Faroe */
-  AtlanticFaroe = 'ATLANTIC_FAROE',
-  /** Madeira */
-  AtlanticMadeira = 'ATLANTIC_MADEIRA',
-  /** Reykjavik */
-  AtlanticReykjavik = 'ATLANTIC_REYKJAVIK',
-  /** South Georgia */
-  AtlanticSouthGeorgia = 'ATLANTIC_SOUTH_GEORGIA',
-  /** Stanley */
-  AtlanticStanley = 'ATLANTIC_STANLEY',
-  /** St Helena */
-  AtlanticStHelena = 'ATLANTIC_ST_HELENA',
-  /** Adelaide */
-  AustraliaAdelaide = 'AUSTRALIA_ADELAIDE',
-  /** Brisbane */
-  AustraliaBrisbane = 'AUSTRALIA_BRISBANE',
-  /** Broken Hill */
-  AustraliaBrokenHill = 'AUSTRALIA_BROKEN_HILL',
-  /** Currie */
-  AustraliaCurrie = 'AUSTRALIA_CURRIE',
-  /** Darwin */
-  AustraliaDarwin = 'AUSTRALIA_DARWIN',
-  /** Eucla */
-  AustraliaEucla = 'AUSTRALIA_EUCLA',
-  /** Hobart */
-  AustraliaHobart = 'AUSTRALIA_HOBART',
-  /** Lindeman */
-  AustraliaLindeman = 'AUSTRALIA_LINDEMAN',
-  /** Lord Howe */
-  AustraliaLordHowe = 'AUSTRALIA_LORD_HOWE',
-  /** Melbourne */
-  AustraliaMelbourne = 'AUSTRALIA_MELBOURNE',
-  /** Perth */
-  AustraliaPerth = 'AUSTRALIA_PERTH',
-  /** Sydney */
-  AustraliaSydney = 'AUSTRALIA_SYDNEY',
-  /** Amsterdam */
-  EuropeAmsterdam = 'EUROPE_AMSTERDAM',
-  /** Andorra */
-  EuropeAndorra = 'EUROPE_ANDORRA',
-  /** Astrakhan */
-  EuropeAstrakhan = 'EUROPE_ASTRAKHAN',
-  /** Athens */
-  EuropeAthens = 'EUROPE_ATHENS',
-  /** Belgrade */
-  EuropeBelgrade = 'EUROPE_BELGRADE',
-  /** Berlin */
-  EuropeBerlin = 'EUROPE_BERLIN',
-  /** Bratislava */
-  EuropeBratislava = 'EUROPE_BRATISLAVA',
-  /** Brussels */
-  EuropeBrussels = 'EUROPE_BRUSSELS',
-  /** Bucharest */
-  EuropeBucharest = 'EUROPE_BUCHAREST',
-  /** Budapest */
-  EuropeBudapest = 'EUROPE_BUDAPEST',
-  /** Busingen */
-  EuropeBusingen = 'EUROPE_BUSINGEN',
-  /** Chisinau */
-  EuropeChisinau = 'EUROPE_CHISINAU',
-  /** Copenhagen */
-  EuropeCopenhagen = 'EUROPE_COPENHAGEN',
-  /** Dublin */
-  EuropeDublin = 'EUROPE_DUBLIN',
-  /** Gibraltar */
-  EuropeGibraltar = 'EUROPE_GIBRALTAR',
-  /** Guernsey */
-  EuropeGuernsey = 'EUROPE_GUERNSEY',
-  /** Helsinki */
-  EuropeHelsinki = 'EUROPE_HELSINKI',
-  /** Isle of Man */
-  EuropeIsleOfMan = 'EUROPE_ISLE_OF_MAN',
-  /** Istanbul */
-  EuropeIstanbul = 'EUROPE_ISTANBUL',
-  /** Jersey */
-  EuropeJersey = 'EUROPE_JERSEY',
-  /** Kaliningrad */
-  EuropeKaliningrad = 'EUROPE_KALININGRAD',
-  /** Kiev */
-  EuropeKiev = 'EUROPE_KIEV',
-  /** Kirov */
-  EuropeKirov = 'EUROPE_KIROV',
-  /** Lisbon */
-  EuropeLisbon = 'EUROPE_LISBON',
-  /** Ljubljana */
-  EuropeLjubljana = 'EUROPE_LJUBLJANA',
-  /** London */
-  EuropeLondon = 'EUROPE_LONDON',
-  /** Luxembourg */
-  EuropeLuxembourg = 'EUROPE_LUXEMBOURG',
-  /** Madrid */
-  EuropeMadrid = 'EUROPE_MADRID',
-  /** Malta */
-  EuropeMalta = 'EUROPE_MALTA',
-  /** Mariehamn */
-  EuropeMariehamn = 'EUROPE_MARIEHAMN',
-  /** Minsk */
-  EuropeMinsk = 'EUROPE_MINSK',
-  /** Monaco */
-  EuropeMonaco = 'EUROPE_MONACO',
-  /** Moscow */
-  EuropeMoscow = 'EUROPE_MOSCOW',
-  /** Oslo */
-  EuropeOslo = 'EUROPE_OSLO',
-  /** Paris */
-  EuropeParis = 'EUROPE_PARIS',
-  /** Podgorica */
-  EuropePodgorica = 'EUROPE_PODGORICA',
-  /** Prague */
-  EuropePrague = 'EUROPE_PRAGUE',
-  /** Riga */
-  EuropeRiga = 'EUROPE_RIGA',
-  /** Rome */
-  EuropeRome = 'EUROPE_ROME',
-  /** Samara */
-  EuropeSamara = 'EUROPE_SAMARA',
-  /** San Marino */
-  EuropeSanMarino = 'EUROPE_SAN_MARINO',
-  /** Sarajevo */
-  EuropeSarajevo = 'EUROPE_SARAJEVO',
-  /** Saratov */
-  EuropeSaratov = 'EUROPE_SARATOV',
-  /** Simferopol */
-  EuropeSimferopol = 'EUROPE_SIMFEROPOL',
-  /** Skopje */
-  EuropeSkopje = 'EUROPE_SKOPJE',
-  /** Sofia */
-  EuropeSofia = 'EUROPE_SOFIA',
-  /** Stockholm */
-  EuropeStockholm = 'EUROPE_STOCKHOLM',
-  /** Tallinn */
-  EuropeTallinn = 'EUROPE_TALLINN',
-  /** Tirane */
-  EuropeTirane = 'EUROPE_TIRANE',
-  /** Ulyanovsk */
-  EuropeUlyanovsk = 'EUROPE_ULYANOVSK',
-  /** Uzhgorod */
-  EuropeUzhgorod = 'EUROPE_UZHGOROD',
-  /** Vaduz */
-  EuropeVaduz = 'EUROPE_VADUZ',
-  /** Vatican */
-  EuropeVatican = 'EUROPE_VATICAN',
-  /** Vienna */
-  EuropeVienna = 'EUROPE_VIENNA',
-  /** Vilnius */
-  EuropeVilnius = 'EUROPE_VILNIUS',
-  /** Volgograd */
-  EuropeVolgograd = 'EUROPE_VOLGOGRAD',
-  /** Warsaw */
-  EuropeWarsaw = 'EUROPE_WARSAW',
-  /** Zagreb */
-  EuropeZagreb = 'EUROPE_ZAGREB',
-  /** Zaporozhye */
-  EuropeZaporozhye = 'EUROPE_ZAPOROZHYE',
-  /** Zurich */
-  EuropeZurich = 'EUROPE_ZURICH',
-  /** Antananarivo */
-  IndianAntananarivo = 'INDIAN_ANTANANARIVO',
-  /** Chagos */
-  IndianChagos = 'INDIAN_CHAGOS',
-  /** Christmas */
-  IndianChristmas = 'INDIAN_CHRISTMAS',
-  /** Cocos */
-  IndianCocos = 'INDIAN_COCOS',
-  /** Comoro */
-  IndianComoro = 'INDIAN_COMORO',
-  /** Kerguelen */
-  IndianKerguelen = 'INDIAN_KERGUELEN',
-  /** Mahe */
-  IndianMahe = 'INDIAN_MAHE',
-  /** Maldives */
-  IndianMaldives = 'INDIAN_MALDIVES',
-  /** Mauritius */
-  IndianMauritius = 'INDIAN_MAURITIUS',
-  /** Mayotte */
-  IndianMayotte = 'INDIAN_MAYOTTE',
-  /** Reunion */
-  IndianReunion = 'INDIAN_REUNION',
-  /** Apia */
-  PacificApia = 'PACIFIC_APIA',
-  /** Auckland */
-  PacificAuckland = 'PACIFIC_AUCKLAND',
-  /** Bougainville */
-  PacificBougainville = 'PACIFIC_BOUGAINVILLE',
-  /** Chatham */
-  PacificChatham = 'PACIFIC_CHATHAM',
-  /** Chuuk */
-  PacificChuuk = 'PACIFIC_CHUUK',
-  /** Easter */
-  PacificEaster = 'PACIFIC_EASTER',
-  /** Efate */
-  PacificEfate = 'PACIFIC_EFATE',
-  /** Enderbury */
-  PacificEnderbury = 'PACIFIC_ENDERBURY',
-  /** Fakaofo */
-  PacificFakaofo = 'PACIFIC_FAKAOFO',
-  /** Fiji */
-  PacificFiji = 'PACIFIC_FIJI',
-  /** Funafuti */
-  PacificFunafuti = 'PACIFIC_FUNAFUTI',
-  /** Galapagos */
-  PacificGalapagos = 'PACIFIC_GALAPAGOS',
-  /** Gambier */
-  PacificGambier = 'PACIFIC_GAMBIER',
-  /** Guadalcanal */
-  PacificGuadalcanal = 'PACIFIC_GUADALCANAL',
-  /** Guam */
-  PacificGuam = 'PACIFIC_GUAM',
-  /** Honolulu */
-  PacificHonolulu = 'PACIFIC_HONOLULU',
-  /** Kiritimati */
-  PacificKiritimati = 'PACIFIC_KIRITIMATI',
-  /** Kosrae */
-  PacificKosrae = 'PACIFIC_KOSRAE',
-  /** Kwajalein */
-  PacificKwajalein = 'PACIFIC_KWAJALEIN',
-  /** Majuro */
-  PacificMajuro = 'PACIFIC_MAJURO',
-  /** Marquesas */
-  PacificMarquesas = 'PACIFIC_MARQUESAS',
-  /** Midway */
-  PacificMidway = 'PACIFIC_MIDWAY',
-  /** Nauru */
-  PacificNauru = 'PACIFIC_NAURU',
-  /** Niue */
-  PacificNiue = 'PACIFIC_NIUE',
-  /** Norfolk */
-  PacificNorfolk = 'PACIFIC_NORFOLK',
-  /** Noumea */
-  PacificNoumea = 'PACIFIC_NOUMEA',
-  /** Pago Pago */
-  PacificPagoPago = 'PACIFIC_PAGO_PAGO',
-  /** Palau */
-  PacificPalau = 'PACIFIC_PALAU',
-  /** Pitcairn */
-  PacificPitcairn = 'PACIFIC_PITCAIRN',
-  /** Pohnpei */
-  PacificPohnpei = 'PACIFIC_POHNPEI',
-  /** Port Moresby */
-  PacificPortMoresby = 'PACIFIC_PORT_MORESBY',
-  /** Rarotonga */
-  PacificRarotonga = 'PACIFIC_RAROTONGA',
-  /** Saipan */
-  PacificSaipan = 'PACIFIC_SAIPAN',
-  /** Tahiti */
-  PacificTahiti = 'PACIFIC_TAHITI',
-  /** Tarawa */
-  PacificTarawa = 'PACIFIC_TARAWA',
-  /** Tongatapu */
-  PacificTongatapu = 'PACIFIC_TONGATAPU',
-  /** Wake */
-  PacificWake = 'PACIFIC_WAKE',
-  /** Wallis */
-  PacificWallis = 'PACIFIC_WALLIS',
-  /** UTC offset: UTC+0 */
-  Utc_0 = 'UTC_0',
-  /** UTC offset: UTC+0:30 */
-  Utc_0_30 = 'UTC_0_30',
-  /** UTC offset: UTC+1 */
-  Utc_1 = 'UTC_1',
-  /** UTC offset: UTC+10 */
-  Utc_10 = 'UTC_10',
-  /** UTC offset: UTC+10:30 */
-  Utc_10_30 = 'UTC_10_30',
-  /** UTC offset: UTC+11 */
-  Utc_11 = 'UTC_11',
-  /** UTC offset: UTC+11:30 */
-  Utc_11_30 = 'UTC_11_30',
-  /** UTC offset: UTC+12 */
-  Utc_12 = 'UTC_12',
-  /** UTC offset: UTC+12:45 */
-  Utc_12_45 = 'UTC_12_45',
-  /** UTC offset: UTC+13 */
-  Utc_13 = 'UTC_13',
-  /** UTC offset: UTC+13:45 */
-  Utc_13_45 = 'UTC_13_45',
-  /** UTC offset: UTC+14 */
-  Utc_14 = 'UTC_14',
-  /** UTC offset: UTC+1:30 */
-  Utc_1_30 = 'UTC_1_30',
-  /** UTC offset: UTC+2 */
-  Utc_2 = 'UTC_2',
-  /** UTC offset: UTC+2:30 */
-  Utc_2_30 = 'UTC_2_30',
-  /** UTC offset: UTC+3 */
-  Utc_3 = 'UTC_3',
-  /** UTC offset: UTC+3:30 */
-  Utc_3_30 = 'UTC_3_30',
-  /** UTC offset: UTC+4 */
-  Utc_4 = 'UTC_4',
-  /** UTC offset: UTC+4:30 */
-  Utc_4_30 = 'UTC_4_30',
-  /** UTC offset: UTC+5 */
-  Utc_5 = 'UTC_5',
-  /** UTC offset: UTC+5:30 */
-  Utc_5_30 = 'UTC_5_30',
-  /** UTC offset: UTC+5:45 */
-  Utc_5_45 = 'UTC_5_45',
-  /** UTC offset: UTC+6 */
-  Utc_6 = 'UTC_6',
-  /** UTC offset: UTC+6:30 */
-  Utc_6_30 = 'UTC_6_30',
-  /** UTC offset: UTC+7 */
-  Utc_7 = 'UTC_7',
-  /** UTC offset: UTC+7:30 */
-  Utc_7_30 = 'UTC_7_30',
-  /** UTC offset: UTC+8 */
-  Utc_8 = 'UTC_8',
-  /** UTC offset: UTC+8:30 */
-  Utc_8_30 = 'UTC_8_30',
-  /** UTC offset: UTC+8:45 */
-  Utc_8_45 = 'UTC_8_45',
-  /** UTC offset: UTC+9 */
-  Utc_9 = 'UTC_9',
-  /** UTC offset: UTC+9:30 */
-  Utc_9_30 = 'UTC_9_30'
-}
-
-/** Options for filtering the connection */
-export type MenuItemsWhereArgs = {
-  /** The ID of the object */
-  id?: Maybe<Scalars['Int']>;
-  /** The menu location for the menu being queried */
-  location?: Maybe<MenuLocationEnum>;
-};
-
-export type TermObjectUnion = Category | Tag | PostFormat | Series;
-
-/** The payload for the createBlockEditorPreview mutation */
-export type CreateBlockEditorPreviewPayload = {
-  __typename?: 'CreateBlockEditorPreviewPayload';
-  /** @deprecated  */
-  blockEditorPreview?: Maybe<BlockEditorPreview>;
-  /** @deprecated  */
-  clientMutationId: Scalars['String'];
-};
-
-/** Input for the createBlockEditorPreview mutation */
-export type CreateBlockEditorPreviewInput = {
-  /** The userId to assign as the author of the object */
-  authorId?: Maybe<Scalars['ID']>;
-  clientMutationId: Scalars['String'];
-  /** The content of the object */
-  content?: Maybe<Scalars['String']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
-  date?: Maybe<Scalars['String']>;
-  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
-  menuOrder?: Maybe<Scalars['Int']>;
-  /** The password used to protect the content of the object */
-  password?: Maybe<Scalars['String']>;
-  /** The slug of the object */
-  slug?: Maybe<Scalars['String']>;
-  /** The status of the object */
-  status?: Maybe<PostStatusEnum>;
-  /** The title of the object */
-  title?: Maybe<Scalars['String']>;
-};
-
-/** The payload for the updateBlockEditorPreview mutation */
-export type UpdateBlockEditorPreviewPayload = {
-  __typename?: 'UpdateBlockEditorPreviewPayload';
-  /** @deprecated  */
-  blockEditorPreview?: Maybe<BlockEditorPreview>;
-  /** @deprecated  */
-  clientMutationId: Scalars['String'];
-};
-
-/** Input for the updateBlockEditorPreview mutation */
-export type UpdateBlockEditorPreviewInput = {
-  /** The userId to assign as the author of the object */
-  authorId?: Maybe<Scalars['ID']>;
-  clientMutationId: Scalars['String'];
-  /** The content of the object */
-  content?: Maybe<Scalars['String']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
-  date?: Maybe<Scalars['String']>;
-  /** The ID of the BlockEditorPreview object */
-  id: Scalars['ID'];
-  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
-  menuOrder?: Maybe<Scalars['Int']>;
-  /** The password used to protect the content of the object */
-  password?: Maybe<Scalars['String']>;
-  /** The slug of the object */
-  slug?: Maybe<Scalars['String']>;
-  /** The status of the object */
-  status?: Maybe<PostStatusEnum>;
-  /** The title of the object */
-  title?: Maybe<Scalars['String']>;
-};
-
-/** The payload for the deleteBlockEditorPreview mutation */
-export type DeleteBlockEditorPreviewPayload = {
-  __typename?: 'DeleteBlockEditorPreviewPayload';
-  /**
-   * The object before it was deleted
-   * @deprecated 
-   */
-  blockEditorPreview?: Maybe<BlockEditorPreview>;
-  /** @deprecated  */
-  clientMutationId: Scalars['String'];
-  /**
-   * The ID of the deleted object
-   * @deprecated 
-   */
-  deletedId?: Maybe<Scalars['ID']>;
-};
-
-/** Input for the deleteBlockEditorPreview mutation */
-export type DeleteBlockEditorPreviewInput = {
-  clientMutationId: Scalars['String'];
-  /** Whether the object should be force deleted instead of being moved to the trash */
-  forceDelete?: Maybe<Scalars['Boolean']>;
-  /** The ID of the BlockEditorPreview to delete */
-  id: Scalars['ID'];
-};

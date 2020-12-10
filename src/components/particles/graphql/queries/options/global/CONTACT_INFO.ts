@@ -1,5 +1,3 @@
-import { parse } from 'graphql';
-
 export const CONTACT_INFO = /* GraphQL */ `
   query CONTACT_INFO {
     settings: globalSettings {
@@ -24,7 +22,4 @@ export const CONTACT_INFO = /* GraphQL */ `
   }
 `;
 
-const CONTACT_INFO_GQL = parse(CONTACT_INFO);
-
-export { CONTACT_INFO_GQL };
 export default CONTACT_INFO;

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import StyledEmbedVideo from './video.styles';
 
 type VideoProps = {

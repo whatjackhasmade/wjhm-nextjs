@@ -1,3 +1,4 @@
+export * from './api';
 export * from './apollo';
 export * from './helpers';
 export * from './graphql';
@@ -14,7 +15,5 @@ export { default as ROUTES } from './ROUTES';
 export { default as SEO } from './SEO';
 export { default as ThemeDefault } from './ThemeDefault';
 
-export { default as getStaticData } from './next/getStaticData';
-export { default as eventGetStaticProps } from './next/getStaticProps/event';
-export { default as nodeGetStaticProps } from './next/getStaticProps/node';
-export { default as reviewGetStaticProps } from './next/getStaticProps/review';
+export { default as getStaticPropsPosts } from './next/getStaticProps/posts';
+export { default as getServerPropsNode } from './next/getServerProps/node';

@@ -1,5 +1,3 @@
-import { parse } from 'graphql';
-
 import { MediaFragment } from '../../../fragments/general/media';
 import { SEOFragment } from '../../../fragments/general/seo';
 
@@ -32,7 +30,4 @@ export const FALLBACK_WORKS = /* GraphQL */ `
   }
 `;
 
-const FALLBACK_WORKS_GQL = parse(FALLBACK_WORKS);
-
-export { FALLBACK_WORKS_GQL };
 export default FALLBACK_WORKS;

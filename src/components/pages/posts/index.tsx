@@ -1,9 +1,11 @@
-import React from 'react';
-import moment from 'moment';
+import * as React from 'react';
 import { InView } from 'react-intersection-observer';
+import moment from 'moment';
+
 import { decodeHTML } from 'wjhm';
 
-import { CollectionMenu, CollectionWrapper } from './posts.styles';
+import { CollectionMenu } from './posts.styles';
+import { CollectionWrapper } from './posts.styles';
 
 import { Link } from 'wjhm';
 import { Base } from 'wjhm';
@@ -24,14 +26,10 @@ const Archive = (props: ArchiveProps) => {
     });
   }
 
-  const footerMenu = null;
-  const headerMenu = null;
   const seo = null;
 
   const allProps = {
     ...props,
-    footerMenu,
-    headerMenu,
     seo,
   };
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { default as parser } from 'html-react-parser';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 

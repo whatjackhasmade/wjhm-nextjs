@@ -1,18 +1,10 @@
-import React from 'react';
-
-import { getStaticData } from 'wjhm';
-
 import { Base } from 'wjhm';
 
 import { NotFound } from 'wjhm';
 
-import type { Menu } from 'wjhmtypes';
-declare type Four0FourProps = {
-  footerMenu: Menu;
-  headerMenu: Menu;
-};
+declare type Four0FourProps = {};
 
-const Four0Four = (props: Four0FourProps) => {
+const Four0Four: React.FC<Four0FourProps> = (props: Four0FourProps) => {
   const seo = {
     title: `Page Not Found - WhatJackHasMade`,
   };
@@ -31,12 +23,8 @@ const Four0Four = (props: Four0FourProps) => {
 
 export async function getStaticProps() {
   // Call an external API endpoint to get pages
-  const { footerMenu, headerMenu } = await getStaticData();
 
-  const props = {
-    ...(footerMenu && { footerMenu }),
-    ...(headerMenu && { headerMenu }),
-  };
+  const props = {};
 
   return {
     props, // will be passed to the page component as props

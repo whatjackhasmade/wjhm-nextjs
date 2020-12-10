@@ -3,10 +3,7 @@ import { device } from 'particles';
 
 const ContactComponent = styled.section`
   margin-top: 32px;
-  left: 50%;
-  margin-left: -50vw;
   position: relative;
-  width: 100vw;
   z-index: 9;
 
   background-color: var(--primary);

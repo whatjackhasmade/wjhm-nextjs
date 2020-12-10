@@ -1,4 +1,3 @@
-import React from 'react';
 import { parseHTML } from 'wjhm';
 
 import Duotone from './duotone';

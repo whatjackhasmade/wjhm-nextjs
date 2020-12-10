@@ -1,4 +1,3 @@
-import React from 'react';
 import { isEmptyObject, randomID } from './helpers';
 import { parseHTML } from './parseHTML';
 

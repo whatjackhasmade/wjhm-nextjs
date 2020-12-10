@@ -1,25 +1,25 @@
-import React from 'react';
-
-// if (typeof window !== `undefined`) {
-//   // Make scroll behavior of internal links smooth
-//   // eslint-disable-next-line global-require
-//   require(`mailtoui/dist/mailtoui-min.js`)(`MailtoUI.run()`);
-// }
-
-import FooterComponent from './footer.styles';
+import { useQuery } from 'react-query';
 
 import { Github as IconGithub } from '../../atoms/icons/brands';
 import { Linkedin as IconLinkedIn } from '../../atoms/icons/brands';
 import { Twitter as IconTwitter } from '../../atoms/icons/brands';
 import { Youtube as IconYouTube } from '../../atoms/icons/brands';
 
+import { callGetMenu } from 'wjhm';
+
+import FooterComponent from './footer.styles';
+
 import type { Menu } from 'wjhmtypes';
 
-declare type FooterProps = {
-  menu: Menu;
-};
+declare type FooterProps = {};
 
-const Footer = (props: FooterProps) => {
+const args: { slug: string } = { slug: `footer-menu` };
+const options = {};
+
+const Footer: React.FC<FooterProps> = (props: FooterProps) => {
+  const { data, error, isLoading: loading } = useQuery(args, callGetMenu, options);
+  const footerMenu: Menu = data?.menus?.nodes?.[0];
+
   return (
     <FooterComponent>
       <div className="footer__contents">

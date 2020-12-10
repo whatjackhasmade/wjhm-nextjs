@@ -1,13 +1,11 @@
-import { getStaticData } from 'wjhm';
+import { getStaticPropsPosts } from 'wjhm';
 
 import { Posts } from 'wjhm';
 
 export async function getStaticProps() {
-  const { footerMenu, headerMenu, posts } = await getStaticData();
+  const { posts } = await getStaticPropsPosts();
 
   const props = {
-    ...(footerMenu && { footerMenu }),
-    ...(headerMenu && { headerMenu }),
     ...(posts && { posts }),
   };
 

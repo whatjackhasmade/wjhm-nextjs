@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Button } from 'wjhm';
 
 import { Hero } from 'wjhm';
@@ -26,14 +24,10 @@ const VideosArray = [
 type AnimationPrinciplesProps = {};
 
 const AnimationPrinciples = (props: AnimationPrinciplesProps) => {
-  const footerMenu = null;
-  const headerMenu = null;
   const seo = null;
 
   const allProps = {
     ...props,
-    footerMenu,
-    headerMenu,
     seo,
   };
 

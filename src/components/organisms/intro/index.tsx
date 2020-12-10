@@ -1,4 +1,3 @@
-import React from 'react';
 import { parseHTML } from 'wjhm';
 
 import IntroComponent from './intro.styles';

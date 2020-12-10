@@ -1,5 +1,3 @@
-import React from 'react';
-
 import ContactFormComponent from './fields.styles';
 
 type ContactFormProps = {

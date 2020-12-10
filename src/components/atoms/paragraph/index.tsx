@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { parseHTML } from 'wjhm';
 
 import type { CoreParagraphBlockAttributes } from 'wjhmtypes';

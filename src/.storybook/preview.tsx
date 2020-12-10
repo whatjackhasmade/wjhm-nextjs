@@ -1,7 +1,3 @@
-require('slick-carousel/slick/slick.css');
-require('slick-carousel/slick/slick-theme.css');
-
-import React from 'react';
 import { addDecorator } from '@storybook/react';
 import { linkTo } from '@storybook/addon-links';
 import { ApolloProvider } from '@apollo/client';

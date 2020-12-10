@@ -1,2 +1,2 @@
 export * from './MENUS';
-export * from './MENU_BY_SLUG';
+export * from './MENU_WHERE';

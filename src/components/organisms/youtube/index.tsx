@@ -1,4 +1,3 @@
-import React from 'react';
 import YouTube from 'react-youtube';
 
 import backgroundLeft from './youtube-left.png';

@@ -1,8 +1,6 @@
-import { parse } from 'graphql';
-
-export const MENU_BY_SLUG = /* GraphQL */ `
-  query MENU_BY_SLUG($slug: String!) {
-    menus(where: { slug: $slug }) {
+export const MENU_WHERE = /* GraphQL */ `
+  query MENU_WHERE($id: String, $slug: String) {
+    menus(where: { id: $id, slug: $slug }) {
       nodes {
         id
         menuId
@@ -25,7 +23,4 @@ export const MENU_BY_SLUG = /* GraphQL */ `
   }
 `;
 
-const MENU_BY_SLUG_GQL = parse(MENU_BY_SLUG);
-
-export { MENU_BY_SLUG_GQL };
-export default MENU_BY_SLUG;
+export default MENU_WHERE;

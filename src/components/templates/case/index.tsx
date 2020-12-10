@@ -1,6 +1,7 @@
 import React from 'react';
 import { InView } from 'react-intersection-observer';
-import ReactBreakpoints, { Media } from 'react-breakpoints';
+import ReactBreakpoints from 'react-breakpoints';
+import { Media } from 'react-breakpoints';
 
 import { Devices } from './case.styles';
 
@@ -59,14 +60,10 @@ const CaseTemplate = (props: CaseProps) => {
     gallerySix.push(gallery[i]);
   }
 
-  const footerMenu = null;
-  const headerMenu = null;
   const seo = null;
 
   const allProps = {
     ...props,
-    footerMenu,
-    headerMenu,
     seo,
   };
 

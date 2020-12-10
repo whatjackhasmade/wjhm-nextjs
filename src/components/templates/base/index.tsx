@@ -1,5 +1,4 @@
-import React from 'react';
-import { ThemeProvider } from 'styled-components';
+import * as React from 'react';
 
 if (typeof window !== `undefined`) {
   // Make scroll behavior of internal links smooth
@@ -7,9 +6,7 @@ if (typeof window !== `undefined`) {
   require(`smooth-scroll`)(`a[href*="#"]`);
 }
 
-import { GlobalStyle } from 'wjhm';
 import { SEO } from 'wjhm';
-import { ThemeDefault } from 'wjhm';
 
 import { Contact } from 'wjhm';
 import { Footer } from 'wjhm';
@@ -20,32 +17,30 @@ import { Page } from 'wjhm';
 import { Post } from 'wjhm';
 import { Series } from 'wjhm';
 
-import type { Menu, PostTypeSeo } from 'wjhmtypes';
+import type { PostTypeSeo } from 'wjhmtypes';
 declare type BaseProps = {
-  children: any;
+  children?: any;
   cta?: boolean;
-  footerMenu: Menu;
-  headerMenu: Menu;
-  seo: PostTypeSeo;
+  seo?: PostTypeSeo;
   __typename?: string;
 };
 
 const Base = (props: BaseProps) => {
-  const { children, cta = true, footerMenu, headerMenu, seo } = props;
+  const { children, cta = true, seo } = props;
   const includeContact = cta !== false;
+  const hasChildren = children?.length > 0;
 
   return (
-    <ThemeProvider theme={ThemeDefault}>
-      <GlobalStyle />
-      <SEO {...seo} />
+    <React.Fragment>
+      {seo && <SEO {...seo} />}
       <div className="wrapper">
-        <Header menu={headerMenu} />
-        {children?.length > 0 && children}
+        <Header />
+        {hasChildren && children}
         <InnerContent {...props} />
         {includeContact && <Contact />}
-        <Footer menu={footerMenu} />
+        <Footer />
       </div>
-    </ThemeProvider>
+    </React.Fragment>
   );
 };
 

@@ -1,5 +1,3 @@
-import { parse } from 'graphql';
-
 export const MENUS = /* GraphQL */ `
   query MENUS {
     menus {
@@ -25,7 +23,4 @@ export const MENUS = /* GraphQL */ `
   }
 `;
 
-const MENUS_GQL = parse(MENUS);
-
-export { MENUS_GQL };
 export default MENUS;

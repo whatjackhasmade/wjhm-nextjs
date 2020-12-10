@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Hero } from 'wjhm';
 
@@ -34,14 +34,10 @@ const Twitter = (props: TwitterPageProps) => {
     return hearts;
   };
 
-  const footerMenu = null;
-  const headerMenu = null;
   const seo = null;
 
   const allProps = {
     ...props,
-    footerMenu,
-    headerMenu,
     seo,
   };
 

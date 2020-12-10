@@ -1,4 +1,3 @@
-import React from 'react';
 import StyledOverviewList from './overview-list.styles';
 
 type OverviewListProps = {

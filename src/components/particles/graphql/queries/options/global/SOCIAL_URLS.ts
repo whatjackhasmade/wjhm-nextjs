@@ -1,5 +1,3 @@
-import { parse } from 'graphql';
-
 export const SOCIAL_URLS = /* GraphQL */ `
   query SOCIAL_URLS {
     settings: globalSettings {
@@ -14,7 +12,4 @@ export const SOCIAL_URLS = /* GraphQL */ `
   }
 `;
 
-const SOCIAL_URLS_GQL = parse(SOCIAL_URLS);
-
-export { SOCIAL_URLS_GQL };
 export default SOCIAL_URLS;
