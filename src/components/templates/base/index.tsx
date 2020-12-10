@@ -18,12 +18,15 @@ import { Post } from 'wjhm';
 import { Series } from 'wjhm';
 
 import type { PostTypeSeo } from 'wjhmtypes';
+
 declare type BaseProps = {
   children?: any;
   cta?: boolean;
   seo?: PostTypeSeo;
   __typename?: string;
 };
+
+const isDevelopment: boolean = process.env.NODE_ENV !== 'production';
 
 const Base = (props: BaseProps) => {
   const { children, cta = true, seo } = props;
@@ -40,6 +43,7 @@ const Base = (props: BaseProps) => {
         {includeContact && <Contact />}
         <Footer />
       </div>
+      {isDevelopment && <ReactQueryDevtools initialIsOpen={true} />}
     </React.Fragment>
   );
 };
