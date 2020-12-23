@@ -1,11 +1,4 @@
 import * as React from 'react';
-import { ReactQueryDevtools } from 'react-query-devtools';
-
-if (typeof window !== `undefined`) {
-  // Make scroll behavior of internal links smooth
-  // eslint-disable-next-line global-require
-  require(`smooth-scroll`)(`a[href*="#"]`);
-}
 
 import { SEO } from 'wjhm';
 
@@ -18,21 +11,28 @@ import { Page } from 'wjhm';
 import { Post } from 'wjhm';
 import { Series } from 'wjhm';
 
-import type { PostTypeSeo } from 'wjhmtypes';
+import type { Seo as SEOTypes } from 'wjhmtypes';
+
+if (typeof window !== `undefined`) {
+  // Make scroll behavior of internal links smooth
+  // eslint-disable-next-line global-require
+  require(`smooth-scroll`)(`a[href*="#"]`);
+}
+
+declare type typeName = {
+  postType?: string;
+};
 
 declare type BaseProps = {
   children?: any;
   cta?: boolean;
-  seo?: PostTypeSeo;
-  __typename?: string;
-};
-
-const isDevelopment: boolean = process.env.NODE_ENV !== 'production';
+  seo?: SEOTypes;
+} & typeName;
 
 const Base = (props: BaseProps) => {
   const { children, cta = true, seo } = props;
-  const includeContact = cta !== false;
-  const hasChildren = children?.length > 0;
+  const includeContact: boolean = cta !== false;
+  const hasChildren: boolean = children?.length > 0;
 
   return (
     <React.Fragment>
@@ -44,16 +44,15 @@ const Base = (props: BaseProps) => {
         {includeContact && <Contact />}
         <Footer />
       </div>
-      {isDevelopment && <ReactQueryDevtools initialIsOpen={true} />}
     </React.Fragment>
   );
 };
 
-const InnerContent = props => {
-  const { __typename } = props;
-  let innerContents;
+const InnerContent: React.FC<any> = (props: any) => {
+  const { postType } = props;
+  let innerContents = null;
 
-  switch (__typename) {
+  switch (postType) {
     case `case`:
       innerContents = <Case {...props} />;
       break;

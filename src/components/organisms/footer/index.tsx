@@ -17,7 +17,7 @@ const args: { slug: string } = { slug: `footer-menu` };
 const options = {};
 
 const Footer: React.FC<FooterProps> = (props: FooterProps) => {
-  const { data, error, isLoading: loading } = useQuery(args, callGetMenu, options);
+  const { data, error, isLoading: loading } = useQuery([`callGetMenu`, args], callGetMenu, options);
   const footerMenu: Menu = data?.menus?.nodes?.[0];
 
   return (

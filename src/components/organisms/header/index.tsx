@@ -16,24 +16,25 @@ import type { Menu } from 'wjhmtypes';
 
 declare type HeaderProps = {};
 
-const args: { slug: string } = { slug: `header-menu` };
-const options = {};
-
 const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
   const [menuOpen, toggleMenu] = useState(false);
-  const { data, error, isLoading: loading } = useQuery(args, callGetMenu, options);
+
+  const { data, error, isLoading: loading } = useQuery([`callGetMenu`, { slug: `header-menu` }], callGetMenu);
   const headerMenu: Menu = data?.menus?.nodes?.[0];
   const menuItems = headerMenu?.menuItems?.nodes;
 
-  const menuLength = menuItems?.length;
-  const hasItems = menuLength > 0;
+  const menuLength: number = menuItems?.length;
+  const hasItems: boolean = menuLength > 0;
   const lastItem = !hasItems ? null : menuItems[menuLength - 1];
-  const otherItems = !hasItems ? null : menuItems.filter((item, index) => index !== menuLength - 1);
+  const otherLength = (i: number): boolean => i !== menuLength - 1;
+  const otherItems = !hasItems ? null : menuItems.filter((_, i) => otherLength(i));
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     toggleMenu(!menuOpen);
   };
+
+  if (error) console.error(error);
 
   return (
     <HeaderComponent>

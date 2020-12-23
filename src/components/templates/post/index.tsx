@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import moment from 'moment';
-import Prism from 'prismjs';
 
 import { decodeHTML } from '../../particles/helpers';
 import { parseHTML } from 'wjhm';
@@ -25,24 +24,20 @@ const PostTemplate = (props: PostTemplateProps) => {
   const learn = null;
   const lessons = learn?.items;
 
-  const hasBlocks = blocks?.length > 0;
-  const hasDate = date;
-  const hasLessons = lessons?.length > 0;
-  const hasRelated = relatedPosts?.length > 0;
+  const hasBlocks: boolean = blocks?.length > 0;
+  const hasDate: boolean = Boolean(date);
+  const hasLessons: boolean = lessons?.length > 0;
+  const hasRelated: boolean = relatedPosts?.length > 0;
 
-  const overviewTitle = learn?.title ? learn.title : `What you will learn`;
+  let overviewTitle: string = `What you will learn`;
+  if (learn?.title) overviewTitle = learn.title;
 
   const router = useRouter();
 
   useEffect(() => {
     // Always do navigations after the first render
     router.push(`/${slug}`, undefined, { shallow: true });
-  }, []);
-
-  useEffect(() => {
-    // call the highlightAll() function to style our code blocks
-    // Prism.highlightAll();
-  }, []);
+  }, [router, slug]);
 
   return (
     <React.Fragment>

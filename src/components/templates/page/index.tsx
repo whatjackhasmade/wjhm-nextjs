@@ -1,21 +1,11 @@
 import { ComponentParser } from 'wjhm';
-import { Base } from 'wjhm';
 
 import type { Page } from 'wjhmtypes';
 
-declare type PageProps = { pageData: Page };
+declare type PageProps = Page;
 
 const PageTemplate: React.FC<PageProps> = (props: PageProps) => {
-  const hasBlocks = props?.pageData?.blocks?.length > 0;
-
-  const seo = null;
-
-  const allProps = {
-    ...props,
-    seo,
-  };
-
-  return <Base {...allProps}>{hasBlocks && <ComponentParser content={props?.pageData?.blocks} />}</Base>;
+  return <ComponentParser content={props.blocks} />;
 };
 
 export default PageTemplate;

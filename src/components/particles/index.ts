@@ -1,7 +1,7 @@
 export * from './api';
-export * from './apollo';
 export * from './helpers';
 export * from './graphql';
+export * from './requestor';
 
 export { bp } from './css/_required/mediaQueries';
 export { device } from './css/_required/mediaQueries';
@@ -17,3 +17,4 @@ export { default as ThemeDefault } from './ThemeDefault';
 
 export { default as getStaticPropsPosts } from './next/getStaticProps/posts';
 export { default as getServerPropsNode } from './next/getServerProps/node';
+export { default as getServerPropsHomepage } from './next/getServerProps/homepage';

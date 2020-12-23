@@ -1,6 +1,6 @@
 export const MENU_WHERE = /* GraphQL */ `
-  query MENU_WHERE($id: String, $slug: String) {
-    menus(where: { id: $id, slug: $slug }) {
+  query MENU_WHERE($slug: String) {
+    menus(where: { slug: $slug }) {
       nodes {
         id
         menuId

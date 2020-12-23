@@ -2,7 +2,15 @@ import { MediaFragment } from '../../general/media';
 
 export const gqlSnippet = /* GraphQL */ `
  ... on AcfHeroBlock {
-	name
+		heroFields {
+			backgroundColour
+			content
+			duotone
+			media {
+				${MediaFragment}
+			}
+			overlay
+		}
  }
 `;
 

@@ -1,4 +1,6 @@
-import { isEmptyObject, randomID } from './helpers';
+import * as React from 'react';
+
+import { isEmptyObject } from './helpers';
 import { parseHTML } from './parseHTML';
 
 import Code from '../atoms/code';
@@ -63,30 +65,35 @@ const ComponentParser = (props: ComponentParserProps) => {
     component => !component || !isEmptyObject(component) || component.name !== null,
   );
 
-  if (filteredComponents && filteredComponents.length > 0) {
-    const pageComponents = filteredComponents.map((component, index) => {
-      const Component = components[component.name];
+  const hasFiltered: boolean = filteredComponents?.length > 0;
+  if (!hasFiltered) return null;
 
-      if (!Component) return parseHTML(component.originalContent);
+  const pageComponents = filteredComponents.map((component, index) => {
+    const { name, originalContent } = component;
+    const key: string = `${name}-${index}`;
 
-      component = convertACFProps(component);
+    const Component = components[name];
 
-      return (
-        <Component
-          index={index}
-          key={`component-${randomID()}`}
-          {...component}
-          // @ts-ignore
-          {...component.attributes}
-          // @ts-ignore
-          {...component.data}
-        />
-      );
-    });
+    if (!Component) return parseHTML(originalContent);
 
-    if (pageComponents) return <React.Fragment>{pageComponents}</React.Fragment>;
-  }
-  return null;
+    component = convertACFProps(component);
+
+    return (
+      <Component
+        index={index}
+        key={key}
+        {...component}
+        // @ts-ignore
+        {...component.attributes}
+        // @ts-ignore
+        {...component.data}
+      />
+    );
+  });
+
+  if (!pageComponents) return null;
+
+  return <React.Fragment>{pageComponents}</React.Fragment>;
 };
 
 export default ComponentParser;

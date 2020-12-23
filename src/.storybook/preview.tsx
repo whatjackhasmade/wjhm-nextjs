@@ -1,10 +1,8 @@
 import { addDecorator } from '@storybook/react';
 import { linkTo } from '@storybook/addon-links';
-import { ApolloProvider } from '@apollo/client';
 import { ThemeProvider } from 'styled-components';
 import { RouterContext } from 'next/dist/next-server/lib/router-context';
 
-import { client } from 'wjhm';
 import { GlobalStyle } from 'wjhm';
 import { ThemeDefault } from 'wjhm';
 
@@ -39,14 +37,12 @@ const NextRouterMock = ({ children }) => (
 );
 
 addDecorator(storyFn => (
-  <ApolloProvider client={client}>
-    <ThemeProvider theme={ThemeDefault}>
-      <NextRouterMock>
-        <React.Fragment>
-          <GlobalStyle />
-          {storyFn()}
-        </React.Fragment>
-      </NextRouterMock>
-    </ThemeProvider>
-  </ApolloProvider>
+  <ThemeProvider theme={ThemeDefault}>
+    <NextRouterMock>
+      <React.Fragment>
+        <GlobalStyle />
+        {storyFn()}
+      </React.Fragment>
+    </NextRouterMock>
+  </ThemeProvider>
 ));

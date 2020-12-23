@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useQuery } from 'react-query';
+
 import StyledBookmark from './bookmark.styles';
 
 const scraperURL = process.env.GATSBY_OPEN_GRAPH_SCRAPER || `https://wjhm-opengraphscraper.herokuapp.com/?url=`;
@@ -7,36 +9,28 @@ type BookmarkProps = {
   url: string;
 };
 
+const fetchBookmark = async url => await fetch(scraperURL + url);
+
 const Bookmark = ({ url }: BookmarkProps) => {
-  const [data, setData] = useState(null);
+  const { data: res, error, isLoading: loading } = useQuery([`fetchBookmark`, { url }], fetchBookmark);
+  const data = res?.data;
 
-  useEffect(() => {
-    const getData = async () => {
-      const response = await fetch(scraperURL + url);
-      const jsonPayload = await response.json();
-      setData(jsonPayload.data);
-      return jsonPayload;
-    };
+  const hasImage = Boolean(data?.ogImage) || Boolean(data?.ogImage?.length > 0);
 
-    getData();
-  }, [url]);
+  if (!data) return null;
 
-  const hasImage = data?.ogImage || data?.ogImage?.length > 0;
-
-  if (data)
-    return (
-      <StyledBookmark className="link" href={url}>
-        <div className="link__image">
-          {hasImage && <BookmarkImage altText={`Open Graph for ${url}`} image={data.ogImage} />}
-          {!hasImage && <img alt={`Open Graph Fallback for ${url}`} />}
-        </div>
-        <div className="link__content">
-          <h3 className="link__title">{data.ogTitle}</h3>
-          <p className="link__description">{data.ogDescription}</p>
-        </div>
-      </StyledBookmark>
-    );
-  return null;
+  return (
+    <StyledBookmark className="link" href={url}>
+      <div className="link__image">
+        {hasImage && <BookmarkImage altText={`Open Graph for ${url}`} image={data.ogImage} />}
+        {!hasImage && <img alt={`Open Graph Fallback for ${url}`} />}
+      </div>
+      <div className="link__content">
+        <h3 className="link__title">{data.ogTitle}</h3>
+        <p className="link__description">{data.ogDescription}</p>
+      </div>
+    </StyledBookmark>
+  );
 };
 
 declare type BookmarkImageSingleProps = {

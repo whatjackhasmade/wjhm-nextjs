@@ -2,7 +2,13 @@ import { MediaFragment } from '../../general/media';
 
 export const gqlSnippet = /* GraphQL */ `
  ... on AcfRowBlock {
-	name
+		rowFields {
+			content
+			link
+			media {
+				${MediaFragment}
+			}
+		}
  }
 `;
 

@@ -8,12 +8,6 @@ const YouTubeComponent = styled.section`
   padding: 64px 0;
   position: relative;
 
-  @supports (margin-left: -50vw) {
-    left: 50%;
-    margin-left: -50vw;
-    width: 100vw;
-  }
-
   @media ${device?.lg} {
     padding: 0;
     min-height: 1080px;

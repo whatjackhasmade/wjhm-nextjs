@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import { InView } from 'react-intersection-observer';
 import { parseHTML } from 'wjhm';
 

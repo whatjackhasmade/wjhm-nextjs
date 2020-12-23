@@ -11,19 +11,12 @@ const TestimonialsComponent = styled.section`
   }
 
   @media ${device?.md} {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
     margin: 0 0 128px;
+    flex-direction: column;
   }
 
   @media ${device?.xl} {
     margin: 0 0 160px;
-  }
-
-  .gatsby-image-wrapper {
-    > div {
-      padding-bottom: 56.25% !important; /* your aspect ratio */
-    }
   }
 
   .testimonial__media {
@@ -160,7 +153,7 @@ const TestimonialsComponent = styled.section`
     @media ${device?.md} {
       display: flex;
     }
-  }
+  } */
 `;
 
 export default TestimonialsComponent;

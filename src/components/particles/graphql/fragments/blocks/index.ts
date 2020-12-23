@@ -23,25 +23,25 @@ import coreColumns from './unique/columns';
 export const AllBlocksFragment = /* GraphQL */ `
   blocks {
     name
-    order
-    originalContent
-    ${coreColumns}
-    ${coreEmbedVimeo}
-    ${coreEmbedYouTube}
-    ${coreHeading}
-    ${coreParagraph}
-    ${coreVideo}
-    ${acfCode}
-    ${acfDribbble}
-    ${acfGithub}
-    ${acfHero}
-    ${acfIntro}
-    ${acfLink}
-    ${acfPresentations}
-    ${acfRow}
-    ${acfTestimonials}
-    ${acfYoutube}
-    ${acfYoutubeChannel}
+    # order
+    # originalContent
+    # ${coreColumns}
+    # ${coreEmbedVimeo}
+    # ${coreEmbedYouTube}
+    # ${coreHeading}
+    # ${coreParagraph}
+    # ${coreVideo}
+    # ${acfCode}
+    # ${acfDribbble}
+    # ${acfGithub}
+    # ${acfHero}
+    # ${acfIntro}
+    # ${acfLink}
+    # ${acfPresentations}
+    # ${acfRow}
+    # ${acfTestimonials}
+    # ${acfYoutube}
+    # ${acfYoutubeChannel}
   }
 `;
 

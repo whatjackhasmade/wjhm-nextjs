@@ -4,7 +4,7 @@ import { InferGetServerSidePropsType } from 'next';
 
 import { Base } from 'wjhm';
 
-import { getServerPropsNode as getServerSideProps } from 'wjhm';
+import { getServerPropsHomepage as getServerSideProps } from 'wjhm';
 
 export { getServerSideProps };
 

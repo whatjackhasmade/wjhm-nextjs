@@ -1,8 +1,9 @@
-import { MediaFragment } from '../../general/media';
-
 export const gqlSnippet = /* GraphQL */ `
  ... on AcfDribbbleBlock {
-	name
+		dribbbleFields {
+			content
+			count
+		}
  }
 `;
 

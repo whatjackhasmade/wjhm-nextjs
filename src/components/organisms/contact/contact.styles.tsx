@@ -3,6 +3,7 @@ import { device } from 'particles';
 
 const ContactComponent = styled.section`
   margin-top: 32px;
+  max-width: 100% !important;
   position: relative;
   z-index: 9;
 
