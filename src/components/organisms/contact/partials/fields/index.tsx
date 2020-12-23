@@ -1,80 +1,49 @@
+/* eslint-disable react/react-in-jsx-scope */
+import * as React from 'react';
+
 import ContactFormComponent from './fields.styles';
 
 type ContactFormProps = {
-  bot: string;
-  company: string;
-  email: string;
-  firstname: string;
-  handleSubmit: any;
-  lastname: string;
-  message: string;
+  submit: (event: React.FormEvent<HTMLFormElement>) => void;
   submitted: boolean;
-  setBot: any;
-  setCompany: any;
-  setEmail: any;
-  setFirstname: any;
-  setLastname: any;
-  setMessage: any;
-  setSubmitted: any;
 };
 
-const ContactForm = ({
-  bot,
-  company,
-  email,
-  firstname,
-  handleSubmit,
-  lastname,
-  message,
-  submitted,
-  setBot,
-  setCompany,
-  setEmail,
-  setFirstname,
-  setLastname,
-  setMessage,
-}: ContactFormProps) => (
-  <ContactFormComponent
-    name="contact"
-    method="post"
-    data-netlify="true"
-    data-netlify-honeypot="bot"
-    onSubmit={e => handleSubmit(e)}
-    className={!submitted ? `contact__form` : `contact__form contact__form--hidden`}
-  >
-    <input type="hidden" name="bot" id="bot" onChange={e => setBot(e.target.value)} value={bot} />
-    <div className="row">
-      <div className="col">
-        <label htmlFor="firstname">First Name</label>
-        <input
-          type="text"
-          name="firstname"
-          id="firstname"
-          onChange={e => setFirstname(e.target.value)}
-          value={firstname}
-        />
+const ContactForm = (props: ContactFormProps) => {
+  const { submit, submitted } = props;
+
+  let classList: string = `contact__form`;
+  if (submitted) classList += ` contact__form--hidden`;
+
+  return (
+    <ContactFormComponent name="contact" onSubmit={submit} className={classList}>
+      <input type="hidden" name="_gotcha" />
+      <div className="row">
+        <div className="col">
+          <label htmlFor="firstname">First Name</label>
+          <input type="text" name="firstname" id="firstname" />
+        </div>
+        <div className="col">
+          <label htmlFor="lastname">Last Name</label>
+          <input type="text" name="lastname" id="lastname" />
+        </div>
       </div>
-      <div className="col">
-        <label htmlFor="lastname">Last Name</label>
-        <input type="text" name="lastname" id="lastname" onChange={e => setLastname(e.target.value)} value={lastname} />
+      <div className="row">
+        <div className="col">
+          <label htmlFor="email">Email</label>
+          <input type="text" name="email" id="email" />
+        </div>
+        <div className="col">
+          <label htmlFor="company">Company</label>
+          <input type="text" name="company" id="company" />
+        </div>
       </div>
-    </div>
-    <div className="row">
-      <div className="col">
-        <label htmlFor="email">Email</label>
-        <input type="text" name="email" id="email" onChange={e => setEmail(e.target.value)} value={email} />
-      </div>
-      <div className="col">
-        <label htmlFor="company">Company</label>
-        <input type="text" name="company" id="company" onChange={e => setCompany(e.target.value)} value={company} />
-      </div>
-    </div>
-    <label htmlFor="message">Tell Me About Your Project</label>
-    <textarea name="message" id="message" rows={6} onChange={e => setMessage(e.target.value)} value={message} />
-    <button type="submit" value="Send Message">
-      Send Message
-    </button>
-  </ContactFormComponent>
-);
+      <label htmlFor="message">Tell Me About Your Project</label>
+      <textarea name="message" id="message" rows={6} />
+      <button type="submit" value="Send Message">
+        Send Message
+      </button>
+    </ContactFormComponent>
+  );
+};
 
 export default ContactForm;
