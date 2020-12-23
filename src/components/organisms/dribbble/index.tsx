@@ -1,43 +1,66 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { useState } from 'react';
+import { useQuery } from 'react-query';
 import Slider from 'react-slick';
+
 import { parseHTML } from 'wjhm';
 
 import DribbbleComponent from './dribbble.styles';
 import settings from './settings.json';
 
+import { callGetAllDribbble } from 'wjhm';
+
 import { Dribbble as IconDribbble } from '../../atoms/icons/brands';
+
+import { Error } from 'wjhm';
 
 import { Intro } from 'wjhm';
 
+import { AcfDribbbleBlock_Dribbblefields as Fields } from 'wjhmtypes';
+
+declare type ShotImage = {
+  hidpi?: string;
+  normal?: string;
+  one_x?: string;
+  two_x?: string;
+};
+
 declare type ShotProps = {
-  id: string;
-  html_url: string;
-  images: {
-    two_x: string;
-  };
-  title: string;
+  animated?: boolean;
+  attachments?: any[];
+  description?: string;
+  height?: number;
+  html_url?: string;
+  id?: number;
+  images?: ShotImage;
+  low_profile?: boolean;
+  projects?: any[];
+  published_at?: string;
+  tags?: string[];
+  title?: string;
+  updated_at?: string;
+  video?: any;
+  width?: number;
 };
 
-type DribbbleProps = {
-  content: string;
-  shots: {
-    node: ShotProps;
-  }[];
-};
+const Dribbble = (props: Fields) => {
+  const { content } = props;
 
-const Dribbble = (props: DribbbleProps) => {
-  const { content, shots } = props;
-  const hasShots = shots?.length > 0;
+  const { data, error, isLoading: loading } = useQuery(`callGetAllDribbble`, callGetAllDribbble);
+
+  const shots: ShotProps[] = data;
+  const hasShots: boolean = data?.length > 0;
 
   return (
     <DribbbleComponent>
       <Intro heading={`Interface Designs`} subheading={`My Dribbble Shots`} marginReduced>
         {parseHTML(content)}
       </Intro>
+      {error && <Error error={error} />}
       {hasShots && (
         <Slider {...settings}>
           {shots.map(shot => (
-            <Shot key={shot.node.id} {...shot.node} />
+            <Shot key={String(shot.id)} {...shot} />
           ))}
         </Slider>
       )}
@@ -45,21 +68,20 @@ const Dribbble = (props: DribbbleProps) => {
   );
 };
 
-const Shot = ({ html_url: htmlURL, images, title }: ShotProps) => {
+const Shot = (props: ShotProps) => {
+  const { html_url: htmlURL, images, title } = props;
   const twoX = images?.two_x;
 
-  const [mouseOver, setMouseOver] = useState(false);
+  const [mouseOver, setMouseOver] = useState<boolean>(false);
 
-  const handleHover = e => {
-    setMouseOver(!mouseOver);
-  };
+  // Set the mouseOver to true on mouse over
+  const handleHover = () => setMouseOver(true);
+
+  let classList: string = `dribble__shot`;
+  if (mouseOver) classList += ` dribbble__shot--animate`;
 
   return (
-    <div
-      className={mouseOver ? `dribbble__shot dribbble__shot--animate` : `dribbble__shot`}
-      onMouseEnter={handleHover}
-      onMouseLeave={handleHover}
-    >
+    <div className={classList} onMouseEnter={handleHover} onMouseLeave={handleHover}>
       <a className="dribbble__shot__thumbnail" href={htmlURL} rel="noopener noreferrer" target="_blank">
         <IconDribbble className="dribbble__shot__logo" />
         <img alt={title} className="presentations__event__thumbnail" src={twoX} />

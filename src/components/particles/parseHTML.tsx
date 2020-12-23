@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { default as parser } from 'html-react-parser';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 
@@ -8,38 +9,59 @@ import { Link } from 'wjhm';
 
 const config = {
   replace: data => {
-    const { attribs, parent } = data;
-    if (attribs && attribs.href) {
-      const { children, href } = attribs;
+    const { attribs, children, parent } = data;
 
-      const isTweet = href.startsWith(`https://twitter.com`) && parent?.attribs?.class === `twitter-tweet`;
+    const hasHREF: boolean = Boolean(attribs?.href);
 
-      if (isTweet) {
-        let url = href.split(`/`);
-        if (url.length < 6) return null;
-        url = url[5];
-        url = url.split(`?`);
-        if (url.length < 1) return null;
-        url = url[0];
-        if (url) return <TwitterTweetEmbed tweetId={url} />;
-        return null;
-      }
+    if (hasHREF) {
+      const { href } = attribs;
 
-      if (href && children) return <ReactAnchor attribs={attribs}>{children}</ReactAnchor>;
+      const isTweet: boolean = href.startsWith(`https://twitter.com`) && parent?.attribs?.class === `twitter-tweet`;
+      if (isTweet) return handleTweet(href);
+
+      const isLink: boolean = Boolean(href && children);
+      if (isLink) return <ReactAnchor attribs={attribs}>{children}</ReactAnchor>;
     }
   },
 };
 
-const ReactAnchor = ({ attribs, children }) => {
-  let { href } = attribs;
-  href = createRelative(href);
-  if (isInternal(href)) return <Link to={`${href}`}>{children && children.length > 0 && children[0].data}</Link>;
-  if (!isInternal(href)) return <a href={`${href}`}>{children && children.length > 0 && children[0].data}</a>;
+const handleTweet = (href: string) => {
+  const parts = href.split(`/`);
+
+  const hasParts: boolean = parts.length > 0;
+  if (!hasParts) return null;
+
+  const tooShort: boolean = parts?.length < 6;
+  if (tooShort) return null;
+
+  const queryPart = parts?.[5];
+  const querySplit = queryPart.split(`?`);
+
+  const queryNotFound = querySplit?.length < 1;
+  if (queryNotFound) return null;
+
+  const id = querySplit[0];
+  return <TwitterTweetEmbed tweetId={id} />;
 };
 
-const isString = val => typeof val === 'string' || val instanceof String;
+const ReactAnchor = props => {
+  const { attribs, children } = props;
 
-const parseHTML = html => {
+  let { href } = attribs;
+  href = createRelative(href);
+
+  let inner: string = ``;
+  const hasChildren: boolean = Boolean(children?.[0]?.data);
+  if (hasChildren) inner = children?.[0]?.data;
+
+  if (isInternal(href)) return <Link to={`${href}`}>{inner}</Link>;
+
+  return <a href={`${href}`}>{inner}</a>;
+};
+
+const isString = val => typeof val === `string` || val instanceof String;
+
+const parseHTML = (html: string) => {
   if (!html) return html;
   if (!isString(html)) return html;
   const clean = parser(html, config);

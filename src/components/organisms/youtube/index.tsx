@@ -1,10 +1,13 @@
+import { useQuery } from 'react-query';
 import YouTube from 'react-youtube';
 
-import backgroundLeft from './youtube-left.png';
-import backgroundRight from './youtube-right.png';
 import YouTubeComponent from './youtube.styles';
 
 import { ImageLoader } from 'wjhm';
+
+import { Error } from 'wjhm';
+
+import { callGetYouTubeChannelVideos } from 'wjhm';
 
 // https://developers.google.com/youtube/player_parameters
 const opts = {
@@ -13,39 +16,22 @@ const opts = {
   },
 };
 
-declare type VideoNodeProps = {
-  snippet: {
-    resourceId: {
-      videoId: string;
-    };
-    thumbnails: {
-      medium: {
-        url: string;
-      };
-    };
-    title: string;
-  };
+const _onReady = event => {
+  // access to player in all event handlers via event.target
+  event.target.pauseVideo();
 };
 
-type YouTubeChannelProps = {
-  videos: {
-    node: VideoNodeProps;
-  }[];
-};
+const YouTubeChannel = props => {
+  const { data, error: apiError, isLoading: loading } = useQuery(
+    [`callGetYouTubeChannelVideos`],
+    callGetYouTubeChannelVideos,
+  );
 
-const YouTubeChannel = (props: YouTubeChannelProps) => {
-  const { videos: initialVideos } = props;
+  let error = null;
+  if (apiError) error = apiError;
 
-  const _onReady = event => {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
-  };
-
-  const hasVideos = initialVideos?.length > 0;
-  if (!hasVideos) return null;
-
-  const videos = initialVideos.map(({ node }) => node).filter((v, i) => i > 0 && i < 19);
-  const [firstVideo] = videos;
+  const isDataError = data?.error?.code === 400;
+  if (isDataError) error = data?.error?.message;
 
   return (
     <YouTubeComponent>
@@ -53,6 +39,7 @@ const YouTubeChannel = (props: YouTubeChannelProps) => {
       <img alt="" className="youtube__background youtube__background--right" src="/images/youtube-right.png" />
       <div className="youtube__content">
         <div className="youtube__intro">
+          {error && <Error error={error} />}
           <h2>My YouTube Channel</h2>
           <p>
             Early on in my career I knew it was important to document what I was learning, so I started a blog. The next
@@ -67,33 +54,58 @@ const YouTubeChannel = (props: YouTubeChannelProps) => {
           <a className="button" href="https://youtube.com/whatjackhasmade" rel="noopener noreferrer" target="_blank">
             View My YouTube Channel
           </a>
-          {hasVideos && firstVideo.snippet && (
-            <div className="youtube__video" title={firstVideo.snippet.title}>
-              {/* @ts-ignore */}
-              <YouTube videoId={firstVideo.snippet.resourceId.videoId} opts={opts} onReady={_onReady} />
-            </div>
-          )}
+          <MostRecent data={data} />
         </div>
         <div className="youtube__videos">
-          {hasVideos && videos.map(video => <Video key={video.snippet.resourceId.videoId} {...video} />)}
+          <Videos data={data} />
         </div>
       </div>
     </YouTubeComponent>
   );
 };
 
-const Video = (props: VideoNodeProps) => {
-  const { snippet } = props;
+const MostRecent = props => {
+  const data = props?.data;
+
+  const hasVideos: boolean = data?.length > 0;
+  if (!hasVideos) return null;
+
+  const videos = data.map(({ node }) => node).filter((v, i) => i > 0 && i < 19);
+  const [firstVideo] = videos;
+
+  if (!firstVideo) return null;
 
   return (
-    <div className="youtube__video" title={snippet.title}>
-      <a
-        href={`https://www.youtube.com/watch?v=${snippet.resourceId.videoId}`}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
+    <div className="youtube__video" title={firstVideo.snippet.title}>
+      {/* @ts-ignore */}
+      <YouTube videoId={firstVideo.snippet.resourceId.videoId} opts={opts} onReady={_onReady} />
+    </div>
+  );
+};
+
+const Videos = props => {
+  const data = props?.data;
+
+  const hasVideos: boolean = data?.length > 0;
+  if (!hasVideos) return null;
+
+  const videos = data.map(({ node }) => node).filter((v, i) => i > 0 && i < 19);
+
+  return videos.map(video => <Video key={video.snippet.resourceId.videoId} {...video} />);
+};
+
+const Video = props => {
+  const { snippet } = props;
+
+  const href: string = `https://www.youtube.com/watch?v=${snippet.resourceId.videoId}`;
+  const thumbnail: string = snippet?.thumbnails?.medium?.url;
+  const title: string = snippet?.title;
+
+  return (
+    <div className="youtube__video" title={title}>
+      <a href={href} rel="noopener noreferrer" target="_blank">
         <div className="youtube__video__thumbnail">
-          <ImageLoader alt={snippet.title} src={snippet.thumbnails.medium.url} />
+          <ImageLoader alt={title} src={thumbnail} />
         </div>
       </a>
     </div>

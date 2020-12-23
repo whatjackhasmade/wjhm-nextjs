@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 
 import StyledBookmark from './bookmark.styles';
 
-const scraperURL = process.env.GATSBY_OPEN_GRAPH_SCRAPER || `https://wjhm-opengraphscraper.herokuapp.com/?url=`;
+const scraperURL = process.env.NEXT_PUBLIC_GRAPH_SCRAPER || `https://wjhm-opengraphscraper.herokuapp.com/?url=`;
 
 type BookmarkProps = {
   url: string;
@@ -11,8 +11,9 @@ type BookmarkProps = {
 
 const fetchBookmark = async url => await fetch(scraperURL + url);
 
-const Bookmark = ({ url }: BookmarkProps) => {
-  const { data: res, error, isLoading: loading } = useQuery([`fetchBookmark`, { url }], fetchBookmark);
+const Bookmark = (props: BookmarkProps) => {
+  const { url } = props;
+  const { data: res, error, isLoading: loading } = useQuery([`fetchBookmark`, { url }], () => fetchBookmark(url));
   const data = res?.data;
 
   const hasImage = Boolean(data?.ogImage) || Boolean(data?.ogImage?.length > 0);
