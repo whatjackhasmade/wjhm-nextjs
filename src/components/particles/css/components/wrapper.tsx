@@ -9,15 +9,6 @@ const exportedCSS = css`
       min-height: 100vh;
     }
   }
-
-  .wrapper {
-    section {
-      max-width: 1506px;
-      margin-right: auto;
-      padding: 0 30px;
-      margin-left: auto;
-    }
-  }
 `;
 
 export default exportedCSS;

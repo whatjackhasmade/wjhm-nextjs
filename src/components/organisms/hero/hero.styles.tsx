@@ -6,9 +6,12 @@ const HeroComponent = styled.section`
   display: flex;
   height: 500px;
   justify-content: center;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
   min-height: ${props => props.height};
   overflow: hidden;
   position: relative;
+  width: 100vw;
   z-index: 9;
 
   background: ${props => (props.background ? props.background : props.theme.primary)};

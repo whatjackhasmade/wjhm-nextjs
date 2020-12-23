@@ -48,7 +48,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
     try {
       // Call an external API endpoint to get pages
       const res = await requestor.request(CASE_BY_URI, { uri });
-      data = res?.post;
+      data = res?.caseStudy;
     } catch (error) {
       console.error(error.message);
       return { props: null };
@@ -62,7 +62,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
     try {
       // Call an external API endpoint to get pages
       const res = await requestor.request(SERIES_BY_URI, { uri });
-      data = res?.post;
+      data = res?.series;
     } catch (error) {
       console.error(error.message);
       return { props: null };
