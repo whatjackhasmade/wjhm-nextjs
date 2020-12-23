@@ -16,10 +16,12 @@ import type { Menu } from 'wjhmtypes';
 
 declare type HeaderProps = {};
 
+const args: { slug: string } = { slug: `header-menu` };
+
 const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
   const [menuOpen, toggleMenu] = useState(false);
 
-  const { data, error, isLoading: loading } = useQuery([`callGetMenu`, { slug: `header-menu` }], callGetMenu);
+  const { data, error, isLoading: loading } = useQuery([`callGetMenu`, args], () => callGetMenu(args));
   const headerMenu: Menu = data?.menus?.nodes?.[0];
   const menuItems = headerMenu?.menuItems?.nodes;
 

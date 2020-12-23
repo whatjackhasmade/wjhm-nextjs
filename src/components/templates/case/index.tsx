@@ -1,8 +1,8 @@
 import React from 'react';
 import { useMemo } from 'react';
 import { InView } from 'react-intersection-observer';
-import ReactBreakpoints from 'react-breakpoints';
 import { Media } from 'react-breakpoints';
+import ReactBreakpoints from 'react-breakpoints';
 
 import { Devices } from './case.styles';
 
@@ -15,7 +15,8 @@ import { Intro } from 'wjhm';
 import { Related } from 'wjhm';
 import { Testimonials } from 'wjhm';
 
-import type { CaseStudy } from 'wjhmtypes';
+import { CaseStudy } from 'wjhmtypes';
+import { MediaItem } from 'wjhmtypes';
 
 const breakpoints = {
   xs: 576,
@@ -29,8 +30,6 @@ const breakpoints = {
 type CaseProps = CaseStudy;
 
 const CaseTemplate = (props: CaseProps) => {
-  console.log(props);
-
   const fields = props?.CaseStudyFields;
 
   const blocks = fields?.blocks;
@@ -51,12 +50,12 @@ const CaseTemplate = (props: CaseProps) => {
     });
   }, [testimonials]);
 
-  const galleryOne = [];
-  const galleryTwo = [];
-  const galleryThree = [];
-  const galleryFour = gallery?.[7];
-  const galleryFive = [];
-  const gallerySix = [];
+  const galleryOne: MediaItem[] | any[] = [];
+  const galleryTwo: MediaItem[] | any[] = [];
+  const galleryThree: MediaItem[] | any[] = [];
+  const galleryFour: MediaItem = gallery?.[7];
+  const galleryFive: MediaItem[] | any[] = [];
+  const gallerySix: MediaItem[] | any[] = [];
 
   const hasImages: boolean = gallery?.length > 0;
   if (hasImages) {

@@ -1,40 +1,49 @@
-import { InView } from 'react-intersection-observer';
+/* eslint-disable react/react-in-jsx-scope */
+import { useInView } from 'react-intersection-observer';
 
 import { GalleryContainer } from '../../case.styles';
 
 import { ImageLoader } from 'wjhm';
 
-declare type CaseImage = {
-  altText?: string;
-  md?: string;
-  mediaItemUrl?: string;
-};
+import { MediaItem } from 'wjhmtypes';
+
 declare type CaseGalleryProps = {
-  images?: CaseImage[];
+  images?: MediaItem[];
   small?: boolean;
 };
 
-const CaseGallery = ({ images, small }: CaseGalleryProps) => {
-  const hasImages = images?.length > 0;
+const CaseGallery: React.FC<CaseGalleryProps> = (props: CaseGalleryProps) => {
+  const { images, small } = props;
+
+  const { ref, inView } = useInView({
+    /* Optional options */
+    threshold: 0,
+    triggerOnce: true,
+  });
+
+  const hasImages: boolean = images?.length > 0;
   if (!hasImages) return null;
 
-  let classList = `gallery`;
+  let classList: string = `gallery`;
   if (small) classList += ` gallery--small`;
+  if (inView) classList += ` gallery--show`;
 
   return (
-    <InView threshold={0} triggerOnce={true}>
-      {({ inView, ref }) => (
-        <GalleryContainer className={inView ? `${classList} gallery--show` : `${classList}`} ref={ref}>
-          {images.map(image => (
-            <div className="gallery__image__wrapper" key={image?.mediaItemUrl}>
-              <div className="gallery__image">
-                <ImageLoader alt={image.altText} key={image.mediaItemUrl} src={image.md} />
-              </div>
-            </div>
-          ))}
-        </GalleryContainer>
-      )}
-    </InView>
+    <GalleryContainer className={classList} ref={ref}>
+      {images.map(image => (
+        <Image {...image} key={image?.mediaItemUrl} />
+      ))}
+    </GalleryContainer>
+  );
+};
+
+const Image: React.FC<MediaItem> = (props: MediaItem) => {
+  return (
+    <div className="gallery__image__wrapper">
+      <div className="gallery__image">
+        <ImageLoader alt={props.altText} key={props.mediaItemUrl} src={props.md} />
+      </div>
+    </div>
   );
 };
 

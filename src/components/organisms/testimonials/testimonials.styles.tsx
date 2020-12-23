@@ -11,8 +11,9 @@ const TestimonialsComponent = styled.section`
   }
 
   @media ${device?.md} {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
     margin: 0 0 128px;
-    flex-direction: column;
   }
 
   @media ${device?.xl} {
@@ -76,7 +77,7 @@ const TestimonialsComponent = styled.section`
     }
   }
 
-  .Testimonials {
+  .testimonials {
     grid-row: 1 / 4;
     grid-column: 7 / 13;
     padding: 8px;

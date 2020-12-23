@@ -30,7 +30,24 @@ CaseStudyFields {
 	related {
 		... on CaseStudy {
 			id
+			categories {
+				nodes {
+					name
+					slug
+					termTaxonomyId
+				}
+			}
 			date
+			featuredImage {
+				node {
+					${MediaFragment}
+				}
+			}
+			${SEOFragment}
+			slug
+			status
+			title
+			uri
 		}
 	}
 	siteUrl

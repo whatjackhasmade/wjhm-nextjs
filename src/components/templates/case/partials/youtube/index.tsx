@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import YouTube from 'react-youtube';
 import { youtubeID } from 'wjhm';
 
@@ -5,10 +6,7 @@ type CaseYouTubeProps = {
   url: string;
 };
 
-const CaseYouTube = ({ url }: CaseYouTubeProps) => {
-  if (!url) return null;
-  const ID = youtubeID(url);
-
+const getOptions = id => {
   const opts = {
     height: `780`,
     width: `1280`,
@@ -23,21 +21,45 @@ const CaseYouTube = ({ url }: CaseYouTubeProps) => {
       mute: 1,
       rel: 0,
       playerVars: {
-        playlist: ID,
+        playlist: id,
         loop: 1,
       },
     },
   };
 
-  const onReady = e => {
-    e.target.mute();
-    e.target.playVideo();
-  };
+  return opts;
+};
 
-  const onEnd = e => {
-    e.target.mute();
-    e.target.playVideo();
-  };
+const onReady = e => {
+  const target = e?.target;
+  if (!target) return;
+
+  try {
+    target.mute();
+    target.playVideo();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const onEnd = e => {
+  const target = e?.target;
+  if (!target) return;
+
+  try {
+    target.mute();
+    target.playVideo();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const CaseYouTube = (props: CaseYouTubeProps) => {
+  const { url } = props;
+  if (!url) return null;
+
+  const ID = youtubeID(url);
+  const opts = getOptions(ID);
 
   // @ts-ignore
   return <YouTube videoId={ID} opts={opts} onReady={onReady} onEnd={onEnd} />;

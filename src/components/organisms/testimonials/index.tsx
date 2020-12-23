@@ -1,11 +1,12 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import Slider from 'react-slick';
 
 import { AngleRight } from '../../atoms/icons/solid';
 
 import TestimonialsComponent from './testimonials.styles';
 
-import type { AcfTestimonialsBlock_Testimonials } from 'wjhmtypes';
+import type { AcfTestimonialsBlock_Testimonialsfields as Props } from 'wjhmtypes';
+import type { AcfTestimonialsBlock_Testimonialsfields_Testimonials as SingleItem } from 'wjhmtypes';
 
 const settings = {
   draggable: false,
@@ -20,26 +21,29 @@ const settings = {
   swipeToSlide: false,
 };
 
-const Testimonials = (props: AcfTestimonialsBlock_Testimonials) => {
+const Testimonials: React.FC<Props> = (props: Props) => {
   const { testimonials } = props;
   const sliderImages = useRef(null);
   const sliderTestimonials = useRef(null);
 
-  const hasTestimonials = testimonials?.length > 0;
-  const hasNavigation = testimonials?.length > 1;
+  const hasTestimonials: boolean = testimonials?.length > 0;
+  const hasNavigation: boolean = testimonials?.length > 1;
 
-  const nextTestimonial = e => {
-    e.preventDefault();
+  const nextTestimonial = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (e) e.preventDefault();
     if (sliderImages) sliderImages?.current?.slickNext();
     if (sliderImages) sliderTestimonials?.current?.slickNext();
   };
+
+  if (!hasTestimonials) return null;
 
   return (
     <TestimonialsComponent>
       <div className="testimonial__media">
         <Slider ref={sliderImages} {...settings}>
-          {hasTestimonials &&
-            testimonials.map(({ author, media }) => <img src={media.mediaItemUrl} alt={author} key={author} />)}
+          {testimonials.map(t => (
+            <TestimonialImage {...t} key={`${t?.author}-image`} />
+          ))}
         </Slider>
       </div>
       {hasNavigation && (
@@ -49,22 +53,35 @@ const Testimonials = (props: AcfTestimonialsBlock_Testimonials) => {
       )}
       <div className="testimonials">
         <Slider ref={sliderTestimonials} {...settings}>
-          {hasTestimonials &&
-            testimonials.map(({ author, logo, role, testimonial }) => (
-              <div className="testimonial" key={`testimonial-${author}`}>
-                <header className="testimonial__header">
-                  <div>
-                    <h3 className="testimonial__author">{author}</h3>
-                    <h4 className="testimonial__role">{role}</h4>
-                  </div>
-                  <img className="testimonial__logo" src={logo?.sourceUrl} alt={logo?.altText} />
-                </header>
-                <p className="testimonial__quote">&quot;{testimonial}&quot;</p>
-              </div>
-            ))}
+          {testimonials.map(t => (
+            <TestimonialInfo {...t} key={`${t?.author}-content`} />
+          ))}
         </Slider>
       </div>
     </TestimonialsComponent>
+  );
+};
+
+const TestimonialImage: React.FC<SingleItem> = (props: SingleItem) => {
+  const { author, media } = props;
+
+  return <img src={media.mediaItemUrl} alt={author} />;
+};
+
+const TestimonialInfo: React.FC<SingleItem> = (props: SingleItem) => {
+  const { author, logo, role, testimonial } = props;
+
+  return (
+    <div className="testimonial">
+      <header className="testimonial__header">
+        <div>
+          <h3 className="testimonial__author">{author}</h3>
+          <h4 className="testimonial__role">{role}</h4>
+        </div>
+        <img className="testimonial__logo" src={logo?.sourceUrl} alt={logo?.altText} />
+      </header>
+      <p className="testimonial__quote">&quot;{testimonial}&quot;</p>
+    </div>
   );
 };
 

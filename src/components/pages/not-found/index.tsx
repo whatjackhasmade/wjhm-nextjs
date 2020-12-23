@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Container, Row, Col } from 'react-grid-system';
 
 import { Link } from 'wjhm';
@@ -23,7 +24,8 @@ const NotFound = (props: NotFoundProps) => {
               <h1>
                 <span aria-label="hushed face emoji" role="img">
                   😯
-                </span>{' '}
+                </span>
+                {` `}
                 Sorry, we couldn't find that
               </h1>
               <p>
