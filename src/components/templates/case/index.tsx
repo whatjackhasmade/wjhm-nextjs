@@ -29,6 +29,8 @@ const breakpoints = {
 type CaseProps = CaseStudy;
 
 const CaseTemplate = (props: CaseProps) => {
+  console.log(props);
+
   const fields = props?.CaseStudyFields;
 
   const blocks = fields?.blocks;
