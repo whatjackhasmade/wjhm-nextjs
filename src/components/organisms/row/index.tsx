@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useInView } from 'react-intersection-observer';
+import Image from 'next/image';
+
 import { parseHTML } from 'wjhm';
 
 import RowComponent from './row.styles';
-
-import { ImageLoader } from 'wjhm';
 
 import { AcfRowBlock_Rowfields as RowProps } from 'wjhmtypes';
 
@@ -63,7 +63,7 @@ const RowMedia = (props: RowMediaProps) => {
 
   return (
     <div className="row__media">
-      {!isVideo && <ImageLoader src={src} alt={media.altText} />}
+      {!isVideo && <Image src={src} alt={media.altText} width={1920} height={1080} />}
       {isVideo && <video src={src} muted={true} autoPlay={true} loop={true} />}
     </div>
   );

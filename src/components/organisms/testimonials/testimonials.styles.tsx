@@ -121,7 +121,9 @@ const TestimonialsComponent = styled.section`
 
   .testimonial__logo {
     display: none;
-    max-height: 40px;
+    flex-shrink: 0;
+    height: 40px;
+    position: relative;
 
     @media ${device?.md} {
       display: block;

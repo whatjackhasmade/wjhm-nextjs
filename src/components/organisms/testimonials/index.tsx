@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import Image from 'next/image';
 import Slider from 'react-slick';
 
 import { AngleRight } from '../../atoms/icons/solid';
@@ -71,6 +72,14 @@ const TestimonialImage: React.FC<SingleItem> = (props: SingleItem) => {
 const TestimonialInfo: React.FC<SingleItem> = (props: SingleItem) => {
   const { author, logo, role, testimonial } = props;
 
+  let alt: string = author + ` logo`;
+  if (logo?.altText) alt = logo.altText;
+
+  let src: string = ``;
+  if (logo?.mediaItemUrl) src = logo.mediaItemUrl;
+
+  const hasImage: boolean = src !== ``;
+
   return (
     <div className="testimonial">
       <header className="testimonial__header">
@@ -78,7 +87,11 @@ const TestimonialInfo: React.FC<SingleItem> = (props: SingleItem) => {
           <h3 className="testimonial__author">{author}</h3>
           <h4 className="testimonial__role">{role}</h4>
         </div>
-        <img className="testimonial__logo" src={logo?.sourceUrl} alt={logo?.altText} />
+        {hasImage && (
+          <div className="testimonial__logo">
+            <Image src={src} alt={alt} layout="fill" />
+          </div>
+        )}
       </header>
       <p className="testimonial__quote">&quot;{testimonial}&quot;</p>
     </div>

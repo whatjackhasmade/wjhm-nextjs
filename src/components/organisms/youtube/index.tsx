@@ -1,9 +1,9 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { useQuery } from 'react-query';
+import Image from 'next/image';
 import YouTube from 'react-youtube';
 
 import YouTubeComponent from './youtube.styles';
-
-import { ImageLoader } from 'wjhm';
 
 import { Error } from 'wjhm';
 
@@ -21,26 +21,25 @@ const _onReady = event => {
   event.target.pauseVideo();
 };
 
-const YouTubeChannel = props => {
-  const { data, error: apiError, isLoading: loading } = useQuery(
-    [`callGetYouTubeChannelVideos`],
-    callGetYouTubeChannelVideos,
+const YouTubeChannel = () => {
+  const count: number = 18;
+  const { data, error, isLoading: loading } = useQuery([`callGetYouTubeChannelVideos`], () =>
+    callGetYouTubeChannelVideos(count),
   );
-
-  let error = null;
-  if (apiError) error = apiError;
-
-  const isDataError = data?.error?.code === 400;
-  if (isDataError) error = data?.error?.message;
 
   return (
     <YouTubeComponent>
-      <img alt="" className="youtube__background youtube__background--left" src="/images/youtube-left.png" />
-      <img alt="" className="youtube__background youtube__background--right" src="/images/youtube-right.png" />
+      <div className="youtube__background youtube__background--left">
+        <Image alt="" src="/images/youtube-left.png" width={189} height={1080} />
+      </div>
+      <div className="youtube__background youtube__background--right">
+        <Image alt="" src="/images/youtube-right.png" width={189} height={1080} />
+      </div>
       <div className="youtube__content">
         <div className="youtube__intro">
-          {error && <Error error={error} />}
           <h2>My YouTube Channel</h2>
+          {loading && <p>Loading...</p>}
+          {error && <Error error={error} />}
           <p>
             Early on in my career I knew it was important to document what I was learning, so I started a blog. The next
             step on from that was to start my own YouTube channel. I did this not only for myself, but to also share my
@@ -70,8 +69,8 @@ const MostRecent = props => {
   const hasVideos: boolean = data?.length > 0;
   if (!hasVideos) return null;
 
-  const videos = data.map(({ node }) => node).filter((v, i) => i > 0 && i < 19);
-  const [firstVideo] = videos;
+  const allVideos = data.map(({ node }) => node);
+  const [firstVideo] = allVideos;
 
   if (!firstVideo) return null;
 
@@ -89,7 +88,8 @@ const Videos = props => {
   const hasVideos: boolean = data?.length > 0;
   if (!hasVideos) return null;
 
-  const videos = data.map(({ node }) => node).filter((v, i) => i > 0 && i < 19);
+  const allVideos = data.map(({ node }) => node);
+  const videos = allVideos.filter((_, i) => i !== 0);
 
   return videos.map(video => <Video key={video.snippet.resourceId.videoId} {...video} />);
 };
@@ -105,7 +105,7 @@ const Video = props => {
     <div className="youtube__video" title={title}>
       <a href={href} rel="noopener noreferrer" target="_blank">
         <div className="youtube__video__thumbnail">
-          <ImageLoader alt={title} src={thumbnail} />
+          <Image alt={title} src={thumbnail} width={1920} height={1080} />
         </div>
       </a>
     </div>

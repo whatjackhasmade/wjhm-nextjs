@@ -1,9 +1,8 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useInView } from 'react-intersection-observer';
+import Image from 'next/image';
 
 import { GalleryContainer } from '../../case.styles';
-
-import { ImageLoader } from 'wjhm';
 
 import { MediaItem } from 'wjhmtypes';
 
@@ -31,17 +30,20 @@ const CaseGallery: React.FC<CaseGalleryProps> = (props: CaseGalleryProps) => {
   return (
     <GalleryContainer className={classList} ref={ref}>
       {images.map(image => (
-        <Image {...image} key={image?.mediaItemUrl} />
+        <GalleryImage {...image} key={image?.mediaItemUrl} />
       ))}
     </GalleryContainer>
   );
 };
 
-const Image: React.FC<MediaItem> = (props: MediaItem) => {
+const GalleryImage: React.FC<MediaItem> = (props: MediaItem) => {
+  const src: string = props.mediaItemUrl;
+  const key: string = src;
+
   return (
     <div className="gallery__image__wrapper">
       <div className="gallery__image">
-        <ImageLoader alt={props.altText} key={props.mediaItemUrl} src={props.md} />
+        <Image alt={props.altText} key={key} src={src} height={1920} width={1080} />
       </div>
     </div>
   );

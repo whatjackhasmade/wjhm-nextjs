@@ -1,4 +1,5 @@
 import * as React from 'react';
+import he from 'he';
 
 import { SEO } from 'wjhm';
 
@@ -67,7 +68,20 @@ const InnerContent: React.FC<any> = (props: any) => {
       break;
   }
 
-  return <main>{innerContents}</main>;
+  // Set a H1 on every page that one isn't included in the content
+  const content: string = props?.content;
+  const hasHeadingOne: boolean = content?.includes(`<h1>`);
+
+  let decodedTitle = ``;
+  const seo: SEOTypes = props?.seo;
+  if (Boolean(seo?.title)) decodedTitle = he.decode(seo.title);
+
+  return (
+    <main>
+      {!hasHeadingOne && <h1 className="hidden">{decodedTitle}</h1>}
+      {innerContents}
+    </main>
+  );
 };
 
 export default Base;

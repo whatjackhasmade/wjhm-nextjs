@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
+import Image from 'next/image';
 import Slider from 'react-slick';
 
 import { parseHTML } from 'wjhm';
@@ -84,7 +85,7 @@ const Shot = (props: ShotProps) => {
     <div className={classList} onMouseEnter={handleHover} onMouseLeave={handleHover}>
       <a className="dribbble__shot__thumbnail" href={htmlURL} rel="noopener noreferrer" target="_blank">
         <IconDribbble className="dribbble__shot__logo" />
-        <img alt={title} className="presentations__event__thumbnail" src={twoX} />
+        <Image alt={title} className="presentations__event__thumbnail" src={twoX} height={1440} width={1920} />
       </a>
       <div className="dribbble__shot__meta">
         <a href={htmlURL} rel="noopener noreferrer" target="_blank">

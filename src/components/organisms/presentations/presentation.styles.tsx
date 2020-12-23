@@ -23,14 +23,6 @@ const PresentationsComponent = styled.section`
     font-size: 24px;
   }
 
-  img {
-    display: block;
-    max-height: 175px;
-    width: 100%;
-
-    object-fit: cover;
-  }
-
   .presentations__events {
     align-items: flex-start;
     display: flex;

@@ -1,21 +1,41 @@
+/* eslint-disable react/react-in-jsx-scope */
+import Image from 'next/image';
+
 import { parseHTML } from 'wjhm';
 
-import GithubComponent from './github.styles';
-
 import { Intro } from 'wjhm';
+
+import GithubComponent from './github.styles';
 
 type GithubProps = {
   content: string;
 };
 
-const Github = ({ content }: GithubProps) => (
-  <GithubComponent>
-    <Intro heading={`Development Activity`} subheading={`I love GitHub and open source projects`} marginReduced />
-    <a className="github__calendar" href="https://github.com/whatjackhasmade" rel="noopener noreferrer" target="_blank">
-      <img src="https://ghchart.rshah.org/whatjackhasmade" alt="2016rshah's Github chart" />
-    </a>
-    <div>{parseHTML(content)}</div>
-  </GithubComponent>
-);
+const Github = (props: GithubProps) => {
+  const { content } = props;
+
+  const heading: string = `Development Activity`;
+  const subheading: string = `I love GitHub and open source projects`;
+
+  return (
+    <GithubComponent>
+      <Intro heading={heading} subheading={subheading} marginReduced />
+      <a
+        className="github__calendar"
+        href="https://github.com/whatjackhasmade"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <Image
+          alt="Jack Pritchard's Github chart"
+          height={104}
+          src="https://ghchart.rshah.org/whatjackhasmade"
+          width={702}
+        />
+      </a>
+      {content && <div>{parseHTML(content)}</div>}
+    </GithubComponent>
+  );
+};
 
 export default Github;

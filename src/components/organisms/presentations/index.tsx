@@ -1,6 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useQuery } from 'react-query';
 import Slider from 'react-slick';
+import Image from 'next/image';
 
 import PresentationsComponent from './presentation.styles';
 import settings from './settings.json';
@@ -54,7 +55,13 @@ const Presentation = (props: Event) => {
 
   return (
     <div className="presentations__event">
-      <img alt={title} className="presentations__event__thumbnail" src={featuredImage.sm} />
+      <Image
+        alt={title}
+        className="presentations__event__thumbnail"
+        src={featuredImage.mediaItemUrl}
+        height={1080}
+        width={1920}
+      />
       <div className="presentations__event__meta">
         <h5 className="subheading">{venue}</h5>
         <h3>{title}</h3>

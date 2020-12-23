@@ -3,6 +3,9 @@ const path = require(`path`);
 const buildPath = stringDirectory => path.resolve(__dirname + `/` + stringDirectory);
 
 module.exports = {
+  images: {
+    domains: [`cdn.dribbble.com`, `ghchart.rshah.org`, `whatjackhasmade-london.storage.googleapis.com`],
+  },
   trailingSlash: true,
   webpack: config => {
     config.resolve.alias[`wjhm`] = buildPath(`src/components`);

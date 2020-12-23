@@ -1,9 +1,8 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useInView } from 'react-intersection-observer';
+import Image from 'next/image';
 
 import { BreakImage } from '../../case.styles';
-
-import ImageLoader from '../../../../molecules/image-loader';
 
 import { MediaItem } from 'wjhmtypes';
 
@@ -26,7 +25,7 @@ const CaseBreak = (props: Props) => {
   return (
     <BreakImage className={classList} ref={ref}>
       <div className="break__image">
-        <ImageLoader alt={image.altText} src={image.mediaItemUrl} />
+        <Image layout="fill" alt={image.altText} src={image.mediaItemUrl} />
       </div>
     </BreakImage>
   );

@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { useState } from 'react';
+import Image from 'next/image';
 
 import GridComponent from './grid.styles';
 
@@ -30,19 +32,18 @@ type GridProps = {
 
 const Grid = (props: GridProps) => {
   const { filter, items } = props;
-  const [count, updateCount] = useState(100);
+  const [count, updateCount] = useState<number>(100);
 
   if (!items) return null;
 
-  const addItems = () => {
-    updateCount(count + 9);
-  };
+  const loadMore = () => updateCount(count + 9);
+
+  const validItems = items.filter(Boolean);
 
   const rows = [];
 
   for (let i = 0; i < count; i++) {
-    const item = items[i];
-    if (typeof item === `undefined`) break;
+    const item = validItems[i];
 
     const { id, media, title } = item;
     const { altText, md, mediaItemUrl } = media;
@@ -58,12 +59,12 @@ const Grid = (props: GridProps) => {
       key: `grid-item-${id}`,
       md,
       mediaItemUrl,
-      tag: tags.nodes[0].slug,
+      tag: tags?.nodes?.[0]?.slug,
       title,
     });
   }
 
-  const hasRows = rows?.length > 0;
+  const hasRows: boolean = rows?.length > 0;
   if (!hasRows) return null;
 
   return (
@@ -82,7 +83,7 @@ const Grid = (props: GridProps) => {
           />
         ))}
       </GridComponent>
-      <Button disabled={count > items.length} onClick={addItems}>
+      <Button disabled={count > items.length} onClick={loadMore}>
         Load More
       </Button>
     </React.Fragment>
@@ -96,10 +97,10 @@ declare type GridItemProps = {
 
 const GridItem = (props: GridItemProps) => {
   const { altText, ext, filter, key, mediaItemUrl, md, tag, title } = props;
-  const [fullScreen, changeFullScreen] = useState(false);
-  const isActive = tag === filter;
+  const [fullScreen, changeFullScreen] = useState<boolean>(false);
+  const isActive: boolean = tag === filter;
 
-  let classList = `grid__item`;
+  let classList: string = `grid__item`;
   if (fullScreen) classList += ` grid__item--fullscreen`;
 
   if (isActive) classList += ` grid__item--active`;
@@ -115,7 +116,7 @@ const GridItem = (props: GridItemProps) => {
   return (
     <button className={classList} key={key} onClick={toggleFullscreen}>
       {!isImage && <video src={mediaItemUrl} autoPlay={true} loop={true} muted={true} />}
-      {isImage && <img alt={altText} src={md} />}
+      {isImage && <Image alt={altText} src={md} height={1080} width={1920} />}
       <span className="grid__item__title">{title}</span>
     </button>
   );

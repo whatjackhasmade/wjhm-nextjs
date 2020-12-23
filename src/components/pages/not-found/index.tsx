@@ -1,17 +1,16 @@
 import * as React from 'react';
+import Image from 'next/image';
 import { Container, Row, Col } from 'react-grid-system';
 
 import { Link } from 'wjhm';
 import { Hero } from 'wjhm';
-import { ImageLoader } from 'wjhm';
 import { Related } from 'wjhm';
 
 type NotFoundProps = {};
 
 const NotFound = (props: NotFoundProps) => {
   const allPosts = [];
-  const image = null;
-  const latestPosts = allPosts.filter((post, i) => i < 3);
+  const latestPosts = allPosts.filter((_, i) => i < 3);
 
   const hasPosts = latestPosts?.length > 0;
 
@@ -26,7 +25,7 @@ const NotFound = (props: NotFoundProps) => {
                   😯
                 </span>
                 {` `}
-                Sorry, we couldn't find that
+                Sorry, we couldn&apos;t find that
               </h1>
               <p>
                 Your dog is cute but honestly a menace. Where are my shoes? Where is my graduation certificate? Where is
@@ -36,7 +35,7 @@ const NotFound = (props: NotFoundProps) => {
               <Link to="/">Return to the homepage</Link>
             </Col>
             <Col lg={4} offset={{ lg: 1 }}>
-              <ImageLoader {...image} />
+              <Image alt="Illustration of a dog eating paper" src="/images/404-dog.png" height={800} width={800} />
             </Col>
           </Row>
         </Container>

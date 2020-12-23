@@ -1,4 +1,7 @@
+/* eslint-disable react/react-in-jsx-scope */
+
 import YouTube from 'react-youtube';
+
 import { youtubeID } from 'wjhm';
 
 import YouTubeComponent from './youtube.styles';

@@ -1,4 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
+import Image from 'next/image';
 import { useInView } from 'react-intersection-observer';
 
 import { decodeHTML } from 'wjhm';
@@ -7,14 +8,14 @@ import { RelatedItem } from './related.styles';
 import { RelatedWrapper } from './related.styles';
 
 import { Link } from 'wjhm';
-import { ImageLoader } from 'wjhm';
 
+import { CaseStudy } from 'wjhmtypes';
 import { MediaItem } from 'wjhmtypes';
 import { Post } from 'wjhmtypes';
 import { Seo } from 'wjhmtypes';
 
 declare type RelatedProps = {
-  data: Post[];
+  data: Post[] | CaseStudy[];
   relatedRef?: any;
   title?: string;
 };
@@ -22,6 +23,7 @@ declare type RelatedProps = {
 const Related = (props: RelatedProps) => {
   const { data, relatedRef, title = `Continue Reading` } = props;
 
+  // @ts-ignore
   const items = data.filter(Boolean);
 
   return (
@@ -43,7 +45,9 @@ const Related = (props: RelatedProps) => {
 };
 
 declare type ItemProps = {
-  featuredImage: MediaItem;
+  featuredImage: {
+    node: MediaItem;
+  };
   seo: Seo;
   title: string;
   uri: string;
@@ -56,16 +60,17 @@ const Item: React.FC<ItemProps> = (props: ItemProps) => {
     triggerOnce: true,
   });
 
-  const hasImage: boolean = Boolean(props?.featuredImage);
+  const image = props?.featuredImage?.node;
+  const hasImage: boolean = Boolean(image.mediaItemUrl);
   if (!hasImage) return null;
 
-  const image = props?.featuredImage?.md;
+  const src = image?.mediaItemUrl;
   const seo = props?.seo?.metaDesc;
   const title = props?.title;
 
   const hasSEO: boolean = Boolean(seo);
   const hasTitle: boolean = Boolean(title);
-  const imageAlt = props?.featuredImage?.altText;
+  const imageAlt = image?.altText;
 
   let altText: string = title;
   if (imageAlt) altText = imageAlt;
@@ -78,9 +83,7 @@ const Item: React.FC<ItemProps> = (props: ItemProps) => {
   return (
     <RelatedItem className={classList} ref={ref}>
       <Link to={to}>
-        <div className="related__media related__media--fallback">
-          <ImageLoader alt={altText} src={image} />
-        </div>
+        {hasImage && <Image className="related__media" src={src} alt={altText} width={1600} height={900} />}
         {hasTitle && <h3>{decodeHTML(title)}</h3>}
         {hasSEO && <p>{seo}</p>}
       </Link>

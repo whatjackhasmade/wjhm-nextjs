@@ -1,3 +1,6 @@
+/* eslint-disable react/react-in-jsx-scope */
+import Image from 'next/image';
+
 import { parseHTML } from 'wjhm';
 
 import Duotone from './duotone';
@@ -29,16 +32,10 @@ type HeroMediaProps = {
   overlay?: boolean;
 };
 
-const Hero = ({
-  align = `left`,
-  backgroundColour,
-  children,
-  content,
-  duotone = false,
-  maxWidth,
-  media,
-  overlay = true,
-}: HeroProps) => {
+const Hero = (props: HeroProps) => {
+  const { align = `left`, backgroundColour, children, content } = props;
+  const { duotone = false, maxWidth, media, overlay = true } = props;
+
   if (!content) {
     return (
       <HeroComponent align={align} maxWidth={maxWidth}>
@@ -71,16 +68,20 @@ const Hero = ({
   );
 };
 
-const HeroMedia = ({ altText, background, duotone, media, overlay }: HeroMediaProps) => (
-  <HeroMediaComponent background={background} overlay={overlay}>
-    {duotone && (
-      <Duotone className="hero__media">
-        <HeroImage altText={altText} src={media} />
-      </Duotone>
-    )}
-    {!duotone && <HeroImage altText={altText} src={media} />}
-  </HeroMediaComponent>
-);
+const HeroMedia = (props: HeroMediaProps) => {
+  const { altText, background, duotone, media, overlay } = props;
+
+  return (
+    <HeroMediaComponent background={background} overlay={overlay}>
+      {duotone && (
+        <Duotone className="hero__media">
+          <HeroImage altText={altText} src={media} />
+        </Duotone>
+      )}
+      {!duotone && <HeroImage altText={altText} src={media} />}
+    </HeroMediaComponent>
+  );
+};
 
 declare type HeroImageProps = {
   altText: string;
@@ -89,10 +90,14 @@ declare type HeroImageProps = {
   };
 };
 
-const HeroImage = ({ altText, src }: HeroImageProps) => (
-  <div className="hero__media">
-    <img src={src.mediaItemUrl} alt={altText} />
-  </div>
-);
+const HeroImage = (props: HeroImageProps) => {
+  const { altText, src } = props;
+
+  return (
+    <div className="hero__media">
+      <Image src={src.mediaItemUrl} alt={altText} layout="fill" />
+    </div>
+  );
+};
 
 export default Hero;

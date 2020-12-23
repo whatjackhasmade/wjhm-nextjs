@@ -43,6 +43,10 @@ const DribbbleComponent = styled.section`
     width: 100%;
   }
 
+  .slick-list {
+    overflow: visible;
+  }
+
   .dribbble__shots {
     align-items: flex-start;
     display: flex;
@@ -62,6 +66,10 @@ const DribbbleComponent = styled.section`
     }
   }
 
+  .dribble__shot {
+    position: relative;
+  }
+
   @media ${device?.md} {
     .dribbble__shot--animate {
       .dribbble__shot__logo {
@@ -77,7 +85,6 @@ const DribbbleComponent = styled.section`
 
   .dribbble__shot__thumbnail {
     border-radius: 3px 3px 0 0;
-    position: relative;
   }
 
   .dribbble__shot__logo {
@@ -86,6 +93,7 @@ const DribbbleComponent = styled.section`
     right: -16px;
     top: -16px;
     width: 32px;
+    z-index: 2;
 
     background: #ea4c89;
     border-radius: 50%;
