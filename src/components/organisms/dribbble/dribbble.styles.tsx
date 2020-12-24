@@ -17,14 +17,14 @@ const bounce = keyframes`
 `;
 
 const DribbbleComponent = styled.section`
-  margin: 32px 0;
+  margin: 32px 0 64px;
 
   @media ${device?.xs} {
-    margin: 64px 0;
+    margin: 64px 0 96px;
   }
 
   @media ${device?.lg} {
-    margin: 96px 0;
+    margin: 96px 0 128px;
   }
 
   a {
@@ -67,7 +67,24 @@ const DribbbleComponent = styled.section`
   }
 
   .dribble__shot {
+    --shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+    border-radius: 3px;
     position: relative;
+
+    background-color: var(--offWhite);
+    box-shadow: var(--shadow);
+    transform: translateY(0px) scale(1);
+    transition: 0.4s box-shadow ease, 0.4s transform ease, 0.6s background-color ease;
+    will-change: background-color, box-shadow, transform;
+
+    &:focus-within,
+    &:hover {
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+      background-color: var(--white);
+      transform: translateY(-5px) scale(1.05);
+    }
   }
 
   @media ${device?.md} {
@@ -80,11 +97,27 @@ const DribbbleComponent = styled.section`
   }
 
   .dribbble__shot__meta {
-    padding: 16px;
+    border-radius: 0 0 3px 3px;
+
+    a {
+      display: block;
+      padding: 16px;
+
+      &:active,
+      &:focus,
+      &:hover {
+        text-decoration: none;
+      }
+    }
   }
 
   .dribbble__shot__thumbnail {
     border-radius: 3px 3px 0 0;
+    display: block;
+
+    img {
+      display: block;
+    }
   }
 
   .dribbble__shot__logo {
@@ -118,7 +151,7 @@ const DribbbleComponent = styled.section`
     }
   }
 
-  slick-slider {
+  .slick-slider {
     padding: 0 0 8px;
     width: 100%;
 
@@ -134,6 +167,24 @@ const DribbbleComponent = styled.section`
 
     @media ${device?.md} {
       padding: 16px;
+    }
+  }
+
+  .slick-track {
+    display: flex;
+
+    .slick-slide {
+      height: auto;
+
+      > div {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        > * {
+          flex: 1;
+        }
+      }
     }
   }
 `;

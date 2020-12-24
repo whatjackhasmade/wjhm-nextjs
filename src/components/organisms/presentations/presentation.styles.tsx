@@ -64,17 +64,12 @@ const PresentationsComponent = styled.section`
   }
 
   .presentations__event {
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
     border-radius: 0 0 3px 3px;
 
-    background: var(--white);
-    box-shadow: 0px 2px 6px rgba(20, 18, 19, 0.1);
-    transition: 0.2s all ease;
-
-    &:active,
-    &:focus,
-    &:hover {
-      box-shadow: 0px 2px 10px rgba(20, 18, 19, 0.3);
-    }
+    background-color: var(--white);
+    box-shadow: var(--shadow);
   }
 
   .presentations__event__thumbnail > div {
@@ -108,6 +103,24 @@ const PresentationsComponent = styled.section`
 
     @media ${device?.md} {
       padding: 16px;
+    }
+  }
+
+  .slick-track {
+    display: flex;
+
+    .slick-slide {
+      height: auto;
+
+      > div {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        > * {
+          flex: 1;
+        }
+      }
     }
   }
 `;
