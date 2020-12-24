@@ -4,7 +4,12 @@ const buildPath = stringDirectory => path.resolve(__dirname + `/` + stringDirect
 
 module.exports = {
   images: {
-    domains: [`cdn.dribbble.com`, `ghchart.rshah.org`, `whatjackhasmade-london.storage.googleapis.com`],
+    domains: [
+      `cdn.dribbble.com`,
+      `ghchart.rshah.org`,
+      `whatjackhasmade-london.storage.googleapis.com`,
+      `wjhm.noface.app`,
+    ],
   },
   trailingSlash: true,
   webpack: config => {
