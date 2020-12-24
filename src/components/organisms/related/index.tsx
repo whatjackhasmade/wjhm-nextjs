@@ -75,14 +75,14 @@ const Item: React.FC<ItemProps> = (props: ItemProps) => {
   let altText: string = title;
   if (imageAlt) altText = imageAlt;
 
-  const to: string = `/${props.uri}`;
+  const href: string = `${props.uri}`;
 
   let classList: string = `related-item`;
   if (inView) classList += ` related-item--show`;
 
   return (
     <RelatedItem className={classList} ref={ref}>
-      <Link to={to}>
+      <Link href={href}>
         {hasImage && <Image className="related__media" src={src} alt={altText} width={1600} height={900} />}
         {hasTitle && <h3>{decodeHTML(title)}</h3>}
         {hasSEO && <p>{seo}</p>}

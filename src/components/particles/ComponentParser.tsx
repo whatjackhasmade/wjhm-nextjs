@@ -16,6 +16,7 @@ import Intro from '../organisms/intro';
 import Presentations from '../organisms/presentations';
 import Row from '../organisms/row';
 import Testimonials from '../organisms/testimonials';
+import Work from '../organisms/work';
 import YouTubeChannel from '../organisms/youtube';
 
 import type { Block, Maybe } from 'wjhmtypes';
@@ -39,6 +40,7 @@ const components = {
   'acf/presentations': Presentations,
   'acf/row': Row,
   'acf/testimonials': Testimonials,
+  'acf/work': Work,
   'acf/youtube': YouTube,
   'acf/youtubechannel': YouTubeChannel,
   'core/heading': Heading,

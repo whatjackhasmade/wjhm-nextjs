@@ -17908,6 +17908,71 @@ export type AcfTestimonialsBlock = Block & {
   testimonialsFields?: Maybe<AcfTestimonialsBlock_Testimonialsfields>;
 };
 
+export type AcfWorkBlockAttributes = {
+  __typename?: 'AcfWorkBlockAttributes';
+  /** @deprecated  */
+  align?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  className?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  data?: Maybe<Scalars['BlockAttributesObject']>;
+  /** @deprecated  */
+  id?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  mode?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  name?: Maybe<Scalars['String']>;
+};
+
+/** acf/work block */
+export type AcfWorkBlock = Block & {
+  __typename?: 'AcfWorkBlock';
+  /** @deprecated  */
+  attributes?: Maybe<AcfWorkBlockAttributes>;
+  /**
+   * Server side rendered content.
+   * @deprecated 
+   */
+  dynamicContent?: Maybe<Scalars['String']>;
+  /**
+   * Gutenberg blocks
+   * @deprecated 
+   */
+  innerBlocks?: Maybe<Array<Block>>;
+  /**
+   * Is block rendered server side.
+   * @deprecated 
+   */
+  isDynamic: Scalars['Boolean'];
+  /**
+   * Name of the block.
+   * @deprecated 
+   */
+  name: Scalars['String'];
+  /** @deprecated  */
+  order: Scalars['Int'];
+  /**
+   * Original HTML content.
+   * @deprecated 
+   */
+  originalContent?: Maybe<Scalars['String']>;
+  /**
+   * Parent post.
+   * @deprecated 
+   */
+  parentNode: Node;
+  /**
+   * Parent post id.
+   * @deprecated 
+   */
+  parentNodeDatabaseId: Scalars['Int'];
+  /**
+   * Original HTML content with inner blocks.
+   * @deprecated 
+   */
+  saveContent?: Maybe<Scalars['String']>;
+};
+
 export type AcfYoutubeBlockAttributes = {
   __typename?: 'AcfYoutubeBlockAttributes';
   /** @deprecated  */
@@ -25401,4 +25466,4 @@ export type CoreVideoBlock = Block & {
   saveContent?: Maybe<Scalars['String']>;
 };
 
-export type BlockUnion = YoastHowToBlock | YoastFaqBlock | AcfCodeBlock | AcfDribbbleBlock | AcfGithubBlock | AcfHeroBlock | AcfIntroBlock | AcfLinkBlock | AcfPresentationsBlock | AcfRowBlock | AcfTestimonialsBlock | AcfYoutubeBlock | AcfYoutubechannelBlock | CoreParagraphBlock | CoreImageBlock | CoreHeadingBlock | CoreGalleryBlock | CoreListBlock | CoreQuoteBlock | CoreShortcodeBlock | CoreArchivesBlock | CoreAudioBlock | CoreButtonBlock | CoreButtonsBlock | CoreCalendarBlock | CoreCategoriesBlock | CoreCodeBlock | CoreColumnsBlock | CoreColumnBlock | CoreCoverBlock | CoreEmbedBlock | CoreEmbedTwitterBlock | CoreEmbedYoutubeBlock | CoreEmbedFacebookBlock | CoreEmbedInstagramBlock | CoreEmbedWordpressBlock | CoreEmbedSoundcloudBlock | CoreEmbedSpotifyBlock | CoreEmbedFlickrBlock | CoreEmbedVimeoBlock | CoreEmbedAnimotoBlock | CoreEmbedCloudupBlock | CoreEmbedCollegehumorBlock | CoreEmbedCrowdsignalBlock | CoreEmbedDailymotionBlock | CoreEmbedImgurBlock | CoreEmbedIssuuBlock | CoreEmbedKickstarterBlock | CoreEmbedMeetupComBlock | CoreEmbedMixcloudBlock | CoreEmbedPolldaddyBlock | CoreEmbedRedditBlock | CoreEmbedReverbnationBlock | CoreEmbedScreencastBlock | CoreEmbedScribdBlock | CoreEmbedSlideshareBlock | CoreEmbedSmugmugBlock | CoreEmbedSpeakerBlock | CoreEmbedSpeakerDeckBlock | CoreEmbedTiktokBlock | CoreEmbedTedBlock | CoreEmbedTumblrBlock | CoreEmbedVideopressBlock | CoreEmbedWordpressTvBlock | CoreEmbedAmazonKindleBlock | CoreFileBlock | CoreGroupBlock | CoreFreeformBlock | CoreHtmlBlock | CoreMediaTextBlock | CoreLatestCommentsBlock | CoreLatestPostsBlock | CoreMissingBlock | CoreMoreBlock | CoreNextpageBlock | CorePreformattedBlock | CorePullquoteBlock | CoreRssBlock | CoreSearchBlock | CoreSeparatorBlock | CoreBlock | CoreSocialLinksBlock | CoreSocialLinkBlock | CoreSpacerBlock | CoreSubheadBlock | CoreTableBlock | CoreTagCloudBlock | CoreTextColumnsBlock | CoreVerseBlock | CoreVideoBlock;
+export type BlockUnion = YoastHowToBlock | YoastFaqBlock | AcfCodeBlock | AcfDribbbleBlock | AcfGithubBlock | AcfHeroBlock | AcfIntroBlock | AcfLinkBlock | AcfPresentationsBlock | AcfRowBlock | AcfTestimonialsBlock | AcfWorkBlock | AcfYoutubeBlock | AcfYoutubechannelBlock | CoreParagraphBlock | CoreImageBlock | CoreHeadingBlock | CoreGalleryBlock | CoreListBlock | CoreQuoteBlock | CoreShortcodeBlock | CoreArchivesBlock | CoreAudioBlock | CoreButtonBlock | CoreButtonsBlock | CoreCalendarBlock | CoreCategoriesBlock | CoreCodeBlock | CoreColumnsBlock | CoreColumnBlock | CoreCoverBlock | CoreEmbedBlock | CoreEmbedTwitterBlock | CoreEmbedYoutubeBlock | CoreEmbedFacebookBlock | CoreEmbedInstagramBlock | CoreEmbedWordpressBlock | CoreEmbedSoundcloudBlock | CoreEmbedSpotifyBlock | CoreEmbedFlickrBlock | CoreEmbedVimeoBlock | CoreEmbedAnimotoBlock | CoreEmbedCloudupBlock | CoreEmbedCollegehumorBlock | CoreEmbedCrowdsignalBlock | CoreEmbedDailymotionBlock | CoreEmbedImgurBlock | CoreEmbedIssuuBlock | CoreEmbedKickstarterBlock | CoreEmbedMeetupComBlock | CoreEmbedMixcloudBlock | CoreEmbedPolldaddyBlock | CoreEmbedRedditBlock | CoreEmbedReverbnationBlock | CoreEmbedScreencastBlock | CoreEmbedScribdBlock | CoreEmbedSlideshareBlock | CoreEmbedSmugmugBlock | CoreEmbedSpeakerBlock | CoreEmbedSpeakerDeckBlock | CoreEmbedTiktokBlock | CoreEmbedTedBlock | CoreEmbedTumblrBlock | CoreEmbedVideopressBlock | CoreEmbedWordpressTvBlock | CoreEmbedAmazonKindleBlock | CoreFileBlock | CoreGroupBlock | CoreFreeformBlock | CoreHtmlBlock | CoreMediaTextBlock | CoreLatestCommentsBlock | CoreLatestPostsBlock | CoreMissingBlock | CoreMoreBlock | CoreNextpageBlock | CorePreformattedBlock | CorePullquoteBlock | CoreRssBlock | CoreSearchBlock | CoreSeparatorBlock | CoreBlock | CoreSocialLinksBlock | CoreSocialLinkBlock | CoreSpacerBlock | CoreSubheadBlock | CoreTableBlock | CoreTagCloudBlock | CoreTextColumnsBlock | CoreVerseBlock | CoreVideoBlock;
