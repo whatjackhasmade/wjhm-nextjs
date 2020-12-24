@@ -28,8 +28,10 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
   const menuLength: number = menuItems?.length;
   const hasItems: boolean = menuLength > 0;
   const lastItem = !hasItems ? null : menuItems[menuLength - 1];
+
+  let otherItems = null;
   const otherLength = (i: number): boolean => i !== menuLength - 1;
-  const otherItems = !hasItems ? null : menuItems.filter((_, i) => otherLength(i));
+  if (hasItems) otherItems = menuItems.filter((_, i) => otherLength(i));
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
