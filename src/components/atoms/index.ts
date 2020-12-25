@@ -1,4 +1,4 @@
-export { default as Button } from './button';
+export * from './button';
 export { default as ButtonReset } from './button/button.reset';
 export { default as Code } from './code';
 export { default as FeaturedImage } from './featured-image';
@@ -8,4 +8,5 @@ export * from './icons';
 export { default as Link } from './link';
 export { default as MenuItem } from './menu-item';
 export { default as Paragraph } from './paragraph';
+export { default as Skeleton } from './skeleton';
 export { default as Video } from './video';

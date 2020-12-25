@@ -1,4 +1,4 @@
-export const ButtonReset = () => `
+export const ButtonReset = () => /* CSS */ `
 	border: none;
 	margin: 0;
 	padding: 0;

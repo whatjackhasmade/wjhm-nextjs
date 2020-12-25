@@ -12,12 +12,22 @@ const StyledWorks = styled.section`
 
   @media ${device?.md} {
     display: grid;
+    grid-gap: 40px;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     margin: 0 0 128px;
   }
 
   @media ${device?.xl} {
     margin: 0 0 160px;
+  }
+
+  .work__item {
+  }
+
+  .work__image,
+  .work__title {
+    color: inherit;
+    text-decoration: none;
   }
 `;
 

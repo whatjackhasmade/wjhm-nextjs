@@ -15,8 +15,8 @@ import { OverviewList } from 'wjhm';
 
 import { Related } from 'wjhm';
 
-import type { Post } from 'wjhmtypes';
-declare type PostTemplateProps = Post & BaseProps;
+import type { Node } from 'wjhmtypes';
+declare type PostTemplateProps = any;
 
 const PostTemplate = (props: PostTemplateProps) => {
   const { blocks, content, date, PostFields, slug, title } = props;

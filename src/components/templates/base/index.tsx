@@ -9,7 +9,7 @@ import { Header } from 'wjhm';
 
 import { Case } from 'wjhm';
 import { Page } from 'wjhm';
-import { Post } from 'wjhm';
+import { PostTemplate } from 'wjhm';
 import { Series } from 'wjhm';
 
 import type { Seo as SEOTypes } from 'wjhmtypes';
@@ -61,7 +61,7 @@ const InnerContent: React.FC<any> = (props: any) => {
       innerContents = <Page {...props} />;
       break;
     case `post`:
-      innerContents = <Post {...props} />;
+      innerContents = <PostTemplate {...props} />;
       break;
     case `series`:
       innerContents = <Series {...props} />;

@@ -1,4 +1,4 @@
-const ButtonMixin = props => `
+const ButtonMixin = () => /* CSS */ `
  	display: inline-flex;
   padding: 16px 24px;
 
@@ -47,4 +47,5 @@ const ButtonMixin = props => `
   }
 `;
 
+export { ButtonMixin };
 export default ButtonMixin;
