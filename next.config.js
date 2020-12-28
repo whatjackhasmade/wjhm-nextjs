@@ -7,6 +7,7 @@ module.exports = {
     domains: [
       `cdn.dribbble.com`,
       `ghchart.rshah.org`,
+      `localhost`,
       `whatjackhasmade-london.storage.googleapis.com`,
       `wjhm.noface.app`,
     ],
