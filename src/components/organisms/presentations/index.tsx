@@ -59,7 +59,7 @@ const Presentation = (props: Event) => {
         alt={title}
         className="presentations__event__thumbnail"
         src={featuredImage.mediaItemUrl}
-        height={1080}
+        height={1280}
         width={1920}
       />
       <div className="presentations__event__meta">

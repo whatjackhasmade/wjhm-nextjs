@@ -5,8 +5,11 @@ const YouTubeComponent = styled.section`
   align-items: center;
   display: flex;
   justify-content: center;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
   padding: 64px 0;
   position: relative;
+  width: 100vw;
 
   @media ${device?.lg} {
     padding: 0;

@@ -11,10 +11,16 @@ import settings from './settings.json';
 
 import { callGetAllDribbble } from 'wjhm';
 
+// Icons
 import { Dribbble as IconDribbble } from '../../atoms/icons/brands';
 
+// Atoms
+import { Skeleton } from 'wjhm';
+
+// Molecules
 import { Error } from 'wjhm';
 
+// Organisms
 import { Intro } from 'wjhm';
 
 import { AcfDribbbleBlock_Dribbblefields as Fields } from 'wjhmtypes';
@@ -54,9 +60,10 @@ const Dribbble = (props: Fields) => {
 
   return (
     <DribbbleComponent>
-      <Intro heading={`Interface Designs`} subheading={`My Dribbble Shots`} marginReduced>
+      <Intro heading="Interface Designs" subheading="My Dribbble Shots" marginReduced>
         {parseHTML(content)}
       </Intro>
+      {loading && <Skeleton height="3.5" width="16" />}
       {error && <Error error={error} />}
       {hasShots && (
         <Slider {...settings}>
@@ -82,7 +89,12 @@ const Shot = (props: ShotProps) => {
   if (mouseOver) classList += ` dribbble__shot--animate`;
 
   return (
-    <div className={classList} onMouseEnter={handleHover} onMouseLeave={handleHover}>
+    <div
+      className={classList}
+      onAnimationEnd={() => setMouseOver(false)}
+      onMouseEnter={handleHover}
+      onMouseLeave={handleHover}
+    >
       <a className="dribbble__shot__thumbnail" href={htmlURL} rel="noopener noreferrer" target="_blank">
         <IconDribbble className="dribbble__shot__logo" />
         <Image alt={title} className="presentations__event__thumbnail" src={twoX} height={1440} width={1920} />

@@ -96,6 +96,7 @@ const PresentationsComponent = styled.section`
 
   .slick-list {
     margin: 0 -16px;
+    overflow: visible;
   }
 
   .slick-slide {
