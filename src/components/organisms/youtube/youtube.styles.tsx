@@ -66,6 +66,7 @@ const YouTubeComponent = styled.section`
 
     @media ${device?.xxl} {
       left: 0;
+      transform: translateY(var(--y));
     }
   }
 
