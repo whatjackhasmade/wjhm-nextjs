@@ -1574,10 +1574,35 @@ export type WpPageInfo = {
    */
   hasPreviousPage: Scalars['Boolean'];
   /**
+   * Get information about the offset pagination state in the current connection
+   * @deprecated 
+   */
+  offsetPagination?: Maybe<OffsetPaginationPageInfo>;
+  /**
    * When paginating backwards, the cursor to continue.
    * @deprecated 
    */
   startCursor?: Maybe<Scalars['String']>;
+};
+
+/** Get information about the offset pagination state */
+export type OffsetPaginationPageInfo = {
+  __typename?: 'OffsetPaginationPageInfo';
+  /**
+   * True if there is one or more nodes available in this connection. Eg. you can increase the offset at least by one.
+   * @deprecated 
+   */
+  hasMore?: Maybe<Scalars['Boolean']>;
+  /**
+   * True when offset can be decresed eg. offset is 0&lt;
+   * @deprecated 
+   */
+  hasPrevious?: Maybe<Scalars['Boolean']>;
+  /**
+   * Total amount of nodes in this connection
+   * @deprecated 
+   */
+  total?: Maybe<Scalars['Int']>;
 };
 
 /** Arguments for filtering the ContentTypeToContentNodeConnection connection */
@@ -2079,10 +2104,35 @@ export type User = Node & UniformResourceIdentifiable & Commenter & DatabaseIden
    */
   id: Scalars['ID'];
   /**
+   * Whether the JWT User secret has been revoked. If the secret has been revoked, auth tokens will not be issued until an admin, or user with proper capabilities re-issues a secret for the user.
+   * @deprecated 
+   */
+  isJwtAuthSecretRevoked: Scalars['Boolean'];
+  /**
    * Whether the object is restricted from the current viewer
    * @deprecated 
    */
   isRestricted?: Maybe<Scalars['Boolean']>;
+  /**
+   * The expiration for the JWT Token for the user. If not set custom for the user, it will use the default sitewide expiration setting
+   * @deprecated 
+   */
+  jwtAuthExpiration?: Maybe<Scalars['String']>;
+  /**
+   * A JWT token that can be used in future requests for authentication/authorization
+   * @deprecated 
+   */
+  jwtAuthToken?: Maybe<Scalars['String']>;
+  /**
+   * A JWT token that can be used in future requests to get a refreshed jwtAuthToken. If the refresh token used in a request is revoked or otherwise invalid, a valid Auth token will NOT be issued in the response headers.
+   * @deprecated 
+   */
+  jwtRefreshToken?: Maybe<Scalars['String']>;
+  /**
+   * A unique secret tied to the users JWT token that can be revoked or refreshed. Revoking the secret prevents JWT tokens from being issued to the user. Refreshing the token invalidates previously issued tokens, but allows new tokens to be issued.
+   * @deprecated 
+   */
+  jwtUserSecret?: Maybe<Scalars['String']>;
   /**
    * Last name of the user. This is equivalent to the WP_User-&gt;user_last_name property.
    * @deprecated 
@@ -4002,8 +4052,6 @@ export type MediaSize = {
 export type Seo = {
   __typename?: 'SEO';
   /** @deprecated  */
-  breadcrumbs?: Maybe<Array<Maybe<SeoPostTypeBreadcrumbs>>>;
-  /** @deprecated  */
   canonical?: Maybe<Scalars['String']>;
   /** @deprecated  */
   focuskw?: Maybe<Scalars['String']>;
@@ -4016,25 +4064,11 @@ export type Seo = {
   /** @deprecated  */
   metaRobotsNoindex?: Maybe<Scalars['String']>;
   /** @deprecated  */
-  opengraphAuthor?: Maybe<Scalars['String']>;
-  /** @deprecated  */
   opengraphDescription?: Maybe<Scalars['String']>;
   /** @deprecated  */
   opengraphImage?: Maybe<MediaItem>;
   /** @deprecated  */
-  opengraphModifiedTime?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  opengraphPublishedTime?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  opengraphPublisher?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  opengraphSiteName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
   opengraphTitle?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  opengraphType?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  opengraphUrl?: Maybe<Scalars['String']>;
   /** @deprecated  */
   title?: Maybe<Scalars['String']>;
   /** @deprecated  */
@@ -4043,14 +4077,6 @@ export type Seo = {
   twitterImage?: Maybe<MediaItem>;
   /** @deprecated  */
   twitterTitle?: Maybe<Scalars['String']>;
-};
-
-export type SeoPostTypeBreadcrumbs = {
-  __typename?: 'SEOPostTypeBreadcrumbs';
-  /** @deprecated  */
-  text?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  url?: Maybe<Scalars['String']>;
 };
 
 /** Arguments for filtering the UserToPageConnection connection */
@@ -11082,6 +11108,8 @@ export type RootQueryToBlockEditorPreviewConnectionWhereArgs = {
   nameIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Paginate BlockEditorPreviews with offsets */
+  offsetPagination?: Maybe<OffsetPagination>;
   /** What paramater to use to order the objects by. */
   orderby?: Maybe<Array<Maybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
@@ -11100,6 +11128,14 @@ export type RootQueryToBlockEditorPreviewConnectionWhereArgs = {
   status?: Maybe<PostStatusEnum>;
   /** Title of the object */
   title?: Maybe<Scalars['String']>;
+};
+
+/** Offset pagination input type */
+export type OffsetPagination = {
+  /** Number of post to show per page. Passed to posts_per_page of WP_Query. */
+  offset?: Maybe<Scalars['Int']>;
+  /** Number of post to show per page. Passed to posts_per_page of WP_Query. */
+  size?: Maybe<Scalars['Int']>;
 };
 
 /** Connection between the RootQuery type and the BlockEditorPreview type */
@@ -11163,6 +11199,8 @@ export type RootQueryToCaseStudyConnectionWhereArgs = {
   nameIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Paginate CaseStudys with offsets */
+  offsetPagination?: Maybe<OffsetPagination>;
   /** What paramater to use to order the objects by. */
   orderby?: Maybe<Array<Maybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
@@ -11446,6 +11484,8 @@ export type RootQueryToContentNodeConnectionWhereArgs = {
   nameIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Paginate content nodes with offsets */
+  offsetPagination?: Maybe<OffsetPagination>;
   /** What paramater to use to order the objects by. */
   orderby?: Maybe<Array<Maybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
@@ -11583,6 +11623,8 @@ export type RootQueryToEventConnectionWhereArgs = {
   nameIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Paginate Events with offsets */
+  offsetPagination?: Maybe<OffsetPagination>;
   /** What paramater to use to order the objects by. */
   orderby?: Maybe<Array<Maybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
@@ -11724,6 +11766,8 @@ export type RootQueryToInspirationConnectionWhereArgs = {
   nameIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Paginate Inspirations with offsets */
+  offsetPagination?: Maybe<OffsetPagination>;
   /** What paramater to use to order the objects by. */
   orderby?: Maybe<Array<Maybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
@@ -11829,6 +11873,8 @@ export type RootQueryToMediaItemConnectionWhereArgs = {
   nameIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Paginate MediaItems with offsets */
+  offsetPagination?: Maybe<OffsetPagination>;
   /** What paramater to use to order the objects by. */
   orderby?: Maybe<Array<Maybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
@@ -12324,6 +12370,8 @@ export type RootQueryToPageConnectionWhereArgs = {
   nameIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Paginate Pages with offsets */
+  offsetPagination?: Maybe<OffsetPagination>;
   /** What paramater to use to order the objects by. */
   orderby?: Maybe<Array<Maybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
@@ -12599,6 +12647,8 @@ export type RootQueryToPostConnectionWhereArgs = {
   nameIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Paginate Posts with offsets */
+  offsetPagination?: Maybe<OffsetPagination>;
   /** What paramater to use to order the objects by. */
   orderby?: Maybe<Array<Maybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
@@ -12762,6 +12812,8 @@ export type RootQueryToReusableBlockConnectionWhereArgs = {
   nameIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Paginate ReusableBlocks with offsets */
+  offsetPagination?: Maybe<OffsetPagination>;
   /** What paramater to use to order the objects by. */
   orderby?: Maybe<Array<Maybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
@@ -12841,6 +12893,8 @@ export type RootQueryToReviewConnectionWhereArgs = {
   nameIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Paginate Reviews with offsets */
+  offsetPagination?: Maybe<OffsetPagination>;
   /** What paramater to use to order the objects by. */
   orderby?: Maybe<Array<Maybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
@@ -12983,8 +13037,6 @@ export type SeoConfig = {
   /** @deprecated  */
   breadcrumbs?: Maybe<SeoBreadcrumbs>;
   /** @deprecated  */
-  redirects?: Maybe<Array<Maybe<SeoRedirect>>>;
-  /** @deprecated  */
   schema?: Maybe<SeoSchema>;
   /** @deprecated  */
   social?: Maybe<SeoSocial>;
@@ -12992,7 +13044,6 @@ export type SeoConfig = {
   webmaster?: Maybe<SeoWebmaster>;
 };
 
-/** The Yoast SEO breadcrumb config */
 export type SeoBreadcrumbs = {
   __typename?: 'SEOBreadcrumbs';
   /** @deprecated  */
@@ -13015,20 +13066,6 @@ export type SeoBreadcrumbs = {
   showBlogPage?: Maybe<Scalars['Boolean']>;
 };
 
-/** The Yoast redirect data  (Yoast Premium only) */
-export type SeoRedirect = {
-  __typename?: 'SEORedirect';
-  /** @deprecated  */
-  format?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  origin?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  target?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  type?: Maybe<Scalars['Int']>;
-};
-
-/** The Yoast SEO schema data */
 export type SeoSchema = {
   __typename?: 'SEOSchema';
   /** @deprecated  */
@@ -13041,15 +13078,8 @@ export type SeoSchema = {
   logo?: Maybe<MediaItem>;
   /** @deprecated  */
   personLogo?: Maybe<MediaItem>;
-  /** @deprecated  */
-  siteName?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  siteUrl?: Maybe<Scalars['String']>;
-  /** @deprecated  */
-  wordpressSiteName?: Maybe<Scalars['String']>;
 };
 
-/** The Yoast SEO Social media links */
 export type SeoSocial = {
   __typename?: 'SEOSocial';
   /** @deprecated  */
@@ -13130,7 +13160,6 @@ export type SeoSocialYoutube = {
   url?: Maybe<Scalars['String']>;
 };
 
-/** The Yoast SEO  webmaster fields */
 export type SeoWebmaster = {
   __typename?: 'SEOWebmaster';
   /** @deprecated  */
@@ -13536,6 +13565,8 @@ export type RootQueryToUserConnectionWhereArgs = {
   nicenameIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   /** An array of nicenames to exclude. Users matching one of these nicenames will not be included in results. */
   nicenameNotIn?: Maybe<Array<Maybe<Scalars['String']>>>;
+  /** Paginate users with offsets */
+  offsetPagination?: Maybe<OffsetPagination>;
   /** What paramater to use to order the objects by. */
   orderby?: Maybe<Array<Maybe<UsersConnectionOrderbyInput>>>;
   /** An array of role names that users must match to be included in results. Note that this is an inclusive list: users must match *each* role. */
@@ -13819,6 +13850,16 @@ export type RootMutation = {
   /** @deprecated  */
   increaseCount?: Maybe<Scalars['Int']>;
   /**
+   * The payload for the login mutation
+   * @deprecated 
+   */
+  login?: Maybe<LoginPayload>;
+  /**
+   * The payload for the refreshJwtAuthToken mutation
+   * @deprecated 
+   */
+  refreshJwtAuthToken?: Maybe<RefreshJwtAuthTokenPayload>;
+  /**
    * The payload for the registerUser mutation
    * @deprecated 
    */
@@ -14091,6 +14132,18 @@ export type RootMutationDeleteUserArgs = {
 /** The root mutation */
 export type RootMutationIncreaseCountArgs = {
   count?: Maybe<Scalars['Int']>;
+};
+
+
+/** The root mutation */
+export type RootMutationLoginArgs = {
+  input: LoginInput;
+};
+
+
+/** The root mutation */
+export type RootMutationRefreshJwtAuthTokenArgs = {
+  input: RefreshJwtAuthTokenInput;
 };
 
 
@@ -14992,8 +15045,12 @@ export type CreateUserInput = {
   nickname?: Maybe<Scalars['String']>;
   /** A string that contains the plain text password for the user. */
   password?: Maybe<Scalars['String']>;
+  /** If true, this will refresh the users JWT secret. */
+  refreshJwtUserSecret?: Maybe<Scalars['Boolean']>;
   /** The date the user registered. Format is Y-m-d H:i:s. */
   registered?: Maybe<Scalars['String']>;
+  /** If true, this will revoke the users JWT secret. If false, this will unrevoke the JWT secret AND issue a new one. To revoke, the user must have proper capabilities to edit users JWT secrets. */
+  revokeJwtUserSecret?: Maybe<Scalars['Boolean']>;
   /** A string for whether to enable the rich editor or not. False if not empty. */
   richEditing?: Maybe<Scalars['String']>;
   /** An array of roles to be assigned to the user. */
@@ -15371,6 +15428,56 @@ export type DeleteUserPayload = {
   user?: Maybe<User>;
 };
 
+/** Input for the login mutation */
+export type LoginInput = {
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The plain-text password for the user logging in. */
+  password: Scalars['String'];
+  /** The username used for login. Typically a unique or email address depending on specific configuration */
+  username: Scalars['String'];
+};
+
+/** The payload for the login mutation */
+export type LoginPayload = {
+  __typename?: 'LoginPayload';
+  /**
+   * JWT Token that can be used in future requests for Authentication
+   * @deprecated 
+   */
+  authToken?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /**
+   * A JWT token that can be used in future requests to get a refreshed jwtAuthToken. If the refresh token used in a request is revoked or otherwise invalid, a valid Auth token will NOT be issued in the response headers.
+   * @deprecated 
+   */
+  refreshToken?: Maybe<Scalars['String']>;
+  /**
+   * The user that was logged in
+   * @deprecated 
+   */
+  user?: Maybe<User>;
+};
+
+/** Input for the refreshJwtAuthToken mutation */
+export type RefreshJwtAuthTokenInput = {
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** A valid, previously issued JWT refresh token. If valid a new Auth token will be provided. If invalid, expired, revoked or otherwise invalid, a new AuthToken will not be provided. */
+  jwtRefreshToken: Scalars['String'];
+};
+
+/** The payload for the refreshJwtAuthToken mutation */
+export type RefreshJwtAuthTokenPayload = {
+  __typename?: 'RefreshJwtAuthTokenPayload';
+  /**
+   * JWT Token that can be used in future requests for Authentication
+   * @deprecated 
+   */
+  authToken?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 /** Input for the registerUser mutation */
 export type RegisterUserInput = {
   /** User's AOL IM account. */
@@ -15396,8 +15503,12 @@ export type RegisterUserInput = {
   nickname?: Maybe<Scalars['String']>;
   /** A string that contains the plain text password for the user. */
   password?: Maybe<Scalars['String']>;
+  /** If true, this will refresh the users JWT secret. */
+  refreshJwtUserSecret?: Maybe<Scalars['Boolean']>;
   /** The date the user registered. Format is Y-m-d H:i:s. */
   registered?: Maybe<Scalars['String']>;
+  /** If true, this will revoke the users JWT secret. If false, this will unrevoke the JWT secret AND issue a new one. To revoke, the user must have proper capabilities to edit users JWT secrets. */
+  revokeJwtUserSecret?: Maybe<Scalars['Boolean']>;
   /** A string for whether to enable the rich editor or not. False if not empty. */
   richEditing?: Maybe<Scalars['String']>;
   /** A string that contains the user's username. */
@@ -15905,8 +16016,12 @@ export type UpdateUserInput = {
   nickname?: Maybe<Scalars['String']>;
   /** A string that contains the plain text password for the user. */
   password?: Maybe<Scalars['String']>;
+  /** If true, this will refresh the users JWT secret. */
+  refreshJwtUserSecret?: Maybe<Scalars['Boolean']>;
   /** The date the user registered. Format is Y-m-d H:i:s. */
   registered?: Maybe<Scalars['String']>;
+  /** If true, this will revoke the users JWT secret. If false, this will unrevoke the JWT secret AND issue a new one. To revoke, the user must have proper capabilities to edit users JWT secrets. */
+  revokeJwtUserSecret?: Maybe<Scalars['Boolean']>;
   /** A string for whether to enable the rich editor or not. False if not empty. */
   richEditing?: Maybe<Scalars['String']>;
   /** An array of roles to be assigned to the user. */

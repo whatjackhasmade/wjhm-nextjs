@@ -5,7 +5,7 @@ import { requestor } from 'wjhm';
 import { CASE_BY_URI } from 'wjhm';
 import { PAGE_BY_URI } from 'wjhm';
 import { POST_BY_URI } from 'wjhm';
-import { SERIES_BY_URI } from 'wjhm';
+import { SERIES_BY_SLUG } from 'wjhm';
 
 // This also gets called at build time
 export const getServerSideProps: GetServerSideProps = async context => {
@@ -61,7 +61,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 
     try {
       // Call an external API endpoint to get pages
-      const res = await requestor.request(SERIES_BY_URI, { uri });
+      const res = await requestor.request(SERIES_BY_SLUG, { slug: uri });
       data = res?.series;
     } catch (error) {
       console.error(error.message);
