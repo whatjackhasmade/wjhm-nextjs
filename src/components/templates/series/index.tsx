@@ -1,22 +1,27 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import { useMemo } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import Image from 'next/image';
 import he from 'he';
 
+// API
 import { callGetSeriesPostsPaginated } from 'wjhm';
 
+// Particles
 import { autoParagraph } from 'wjhm';
 import { parseHTML } from 'wjhm';
 
+// Atoms
 import { Button } from 'wjhm';
 import { HR } from 'wjhm';
+import { Skeleton } from 'wjhm';
 
+// Local Parts
 import SeriesPost from './partials/post';
 import { SeriesIntro } from './series.styles';
 import { SeriesWrapper } from './series.styles';
 
+// Type Defintions
 import type { Series } from 'wjhmtypes';
 
 type Props = Series;
@@ -57,7 +62,11 @@ const SeriesTemplate: React.FC<Props> = (props: Props) => {
 
 const flattenBatch = entry => entry?.edges?.map(({ node }) => node);
 
-const SeriesPosts = ({ slug }) => {
+declare type SeriesPostsProps = {
+  slug: string;
+};
+
+const SeriesPosts: React.FC<SeriesPostsProps> = ({ slug }: SeriesPostsProps) => {
   const fetchWorks = async args => {
     const pageParam = args?.pageParam;
 
@@ -78,7 +87,7 @@ const SeriesPosts = ({ slug }) => {
     },
   });
 
-  const { fetchNextPage, hasNextPage, isIdle } = postsQuery;
+  const { fetchNextPage, hasNextPage, isIdle, isLoading: loading } = postsQuery;
 
   const data = postsQuery?.data?.pages;
   const batchesLength: number = data?.length;
@@ -86,6 +95,7 @@ const SeriesPosts = ({ slug }) => {
 
   const posts = hasBatches && [].concat.apply([], data.map(flattenBatch));
   const hasPosts: boolean = posts?.length > 0;
+  const showSkeletons: boolean = loading && !hasBatches;
 
   useEffect(() => {
     if (!hasNextPage) return;
@@ -102,10 +112,22 @@ const SeriesPosts = ({ slug }) => {
 
   return (
     <section className="series__grid">
+      {showSkeletons && <Skeletons />}
       {posts.map(post => (
         <SeriesPost key={post.id} {...post} />
       ))}
     </section>
+  );
+};
+
+const Skeletons: React.FC = () => {
+  return (
+    <React.Fragment>
+      {[...Array(9)].map((_, i) => {
+        const key: string = `series-post-${String(i * Math.random() * 46656)}`;
+        return <Skeleton height="1080" width="1920" key={key} />;
+      })}
+    </React.Fragment>
   );
 };
 
