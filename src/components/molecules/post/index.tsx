@@ -21,7 +21,7 @@ const Post: React.FC<Props> = (props: Props) => {
   });
 
   const image = props?.featuredImage?.node;
-  const hasImage: boolean = Boolean(image.mediaItemUrl);
+  const hasImage: boolean = Boolean(image?.mediaItemUrl);
   if (!hasImage) return null;
 
   const src = image?.mediaItemUrl;
