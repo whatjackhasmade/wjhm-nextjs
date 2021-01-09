@@ -40,6 +40,7 @@ const Post: React.FC<Props> = (props: Props) => {
   let classList: string = `item`;
   if (inView) classList += ` item--show`;
 
+  // @ts-ignore
   const caseStudyTitle = props?.CaseStudyFields?.intro?.title;
 
   let subtitle: string = ``;
