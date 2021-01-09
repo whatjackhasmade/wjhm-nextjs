@@ -119,15 +119,6 @@ export const Devices = styled.section`
       overflow: hidden;
       max-width: 100%;
     }
-    .screen > div iframe,
-    .screen > div object,
-    .screen > div embed {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
   }
 
   .iphone {
@@ -142,6 +133,10 @@ export const Devices = styled.section`
       height: 100%;
       overflow: hidden;
     }
+  }
+
+  .macbook,
+  .iphone {
     .screen > div iframe,
     .screen > div object,
     .screen > div embed {
@@ -159,10 +154,9 @@ export const Devices = styled.section`
 `;
 
 export const GalleryContainer = styled.section`
-  align-items: flex-start;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-gap: 32px;
+  grid-template-columns: repeat(1, 1fr);
   margin: 32px 0;
 
   opacity: 0;
@@ -170,72 +164,21 @@ export const GalleryContainer = styled.section`
   transition: 1s all ease;
 
   @media ${device?.sm} {
+    grid-template-columns: repeat(2, 1fr);
     margin: 64px 0;
+  }
+
+  &.gallery--small {
+    grid-gap: 26px;
+    grid-template-columns: repeat(2, 1fr);
+
+    @media ${device?.sm} {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 
   &.gallery--show {
     opacity: 1;
     transform: translateY(0px);
-  }
-
-  &.gallery--small {
-    justify-content: flex-start;
-
-    > * {
-      height: 200px;
-      overflow: hidden;
-
-      @media ${device?.md} {
-        max-width: calc(25% - 16px);
-
-        + * {
-          margin-left: 21.333px;
-        }
-
-        &:nth-child(5n) {
-          margin-left: 0;
-        }
-
-        &:nth-child(1n + 5) {
-          margin-top: 26px;
-        }
-      }
-    }
-  }
-
-  .gallery__image {
-    height: 0;
-    padding-top: 56.25%;
-    position: relative;
-    width: 100%;
-
-    * {
-      height: 100%;
-      left: 0;
-      position: absolute;
-      top: 0;
-      width: 100%;
-
-      object-fit: cover;
-    }
-  }
-
-  .gatsby-image-wrapper > div {
-    padding-bottom: 56.25% !important; /* your aspect ratio */
-  }
-
-  > * {
-    width: 100%;
-    @media ${device?.md} {
-      max-width: calc(50% - 16px);
-    }
-
-    + * {
-      margin-top: 32px;
-
-      @media ${device?.md} {
-        margin-top: 0;
-      }
-    }
   }
 `;

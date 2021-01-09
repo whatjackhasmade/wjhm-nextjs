@@ -18,6 +18,7 @@ const Related = (props: RelatedProps) => {
 
   // @ts-ignore
   const items = data.filter(Boolean);
+  if (!items) return null;
 
   return (
     <RelatedWrapper ref={relatedRef}>

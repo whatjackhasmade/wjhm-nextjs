@@ -40,7 +40,7 @@ const Base = (props: BaseProps) => {
       {seo && <SEO {...seo} />}
       <div className="wrapper">
         <Header />
-        {hasChildren && children}
+        <main>{hasChildren && children}</main>
         <InnerContent {...props} />
         {includeContact && <Contact />}
         <Footer />

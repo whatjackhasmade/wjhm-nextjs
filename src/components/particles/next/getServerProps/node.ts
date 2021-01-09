@@ -10,12 +10,12 @@ import { SERIES_BY_SLUG } from 'wjhm';
 // This also gets called at build time
 export const getServerSideProps: GetServerSideProps = async context => {
   const { params } = context;
-  let { uri } = params;
+  const { uri: slug } = params;
 
   let data = null;
   let postType = `page`;
 
-  uri = `/${uri}/`;
+  const uri = `/${slug}/`;
 
   // Try fetching as a page
   try {

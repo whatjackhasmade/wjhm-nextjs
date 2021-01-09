@@ -14,14 +14,16 @@ type CaseRowProps = {
 };
 
 const CaseRow = (props: CaseRowProps) => {
-  const { data } = props;
-  const { title, columnOne, columnTwo } = data;
-
   const { ref, inView } = useInView({
     /* Optional options */
     threshold: 0,
     triggerOnce: true,
   });
+
+  const { data } = props;
+  if (!data) return null;
+
+  const { title, columnOne, columnTwo } = data;
 
   let classList: string = `block`;
   if (inView) classList += ` block--show`;

@@ -72,10 +72,6 @@ const PresentationsComponent = styled.section`
     box-shadow: var(--shadow);
   }
 
-  .presentations__event__thumbnail > div {
-    padding-bottom: 56.25% !important; /* your aspect ratio */
-  }
-
   .subheading {
     margin: 0 0 8px;
 

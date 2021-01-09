@@ -36,6 +36,25 @@ const StyledLink = styled.a`
     transition: 0.2s color ease;
   }
 
+  .link__image {
+    height: 0;
+    padding-bottom: 100%;
+    position: relative;
+    width: 120px;
+
+    img {
+      height: 100% !important;
+      left: 0;
+      margin: 0;
+      max-width: 120px;
+      position: absolute;
+      top: 0;
+      width: 100% !important;
+
+      object-fit: cover;
+    }
+  }
+
   .link__title {
     font-size: 20px;
   }

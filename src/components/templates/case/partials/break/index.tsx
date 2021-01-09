@@ -11,13 +11,14 @@ type Props = {
 };
 
 const CaseBreak = (props: Props) => {
-  const { image } = props;
-
   const { ref, inView } = useInView({
     /* Optional options */
     threshold: 0,
     triggerOnce: true,
   });
+
+  const { image } = props;
+  if (!image) return null;
 
   let classList: string = `break`;
   if (inView) classList += ` break--show`;

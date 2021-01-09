@@ -82,8 +82,7 @@ const IntroComponent = styled.section`
   .intro__illustration {
     display: none;
     height: auto;
-    max-width: 260px;
-    width: 100%;
+    max-height: 500px;
 
     @media ${device?.lg} {
       display: block;

@@ -4,6 +4,18 @@ import { device } from 'particles';
 export const RelatedWrapper = styled.section`
   margin: 96px auto;
 
+  a {
+    &:active,
+    &:focus,
+    &:hover {
+      text-decoration: none;
+
+      h3 {
+        text-decoration: underline;
+      }
+    }
+  }
+
   h2 {
     text-align: center;
   }

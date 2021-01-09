@@ -58,6 +58,7 @@ const CaseTemplate = (props: CaseProps) => {
   const gallerySix: MediaItem[] | any[] = [];
 
   const hasImages: boolean = gallery?.length > 0;
+
   if (hasImages) {
     for (let i = 0; i < 2; i++) {
       galleryOne.push(gallery[i]);
@@ -99,24 +100,24 @@ const CaseTemplate = (props: CaseProps) => {
         {devicePreviews && <Previews devices={devices} siteUrl={siteUrl} subheading={subheading} />}
         {blocks && (
           <React.Fragment>
-            {blocks?.length > 0 && <CaseRow data={blocks[0].fields} />}
-            {galleryOne?.[0] && <CaseGallery images={galleryOne} />}
-            {blocks?.length > 1 && <CaseRow data={blocks[1].fields} />}
-            {galleryTwo?.[0] && <CaseGallery images={galleryTwo} />}
-            {blocks?.length > 2 && <CaseRow data={blocks[2].fields} />}
-            {galleryThree?.[0] && <CaseGallery images={galleryThree} />}
-            {blocks?.length > 3 && <CaseRow data={blocks[3].fields} />}
-            {galleryFour && <CaseBreak image={galleryFour} />}
-            {blocks?.length > 4 && <CaseRow data={blocks[4].fields} />}
-            {galleryFive?.[0] && <CaseGallery images={galleryFive} />}
-            {blocks?.length > 5 && <CaseRow data={blocks[5].fields} />}
-            {gallerySix?.[0] && <CaseGallery images={gallerySix} small={true} />}
-            {blocks?.length > 6 && <CaseRow data={blocks[6].fields} />}
+            <CaseRow data={blocks[0]?.fields} />
+            <CaseGallery images={galleryOne} />
+            <CaseRow data={blocks[1]?.fields} />
+            <CaseGallery images={galleryTwo} />
+            <CaseRow data={blocks[2]?.fields} />
+            <CaseGallery images={galleryThree} />
+            <CaseRow data={blocks[3]?.fields} />
+            <CaseBreak image={galleryFour} />
+            <CaseRow data={blocks[4]?.fields} />
+            <CaseGallery images={galleryFive} />
+            <CaseRow data={blocks[5]?.fields} />
+            <CaseGallery images={gallerySix} small={true} />
+            <CaseRow data={blocks[6]?.fields} />
           </React.Fragment>
         )}
         {/* @ts-ignore */}
-        {testimonials?.[0] && <Testimonials testimonials={processedTestimonials} />}
-        {related?.[0] && <Related data={related} title="Continue Viewing My Case Studies" />}
+        <Testimonials testimonials={processedTestimonials} />
+        <Related data={related} title="Continue Viewing My Case Studies" />
       </ReactBreakpoints>
     </React.Fragment>
   );

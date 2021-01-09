@@ -153,13 +153,6 @@ const YouTubeComponent = styled.section`
       width: calc(450px + 64px);
     }
 
-    .youtube__video__thumbnail {
-      height: 0;
-      padding-bottom: 56.25%; /* 16:9 */
-      position: relative;
-      width: 150px;
-    }
-
     .youtube__video {
       margin-top: 32px;
 

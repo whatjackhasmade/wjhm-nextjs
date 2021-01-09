@@ -4,6 +4,8 @@ import { useQuery } from 'react-query';
 
 import StyledBookmark from './bookmark.styles';
 
+import { Skeleton } from 'wjhm';
+
 import { Error } from 'wjhm';
 
 const scraperURL = process.env.NEXT_PUBLIC_GRAPH_SCRAPER || `https://wjhm-opengraphscraper.herokuapp.com/?url=`;
@@ -12,7 +14,10 @@ type BookmarkProps = {
   url: string;
 };
 
-const fetchBookmark = async url => await fetch(scraperURL + url);
+const fetchBookmark = async url => {
+  const res = await fetch(scraperURL + url);
+  return res.json();
+};
 
 const Bookmark = (props: BookmarkProps) => {
   const { url } = props;
@@ -21,21 +26,29 @@ const Bookmark = (props: BookmarkProps) => {
   // @ts-ignore
   const data = res?.data;
 
-  const hasImage = Boolean(data?.ogImage?.length > 0);
+  let image = null;
 
-  if (loading) return <p>Loading...</p>;
+  const hasTwitterImage: boolean = data?.twitterImage?.url && data.twitterImage.url.startsWith(`https://`);
+  const hasOGImage: boolean = data?.ogImage?.url && data.ogImage.url.startsWith(`https://`);
 
+  if (hasTwitterImage) image = data?.twitterImage?.url;
+  if (hasOGImage) image = data?.ogImage?.url;
+
+  const hasImage = Boolean(image);
+
+  if (loading) return <Skeleton width={1000} height={200} />;
   if (error) return <Error error={error} />;
-
   if (!data) return null;
 
   return (
     <StyledBookmark className="link" href={url}>
-      <div className="link__image">
-        {hasImage && <BookmarkImage altText={`Open Graph for ${url}`} image={data.ogImage} />}
-        {!hasImage && (
-          <Image src="/images/placeholder.png" alt={`Open Graph Fallback for ${url}`} height={100} width={100} />
-        )}
+      <div>
+        <div className="link__image">
+          {hasImage && <BookmarkImage altText={`Open Graph for ${url}`} image={image} />}
+          {!hasImage && (
+            <Image src="/images/placeholder.png" alt={`Open Graph Fallback for ${url}`} height={100} width={100} />
+          )}
+        </div>
       </div>
       <div className="link__content">
         <h3 className="link__title">{data.ogTitle}</h3>
@@ -56,10 +69,8 @@ declare type BookmarkImageProps = {
 
 const BookmarkImage = (props: BookmarkImageProps) => {
   const { altText, image } = props;
-  const isMultiple = image?.length > 0;
 
-  if (!isMultiple) return <Image alt={altText} src={image.url} height={100} width={100} />;
-  return <Image alt={altText} src={image[0].url} height={100} width={100} />;
+  return <img alt={altText} src={image} height={100} width={100} />;
 };
 
 export default Bookmark;
