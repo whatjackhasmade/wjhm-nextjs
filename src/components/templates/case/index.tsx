@@ -97,7 +97,7 @@ const CaseTemplate = (props: CaseProps) => {
           illustration={illustration}
           maxWidth={maxWidth}
         />
-        {devicePreviews && <Previews devices={devices} siteUrl={siteUrl} subheading={subheading} />}
+        <Previews devices={devices} devicePreviews={devicePreviews} siteUrl={siteUrl} subheading={subheading} />
         {blocks && (
           <React.Fragment>
             <CaseRow data={blocks[0]?.fields} />
@@ -125,21 +125,29 @@ const CaseTemplate = (props: CaseProps) => {
 
 declare type PreviewsProps = {
   devices: any;
+  devicePreviews: boolean;
   siteUrl: any;
   subheading: any;
 };
 
 const Previews: React.FC<PreviewsProps> = (props: PreviewsProps) => {
   const devices = props?.devices;
+  const devicePreviews = props?.devicePreviews;
   const siteUrl = props?.siteUrl;
   const subheading = props?.subheading;
+
+  if (!devicePreviews) return null;
+  if (!devices) return null;
 
   return (
     <Media>
       {({ breakpoints, currentBreakpoint }) => {
         const isLarge: boolean = breakpoints[currentBreakpoint] > breakpoints.lg;
+        const isSmall: boolean = breakpoints[currentBreakpoint] <= breakpoints.lg;
 
-        if (!isLarge) {
+        if (!isLarge && !isSmall) return null;
+
+        if (isSmall) {
           return (
             <a href={siteUrl} className="button" rel="noopener noreferrer" target="_blank">
               View The {subheading} Website
