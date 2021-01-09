@@ -7,7 +7,7 @@
     "d": "yarn codegen:develop",
     "dev": "yarn codegen:develop",
     "develop": "run-p next:develop",
-    "deploy": "yarn && yarn codegen && yarn codegen:fix && yarn build && yarn export",
+    "deploy": "yarn && yarn codegen && yarn codegen:fix && yarn build && yarn serve",
     "export": "next export",
     "format": "yarn prettier",
     "format-check": "yarn prettier --list-different",
