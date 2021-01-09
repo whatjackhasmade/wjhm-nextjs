@@ -40,11 +40,17 @@ const Post: React.FC<Props> = (props: Props) => {
   let classList: string = `item`;
   if (inView) classList += ` item--show`;
 
+  const caseStudyTitle = props?.CaseStudyFields?.intro?.title;
+
+  let subtitle: string = ``;
+  if (caseStudyTitle) subtitle = caseStudyTitle;
+
   return (
     <StyledPost className={classList} ref={ref}>
       <Link href={href}>
-        {hasImage && <Image className="item__media" src={src} alt={altText} width={1600} height={900} />}
+        <div className="item__media">{hasImage && <Image src={src} alt={altText} width={1600} height={900} />}</div>
         {hasTitle && <h3 className="item__title">{decodeHTML(title)}</h3>}
+        {subtitle && <h4 className="item__subtitle">{decodeHTML(subtitle)}</h4>}
         {hasSEO && <p className="item__description">{seo}</p>}
       </Link>
     </StyledPost>

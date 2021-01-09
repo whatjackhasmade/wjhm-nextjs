@@ -18,6 +18,8 @@ const StyledWorks = styled.section`
   }
 
   @media ${device?.xl} {
+    grid-gap: 64px;
+    grid-row-gap: 48px;
     margin: 0 0 160px;
   }
 

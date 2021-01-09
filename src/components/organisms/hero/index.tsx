@@ -95,7 +95,7 @@ const HeroImage = (props: HeroImageProps) => {
 
   return (
     <div className="hero__media">
-      <Image src={src.mediaItemUrl} alt={altText} layout="fill" />
+      <Image src={src.mediaItemUrl} alt={altText} layout="fill" priority={true} />
     </div>
   );
 };

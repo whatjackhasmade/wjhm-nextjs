@@ -5695,7 +5695,11 @@ export type Series_Seriesfields = {
   /** @deprecated  */
   fieldGroupName?: Maybe<Scalars['String']>;
   /** @deprecated  */
+  index?: Maybe<Scalars['Float']>;
+  /** @deprecated  */
   seriesImage?: Maybe<MediaItem>;
+  /** @deprecated  */
+  youtubePlaylist?: Maybe<Scalars['String']>;
 };
 
 /** Connection between the Series type and the Series type */

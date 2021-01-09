@@ -29,6 +29,7 @@ const Github = (props: GithubProps) => {
         <Image
           alt="Jack Pritchard's Github chart"
           height={104}
+          priority={true}
           src="https://ghchart.rshah.org/whatjackhasmade"
           width={702}
         />

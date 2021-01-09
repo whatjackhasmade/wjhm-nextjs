@@ -11,7 +11,6 @@ import { Post } from 'wjhm';
 import StyledWorks from './work.styles';
 
 import { AcfWorkBlockAttributes as Props } from 'wjhmtypes';
-import { CaseStudy } from 'wjhmtypes';
 
 const Skeletons: React.FC = () => {
   return (
@@ -27,19 +26,15 @@ const Skeletons: React.FC = () => {
 const Work: React.FC<Props> = (props: Props) => {
   const { data, error, isLoading: loading } = useQuery(`callGetAllCaseStudies`, callGetAllCaseStudies);
 
-  const items: CaseStudy[] = data?.caseStudies?.nodes;
+  const items = data?.caseStudies?.nodes;
   const hasItems: boolean = items?.length > 0;
 
   if (error) return <Error error={error} />;
 
-  if (!hasItems) return null;
-
   return (
     <StyledWorks className="work">
       {loading && <Skeletons />}
-      {items.map(item => (
-        <Post {...item} key={item.id} />
-      ))}
+      {hasItems && items.map(item => <Post {...item} key={item.id} />)}
     </StyledWorks>
   );
 };

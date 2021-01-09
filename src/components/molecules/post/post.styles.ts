@@ -6,9 +6,15 @@ export const StyledPost = styled.div`
   a {
     color: inherit;
     text-decoration: none;
+
+    &:hover {
+      img {
+        transform: scale(1.05);
+      }
+    }
   }
 
-  .post__media {
+  .item__media {
     overflow: hidden;
 
     img {
@@ -17,12 +23,19 @@ export const StyledPost = styled.div`
     }
   }
 
-  &:hover {
-    .post__media {
-      img {
-        transform: scale(1.05);
-      }
-    }
+  .item__subtitle {
+    margin: 0;
+    margin-top: 8px;
+
+    color: var(--grey600);
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .item__title {
+    margin: 0;
+    margin-top: 16px;
   }
 `;
 

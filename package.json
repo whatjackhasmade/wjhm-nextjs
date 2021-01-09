@@ -29,7 +29,7 @@
     "cypress:dev": "cypress open --config baseUrl=http://localhost:3000",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "next:develop": "NODE_TLS_REJECT_UNAUTHORIZED=0 && next dev",
+    "next:develop": "NODE_TLS_REJECT_UNAUTHORIZED=0 && NODE_OPTIONS=\"--max_old_space_size=8192\" next dev",
     "netlify:upload": "netlify deploy -p",
     "storybook:assets": "node src/node/storybook/assets.ts",
     "storybook:build": "build-storybook  -c src/.storybook -o storybook-public --quiet",

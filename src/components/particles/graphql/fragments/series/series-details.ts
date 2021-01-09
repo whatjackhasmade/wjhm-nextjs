@@ -10,6 +10,7 @@ SeriesFields {
 	seriesImage {
 		${MediaFragment}
 	}
+	youtubePlaylist
 }
 slug
 uri
