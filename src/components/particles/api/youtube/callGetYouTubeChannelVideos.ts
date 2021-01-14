@@ -6,7 +6,11 @@ export const callGetYouTubeChannelVideos = async (count?: number): Promise<any> 
   if (count) max = count;
 
   const maxString: string = String(max);
-  const youtubeURL: string = `https://youtube.googleapis.com/youtube/v3/channels?part=id&part=snippet&categoryId=${channelID}&maxResults=${maxString}&key=${GAPI}`;
+  const youtubeURL: string = encodeURI(
+    `https://youtube.googleapis.com/youtube/v3/channels?part=snippet,contentDetails&forUsername=${channelID}&maxResults=${maxString}&key=${GAPI}`,
+  );
 
-  await fetch(youtubeURL);
+  const res = await fetch(youtubeURL);
+  const data = await res.json();
+  return data;
 };

@@ -1,44 +1,49 @@
 /* eslint-disable react/react-in-jsx-scope */
 import Image from 'next/image';
 
+// Particles
 import { parseHTML } from 'wjhm';
+import { theme } from 'wjhm';
 
+// Local Partials
 import Duotone from './duotone';
 import HeroComponent from './hero.styles';
 import HeroMediaComponent from './media.styles';
 
-type HeroProps = {
+// Type definitions
+import type { MediaItem } from 'wjhmtypes';
+import type { AcfHeroBlock_Herofields as HeroProps } from 'wjhmtypes';
+
+declare type Props = HeroProps & {
   align?: string;
-  backgroundColour?: string;
   children?: any;
-  content?: string;
-  duotone?: boolean;
+  height?: number;
   maxWidth?: string;
-  media?: {
-    altText: string;
-    mediaItemUrl: string;
-  };
-  overlay?: boolean;
 };
 
-type HeroMediaProps = {
-  altText?: string;
+export interface CSSProperties extends React.CSSProperties {
   background?: string;
-  duotone: boolean;
-  media?: {
-    altText: string;
-    mediaItemUrl: string;
-  };
-  overlay?: boolean;
-};
+  height?: string;
+}
 
-const Hero = (props: HeroProps) => {
+const Hero: React.FC<Props> = (props: Props) => {
   const { align = `left`, backgroundColour, children, content } = props;
-  const { duotone = false, maxWidth, media, overlay = true } = props;
+  const { duotone = false, height = 500, maxWidth, media, overlay = true } = props;
+
+  const background = backgroundColour ? backgroundColour : theme.primary;
+  const contentsMargin = align === `center` ? `0 auto` : `0 auto 0 0`;
+  const contentsMaxWidth = maxWidth || `686px`;
+
+  const style = {
+    '--background': background,
+    '--contents-margin': contentsMargin,
+    '--contents-max-width': contentsMaxWidth,
+    '--min-height': `${String(height)}px`,
+  } as CSSProperties;
 
   if (!content) {
     return (
-      <HeroComponent align={align} maxWidth={maxWidth}>
+      <HeroComponent style={style}>
         <div className="hero__wrapper">
           <div className="hero__contents">{children}</div>
         </div>
@@ -47,55 +52,37 @@ const Hero = (props: HeroProps) => {
   }
 
   return (
-    <HeroComponent background={backgroundColour} overlay={overlay}>
+    <HeroComponent style={style}>
       <div className="hero__wrapper">
-        {content ? (
-          <div className="hero__contents">{parseHTML(content)}</div>
-        ) : (
-          <div className="hero__contents">{children}</div>
-        )}
-        {media && (
-          <HeroMedia
-            altText={media.altText}
-            background={backgroundColour}
-            duotone={duotone}
-            media={media}
-            overlay={overlay}
-          />
-        )}
+        {content && <div className="hero__contents">{parseHTML(content)}</div>}
+        {!content && <div className="hero__contents">{children}</div>}
+        {media && <HeroMedia backgroundColour={backgroundColour} duotone={duotone} media={media} overlay={overlay} />}
       </div>
     </HeroComponent>
   );
 };
 
-const HeroMedia = (props: HeroMediaProps) => {
-  const { altText, background, duotone, media, overlay } = props;
+const HeroMedia: React.FC<Props> = (props: Props) => {
+  const { backgroundColour, duotone, media, overlay } = props;
 
   return (
-    <HeroMediaComponent background={background} overlay={overlay}>
+    <HeroMediaComponent background={backgroundColour} overlay={overlay}>
       {duotone && (
         <Duotone className="hero__media">
-          <HeroImage altText={altText} src={media} />
+          <HeroImage {...media} />
         </Duotone>
       )}
-      {!duotone && <HeroImage altText={altText} src={media} />}
+      {!duotone && <HeroImage {...media} />}
     </HeroMediaComponent>
   );
 };
 
-declare type HeroImageProps = {
-  altText: string;
-  src: {
-    mediaItemUrl: string;
-  };
-};
-
-const HeroImage = (props: HeroImageProps) => {
-  const { altText, src } = props;
+const HeroImage = (props: MediaItem) => {
+  const { altText, mediaItemUrl } = props;
 
   return (
     <div className="hero__media">
-      <Image src={src.mediaItemUrl} alt={altText} layout="fill" priority={true} />
+      <Image src={mediaItemUrl} alt={altText} layout="fill" priority={true} />
     </div>
   );
 };

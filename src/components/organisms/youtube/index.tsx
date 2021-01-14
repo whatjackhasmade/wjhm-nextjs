@@ -53,10 +53,10 @@ const YouTubeChannel = () => {
           <a className="button" href="https://youtube.com/whatjackhasmade" rel="noopener noreferrer" target="_blank">
             View My YouTube Channel
           </a>
-          <MostRecent data={data} />
+          <MostRecent data={data?.items} />
         </div>
         <div className="youtube__videos">
-          <Videos data={data} />
+          <Videos data={data?.items} />
         </div>
       </div>
     </YouTubeComponent>

@@ -4,17 +4,16 @@ import { device } from 'particles';
 const HeroComponent = styled.section`
   align-items: center;
   display: flex;
-  height: 500px;
   justify-content: center;
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
-  min-height: ${props => props.height};
+  min-height: var(--min-height);
   overflow: hidden;
   position: relative;
   width: 100vw;
   z-index: 9;
 
-  background: ${props => (props.background ? props.background : props.theme.primary)};
+  background: var(--background);
   color: var(--white);
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 
@@ -71,8 +70,8 @@ const HeroComponent = styled.section`
   }
 
   .hero__contents {
-    margin: ${props => (props.align === `center` ? `0 auto` : `0 auto 0 0`)};
-    max-width: ${props => (props.maxWidth ? props.maxWidth : `686px`)};
+    margin: var(--contents-margin);
+    max-width: var(--contents-max-width);
     position: relative;
     width: 100%;
     z-index: 3;
@@ -81,7 +80,7 @@ const HeroComponent = styled.section`
   .hero__wrapper {
     margin: 0 auto;
     max-width: 1506px;
-    padding: 0 20px;
+    padding: 20px;
     width: 100%;
 
     @media ${device?.xs} {
