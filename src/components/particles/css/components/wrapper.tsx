@@ -2,7 +2,8 @@ import { css } from 'styled-components';
 
 const exportedCSS = css`
   body,
-  #__next {
+  #__next,
+  .wrapper {
     @supports (display: flex) {
       display: flex;
       flex-direction: column;

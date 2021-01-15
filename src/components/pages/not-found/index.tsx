@@ -1,18 +1,23 @@
 import * as React from 'react';
 import Image from 'next/image';
+import { useQuery } from 'react-query';
 import { Container, Row, Col } from 'react-grid-system';
 
 import { Link } from 'wjhm';
 import { Hero } from 'wjhm';
 import { Related } from 'wjhm';
 
+// API
+import { callGetPosts } from 'wjhm';
+
 type NotFoundProps = {};
 
 const NotFound = (props: NotFoundProps) => {
-  const allPosts = [];
-  const latestPosts = allPosts.filter((_, i) => i < 3);
+  const args = { count: 3 };
+  const { data } = useQuery([`callGetPosts`, args], () => callGetPosts(args));
 
-  const hasPosts = latestPosts?.length > 0;
+  const posts = data;
+  const hasPosts = posts?.length > 0;
 
   return (
     <React.Fragment>
@@ -40,7 +45,7 @@ const NotFound = (props: NotFoundProps) => {
           </Row>
         </Container>
       </Hero>
-      {hasPosts && <Related data={latestPosts} title="Find something that... works!" />}
+      {hasPosts && <Related data={posts} title="Find something that... works!" />}
     </React.Fragment>
   );
 };

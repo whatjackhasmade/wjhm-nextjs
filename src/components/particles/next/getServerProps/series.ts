@@ -2,22 +2,21 @@ import { GetServerSideProps } from 'next';
 
 import { requestor } from 'wjhm';
 
-import { NODE_BY_URI } from 'wjhm';
+import { SERIES_BY_SLUG } from 'wjhm';
 
 // This also gets called at build time
 export const getServerSideProps: GetServerSideProps = async context => {
   const { params } = context;
-  const { uri } = params;
+  const { slug } = params;
 
   let data = null;
-  let postType = ``;
+  const postType = `series`;
 
   // Try fetching as a node
   try {
     // Call an external API endpoint to get nodes
-    const res = await requestor.request(NODE_BY_URI, { uri });
-    data = res?.nodeByUri;
-    postType = data?.__typename;
+    const res = await requestor.request(SERIES_BY_SLUG, { slug });
+    data = res?.series;
   } catch (error) {
     console.error(error.message);
     return { props: null };

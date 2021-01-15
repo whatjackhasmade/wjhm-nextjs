@@ -2,6 +2,7 @@ export * from './blocks';
 export * from './case';
 export * from './event';
 export * from './general';
+export * from './node';
 export * from './page';
 export * from './post';
 export * from './review';

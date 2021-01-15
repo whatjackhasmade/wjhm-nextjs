@@ -3,6 +3,15 @@ const path = require(`path`);
 const buildPath = stringDirectory => path.resolve(__dirname + `/` + stringDirectory);
 
 module.exports = {
+  async redirects() {
+    return [
+      {
+        source: `gatsby-wordpress-2019`,
+        destination: `/series/:uri`,
+        permanent: true,
+      },
+    ];
+  },
   images: {
     domains: [
       `cdn.dribbble.com`,

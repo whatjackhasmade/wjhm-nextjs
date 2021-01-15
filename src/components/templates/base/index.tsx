@@ -31,9 +31,10 @@ declare type BaseProps = {
 } & typeName;
 
 const Base = (props: BaseProps) => {
-  const { children, cta = true, seo } = props;
+  const { children, ...childless } = props;
+  const { cta = true, seo } = childless;
   const includeContact: boolean = cta !== false;
-  const hasChildren: boolean = children?.length > 0;
+  const hasChildren: boolean = Boolean(children);
 
   return (
     <React.Fragment>
@@ -53,8 +54,8 @@ const InnerContent: React.FC<any> = (props: any) => {
   const { postType } = props;
   let innerContents = null;
 
-  switch (postType) {
-    case `case`:
+  switch (postType?.toLowerCase()) {
+    case `casestudy`:
       innerContents = <Case {...props} />;
       break;
     case `page`:
