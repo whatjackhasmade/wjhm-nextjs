@@ -6,7 +6,7 @@ module.exports = {
   async redirects() {
     return [
       {
-        source: `gatsby-wordpress-2019`,
+        source: `/gatsby-wordpress-2019`,
         destination: `/series/:uri`,
         permanent: true,
       },
