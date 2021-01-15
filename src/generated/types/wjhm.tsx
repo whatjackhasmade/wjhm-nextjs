@@ -2189,6 +2189,11 @@ export type User = Node & UniformResourceIdentifiable & Commenter & DatabaseIden
    */
   roles?: Maybe<UserToUserRoleConnection>;
   /**
+   * The Yoast SEO data of a user
+   * @deprecated 
+   */
+  seo?: Maybe<SeoUser>;
+  /**
    * The slug for the user. This field is equivalent to WP_User-&gt;user_nicename
    * @deprecated 
    */
@@ -4052,6 +4057,8 @@ export type MediaSize = {
 export type Seo = {
   __typename?: 'SEO';
   /** @deprecated  */
+  breadcrumbs?: Maybe<Array<Maybe<SeoPostTypeBreadcrumbs>>>;
+  /** @deprecated  */
   canonical?: Maybe<Scalars['String']>;
   /** @deprecated  */
   focuskw?: Maybe<Scalars['String']>;
@@ -4064,11 +4071,25 @@ export type Seo = {
   /** @deprecated  */
   metaRobotsNoindex?: Maybe<Scalars['String']>;
   /** @deprecated  */
+  opengraphAuthor?: Maybe<Scalars['String']>;
+  /** @deprecated  */
   opengraphDescription?: Maybe<Scalars['String']>;
   /** @deprecated  */
   opengraphImage?: Maybe<MediaItem>;
   /** @deprecated  */
+  opengraphModifiedTime?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  opengraphPublishedTime?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  opengraphPublisher?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  opengraphSiteName?: Maybe<Scalars['String']>;
+  /** @deprecated  */
   opengraphTitle?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  opengraphType?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  opengraphUrl?: Maybe<Scalars['String']>;
   /** @deprecated  */
   title?: Maybe<Scalars['String']>;
   /** @deprecated  */
@@ -4077,6 +4098,14 @@ export type Seo = {
   twitterImage?: Maybe<MediaItem>;
   /** @deprecated  */
   twitterTitle?: Maybe<Scalars['String']>;
+};
+
+export type SeoPostTypeBreadcrumbs = {
+  __typename?: 'SEOPostTypeBreadcrumbs';
+  /** @deprecated  */
+  text?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  url?: Maybe<Scalars['String']>;
 };
 
 /** Arguments for filtering the UserToPageConnection connection */
@@ -10555,6 +10584,42 @@ export type UserRole = Node & {
   name?: Maybe<Scalars['String']>;
 };
 
+export type SeoUser = {
+  __typename?: 'SEOUser';
+  /** @deprecated  */
+  metaDesc?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  metaRobotsNofollow?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  metaRobotsNoindex?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  social?: Maybe<SeoUserSocial>;
+  /** @deprecated  */
+  title?: Maybe<Scalars['String']>;
+};
+
+export type SeoUserSocial = {
+  __typename?: 'SEOUserSocial';
+  /** @deprecated  */
+  facebook?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  instagram?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  linkedIn?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  mySpace?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  pinterest?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  soundCloud?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  twitter?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  wikipedia?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  youTube?: Maybe<Scalars['String']>;
+};
+
 /** Connection between the BlockEditorPreview type and the BlockEditorPreview type */
 export type BlockEditorPreviewToPreviewConnectionEdge = {
   __typename?: 'BlockEditorPreviewToPreviewConnectionEdge';
@@ -13041,6 +13106,10 @@ export type SeoConfig = {
   /** @deprecated  */
   breadcrumbs?: Maybe<SeoBreadcrumbs>;
   /** @deprecated  */
+  openGraph?: Maybe<SeoOpenGraph>;
+  /** @deprecated  */
+  redirects?: Maybe<Array<Maybe<SeoRedirect>>>;
+  /** @deprecated  */
   schema?: Maybe<SeoSchema>;
   /** @deprecated  */
   social?: Maybe<SeoSocial>;
@@ -13048,6 +13117,7 @@ export type SeoConfig = {
   webmaster?: Maybe<SeoWebmaster>;
 };
 
+/** The Yoast SEO breadcrumb config */
 export type SeoBreadcrumbs = {
   __typename?: 'SEOBreadcrumbs';
   /** @deprecated  */
@@ -13070,6 +13140,40 @@ export type SeoBreadcrumbs = {
   showBlogPage?: Maybe<Scalars['Boolean']>;
 };
 
+/** The Open Graph data */
+export type SeoOpenGraph = {
+  __typename?: 'SEOOpenGraph';
+  /** @deprecated  */
+  defaultImage?: Maybe<MediaItem>;
+  /** @deprecated  */
+  frontPage?: Maybe<SeoOpenGraphFrontPage>;
+};
+
+/** The Open Graph Front page data */
+export type SeoOpenGraphFrontPage = {
+  __typename?: 'SEOOpenGraphFrontPage';
+  /** @deprecated  */
+  description?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  image?: Maybe<MediaItem>;
+  /** @deprecated  */
+  title?: Maybe<Scalars['String']>;
+};
+
+/** The Yoast redirect data  (Yoast Premium only) */
+export type SeoRedirect = {
+  __typename?: 'SEORedirect';
+  /** @deprecated  */
+  format?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  origin?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  target?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  type?: Maybe<Scalars['Int']>;
+};
+
+/** The Yoast SEO schema data */
 export type SeoSchema = {
   __typename?: 'SEOSchema';
   /** @deprecated  */
@@ -13082,8 +13186,15 @@ export type SeoSchema = {
   logo?: Maybe<MediaItem>;
   /** @deprecated  */
   personLogo?: Maybe<MediaItem>;
+  /** @deprecated  */
+  siteName?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  siteUrl?: Maybe<Scalars['String']>;
+  /** @deprecated  */
+  wordpressSiteName?: Maybe<Scalars['String']>;
 };
 
+/** The Yoast SEO Social media links */
 export type SeoSocial = {
   __typename?: 'SEOSocial';
   /** @deprecated  */
@@ -13164,6 +13275,7 @@ export type SeoSocialYoutube = {
   url?: Maybe<Scalars['String']>;
 };
 
+/** The Yoast SEO  webmaster fields */
 export type SeoWebmaster = {
   __typename?: 'SEOWebmaster';
   /** @deprecated  */
