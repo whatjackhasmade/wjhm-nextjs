@@ -1,7 +1,8 @@
 import { CaseDetailsFragment } from '../../fragments/case/case-details';
 import { PageDetailsFragment } from '../../fragments/page/page-details';
 import { PostDetailsFragment } from '../../fragments/post/post-details';
-import { SeriesDetailsFragment } from '../../fragments/series/series-details';
+
+import { AllBlocksFragment } from '../../fragments/blocks';
 
 export const NODE_BY_URI: string = /* GraphQL */ `
   query NODE_BY_URI($uri: String!) {
@@ -13,12 +14,11 @@ export const NODE_BY_URI: string = /* GraphQL */ `
       }
       ... on Page {
         ${PageDetailsFragment}
+			  ${AllBlocksFragment}
       }
       ... on Post {
         ${PostDetailsFragment}
-      }
-      ... on Series {
-        ${SeriesDetailsFragment}
+			  ${AllBlocksFragment}
       }
     }
   }
