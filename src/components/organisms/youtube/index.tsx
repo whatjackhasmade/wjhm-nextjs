@@ -1,9 +1,10 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useQuery } from 'react-query';
-import Image from 'next/image';
 import YouTube from 'react-youtube';
 
 import YouTubeComponent from './youtube.styles';
+
+import { Image } from 'wjhm';
 
 import { Error } from 'wjhm';
 

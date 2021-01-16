@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import he from 'he';
-import Image from 'next/image';
 
+import { Image } from 'wjhm';
 import { Link } from 'wjhm';
 
 import { Post } from 'wjhmtypes';

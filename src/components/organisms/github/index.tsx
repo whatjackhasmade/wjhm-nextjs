@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
-import Image from 'next/image';
-
 import { parseHTML } from 'wjhm';
+
+import { Image } from 'wjhm';
 
 import { Intro } from 'wjhm';
 

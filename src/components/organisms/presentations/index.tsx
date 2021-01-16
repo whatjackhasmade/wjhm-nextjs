@@ -1,13 +1,14 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useQuery } from 'react-query';
 import Slider from 'react-slick';
-import Image from 'next/image';
 
 import PresentationsComponent from './presentation.styles';
 import settings from './settings.json';
 
 import { callGetAllPresentatitons } from 'wjhm';
 import { parseHTML } from 'wjhm';
+
+import { Image } from 'wjhm';
 
 import { Error } from 'wjhm';
 

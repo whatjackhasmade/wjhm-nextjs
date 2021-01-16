@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
-import Image from 'next/image';
 import he from 'he';
 
 // API
@@ -14,6 +13,7 @@ import { parseHTML } from 'wjhm';
 // Atoms
 import { Button } from 'wjhm';
 import { HR } from 'wjhm';
+import { Image } from 'wjhm';
 import { Skeleton } from 'wjhm';
 
 // Local Parts

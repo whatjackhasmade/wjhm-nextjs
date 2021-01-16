@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useState } from 'react';
-import Image from 'next/image';
 
 import GridComponent from './grid.styles';
 
 import { Button } from 'wjhm';
+import { Image } from 'wjhm';
 
 declare type GridMedia = {
   altText: string;

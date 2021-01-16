@@ -1,6 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useInView } from 'react-intersection-observer';
-import Image from 'next/image';
+
+import { Image } from 'wjhm';
 
 import { BreakImage } from '../../case.styles';
 

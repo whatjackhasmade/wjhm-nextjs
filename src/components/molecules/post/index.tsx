@@ -1,9 +1,9 @@
 /* eslint-disable react/react-in-jsx-scope */
-import Image from 'next/image';
 import { useInView } from 'react-intersection-observer';
 
 import { decodeHTML } from 'wjhm';
 
+import { Image } from 'wjhm';
 import { Link } from 'wjhm';
 
 import { StyledPost } from './post.styles';

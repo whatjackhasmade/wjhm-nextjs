@@ -1,9 +1,11 @@
 /* eslint-disable react/react-in-jsx-scope */
-import Image from 'next/image';
 
 // Particles
 import { parseHTML } from 'wjhm';
 import { theme } from 'wjhm';
+
+// Atoms
+import { Image } from 'wjhm';
 
 // Local Partials
 import Duotone from './duotone';

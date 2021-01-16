@@ -16404,8 +16404,6 @@ export enum TimezoneEnum {
   AmericaFortNelson = 'AMERICA_FORT_NELSON',
   /** Glace Bay */
   AmericaGlaceBay = 'AMERICA_GLACE_BAY',
-  /** Godthab */
-  AmericaGodthab = 'AMERICA_GODTHAB',
   /** Goose Bay */
   AmericaGooseBay = 'AMERICA_GOOSE_BAY',
   /** Grand Turk */
@@ -16512,6 +16510,8 @@ export enum TimezoneEnum {
   AmericaNorthDakotaCenter = 'AMERICA_NORTH_DAKOTA_CENTER',
   /** North Dakota - New Salem */
   AmericaNorthDakotaNewSalem = 'AMERICA_NORTH_DAKOTA_NEW_SALEM',
+  /** Nuuk */
+  AmericaNuuk = 'AMERICA_NUUK',
   /** Ojinaga */
   AmericaOjinaga = 'AMERICA_OJINAGA',
   /** Panama */

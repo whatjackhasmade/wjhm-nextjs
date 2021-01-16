@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { useInView } from 'react-intersection-observer';
-import Image from 'next/image';
 
 import { parseHTML } from 'wjhm';
+
+import { Image } from 'wjhm';
 
 import RowComponent from './row.styles';
 

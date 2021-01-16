@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import Image from 'next/image';
 import Slider from 'react-slick';
 
 import { parseHTML } from 'wjhm';
@@ -15,6 +14,7 @@ import { callGetAllDribbble } from 'wjhm';
 import { Dribbble as IconDribbble } from '../../atoms/icons/brands';
 
 // Atoms
+import { Image } from 'wjhm';
 import { Skeleton } from 'wjhm';
 
 // Molecules

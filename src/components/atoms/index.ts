@@ -4,6 +4,7 @@ export { default as Code } from './code';
 export { default as FeaturedImage } from './featured-image';
 export { default as Heading } from './heading';
 export { default as HR } from './hr';
+export * from './image';
 export * from './icons';
 export { default as Link } from './link';
 export { default as MenuItem } from './menu-item';

@@ -1,9 +1,9 @@
 import React from 'react';
-import Image from 'next/image';
 import { useQuery } from 'react-query';
 
 import StyledBookmark from './bookmark.styles';
 
+import { Image } from 'wjhm';
 import { Skeleton } from 'wjhm';
 
 import { Error } from 'wjhm';

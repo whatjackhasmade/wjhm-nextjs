@@ -1,10 +1,11 @@
 import { useRef } from 'react';
-import Image from 'next/image';
 import Slider from 'react-slick';
 
 import { AngleRight } from '../../atoms/icons/solid';
 
 import TestimonialsComponent from './testimonials.styles';
+
+import { Image } from 'wjhm';
 
 import type { AcfTestimonialsBlock_Testimonialsfields as Props } from 'wjhmtypes';
 import type { AcfTestimonialsBlock_Testimonialsfields_Testimonials as SingleItem } from 'wjhmtypes';

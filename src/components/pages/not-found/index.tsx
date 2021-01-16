@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Image from 'next/image';
 import { useQuery } from 'react-query';
 import { Container, Row, Col } from 'react-grid-system';
 
+import { Image } from 'wjhm';
 import { Link } from 'wjhm';
 import { Hero } from 'wjhm';
 import { Related } from 'wjhm';
