@@ -1,4 +1,4 @@
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { LazyLoadImage, trackWindowScroll } from 'react-lazy-load-image-component';
 import type { LazyLoadImageProps } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
@@ -18,7 +18,7 @@ declare type ImageProps = React.HTMLProps<HTMLImageElement> &
   };
 
 export const Image: React.FC<ImageProps> = (props: ImageProps) => {
-  const { altText, aspect = true, className, height, threshold = 600, width } = props;
+  const { altText, aspect = true, className, height, threshold = 600, scrollPosition, width } = props;
   let { placeholderSrc, src } = props;
 
   const sizes = getSizes(props);
@@ -52,14 +52,30 @@ export const Image: React.FC<ImageProps> = (props: ImageProps) => {
     <StyledImage className={classList} style={style}>
       {aspect && (
         <div className="image__wrapper">
-          <LazyLoadImage alt={alt} effect={effect} placeholderSrc={placeholderSrc} src={src} threshold={threshold} />
+          <LazyLoadImage
+            alt={alt}
+            effect={effect}
+            placeholderSrc={placeholderSrc}
+            scrollPosition={scrollPosition}
+            src={src}
+            threshold={threshold}
+          />
         </div>
       )}
       {!aspect && (
-        <LazyLoadImage alt={alt} effect={effect} placeholderSrc={placeholderSrc} src={src} threshold={threshold} />
+        <LazyLoadImage
+          alt={alt}
+          effect={effect}
+          placeholderSrc={placeholderSrc}
+          scrollPosition={scrollPosition}
+          src={src}
+          threshold={threshold}
+        />
       )}
     </StyledImage>
   );
 };
 
-export default Image;
+// Wrap Gallery with trackWindowScroll HOC so it receives
+// a scrollPosition prop to pass down to the images
+export default trackWindowScroll(Image);
