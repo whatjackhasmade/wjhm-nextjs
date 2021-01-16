@@ -26,10 +26,9 @@ const Github = (props: GithubProps) => {
         rel="noopener noreferrer"
         target="_blank"
       >
-        <Image
+        <SmartImage
           alt="Jack Pritchard's Github chart"
           height={104}
-          priority={true}
           src="https://ghchart.rshah.org/whatjackhasmade"
           width={702}
         />

@@ -29,6 +29,7 @@ declare type ShotImage = {
   hidpi?: string;
   normal?: string;
   one_x?: string;
+  teaser?: string;
   two_x?: string;
 };
 
@@ -98,7 +99,7 @@ const Shot = (props: ShotProps) => {
     >
       <a className="dribbble__shot__thumbnail" href={htmlURL} rel="noopener noreferrer" target="_blank">
         <IconDribbble className="dribbble__shot__logo" />
-        <Image
+        <SmartImage
           alt={title}
           className="presentations__event__thumbnail"
           placeholderSrc={teaser}

@@ -6,14 +6,21 @@ import { Base } from 'wjhm';
 
 import { getStaticPropsNode as getStaticProps } from 'wjhm';
 
+import type { RootQueryToCaseStudyConnection } from 'wjhmtypes';
+import type { RootQueryToPostConnection } from 'wjhmtypes';
+import type { RootQueryToPageConnection } from 'wjhmtypes';
+
+declare type Node = RootQueryToCaseStudyConnection | RootQueryToPostConnection | RootQueryToPageConnection;
+
 // This function gets called at build time
 export async function getStaticPaths() {
   let staticObject = { paths: [{ params: { uri: `` } }], fallback: false };
 
   try {
     // Call an external API endpoint to get pages
-    const data = await requestor.request(NODES_ALL);
+    const data: Node[] = await requestor.request(NODES_ALL);
     const nestedNodes = Object.entries(data).map(([k, v]) => v.nodes);
+    // @ts-ignore
     const nodes = nestedNodes.flat();
 
     // Remove Homepage
