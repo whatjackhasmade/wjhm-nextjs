@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from "dayjs"
 
 import { requestor } from 'wjhm';
 
@@ -10,8 +10,9 @@ function orderByDate(posts) {
 
 function datesGroupByComponent(dates, token) {
   return dates.reduce((val, obj) => {
-    let comp = moment(obj['date']).format(token);
-    (val[comp] = val[comp] || []).push(obj);
+    const date = obj.date;
+    const group = dayjs(obj['date']).format(token);
+    (val[group] = val[group] || []).push(obj);
     return val;
   }, {});
 }

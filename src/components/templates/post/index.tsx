@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import moment from 'moment';
+import dayjs from "dayjs"
 
 import { decodeHTML } from '../../particles/helpers';
 import { parseHTML } from 'wjhm';
@@ -39,13 +39,15 @@ const PostTemplate = (props: PostTemplateProps) => {
     router.push(`/${slug}`, undefined, { shallow: true });
   }, [router, slug]);
 
+  const dateFormatted = date && dayjs(new Date(date)).format(`DD/MM/YYYY`)
+
   return (
     <React.Fragment>
       <ArticleIntro>
         <nav className="article__meta">
           <Link to="/posts">Insights</Link>
           {hasDate && (
-            <h4 className="article__meta__date">{moment(new Date(date)).format(`DD/MM/YYYY`)} by Jack Pritchard</h4>
+            <h4 className="article__meta__date">{dateFormatted} by Jack Pritchard</h4>
           )}
         </nav>
         <h1>{decodeHTML(title)}</h1>

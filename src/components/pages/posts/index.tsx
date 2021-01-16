@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { InView } from 'react-intersection-observer';
-import moment from 'moment';
+import dayjs from "dayjs"
 
 import { decodeHTML } from 'wjhm';
 
@@ -73,11 +73,15 @@ const Collection = ({ date, posts }: CollectionProps) => {
         <React.Fragment key={id}>
           {index === 0 && (
             <InView threshold={0} triggerOnce={false}>
-              {({ inView, ref }) => (
-                <h2 className={inView ? `h3 inview` : `h3`} id={`${moment(date).format('YYYY-MM')}`} ref={ref}>
-                  {moment(date).format('MMMM YYYY')}
+              {({ inView, ref }) => {
+                const id = dayjs(date).format('YYYY-MM')
+                const inner = dayjs(date).format('MMMM YYYY')
+
+                return (
+                <h2 className={inView ? `h3 inview` : `h3`} id={id} ref={ref}>
+                  {inner}
                 </h2>
-              )}
+              )}}
             </InView>
           )}
           <Link to={`/${slug}`}>
@@ -93,11 +97,15 @@ const Collection = ({ date, posts }: CollectionProps) => {
 
 const CollectionNavigation = ({ ids }) => (
   <CollectionMenu>
-    {ids.map(id => (
-      <a href={`#${id}`} key={id}>
-        {moment(id, 'YYYY-MM').format('MMM YYYY')}
-      </a>
-    ))}
+    {ids.map(id => {
+      const inner = dayjs(id, 'YYYY-MM').format('MMM YYYY')
+
+      return (
+        <a href={`#${id}`} key={id}>
+          {inner}
+        </a>
+      )
+    })}
   </CollectionMenu>
 );
 
