@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import dayjs from 'dayjs'
 
 import { decodeHTML } from '../../particles/helpers';
@@ -15,11 +13,10 @@ import { OverviewList } from 'wjhm';
 
 import { Related } from 'wjhm';
 
-import type { Node } from 'wjhmtypes';
 declare type PostTemplateProps = any;
 
 const PostTemplate = (props: PostTemplateProps) => {
-  const { blocks, content, date, PostFields, slug, title } = props;
+  const { blocks, content, date, PostFields, title } = props;
   const relatedPosts = PostFields?.relatedPosts;
   const learn = null;
   const lessons = learn?.items;
@@ -31,13 +28,6 @@ const PostTemplate = (props: PostTemplateProps) => {
 
   let overviewTitle: string = `What you will learn`;
   if (learn?.title) overviewTitle = learn.title;
-
-  const router = useRouter();
-
-  useEffect(() => {
-    // Always do navigations after the first render
-    router.push(`/${slug}`, undefined, { shallow: true });
-  }, [router, slug]);
 
   const dateFormatted = date && dayjs(new Date(date)).format(`DD/MM/YYYY`)
 
