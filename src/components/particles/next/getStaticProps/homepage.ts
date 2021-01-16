@@ -12,7 +12,7 @@ export const getServerSideProps: GetStaticProps = async () => {
   // Try fetching as a page
   try {
     // Call an external API endpoint to get pages
-    const res = await requestor.request(PAGE_BY_URI, { uri });
+    const res = await requestor.query({ operationName: `PAGE_BY_URI`, query: PAGE_BY_URI, variables: { uri } });
     const data = res?.page;
 
     if (!data) {

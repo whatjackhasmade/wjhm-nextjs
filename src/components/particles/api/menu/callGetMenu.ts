@@ -5,9 +5,5 @@ import { requestor } from 'wjhm';
 import { MENU_WHERE } from 'wjhm';
 
 export const callGetMenu = async (args: any | RootQueryToMenuConnectionWhereArgs): Promise<any> => {
-  try {
-    return await requestor.request(MENU_WHERE, args);
-  } catch (error) {
-    throw new Error(error);
-  }
+  return await requestor.query({ operationName: `MENU_WHERE`, query: MENU_WHERE, variables: args });
 };

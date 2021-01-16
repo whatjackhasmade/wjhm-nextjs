@@ -9,7 +9,6 @@ declare type Parameters = {
 };
 
 export const callGetPosts = async (parameters: Parameters): Promise<Post[]> => {
-  const { count } = parameters;
-  const res = await requestor.request(POSTS_LATEST_ARG, { count });
+  const res = await requestor.query({ operationName: `POSTS_LATEST_ARG`, query: POSTS_LATEST_ARG, variables: parameters });
   return res?.posts?.nodes;
 };

@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 
   try {
     // Call an external API endpoint to get pages
-    const data: Node[] = await requestor.request(NODES_ALL);
+    const data: Node[] = await requestor.query({ operationName: `NODES_ALL`, query: NODES_ALL });
     const nestedNodes = Object.entries(data).map(([k, v]) => v.nodes);
     // @ts-ignore
     const nodes = nestedNodes.flat();

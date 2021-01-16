@@ -8,7 +8,6 @@ declare type Parameters = {
 };
 
 export const callGetSeriesPostsPaginated = async (parameters: Parameters): Promise<any> => {
-  const { after, slug } = parameters;
-  const res = await requestor.request(SERIES_POSTS_PAGINATED, { after, slug });
+  const res = await requestor.query({ operationName: `SERIES_POSTS_PAGINATED`, query: SERIES_POSTS_PAGINATED, variables: parameters });
   return res?.series?.posts;
 };

@@ -11,14 +11,14 @@ function orderByDate(posts) {
 function datesGroupByComponent(dates, token) {
   return dates.reduce((val, obj) => {
     const date = obj.date;
-    const group = dayjs(obj[`date`]).format(token);
+    const group = dayjs(date).format(token);
     (val[group] = val[group] || []).push(obj);
     return val;
   }, {});
 }
 
 const getStaticData = async () => {
-  const postsResponse = await requestor.request(POSTS_SUMMARY);
+  const postsResponse = await requestor.query({ operationName: `POSTS_SUMMARY`, query: POSTS_SUMMARY });
   const postSummaries = postsResponse?.posts?.nodes;
 
   const postsSorted = orderByDate(postSummaries);
