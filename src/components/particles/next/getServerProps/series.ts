@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
   try {
     // Call an external API endpoint to get nodes
     const res = await requestor.query({ operationName: `SERIES_BY_SLUG`, query: SERIES_BY_SLUG, variables: { slug } });
-    data = res?.series;
+    data = res?.data?.series;
   } catch (error) {
     console.error(error.message);
     return { props: null };

@@ -10,5 +10,6 @@ declare type Parameters = {
 
 export const callGetPosts = async (parameters: Parameters): Promise<Post[]> => {
   const res = await requestor.query({ operationName: `POSTS_LATEST_ARG`, query: POSTS_LATEST_ARG, variables: parameters });
-  return res?.posts?.nodes;
+  const { data } = res;
+  return data?.posts?.nodes;
 };

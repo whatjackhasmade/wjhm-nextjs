@@ -4,8 +4,12 @@ import { CASES_SUMMARY } from 'wjhm';
 
 import type { RootQuery } from 'wjhmtypes';
 
-export const callGetAllCaseStudies = async (): Promise<{ caseStudies: RootQuery['caseStudies'] }> => {
-  return await requestor.query({ operationName: `CASES_SUMMARY`, query: CASES_SUMMARY });
+declare type Response = { caseStudies: RootQuery['caseStudies'] }
+
+export const callGetAllCaseStudies = async (): Promise<Response> => {
+  const res = await requestor.query({ operationName: `CASES_SUMMARY`, query: CASES_SUMMARY });
+  const { data } = res;
+  return data;
 };
 
 

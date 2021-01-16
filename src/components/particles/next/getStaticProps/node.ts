@@ -15,7 +15,7 @@ export const getStaticProps: GetStaticProps = async context => {
   try {
     // Call an external API endpoint to get node
     const res = await requestor.query({ operationName: `NODE_BY_URI`, query: NODE_BY_URI, variables: { uri } });
-    data = res?.nodeByUri;
+    data = res?.data?.nodeByUri;
     postType = data?.__typename;
   } catch (error) {
     console.error(error.message);

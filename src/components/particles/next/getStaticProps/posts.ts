@@ -18,8 +18,8 @@ function datesGroupByComponent(dates, token) {
 }
 
 const getStaticData = async () => {
-  const postsResponse = await requestor.query({ operationName: `POSTS_SUMMARY`, query: POSTS_SUMMARY });
-  const postSummaries = postsResponse?.posts?.nodes;
+  const { data } = await requestor.query({ operationName: `POSTS_SUMMARY`, query: POSTS_SUMMARY });
+  const postSummaries = data?.posts?.nodes;
 
   const postsSorted = orderByDate(postSummaries);
   const posts = datesGroupByComponent(postsSorted, `YYYY-MM`);

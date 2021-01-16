@@ -13,7 +13,7 @@ export const getServerSideProps: GetStaticProps = async () => {
   try {
     // Call an external API endpoint to get pages
     const res = await requestor.query({ operationName: `PAGE_BY_URI`, query: PAGE_BY_URI, variables: { uri } });
-    const data = res?.page;
+    const data = res?.data?.page;
 
     if (!data) {
       return {
