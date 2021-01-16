@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useQuery } from 'react-query';
-import Slider from 'react-slick';
+import { Carousel } from 'react-responsive-carousel';
 
 import PresentationsComponent from './presentation.styles';
 import settings from './settings.json';
@@ -33,7 +33,7 @@ const Presentations: React.FC<Props> = (props: Props) => {
         {error && <Error error={error} />}
         {loading && <p>Loading events...</p>}
       </Intro>
-      <Slider {...settings}>
+      <Carousel {...settings}>
         {presentations.map(event => {
           const title = event?.title;
           const venue = event?.PostTypeEventFields?.venue;
@@ -42,7 +42,7 @@ const Presentations: React.FC<Props> = (props: Props) => {
 
           return <Presentation {...event} key={key} />;
         })}
-      </Slider>
+      </Carousel>
     </PresentationsComponent>
   );
 };

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import Slider from 'react-slick';
+import { Carousel } from 'react-responsive-carousel';
 
 import { parseHTML } from 'wjhm';
 
@@ -53,6 +53,7 @@ declare type ShotProps = {
 
 const Dribbble = (props: Fields) => {
   const { content } = props;
+  const carouselSettings: CarouselProps = { ...settings };
 
   const { data, error, isLoading: loading } = useQuery(`callGetAllDribbble`, callGetAllDribbble);
 
@@ -67,11 +68,11 @@ const Dribbble = (props: Fields) => {
       {loading && <Skeleton height="3.5" width="16" />}
       {error && <Error error={error} />}
       {hasShots && (
-        <Slider {...settings}>
+        <Carousel {...carouselSettings} >
           {shots.map(shot => (
             <Shot key={String(shot.id)} {...shot} />
           ))}
-        </Slider>
+        </Carousel>
       )}
     </DribbbleComponent>
   );

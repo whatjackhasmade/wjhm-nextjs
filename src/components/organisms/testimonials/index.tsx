@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import Slider from 'react-slick';
+import { Carousel } from 'react-responsive-carousel';
 
 import { AngleRight } from '../../atoms/icons/solid';
 
@@ -42,11 +42,11 @@ const Testimonials: React.FC<Props> = (props: Props) => {
   return (
     <TestimonialsComponent>
       <div className="testimonial__media">
-        <Slider ref={sliderImages} {...settings}>
+        <Carousel ref={sliderImages} {...settings}>
           {testimonials.map(t => (
             <TestimonialImage {...t} key={`${t?.author}-image`} />
           ))}
-        </Slider>
+        </Carousel>
       </div>
       {hasNavigation && (
         <button className="testimonial__next" onClick={nextTestimonial}>
@@ -54,11 +54,11 @@ const Testimonials: React.FC<Props> = (props: Props) => {
         </button>
       )}
       <div className="testimonials">
-        <Slider ref={sliderTestimonials} {...settings}>
+        <Carousel ref={sliderTestimonials} {...settings}>
           {testimonials.map(t => (
             <TestimonialInfo {...t} key={`${t?.author}-content`} />
           ))}
-        </Slider>
+        </Carousel>
       </div>
     </TestimonialsComponent>
   );

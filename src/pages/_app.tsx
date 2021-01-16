@@ -8,9 +8,6 @@ import { GlobalStyle } from 'wjhm';
 import { ThemeDefault } from 'wjhm';
 
 import 'normalize.css/normalize.css';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import 'html5-device-mockups/dist/device-mockups.min.css';
 import 'nprogress/nprogress.css';
 
 Router.events.on(`routeChangeStart`, () => NProgress.start());
