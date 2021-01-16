@@ -12,6 +12,7 @@ export { isEmptyObject } from './isEmptyObject';
 export { isInternal } from './isInternal';
 export { isString } from './isString';
 export { prettyDate } from './prettyDate';
+export { slugify } from "./slugify"
 export { windowAvailable } from './windowAvailable';
 
 export function randomID() {

@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import slugify from 'slugify';
+import { slugify } from 'wjhm';
 
 import type { CoreHeadingBlockAttributes } from 'wjhmtypes';
 declare type HeadingProps = CoreHeadingBlockAttributes & {
