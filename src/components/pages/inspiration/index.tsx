@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import he from 'he';
+import { htmlDecode } from 'wjhm';
 import { randomID } from 'wjhm';
 
 import { Base } from 'wjhm';
@@ -39,7 +39,7 @@ const Inspiration = props => {
     return {
       ...item,
       ...item.acf,
-      title: he.decode(item.title),
+      title: htmlDecode(item.title),
     };
   });
 

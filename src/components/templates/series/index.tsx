@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
-import he from 'he';
 
 // API
 import { callGetSeriesPostsPaginated } from 'wjhm';
 
 // Particles
 import { autoParagraph } from 'wjhm';
+import { htmlDecode } from 'wjhm';
 import { parseHTML } from 'wjhm';
 
 // Atoms
@@ -39,7 +39,7 @@ const SeriesTemplate: React.FC<Props> = (props: Props) => {
           <SeriesIntro>
             <div>
               <a href={youtubePlaylist} rel="noopener noreferrer" target="_blank">
-                <h1>{he.decode(name)}</h1>
+                <h1>{htmlDecode(name)}</h1>
               </a>
               {parseHTML(autoParagraph(description))}
               {youtubePlaylist && (

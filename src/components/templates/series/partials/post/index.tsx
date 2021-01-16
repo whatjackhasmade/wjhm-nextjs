@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import he from 'he';
+import { htmlDecode } from 'wjhm';
 
 import { SmartImage } from 'wjhm';
 import { Link } from 'wjhm';
@@ -19,7 +19,7 @@ const SeriesPost: React.FC<Post> = (props: Post) => {
           <SmartImage {...image} height={397.7} width={707} />
         </div>
       )}
-      {title && <h2 className="h4">{he.decode(title)}</h2>}
+      {title && <h2 className="h4">{htmlDecode(title)}</h2>}
       {seo?.metaDesc && <p>{seo.metaDesc}</p>}
     </Link>
   );

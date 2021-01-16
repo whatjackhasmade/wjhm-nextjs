@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import he from 'he';
+
+import { htmlDecode } from 'wjhm';
 
 const domain = process.env.NEXT_PUBLIC_DOMAIN;
 const fallback = `${domain}/public/images/fallback.jpg`;
@@ -30,8 +31,8 @@ const SEO = (props: SEOProps) => {
   const postURL = `/`;
   const url = `${domain}/${slug}`;
 
-  const decodedOGTitle = he.decode(ogTitle);
-  const decodedTitle = he.decode(title);
+  const decodedOGTitle = htmlDecode(ogTitle);
+  const decodedTitle = htmlDecode(title);
 
   const description = metaDesc ? metaDesc : ``;
   const name = ogTitle ? decodedOGTitle : decodedTitle;

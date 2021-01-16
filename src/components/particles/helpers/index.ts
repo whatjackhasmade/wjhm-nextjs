@@ -5,6 +5,7 @@ export { createRelative } from './createRelative';
 export { decodeHTML } from './decodeHTML';
 export { generateID } from './generateID';
 export { hexToRGB } from './hexToRGB';
+export { htmlDecode } from "./htmlDecode"
 export { httpTohttps } from './httpTohttps';
 export { isAnObject } from './isAnObject';
 export { isEmptyObject } from './isEmptyObject';

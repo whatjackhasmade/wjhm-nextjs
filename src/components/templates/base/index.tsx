@@ -1,5 +1,6 @@
 import * as React from 'react';
-import he from 'he';
+
+import { htmlDecode } from 'wjhm';
 
 import { SEO } from 'wjhm';
 
@@ -75,7 +76,7 @@ const InnerContent: React.FC<any> = (props: any) => {
 
   let decodedTitle = ``;
   const seo: SEOTypes = props?.seo;
-  if (Boolean(seo?.title)) decodedTitle = he.decode(seo.title);
+  if (Boolean(seo?.title)) decodedTitle = htmlDecode(seo.title);
 
   return (
     <main>
