@@ -7,7 +7,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { GlobalStyle } from 'wjhm';
 import { ThemeDefault } from 'wjhm';
 
-import 'normalize.css/normalize.css';
 import 'nprogress/nprogress.css';
 
 Router.events.on(`routeChangeStart`, () => NProgress.start());

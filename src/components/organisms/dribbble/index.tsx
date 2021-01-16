@@ -53,7 +53,7 @@ declare type ShotProps = {
 
 const Dribbble = (props: Fields) => {
   const { content } = props;
-  const carouselSettings: CarouselProps = { ...settings };
+  const carouselSettings = settings;
 
   const { data, error, isLoading: loading } = useQuery(`callGetAllDribbble`, callGetAllDribbble);
 
