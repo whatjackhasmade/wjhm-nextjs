@@ -17,7 +17,7 @@ const Related = (props: RelatedProps) => {
   const { data, relatedRef, title = `Continue Reading` } = props;
 
   // @ts-ignore
-  const items = data.filter(Boolean);
+  const items = data?.filter(Boolean);
   if (!items) return null;
 
   return (
