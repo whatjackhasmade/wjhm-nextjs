@@ -65,7 +65,6 @@
     "react-query": "^3.5.6",
     "react-query-devtools": "^2.6.3",
     "react-slick": "^0.27.13",
-    "react-transition-group": "^4.4.1",
     "react-twitter-embed": "^3.0.3",
     "react-youtube": "^7.13.0",
     "sanitize-html-react": "^1.13.0",
