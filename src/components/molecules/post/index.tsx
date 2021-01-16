@@ -3,7 +3,7 @@ import { useInView } from 'react-intersection-observer';
 
 import { decodeHTML } from 'wjhm';
 
-import { Image } from 'wjhm';
+import { SmartImage } from 'wjhm';
 import { Link } from 'wjhm';
 
 import { StyledPost } from './post.styles';
@@ -44,7 +44,7 @@ const Post: React.FC<Props> = (props: Props) => {
   return (
     <StyledPost className={classList} ref={ref}>
       <Link href={href}>
-        <div className="item__media">{hasImage && <Image {...image} width={534} height={300.367} />}</div>
+        <div className="item__media">{hasImage && <SmartImage {...image} width={534} height={300.367} />}</div>
         {hasTitle && <h3 className="item__title">{decodeHTML(title)}</h3>}
         {subtitle && <h4 className="item__subtitle">{decodeHTML(subtitle)}</h4>}
         {hasSEO && <p className="item__description">{seo}</p>}

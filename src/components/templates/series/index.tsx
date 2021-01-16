@@ -13,7 +13,7 @@ import { parseHTML } from 'wjhm';
 // Atoms
 import { Button } from 'wjhm';
 import { HR } from 'wjhm';
-import { Image } from 'wjhm';
+import { SmartImage } from 'wjhm';
 import { Skeleton } from 'wjhm';
 
 // Local Parts
@@ -49,7 +49,7 @@ const SeriesTemplate: React.FC<Props> = (props: Props) => {
               )}
             </div>
             <a className="intro__image" href={youtubePlaylist} rel="noopener noreferrer" target="_blank">
-              <Image {...seriesImage} height={307.383} width={519.567} />
+              <SmartImage {...seriesImage} height={307.383} width={519.567} />
             </a>
           </SeriesIntro>
         )}

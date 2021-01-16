@@ -5,7 +5,7 @@ import { AngleRight } from '../../atoms/icons/solid';
 
 import TestimonialsComponent from './testimonials.styles';
 
-import { Image } from 'wjhm';
+import { SmartImage } from 'wjhm';
 
 import type { AcfTestimonialsBlock_Testimonialsfields as Props } from 'wjhmtypes';
 import type { AcfTestimonialsBlock_Testimonialsfields_Testimonials as SingleItem } from 'wjhmtypes';
@@ -67,7 +67,7 @@ const Testimonials: React.FC<Props> = (props: Props) => {
 const TestimonialImage: React.FC<SingleItem> = (props: SingleItem) => {
   const { author, media } = props;
 
-  return <Image {...media} alt={author} height={406} width={723} />;
+  return <SmartImage {...media} alt={author} height={406} width={723} />;
 };
 
 const TestimonialInfo: React.FC<SingleItem> = (props: SingleItem) => {
@@ -90,7 +90,7 @@ const TestimonialInfo: React.FC<SingleItem> = (props: SingleItem) => {
         </div>
         {hasImage && (
           <div className="testimonial__logo">
-            <Image src={src} alt={alt} />
+            <SmartImage src={src} alt={alt} />
           </div>
         )}
       </header>

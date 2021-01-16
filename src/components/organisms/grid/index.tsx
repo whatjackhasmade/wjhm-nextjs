@@ -4,7 +4,7 @@ import { useState } from 'react';
 import GridComponent from './grid.styles';
 
 import { Button } from 'wjhm';
-import { Image } from 'wjhm';
+import { SmartImage } from 'wjhm';
 
 declare type GridMedia = {
   altText: string;
@@ -116,7 +116,7 @@ const GridItem = (props: GridItemProps) => {
   return (
     <button className={classList} key={key} onClick={toggleFullscreen}>
       {!isImage && <video src={mediaItemUrl} autoPlay={true} loop={true} muted={true} />}
-      {isImage && <Image alt={altText} src={md} height={1080} width={1920} />}
+      {isImage && <SmartImage alt={altText} src={md} height={1080} width={1920} />}
       <span className="grid__item__title">{title}</span>
     </button>
   );

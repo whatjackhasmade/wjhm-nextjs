@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import he from 'he';
 
-import { Image } from 'wjhm';
+import { SmartImage } from 'wjhm';
 import { Link } from 'wjhm';
 
 import { Post } from 'wjhmtypes';
@@ -16,7 +16,7 @@ const SeriesPost: React.FC<Post> = (props: Post) => {
     <Link className="post" to={href}>
       {featuredImage && (
         <div className="post__image">
-          <Image {...image} height={397.7} width={707} />
+          <SmartImage {...image} height={397.7} width={707} />
         </div>
       )}
       {title && <h2 className="h4">{he.decode(title)}</h2>}

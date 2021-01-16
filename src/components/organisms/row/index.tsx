@@ -3,7 +3,7 @@ import { useInView } from 'react-intersection-observer';
 
 import { parseHTML } from 'wjhm';
 
-import { Image } from 'wjhm';
+import { SmartImage } from 'wjhm';
 
 import RowComponent from './row.styles';
 
@@ -64,7 +64,7 @@ const RowMedia = (props: RowMediaProps) => {
 
   return (
     <div className="row__media">
-      {!isVideo && <Image width={723} height={406} {...media} />}
+      {!isVideo && <SmartImage width={723} height={406} {...media} />}
       {isVideo && <video src={src} muted={true} autoPlay={true} loop={true} />}
     </div>
   );

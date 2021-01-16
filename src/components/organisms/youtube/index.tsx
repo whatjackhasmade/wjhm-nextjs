@@ -4,7 +4,7 @@ import YouTube from 'react-youtube';
 
 import YouTubeComponent from './youtube.styles';
 
-import { Image } from 'wjhm';
+import { SmartImage } from 'wjhm';
 
 import { Error } from 'wjhm';
 
@@ -31,10 +31,10 @@ const YouTubeChannel = () => {
   return (
     <YouTubeComponent>
       <div className="youtube__background youtube__background--left">
-        <Image alt="" src="/images/youtube-left.png" width={189} height={1080} />
+        <SmartImage alt="" src="/images/youtube-left.png" width={189} height={1080} />
       </div>
       <div className="youtube__background youtube__background--right">
-        <Image alt="" src="/images/youtube-right.png" width={189} height={1080} />
+        <SmartImage alt="" src="/images/youtube-right.png" width={189} height={1080} />
       </div>
       <div className="youtube__content">
         <div className="youtube__intro">
@@ -106,7 +106,7 @@ const Video = props => {
     <div className="youtube__video" title={title}>
       <a href={href} rel="noopener noreferrer" target="_blank">
         <div className="youtube__video__thumbnail">
-          <Image alt={title} src={thumbnail} width={1920} height={1080} />
+          <SmartImage alt={title} src={thumbnail} width={1920} height={1080} />
         </div>
       </a>
     </div>

@@ -8,7 +8,7 @@ import settings from './settings.json';
 import { callGetAllPresentatitons } from 'wjhm';
 import { parseHTML } from 'wjhm';
 
-import { Image } from 'wjhm';
+import { SmartImage } from 'wjhm';
 
 import { Error } from 'wjhm';
 
@@ -56,7 +56,7 @@ const Presentation = (props: Event) => {
 
   return (
     <div className="presentations__event">
-      <Image className="presentations__event__thumbnail" height={302} width={453} {...featuredImage} alt={title} />
+      <SmartImage className="presentations__event__thumbnail" height={302} width={453} {...featuredImage} alt={title} />
       <div className="presentations__event__meta">
         <h5 className="subheading">{venue}</h5>
         <h3>{title}</h3>

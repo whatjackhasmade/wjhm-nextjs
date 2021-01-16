@@ -17,7 +17,7 @@ declare type ImageProps = React.HTMLProps<HTMLImageElement> &
     aspect: boolean;
   };
 
-export const Image: React.FC<ImageProps> = (props: ImageProps) => {
+export const SmartImage: React.FC<ImageProps> = (props: ImageProps) => {
   const { altText, aspect = true, className, height, threshold = 600, scrollPosition, width } = props;
   let { placeholderSrc, src } = props;
 
@@ -78,4 +78,4 @@ export const Image: React.FC<ImageProps> = (props: ImageProps) => {
 
 // Wrap Gallery with trackWindowScroll HOC so it receives
 // a scrollPosition prop to pass down to the images
-export default trackWindowScroll(Image);
+export default trackWindowScroll(SmartImage);

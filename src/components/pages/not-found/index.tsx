@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useQuery } from 'react-query';
 import { Container, Row, Col } from 'react-grid-system';
 
-import { Image } from 'wjhm';
+import { SmartImage } from 'wjhm';
 import { Link } from 'wjhm';
 import { Hero } from 'wjhm';
 import { Related } from 'wjhm';
@@ -40,7 +40,7 @@ const NotFound = (props: NotFoundProps) => {
               <Link to="/">Return to the homepage</Link>
             </Col>
             <Col lg={4} offset={{ lg: 1 }}>
-              <Image alt="Illustration of a dog eating paper" src="/images/404-dog.png" height={800} width={800} />
+              <SmartImage alt="Illustration of a dog eating paper" src="/images/404-dog.png" height={800} width={800} />
             </Col>
           </Row>
         </Container>

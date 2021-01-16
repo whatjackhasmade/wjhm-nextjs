@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useInView } from 'react-intersection-observer';
 
-import { Image } from 'wjhm';
+import { SmartImage } from 'wjhm';
 
 import { BreakImage } from '../../case.styles';
 
@@ -26,7 +26,7 @@ const CaseBreak = (props: Props) => {
 
   return (
     <BreakImage className={classList} ref={ref}>
-      <Image {...image} width={1920} height={500} />
+      <SmartImage {...image} width={1920} height={500} />
     </BreakImage>
   );
 };

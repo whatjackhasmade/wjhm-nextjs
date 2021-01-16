@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 
 import StyledBookmark from './bookmark.styles';
 
-import { Image } from 'wjhm';
+import { SmartImage } from 'wjhm';
 import { Skeleton } from 'wjhm';
 
 import { Error } from 'wjhm';
@@ -46,7 +46,7 @@ const Bookmark = (props: BookmarkProps) => {
         <div className="link__image">
           {hasImage && <BookmarkImage altText={`Open Graph for ${url}`} image={image} />}
           {!hasImage && (
-            <Image src="/images/placeholder.png" alt={`Open Graph Fallback for ${url}`} height={100} width={100} />
+            <SmartImage src="/images/placeholder.png" alt={`Open Graph Fallback for ${url}`} height={100} width={100} />
           )}
         </div>
       </div>

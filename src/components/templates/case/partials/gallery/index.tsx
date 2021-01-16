@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useInView } from 'react-intersection-observer';
 
-import { Image } from 'wjhm';
+import { SmartImage } from 'wjhm';
 
 import { GalleryContainer } from '../../case.styles';
 
@@ -43,7 +43,7 @@ const GalleryImage: React.FC<MediaItem> = (props: MediaItem) => {
   return (
     <div className="gallery__image__wrapper">
       <div className="gallery__image">
-        <Image {...props} key={key} height={420} width={707} />
+        <SmartImage {...props} key={key} height={420} width={707} />
       </div>
     </div>
   );

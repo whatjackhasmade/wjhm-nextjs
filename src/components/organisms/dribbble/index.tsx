@@ -14,7 +14,7 @@ import { callGetAllDribbble } from 'wjhm';
 import { Dribbble as IconDribbble } from '../../atoms/icons/brands';
 
 // Atoms
-import { Image } from 'wjhm';
+import { SmartImage } from 'wjhm';
 import { Skeleton } from 'wjhm';
 
 // Molecules
