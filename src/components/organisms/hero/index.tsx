@@ -4,9 +4,6 @@
 import { parseHTML } from 'wjhm';
 import { theme } from 'wjhm';
 
-// Atoms
-import { Image } from 'wjhm';
-
 // Local Partials
 import Duotone from './duotone';
 import HeroComponent from './hero.styles';
@@ -84,7 +81,7 @@ const HeroImage = (props: MediaItem) => {
 
   return (
     <div className="hero__media">
-      <Image src={mediaItemUrl} alt={altText} layout="fill" priority={true} />
+      <img src={mediaItemUrl} alt={altText} />
     </div>
   );
 };

@@ -19,7 +19,7 @@ export const StyledPost = styled.div`
 
     img {
       transform: scale(1);
-      transition: 0.4s transform ease;
+      transition: 0.3s opacity ease, 0.5s transform ease !important;
     }
   }
 

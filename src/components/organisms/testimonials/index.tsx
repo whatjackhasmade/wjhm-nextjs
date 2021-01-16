@@ -67,7 +67,7 @@ const Testimonials: React.FC<Props> = (props: Props) => {
 const TestimonialImage: React.FC<SingleItem> = (props: SingleItem) => {
   const { author, media } = props;
 
-  return <img src={media.mediaItemUrl} alt={author} />;
+  return <Image {...media} alt={author} height={406} width={723} />;
 };
 
 const TestimonialInfo: React.FC<SingleItem> = (props: SingleItem) => {
@@ -90,7 +90,7 @@ const TestimonialInfo: React.FC<SingleItem> = (props: SingleItem) => {
         </div>
         {hasImage && (
           <div className="testimonial__logo">
-            <Image src={src} alt={alt} layout="fill" />
+            <Image src={src} alt={alt} />
           </div>
         )}
       </header>

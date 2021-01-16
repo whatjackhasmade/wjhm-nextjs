@@ -35,14 +35,6 @@ export const BreakImage = styled.section`
     width: 100%;
     object-fit: cover;
   }
-
-  .break__image {
-    width: 100%;
-  }
-
-  .gatsby-image-wrapper > div {
-    padding-bottom: 500px !important; /* your aspect ratio */
-  }
 `;
 
 export const BlockContainer = styled.section`

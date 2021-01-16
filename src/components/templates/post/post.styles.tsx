@@ -233,7 +233,7 @@ export const RelatedItem = styled.div`
 
   .related__media {
     transform: scale(1);
-    transition: 0.4s transform ease;
+    transition: 0.3s opacity ease, 0.5s transform ease !important;
   }
 
   &:hover {

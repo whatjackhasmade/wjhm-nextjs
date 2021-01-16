@@ -49,7 +49,7 @@ const SeriesTemplate: React.FC<Props> = (props: Props) => {
               )}
             </div>
             <a className="intro__image" href={youtubePlaylist} rel="noopener noreferrer" target="_blank">
-              <Image alt={seriesImage.altText} src={seriesImage.mediaItemUrl} height={1080} width={1920} />
+              <Image {...seriesImage} height={307.383} width={519.567} />
             </a>
           </SeriesIntro>
         )}

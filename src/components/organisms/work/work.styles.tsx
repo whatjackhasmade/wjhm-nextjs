@@ -6,13 +6,14 @@ const StyledWorks = styled.section`
   flex-direction: column;
   margin: 0 0 48px;
 
-  @media ${device?.sm} {
+  @media ${device?.xs} {
+    display: grid;
+    grid-gap: 40px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     margin: 0 0 64px;
   }
 
   @media ${device?.md} {
-    display: grid;
-    grid-gap: 40px;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     margin: 0 0 128px;
   }
@@ -23,11 +24,19 @@ const StyledWorks = styled.section`
     margin: 0 0 160px;
   }
 
-  .work__item {
+  .item {
   }
 
-  .work__image,
-  .work__title {
+  .item + .item {
+    margin-top: 40px;
+
+    @media ${device?.xs} {
+      margin-top: 0;
+    }
+  }
+
+  .item__image,
+  .item__title {
     color: inherit;
     text-decoration: none;
   }

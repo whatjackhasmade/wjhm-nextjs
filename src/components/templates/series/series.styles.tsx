@@ -7,6 +7,7 @@ export const SeriesIntro = styled.header`
   margin: 64px auto;
 
   @media ${device?.md} {
+    align-items: flex-start;
     flex-direction: row;
   }
 
@@ -54,7 +55,7 @@ export const SeriesWrapper = styled.section`
 
     img {
       transform: scale(1);
-      transition: 0.5s transform ease;
+      transition: 0.3s opacity ease, 0.5s transform ease !important;
     }
   }
 

@@ -43,7 +43,7 @@ const GalleryImage: React.FC<MediaItem> = (props: MediaItem) => {
   return (
     <div className="gallery__image__wrapper">
       <div className="gallery__image">
-        <Image alt={props.altText} key={key} src={src} height={1280} width={1920} />
+        <Image {...props} key={key} height={420} width={707} />
       </div>
     </div>
   );

@@ -26,9 +26,7 @@ const CaseBreak = (props: Props) => {
 
   return (
     <BreakImage className={classList} ref={ref}>
-      <div className="break__image">
-        <Image layout="fill" alt={image.altText} src={image.mediaItemUrl} />
-      </div>
+      <Image {...image} width={1920} height={500} />
     </BreakImage>
   );
 };

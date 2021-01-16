@@ -79,10 +79,6 @@ const RowComponent = styled.section`
     margin-bottom: 0;
   }
 
-  .row__media--gatsby > div {
-    padding-bottom: 56.25% !important; /* your aspect ratio */
-  }
-
   .row__column {
     width: 100%;
   }
@@ -130,6 +126,7 @@ const RowComponent = styled.section`
       transform: translateX(0px);
 
       .row__media {
+        span,
         img,
         video {
           opacity: 1;
@@ -151,6 +148,7 @@ const RowComponent = styled.section`
     .row__media {
       overflow: hidden;
 
+      span,
       img,
       video {
         opacity: 0;

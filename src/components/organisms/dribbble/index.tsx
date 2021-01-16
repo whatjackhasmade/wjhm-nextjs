@@ -78,7 +78,8 @@ const Dribbble = (props: Fields) => {
 
 const Shot = (props: ShotProps) => {
   const { html_url: htmlURL, images, title } = props;
-  const twoX = images?.two_x;
+  const normal = images?.normal;
+  const teaser = images?.teaser;
 
   const [mouseOver, setMouseOver] = useState<boolean>(false);
 
@@ -97,7 +98,14 @@ const Shot = (props: ShotProps) => {
     >
       <a className="dribbble__shot__thumbnail" href={htmlURL} rel="noopener noreferrer" target="_blank">
         <IconDribbble className="dribbble__shot__logo" />
-        <Image alt={title} className="presentations__event__thumbnail" src={twoX} height={1440} width={1920} />
+        <Image
+          alt={title}
+          className="presentations__event__thumbnail"
+          placeholderSrc={teaser}
+          src={normal}
+          height={1440}
+          width={1920}
+        />
       </a>
       <div className="dribbble__shot__meta">
         <a href={htmlURL} rel="noopener noreferrer" target="_blank">

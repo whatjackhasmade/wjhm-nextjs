@@ -56,13 +56,7 @@ const Presentation = (props: Event) => {
 
   return (
     <div className="presentations__event">
-      <Image
-        alt={title}
-        className="presentations__event__thumbnail"
-        src={featuredImage.mediaItemUrl}
-        height={1280}
-        width={1920}
-      />
+      <Image className="presentations__event__thumbnail" height={302} width={453} {...featuredImage} alt={title} />
       <div className="presentations__event__meta">
         <h5 className="subheading">{venue}</h5>
         <h3>{title}</h3>
