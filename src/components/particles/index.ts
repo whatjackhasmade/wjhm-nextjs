@@ -15,7 +15,8 @@ export { default as ROUTES } from './ROUTES';
 export { default as SEO } from './SEO';
 export { default as ThemeDefault, default as theme } from './ThemeDefault';
 
+export { default as getStaticPropsHomepage } from './next/getStaticProps/homepage';
 export { default as getStaticPropsPosts } from './next/getStaticProps/posts';
-export { default as getServerPropsHomepage } from './next/getServerProps/homepage';
-export { default as getServerPropsNode } from './next/getServerProps/node';
+export { default as getStaticPropsNode } from './next/getStaticProps/node';
+
 export { default as getServerPropsSeries } from './next/getServerProps/series';

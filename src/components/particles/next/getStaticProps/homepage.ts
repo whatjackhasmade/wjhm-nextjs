@@ -1,11 +1,11 @@
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 
 import { requestor } from 'wjhm';
 
 import { PAGE_BY_URI } from 'wjhm';
 
 // This also gets called at build time
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetStaticProps = async () => {
   const postType = `page`;
   const uri = `/homepage/`;
 

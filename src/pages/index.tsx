@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-import { InferGetServerSidePropsType } from 'next';
+import { InferGetStaticPropsType } from 'next';
 
 import { Base } from 'wjhm';
 
-import { getServerPropsHomepage as getServerSideProps } from 'wjhm';
+import { getStaticPropsHomepage as getStaticProps } from 'wjhm';
 
-export { getServerSideProps };
+export { getStaticProps };
 
-const NodePage = (context: InferGetServerSidePropsType<typeof getServerSideProps>) => <Base {...context} />;
+const NodePage = (context: InferGetStaticPropsType<typeof getStaticProps>) => <Base {...context} />;
 
 export default NodePage;
