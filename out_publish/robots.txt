@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://whatjackhasmade.co.uk/sitemap.xml

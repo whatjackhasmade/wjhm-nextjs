@@ -2,12 +2,12 @@
   "name": "wjhm-nextjs",
   "version": "1.1.0",
   "scripts": {
-    "build": "next build",
+    "build": "next build && npm run vercel:sitemap",
     "codegen": "graphql-codegen --config codegen.yml -r dotenv/config",
     "d": "yarn codegen:develop",
     "dev": "yarn codegen:develop",
     "develop": "run-p next:develop",
-    "deploy": "yarn && yarn codegen && yarn codegen:fix && yarn build && yarn serve",
+    "deploy": "yarn && yarn codegen && yarn codegen:fix && vercel:sitemap && yarn build && yarn export",
     "export": "next export",
     "format": "yarn prettier",
     "format-check": "yarn prettier --list-different",
@@ -24,7 +24,7 @@
     "validate": "yarn format-check && yarn lint",
     "validate-fix": "yarn format && yarn lint-fix && yarn validate",
     "upgrade": "npm-check --update",
-    "codegen:develop": "run-s codegen codegen:fix develop",
+    "codegen:develop": "run-s codegen codegen:fix vercel:sitemap develop",
     "codegen:fix": "node src/node/generation/fixSchema.ts",
     "cypress:dev": "cypress open --config baseUrl=http://localhost:3000",
     "cypress:open": "cypress open",
@@ -35,7 +35,8 @@
     "storybook:build": "build-storybook  -c src/.storybook -o storybook-public --quiet",
     "storybook:deploy": "run-s storybook:build storybook:assets netlify:upload",
     "storybook:start": "start-storybook -c src/.storybook -p 6006 -s public --quiet",
-    "vercel:env-pull": "vercel env pull .env.local"
+    "vercel:env-pull": "vercel env pull .env.local",
+    "vercel:sitemap": "node src/node/generation/createSitemap.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.3.6",
@@ -75,7 +76,8 @@
     "slick-carousel": "^1.8.1",
     "slugify": "^1.4.6",
     "smooth-scroll": "^16.1.3",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "unfetch": "^4.2.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.20.0",
