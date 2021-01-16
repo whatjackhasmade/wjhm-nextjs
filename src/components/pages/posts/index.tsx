@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { InView } from 'react-intersection-observer';
-import dayjs from "dayjs"
+import * as dayjs from 'dayjs'
 
 import { decodeHTML } from 'wjhm';
 

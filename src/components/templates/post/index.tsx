@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import dayjs from "dayjs"
+import * as dayjs from 'dayjs'
 
 import { decodeHTML } from '../../particles/helpers';
 import { parseHTML } from 'wjhm';
