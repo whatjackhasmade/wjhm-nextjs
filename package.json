@@ -44,7 +44,6 @@
     "@svgr/webpack": "^5.4.0",
     "dayjs": "^1.10.3",
     "dotenv": "^8.2.0",
-    "formik": "^2.2.6",
     "graphql-request": "^3.4.0",
     "html-react-parser": "^1.1.1",
     "html5-device-mockups": "3.2.1",
