@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { InView } from 'react-intersection-observer';
-import * as dayjs from 'dayjs'
+import dayjs from 'dayjs'
 
 import { decodeHTML } from 'wjhm';
 
@@ -74,8 +74,8 @@ const Collection = ({ date, posts }: CollectionProps) => {
           {index === 0 && (
             <InView threshold={0} triggerOnce={false}>
               {({ inView, ref }) => {
-                const id = dayjs(date).format('YYYY-MM')
-                const inner = dayjs(date).format('MMMM YYYY')
+                const id = dayjs(date).format(`YYYY-MM`)
+                const inner = dayjs(date).format(`MMMM YYYY`)
 
                 return (
                 <h2 className={inView ? `h3 inview` : `h3`} id={id} ref={ref}>
@@ -98,7 +98,7 @@ const Collection = ({ date, posts }: CollectionProps) => {
 const CollectionNavigation = ({ ids }) => (
   <CollectionMenu>
     {ids.map(id => {
-      const inner = dayjs(id, 'YYYY-MM').format('MMM YYYY')
+      const inner = dayjs(id, `YYYY-MM`).format(`MMM YYYY`)
 
       return (
         <a href={`#${id}`} key={id}>
