@@ -28,10 +28,6 @@ declare type ExtendedBlock = {
   data: any;
 } & Block;
 
-declare type ComponentParserProps = {
-  content: Block[] | Maybe<ExtendedBlock>[];
-};
-
 const convertACFProps = component => {
   // get all object keys and iterate over them
   Object.keys(component).forEach(key => {
@@ -44,7 +40,7 @@ const convertACFProps = component => {
   return component;
 };
 
-declare type Props = { blocks: Block[]; innerBlocks?: Block[] };
+declare type Props = { blocks: Block[] | Maybe<ExtendedBlock>[]; innerBlocks?: Block[] | Maybe<ExtendedBlock>[] };
 
 const ComponentParser = (props: Props) => {
   const componentLookup = (component, index: number, isCol: boolean = false) => {
@@ -117,7 +113,7 @@ const ComponentParser = (props: Props) => {
   const pageComponents = validComponents.map((c, index) => componentLookup(c, index));
   if (!pageComponents) return null;
 
-  return pageComponents;
+  return <React.Fragment>{pageComponents}</React.Fragment>;
 };
 
 export default ComponentParser;
