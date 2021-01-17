@@ -1,6 +1,7 @@
 import { css } from 'styled-components';
 
 const exportedCSS = css`
+  .button,
   button,
   input[type='submit'] {
     display: inline-flex;

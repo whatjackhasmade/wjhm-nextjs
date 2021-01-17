@@ -76,79 +76,20 @@ export const BlockContainer = styled.section`
 `;
 
 export const Devices = styled.section`
-/*!
- * html5-device-mockups (https://github.com/pixelsign/html5-device-mockups)
- * Copyright 2013 - 2018 pixelsign
- * Licensed under MIT (https://github.com/pixelsign/html5-device-mockups/blob/master/LICENSE.txt)
- * Last Build: Thu Dec 20 2018 14:05:50
- */
-.device-wrapper {
-  max-width: 300px;
-  width: 100%; }
-
-.device {
-  position: relative;
-  background-size: cover; }
-  .device::after {
-    position: absolute;
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; }
-  .device .screen {
-    position: absolute;
-    background-size: cover;
-    pointer-events: auto; }
-  .device .button {
-    position: absolute;
-    cursor: pointer; }
-
-.device[data-device="Macbook2015"][data-orientation="portrait"][data-color="white"] {
-  padding-bottom: 57.51565762%; }
-  .device[data-device="Macbook2015"][data-orientation="portrait"][data-color="white"] .screen {
-    top: 7.3502722323%;
-    left: 12.4217118998%;
-    width: 75.1565762004%;
-    height: 81.7604355717%; }
-  .device[data-device="Macbook2015"][data-orientation="portrait"][data-color="white"]::after {
-    content: '';
-    background-image: url('/images/device-mockups/Macbook2015/portrait_white.png');
-    z-index: -1; }
-  .device[data-device="Macbook2015"][data-orientation="portrait"][data-color="white"] .button {
-    display: none;
-    top: 0%;
-    left: 0%;
-    width: 100%;
-    height: 100%; }
-
-.device[data-device="iPhone7"][data-orientation="portrait"][data-color="white"] {
-  padding-bottom: 203.103448276%; }
-  .device[data-device="iPhone7"][data-orientation="portrait"][data-color="white"] .screen {
-    top: 11.9977362762%;
-    left: 6.2068965517%;
-    width: 87.3563218391%;
-    height: 76.0611205433%; }
-  .device[data-device="iPhone7"][data-orientation="portrait"][data-color="white"]::after {
-    content: '';
-    background-image: url('/images/device-mockups/iPhone7/portrait_white.png');
-    z-index: -1; }
-  .device[data-device="iPhone7"][data-orientation="portrait"][data-color="white"] .button {
-    top: 89.5302773062%;
-    left: 42.2988505747%;
-    width: 15.7471264368%;
-    height: 7.753254103%; }
-
-
   display: block;
-  margin: 96px 0;
+  margin: 0 0 96px;
+  margin-top: -24px;
 
   opacity: 0;
   transform: translateY(100px);
   transition: 1s all ease;
 
-  a {
-    align-items: center;
-    display: flex;
+  @media ${device?.xs} {
+    margin-top: -48px;
+  }
+
+  @media ${device?.lg} {
+    margin: 96px 0;
   }
 
   &.devices--show {
@@ -156,8 +97,95 @@ export const Devices = styled.section`
     transform: translateY(0px);
   }
 
-  > * {
+  .devices__videos {
+    align-items: center;
+    display: none;
     width: 100%;
+
+    @media ${device?.lg} {
+      display: flex;
+    }
+  }
+
+  .devices__cta {
+    @media ${device?.lg} {
+      display: none;
+    }
+  }
+
+  /*!
+ * html5-device-mockups (https://github.com/pixelsign/html5-device-mockups)
+ * Copyright 2013 - 2018 pixelsign
+ * Licensed under MIT (https://github.com/pixelsign/html5-device-mockups/blob/master/LICENSE.txt)
+ * Last Build: Thu Dec 20 2018 14:05:50
+ */
+  .device-wrapper {
+    max-width: 300px;
+    width: 100%;
+  }
+
+  .device {
+    position: relative;
+    background-size: cover;
+  }
+  .device::after {
+    position: absolute;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .device .screen {
+    position: absolute;
+    background-size: cover;
+    pointer-events: auto;
+  }
+  .device .button {
+    position: absolute;
+    cursor: pointer;
+  }
+
+  .device[data-device='Macbook2015'][data-orientation='portrait'][data-color='white'] {
+    padding-bottom: 57.51565762%;
+  }
+  .device[data-device='Macbook2015'][data-orientation='portrait'][data-color='white'] .screen {
+    top: 7.3502722323%;
+    left: 12.4217118998%;
+    width: 75.1565762004%;
+    height: 81.7604355717%;
+  }
+  .device[data-device='Macbook2015'][data-orientation='portrait'][data-color='white']::after {
+    content: '';
+    background-image: url('/images/device-mockups/Macbook2015/portrait_white.png');
+    z-index: -1;
+  }
+  .device[data-device='Macbook2015'][data-orientation='portrait'][data-color='white'] .button {
+    display: none;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+  }
+
+  .device[data-device='iPhone7'][data-orientation='portrait'][data-color='white'] {
+    padding-bottom: 203.103448276%;
+  }
+  .device[data-device='iPhone7'][data-orientation='portrait'][data-color='white'] .screen {
+    top: 11.9977362762%;
+    left: 6.2068965517%;
+    width: 87.3563218391%;
+    height: 76.0611205433%;
+  }
+  .device[data-device='iPhone7'][data-orientation='portrait'][data-color='white']::after {
+    content: '';
+    background-image: url('/images/device-mockups/iPhone7/portrait_white.png');
+    z-index: -1;
+  }
+  .device[data-device='iPhone7'][data-orientation='portrait'][data-color='white'] .button {
+    top: 89.5302773062%;
+    left: 42.2988505747%;
+    width: 15.7471264368%;
+    height: 7.753254103%;
   }
 
   .macbook {

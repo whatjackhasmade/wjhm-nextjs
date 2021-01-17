@@ -1,8 +1,6 @@
 import React from 'react';
 import { useMemo } from 'react';
 import { InView } from 'react-intersection-observer';
-import { Media } from 'react-breakpoints';
-import ReactBreakpoints from 'react-breakpoints';
 
 import { Devices } from './case.styles';
 
@@ -17,15 +15,6 @@ import { Testimonials } from 'wjhm';
 
 import { CaseStudy } from 'wjhmtypes';
 import { MediaItem } from 'wjhmtypes';
-
-const breakpoints = {
-  xs: 576,
-  sm: 768,
-  md: 992,
-  lg: 1200,
-  xl: 1440,
-  xxl: 1800,
-};
 
 type CaseProps = CaseStudy;
 
@@ -89,36 +78,34 @@ const CaseTemplate = (props: CaseProps) => {
 
   return (
     <React.Fragment>
-      <ReactBreakpoints breakpoints={breakpoints}>
-        <Intro
-          content={content}
-          heading={heading}
-          subheading={subheading}
-          illustration={illustration}
-          maxWidth={maxWidth}
-        />
-        <Previews devices={devices} devicePreviews={devicePreviews} siteUrl={siteUrl} subheading={subheading} />
-        {blocks && (
-          <React.Fragment>
-            <CaseRow data={blocks[0]?.fields} />
-            <CaseGallery images={galleryOne} />
-            <CaseRow data={blocks[1]?.fields} />
-            <CaseGallery images={galleryTwo} />
-            <CaseRow data={blocks[2]?.fields} />
-            <CaseGallery images={galleryThree} />
-            <CaseRow data={blocks[3]?.fields} />
-            <CaseBreak image={galleryFour} />
-            <CaseRow data={blocks[4]?.fields} />
-            <CaseGallery images={galleryFive} />
-            <CaseRow data={blocks[5]?.fields} />
-            <CaseGallery images={gallerySix} small={true} />
-            <CaseRow data={blocks[6]?.fields} />
-          </React.Fragment>
-        )}
-        {/* @ts-ignore */}
-        <Testimonials testimonials={processedTestimonials} />
-        <Related data={related} title="Continue Viewing My Case Studies" />
-      </ReactBreakpoints>
+      <Intro
+        content={content}
+        heading={heading}
+        subheading={subheading}
+        illustration={illustration}
+        maxWidth={maxWidth}
+      />
+      <Previews devices={devices} devicePreviews={devicePreviews} siteUrl={siteUrl} subheading={subheading} />
+      {blocks && (
+        <React.Fragment>
+          <CaseRow data={blocks[0]?.fields} />
+          <CaseGallery images={galleryOne} />
+          <CaseRow data={blocks[1]?.fields} />
+          <CaseGallery images={galleryTwo} />
+          <CaseRow data={blocks[2]?.fields} />
+          <CaseGallery images={galleryThree} />
+          <CaseRow data={blocks[3]?.fields} />
+          <CaseBreak image={galleryFour} />
+          <CaseRow data={blocks[4]?.fields} />
+          <CaseGallery images={galleryFive} />
+          <CaseRow data={blocks[5]?.fields} />
+          <CaseGallery images={gallerySix} small={true} />
+          <CaseRow data={blocks[6]?.fields} />
+        </React.Fragment>
+      )}
+      {/* @ts-ignore */}
+      <Testimonials testimonials={processedTestimonials} />
+      <Related data={related} title="Continue Viewing My Case Studies" />
     </React.Fragment>
   );
 };
@@ -140,47 +127,31 @@ const Previews: React.FC<PreviewsProps> = (props: PreviewsProps) => {
   if (!devices) return null;
 
   return (
-    <Media>
-      {({ breakpoints, currentBreakpoint }) => {
-        const isLarge: boolean = breakpoints[currentBreakpoint] > breakpoints.lg;
-        const isSmall: boolean = breakpoints[currentBreakpoint] <= breakpoints.lg;
-
-        if (!isLarge && !isSmall) return null;
-
-        if (isSmall) {
-          return (
-            <a href={siteUrl} className="button" rel="noopener noreferrer" target="_blank">
-              View The {subheading} Website
-            </a>
-          );
-        }
-
-        return (
-          <InView threshold={0} triggerOnce={true}>
-            {({ inView, ref }) => (
-              <Devices className={inView ? `devices devices--show` : `devices`} ref={ref}>
-                <a href={siteUrl} rel="noopener noreferrer" target="_blank">
-                  <div className="device-wrapper macbook">
-                    <div className="device" data-color="white" data-device="Macbook2015" data-orientation="portrait">
-                      <div className="screen">
-                        <CaseYouTube url={devices.desktop} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="device-wrapper iphone">
-                    <div className="device" data-device="iPhone7" data-orientation="portrait" data-color="white">
-                      <div className="screen">
-                        <CaseYouTube url={devices.mobile} />
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </Devices>
-            )}
-          </InView>
-        );
-      }}
-    </Media>
+    <InView threshold={0} triggerOnce={true}>
+      {({ inView, ref }) => (
+        <Devices className={inView ? `devices devices--show` : `devices`} ref={ref}>
+          <a href={siteUrl} className="devices__cta button" rel="noopener noreferrer" target="_blank">
+            View The {subheading} Website
+          </a>
+          <a className="devices__videos" href={siteUrl} rel="noopener noreferrer" target="_blank">
+            <div className="device-wrapper macbook">
+              <div className="device" data-color="white" data-device="Macbook2015" data-orientation="portrait">
+                <div className="screen">
+                  <CaseYouTube url={devices.desktop} />
+                </div>
+              </div>
+            </div>
+            <div className="device-wrapper iphone">
+              <div className="device" data-device="iPhone7" data-orientation="portrait" data-color="white">
+                <div className="screen">
+                  <CaseYouTube url={devices.mobile} />
+                </div>
+              </div>
+            </div>
+          </a>
+        </Devices>
+      )}
+    </InView>
   );
 };
 
