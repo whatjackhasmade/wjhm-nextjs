@@ -138,13 +138,19 @@ const Previews: React.FC<PreviewsProps> = (props: PreviewsProps) => {
   if (!devices) return null;
 
   return (
-    <InView threshold={0} triggerOnce={true}>
-      {({ inView, ref }) => (
-        <Devices className={inView ? `devices devices--show` : `devices`} ref={ref}>
-          <a href={siteUrl} className="devices__cta button" rel="noopener noreferrer" target="_blank">
-            View The {subheading} Website
-          </a>
-          <a className="devices__videos" href={siteUrl} rel="noopener noreferrer" target="_blank">
+    <Devices className="devices">
+      <a href={siteUrl} className="devices__cta button" rel="noopener noreferrer" target="_blank">
+        View The {subheading} Website
+      </a>
+      <InView threshold={0} triggerOnce={true}>
+        {({ inView, ref }) => (
+          <a
+            className={inView ? `devices__videos devices__videos--show` : `devices__videos`}
+            href={siteUrl}
+            ref={ref}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             <div className="device-wrapper macbook">
               <div className="device" data-color="white" data-device="Macbook2015" data-orientation="portrait">
                 <div className="screen">
@@ -160,9 +166,9 @@ const Previews: React.FC<PreviewsProps> = (props: PreviewsProps) => {
               </div>
             </div>
           </a>
-        </Devices>
-      )}
-    </InView>
+        )}
+      </InView>
+    </Devices>
   );
 };
 

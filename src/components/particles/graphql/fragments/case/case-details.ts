@@ -30,6 +30,12 @@ CaseStudyFields {
 	related {
 		... on CaseStudy {
 			id
+			CaseStudyFields {
+				intro {
+					subtitle
+					title
+				}
+			}
 			categories {
 				nodes {
 					name

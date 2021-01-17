@@ -24,12 +24,9 @@ const Post: React.FC<Props> = (props: Props) => {
   const hasImage: boolean = Boolean(image?.mediaItemUrl);
   if (!hasImage) return null;
 
-  const seo = props?.seo?.metaDesc;
   const title = props?.title;
-
+  const seo = props?.seo?.metaDesc;
   const hasSEO: boolean = Boolean(seo);
-  const hasTitle: boolean = Boolean(title);
-
   const href: string = `${props.uri}`;
 
   let classList: string = `item`;
@@ -40,13 +37,15 @@ const Post: React.FC<Props> = (props: Props) => {
 
   let subtitle: string = ``;
   if (caseStudyTitle) subtitle = caseStudyTitle;
+  const hasSubtitle: boolean = Boolean(subtitle);
+
+  const innerTitle = hasSubtitle ? subtitle : title;
 
   return (
     <StyledPost className={classList} ref={ref}>
       <Link href={href}>
         <div className="item__media">{hasImage && <SmartImage {...image} width={534} height={300.367} />}</div>
-        {hasTitle && <h3 className="item__title">{decodeHTML(title)}</h3>}
-        {subtitle && <h4 className="item__subtitle">{decodeHTML(subtitle)}</h4>}
+        {innerTitle && <h3 className="item__title">{decodeHTML(innerTitle)}</h3>}
         {hasSEO && <p className="item__description">{seo}</p>}
       </Link>
     </StyledPost>

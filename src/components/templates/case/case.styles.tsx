@@ -52,10 +52,27 @@ export const StyledCaseStudy = styled.article`
     margin-left: auto;
     margin-right: auto;
     max-width: 900px;
+
+    @media ${device?.lg} {
+      margin-left: 0;
+      max-width: calc(50% - 16px);
+    }
+
+    @media ${device?.xl} {
+      max-width: calc(50% - 48px);
+    }
+
+    @media ${device?.xxl} {
+      max-width: calc(50% - 64px);
+    }
   }
 
   > *:not(section) + section {
     margin-top: 64px;
+
+    @media ${device?.xxl} {
+      margin-top: 96px;
+    }
   }
 `;
 
@@ -138,36 +155,37 @@ export const Devices = styled.section`
   margin: 0 0 96px;
   margin-top: -24px;
 
-  opacity: 0;
-  transform: translateY(100px);
-  transition: 1s all ease;
-
   @media ${device?.xs} {
     margin-top: -48px;
   }
 
   @media ${device?.lg} {
-    margin: 96px 0;
+    margin-top: -80px;
   }
 
-  &.devices--show {
-    opacity: 1;
-    transform: translateY(0px);
+  .devices__cta {
+    margin-bottom: 60px;
   }
 
   .devices__videos {
     align-items: center;
     display: none;
+    margin-top: 60px;
     width: 100%;
+
+    opacity: 0;
+    transform: translateY(100px);
+    transition: 1s all ease;
 
     @media ${device?.lg} {
       display: flex;
     }
   }
 
-  .devices__cta {
+  .devices__videos--show {
     @media ${device?.lg} {
-      display: none;
+      opacity: 1;
+      transform: translateY(0px);
     }
   }
 

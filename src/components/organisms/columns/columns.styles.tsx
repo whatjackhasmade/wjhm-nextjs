@@ -19,11 +19,19 @@ const ColumnsComponent = styled.section`
     }
   }
 
+  & + .columns {
+    margin-top: 64px;
+
+    @media ${device?.lg} {
+      margin-top: 96px;
+    }
+  }
+
   .column {
     width: 100%;
 
     @media ${device?.lg} {
-      width: calc(50% - 16px);
+      width: calc(50% - 32px);
     }
 
     @media ${device?.xl} {
@@ -40,6 +48,72 @@ const ColumnsComponent = styled.section`
 
     *:last-child {
       margin-bottom: 0;
+    }
+
+    blockquote {
+      margin-bottom: 24px;
+      margin-top: 24px;
+
+      font-size: 1.7rem;
+    }
+
+    cite {
+      bottom: initial;
+      display: block;
+      margin-top: 12px;
+      position: relative;
+
+      font-size: 1.5rem;
+
+      @media ${device?.xl} {
+        font-size: 1.7rem;
+      }
+    }
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    > * + * {
+      margin-top: 16px;
+    }
+
+    > h2 + * {
+      margin-top: 24px;
+    }
+
+    > img + *,
+    > figure + * {
+      margin-top: 32px;
+    }
+
+    > * + h2 {
+      margin-top: 64px;
+    }
+
+    > * + h3 {
+      margin-top: 48px;
+    }
+
+    > * + img {
+      margin-top: 32px;
+    }
+
+    > * + h4 {
+      margin-top: 48px;
+    }
+
+    > img + img,
+    > figure + figure {
+      margin-top: 32px;
+    }
+
+    > h2 + h3 {
+      margin-top: 32px;
+    }
+
+    > h3 + h4 {
+      margin-top: 32px;
     }
   }
 
