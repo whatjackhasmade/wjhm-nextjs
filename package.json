@@ -41,7 +41,6 @@
   "dependencies": {
     "@formcarry/react": "^1.0.2",
     "dayjs": "^1.10.3",
-    "dotenv": "^8.2.0",
     "fetchql": "^3.0.0",
     "html-react-parser": "^1.1.1",
     "keen-slider": "^5.4.0",
@@ -84,6 +83,7 @@
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
     "babel-eslint": "^10.1.0",
+    "dotenv": "^8.2.0",
     "eslint": "^7.17.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^7.1.0",
