@@ -15,12 +15,6 @@ import { Series } from 'wjhm';
 
 import type { Seo as SEOTypes } from 'wjhmtypes';
 
-if (typeof window !== `undefined`) {
-  // Make scroll behavior of internal links smooth
-  // eslint-disable-next-line global-require
-  require(`smooth-scroll`)(`a[href*="#"]`);
-}
-
 declare type typeName = {
   postType?: string;
 };

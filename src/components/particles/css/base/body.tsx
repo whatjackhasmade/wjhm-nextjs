@@ -23,6 +23,11 @@ const exportedCSS = css`
     font-smoothing: antialiased;
     -webkit-font-smoothing: antialiased;
     text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
+
+    /* If the user doesn't want it animate, prevent */
+    @media screen and (prefers-reduced-motion: reduce) {
+      scroll-behavior: auto;
+    }
   }
 
   .sb-show-main {
