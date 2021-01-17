@@ -50,6 +50,7 @@ const ComponentParser = (props: Props) => {
     const key = `component-${generateID()}`;
     if (isCol) component.attributes = { ...component.attributes, autoplay: false };
 
+    if (!Component && !originalContent) return null;
     if (!Component && originalContent) return <React.Fragment key={key}>{parseHTML(originalContent)}</React.Fragment>;
 
     component = convertACFProps(component);
@@ -103,15 +104,15 @@ const ComponentParser = (props: Props) => {
   const noBlocks = !blocks && !innerBlocks;
   if (noBlocks) return null;
 
-  let mapOver = innerBlocks;
-  if (blocks) mapOver = blocks;
+  const mapOver = blocks ? blocks : innerBlocks;
 
   const validComponents = mapOver.filter(c => !c || !isEmptyObject(c) || c.name !== null);
   const hasValidComponents = validComponents?.length > 0;
   if (!hasValidComponents) return null;
 
   const pageComponents = validComponents.map((c, index) => componentLookup(c, index));
-  if (!pageComponents) return null;
+  const hasComponents = pageComponents?.length > 0;
+  if (!hasComponents) return null;
 
   return <React.Fragment>{pageComponents}</React.Fragment>;
 };

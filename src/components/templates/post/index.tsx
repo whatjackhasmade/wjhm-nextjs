@@ -1,9 +1,10 @@
 import * as React from 'react';
 import dayjs from 'dayjs';
 
-import { decodeHTML } from '../../particles/helpers';
+import { decodeHTML } from 'wjhm';
+import { enabledBlocks } from 'wjhm';
 import { parseHTML } from 'wjhm';
-import ComponentParser from '../../particles/ComponentParser';
+import { ComponentParser } from 'wjhm';
 
 import { Article, ArticleIntro } from './post.styles';
 
@@ -16,7 +17,8 @@ import { Related } from 'wjhm';
 declare type PostTemplateProps = any;
 
 const PostTemplate = (props: PostTemplateProps) => {
-  const { blocks, content, date, PostFields, title } = props;
+  const { blocks: initialBlocks, content, date, PostFields, title } = props;
+  const blocks = enabledBlocks(initialBlocks);
   const relatedPosts = PostFields?.relatedPosts;
   const learn = null;
   const lessons = learn?.items;

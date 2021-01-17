@@ -3,16 +3,17 @@ export { camelToKebab } from './camelToKebab';
 export { createCSSVars } from './createCSSVars';
 export { createRelative } from './createRelative';
 export { decodeHTML } from './decodeHTML';
+export { enabledBlocks } from './enabledBlocks';
 export { generateID } from './generateID';
 export { hexToRGB } from './hexToRGB';
-export { htmlDecode } from "./htmlDecode"
+export { htmlDecode } from './htmlDecode';
 export { httpTohttps } from './httpTohttps';
 export { isAnObject } from './isAnObject';
 export { isEmptyObject } from './isEmptyObject';
 export { isInternal } from './isInternal';
 export { isString } from './isString';
 export { prettyDate } from './prettyDate';
-export { slugify } from "./slugify"
+export { slugify } from './slugify';
 export { windowAvailable } from './windowAvailable';
 
 export function randomID() {
