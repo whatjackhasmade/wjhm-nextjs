@@ -26,7 +26,7 @@ const Presentations: React.FC<Props> = (props: Props) => {
     centered: false,
     controls: false,
     dragSpeed: 1,
-    duration: 500,
+    duration: 1000,
     loop: true,
     resetSlide: true,
     rtl: false,
