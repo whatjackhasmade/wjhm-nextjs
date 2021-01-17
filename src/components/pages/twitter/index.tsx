@@ -17,7 +17,7 @@ const Twitter = (props: TwitterPageProps) => {
   const [tweets, setTweets] = useState([]);
 
   useEffect(() => {
-    fetch('https://wjhm-node-twitter-feed.herokuapp.com/')
+    fetch(`https://wjhm-node-twitter-feed.herokuapp.com/`)
       .then(res => {
         return res.json();
       })
@@ -27,9 +27,9 @@ const Twitter = (props: TwitterPageProps) => {
   }, []);
 
   const heartGenerator = count => {
-    let hearts = [];
-    for (var i = 0; i < count; i++) {
-      hearts.push('❤');
+    const hearts = [];
+    for (let i = 0; i < count; i++) {
+      hearts.push(`❤`);
     }
     return hearts;
   };

@@ -44,8 +44,8 @@ const Colour = styled.div`
 
 const BrandColours = [
   {
-    name: 'Primary',
-    hex: '#0652DD',
+    name: `Primary`,
+    hex: `#0652DD`,
   },
 ];
 

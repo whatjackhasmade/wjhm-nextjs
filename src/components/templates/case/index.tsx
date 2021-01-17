@@ -9,6 +9,8 @@ import CaseGallery from './partials/gallery';
 import CaseRow from './partials/row';
 import CaseYouTube from './partials/youtube';
 
+import { ComponentParser } from 'wjhm';
+
 import { Intro } from 'wjhm';
 import { Related } from 'wjhm';
 import { Testimonials } from 'wjhm';
@@ -21,7 +23,10 @@ type CaseProps = CaseStudy;
 const CaseTemplate = (props: CaseProps) => {
   const fields = props?.CaseStudyFields;
 
-  const blocks = fields?.blocks;
+  const blocks = props?.blocks;
+  const hasBlocks: boolean = blocks?.length > 0;
+
+  const oldBlocks = fields?.blocks;
   const devices = fields?.devices;
   const devicePreviews = fields?.devicePreviews;
   const gallery = fields?.gallery;
@@ -86,21 +91,22 @@ const CaseTemplate = (props: CaseProps) => {
         maxWidth={maxWidth}
       />
       <Previews devices={devices} devicePreviews={devicePreviews} siteUrl={siteUrl} subheading={subheading} />
-      {blocks && (
+      {hasBlocks && <ComponentParser content={blocks} />}
+      {oldBlocks && (
         <React.Fragment>
-          <CaseRow data={blocks[0]?.fields} />
+          <CaseRow data={oldBlocks[0]?.fields} />
           <CaseGallery images={galleryOne} />
-          <CaseRow data={blocks[1]?.fields} />
+          <CaseRow data={oldBlocks[1]?.fields} />
           <CaseGallery images={galleryTwo} />
-          <CaseRow data={blocks[2]?.fields} />
+          <CaseRow data={oldBlocks[2]?.fields} />
           <CaseGallery images={galleryThree} />
-          <CaseRow data={blocks[3]?.fields} />
+          <CaseRow data={oldBlocks[3]?.fields} />
           <CaseBreak image={galleryFour} />
-          <CaseRow data={blocks[4]?.fields} />
+          <CaseRow data={oldBlocks[4]?.fields} />
           <CaseGallery images={galleryFive} />
-          <CaseRow data={blocks[5]?.fields} />
+          <CaseRow data={oldBlocks[5]?.fields} />
           <CaseGallery images={gallerySix} small={true} />
-          <CaseRow data={blocks[6]?.fields} />
+          <CaseRow data={oldBlocks[6]?.fields} />
         </React.Fragment>
       )}
       {/* @ts-ignore */}

@@ -7,18 +7,18 @@ import { Base } from 'wjhm';
 import { VideoGrid } from './animation-principles.styles';
 
 const VideosArray = [
-  '/videos/ux-motion/1.mp4',
-  '/videos/ux-motion/2.mp4',
-  '/videos/ux-motion/3.mp4',
-  '/videos/ux-motion/4.mp4',
-  '/videos/ux-motion/5.mp4',
-  '/videos/ux-motion/6.mp4',
-  '/videos/ux-motion/7.mp4',
-  '/videos/ux-motion/8.mp4',
-  '/videos/ux-motion/9.mp4',
-  '/videos/ux-motion/10.mp4',
-  '/videos/ux-motion/11.mp4',
-  '/videos/ux-motion/12.mp4',
+  `/videos/ux-motion/1.mp4`,
+  `/videos/ux-motion/2.mp4`,
+  `/videos/ux-motion/3.mp4`,
+  `/videos/ux-motion/4.mp4`,
+  `/videos/ux-motion/5.mp4`,
+  `/videos/ux-motion/6.mp4`,
+  `/videos/ux-motion/7.mp4`,
+  `/videos/ux-motion/8.mp4`,
+  `/videos/ux-motion/9.mp4`,
+  `/videos/ux-motion/10.mp4`,
+  `/videos/ux-motion/11.mp4`,
+  `/videos/ux-motion/12.mp4`,
 ];
 
 type AnimationPrinciplesProps = {};

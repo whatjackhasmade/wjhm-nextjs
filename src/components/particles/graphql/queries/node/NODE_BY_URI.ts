@@ -11,6 +11,7 @@ export const NODE_BY_URI: string = /* GraphQL */ `
 			id
       ... on CaseStudy {
         ${CaseDetailsFragment}
+			  ${AllBlocksFragment}
       }
       ... on Page {
         ${PageDetailsFragment}

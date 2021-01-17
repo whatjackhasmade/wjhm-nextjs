@@ -2,8 +2,9 @@ import * as React from 'react';
 import { default as parser } from 'html-react-parser';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 
-import { isInternal } from 'wjhm';
 import { createRelative } from 'wjhm';
+import { decodeHTML } from 'wjhm';
+import { isInternal } from 'wjhm';
 
 import { Link } from 'wjhm';
 
@@ -65,7 +66,7 @@ const parseHTML = (html: string) => {
   if (!html) return html;
   if (!isString(html)) return html;
   const clean = parser(html, config);
-  return clean;
+  return decodeHTML(clean);
 };
 
 export { parseHTML };

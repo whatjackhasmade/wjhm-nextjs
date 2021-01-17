@@ -1,4 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
+import { decodeHTML } from 'wjhm';
 import { slugify } from 'wjhm';
 
 import type { CoreHeadingBlockAttributes } from 'wjhmtypes';
@@ -16,7 +17,7 @@ const Heading = (props: HeadingProps) => {
   if (Boolean(className)) headingClass += ` ${className}`;
   if (Boolean(variant)) headingClass += ` h${variant}`;
 
-  const innerContent = content ? content : children;
+  const innerContent = content ? decodeHTML(content) : children;
 
   const id: string = slugify(innerContent.toLowerCase());
 
