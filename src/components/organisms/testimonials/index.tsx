@@ -38,11 +38,15 @@ const Testimonials: React.FC<Props> = (props: Props) => {
     if (sliderTestimonials) sliderTestimonials?.next();
   };
 
+  if (!hasTestimonials) return null;
+
   return (
     <TestimonialsComponent>
       <div className="testimonial__media">
         <div ref={refSliderImages} className="keen-slider">
-          {hasTestimonials && testimonials.map(t => <TestimonialImage {...t} key={`${t?.author}-image`} />)}
+          {testimonials.map(t => (
+            <TestimonialImage {...t} key={`${t?.author}-image`} />
+          ))}
         </div>
       </div>
       {hasNavigation && (
@@ -52,7 +56,9 @@ const Testimonials: React.FC<Props> = (props: Props) => {
       )}
       <div className="testimonials">
         <div ref={refSliderTestimonials} className="keen-slider">
-          {hasTestimonials && testimonials.map(t => <TestimonialInfo {...t} key={`${t?.author}-content`} />)}
+          {testimonials.map(t => (
+            <TestimonialInfo {...t} key={`${t?.author}-content`} />
+          ))}
         </div>
       </div>
     </TestimonialsComponent>

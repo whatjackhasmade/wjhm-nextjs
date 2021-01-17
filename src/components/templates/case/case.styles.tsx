@@ -1,6 +1,64 @@
 import styled from 'styled-components';
 import { device } from 'particles';
 
+export const StyledCaseStudy = styled.article`
+  li + li {
+    margin-top: 8px;
+  }
+
+  > * + * {
+    margin-top: 16px;
+  }
+
+  > h2 + * {
+    margin-top: 24px;
+  }
+
+  > img + *,
+  > figure + * {
+    margin-top: 32px;
+  }
+
+  > * + h2 {
+    margin-top: 64px;
+  }
+
+  > * + h3 {
+    margin-top: 48px;
+  }
+
+  > * + img {
+    margin-top: 32px;
+  }
+
+  > * + h4 {
+    margin-top: 48px;
+  }
+
+  > img + img,
+  > figure + figure {
+    margin-top: 32px;
+  }
+
+  > h2 + h3 {
+    margin-top: 32px;
+  }
+
+  > h3 + h4 {
+    margin-top: 32px;
+  }
+
+  > *:not(section) {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+  }
+
+  > *:not(section) + section {
+    margin-top: 64px;
+  }
+`;
+
 export const BreakImage = styled.section`
   align-items: center;
   display: flex;

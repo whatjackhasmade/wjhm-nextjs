@@ -1,5 +1,5 @@
 import * as React from 'react';
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 import { decodeHTML } from '../../particles/helpers';
 import { parseHTML } from 'wjhm';
@@ -29,22 +29,20 @@ const PostTemplate = (props: PostTemplateProps) => {
   let overviewTitle: string = `What you will learn`;
   if (learn?.title) overviewTitle = learn.title;
 
-  const dateFormatted = date && dayjs(new Date(date)).format(`DD/MM/YYYY`)
+  const dateFormatted = date && dayjs(new Date(date)).format(`DD/MM/YYYY`);
 
   return (
     <React.Fragment>
       <ArticleIntro>
         <nav className="article__meta">
           <Link to="/posts">Insights</Link>
-          {hasDate && (
-            <h4 className="article__meta__date">{dateFormatted} by Jack Pritchard</h4>
-          )}
+          {hasDate && <h4 className="article__meta__date">{dateFormatted} by Jack Pritchard</h4>}
         </nav>
         <h1>{decodeHTML(title)}</h1>
       </ArticleIntro>
       <Article>
         {hasLessons && <OverviewList items={lessons} title={overviewTitle} />}
-        {hasBlocks && <ComponentParser content={blocks} />}
+        {hasBlocks && <ComponentParser blocks={blocks} />}
         {!hasBlocks && parseHTML(content)}
       </Article>
       {hasRelated && <Related data={relatedPosts} />}

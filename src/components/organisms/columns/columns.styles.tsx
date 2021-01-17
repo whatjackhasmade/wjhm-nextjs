@@ -1,0 +1,55 @@
+import styled from 'styled-components';
+import { device } from 'particles';
+
+const ColumnsComponent = styled.section`
+  .columns__contents {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto 32px;
+    max-width: var(--gridMax);
+    width: 100%;
+
+    @media ${device?.lg} {
+      align-items: unset;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 0 auto 64px;
+    }
+  }
+
+  .column {
+    width: 100%;
+
+    @media ${device?.lg} {
+      width: calc(50% - 16px);
+    }
+
+    @media ${device?.xl} {
+      width: calc(50% - 48px);
+    }
+
+    @media ${device?.xxl} {
+      width: calc(50% - 64px);
+    }
+
+    *:first-child {
+      margin-top: 0;
+    }
+
+    *:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .column + .column {
+    margin-top: 32px;
+
+    @media ${device?.lg} {
+      margin-top: 0;
+    }
+  }
+`;
+
+export default ColumnsComponent;

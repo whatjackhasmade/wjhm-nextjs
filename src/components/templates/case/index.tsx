@@ -2,6 +2,7 @@ import React from 'react';
 import { useMemo } from 'react';
 import { InView } from 'react-intersection-observer';
 
+import { StyledCaseStudy } from './case.styles';
 import { Devices } from './case.styles';
 
 import CaseBreak from './partials/break';
@@ -91,7 +92,11 @@ const CaseTemplate = (props: CaseProps) => {
         maxWidth={maxWidth}
       />
       <Previews devices={devices} devicePreviews={devicePreviews} siteUrl={siteUrl} subheading={subheading} />
-      {hasBlocks && <ComponentParser content={blocks} />}
+      {hasBlocks && (
+        <StyledCaseStudy>
+          <ComponentParser blocks={blocks} />
+        </StyledCaseStudy>
+      )}
       {oldBlocks && (
         <React.Fragment>
           <CaseRow data={oldBlocks[0]?.fields} />
