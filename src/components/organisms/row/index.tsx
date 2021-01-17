@@ -3,6 +3,7 @@ import { useInView } from 'react-intersection-observer';
 
 import { parseHTML } from 'wjhm';
 
+import { Link } from 'wjhm';
 import { SmartImage } from 'wjhm';
 
 import RowComponent from './row.styles';
@@ -38,9 +39,9 @@ const Row: React.FC<Props> = (props: Props) => {
         {hasMedia && (
           <React.Fragment>
             {link && (
-              <a href={link}>
+              <Link href={link}>
                 <RowMedia media={media} ext={ext} />
-              </a>
+              </Link>
             )}
             {!link && <RowMedia media={media} ext={ext} />}
           </React.Fragment>
