@@ -39,7 +39,6 @@
     "vercel:sitemap": "node src/node/generation/createSitemap.ts"
   },
   "dependencies": {
-    "@apollo/client": "^3.3.7",
     "@formcarry/react": "^1.0.2",
     "dayjs": "^1.10.3",
     "dotenv": "^8.2.0",
@@ -61,6 +60,7 @@
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
+    "@apollo/client": "^3.3.7",
     "@graphql-codegen/cli": "^1.20.0",
     "@graphql-codegen/introspection": "^1.17.8",
     "@graphql-codegen/typescript": "^1.20.0",
