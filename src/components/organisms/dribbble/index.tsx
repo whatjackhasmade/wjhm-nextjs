@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { Carousel } from 'react-responsive-carousel';
+import { useKeenSlider } from 'keen-slider/react';
 
 import { parseHTML } from 'wjhm';
 
 import DribbbleComponent from './dribbble.styles';
-import settings from './settings.json';
 
 import { callGetAllDribbble } from 'wjhm';
 
@@ -53,12 +52,47 @@ declare type ShotProps = {
 
 const Dribbble = (props: Fields) => {
   const { content } = props;
-  const carouselSettings = settings;
+
+  const [ref, slider] = useKeenSlider<HTMLDivElement>({
+    centered: false,
+    controls: false,
+    dragSpeed: 1,
+    duration: 500,
+    loop: true,
+    resetSlide: true,
+    rtl: false,
+    rubberband: true,
+    slidesPerView: 1,
+    spacing: 24,
+    vertical: false,
+    breakpoints: {
+      '(min-width: 500px)': {
+        slidesPerView: 3,
+      },
+      '(min-width: 1000px)': {
+        slidesPerView: 4,
+      },
+      '(min-width: 1200px)': {
+        slidesPerView: 6,
+      },
+      '(min-width: 1440px)': {
+        slidesPerView: 8,
+      },
+    },
+  });
 
   const { data, error, isLoading: loading } = useQuery(`callGetAllDribbble`, callGetAllDribbble);
-
   const shots: ShotProps[] = data;
   const hasShots: boolean = data?.length > 0;
+  const doubledShots = hasShots ? [...shots, ...shots] : [];
+
+  React.useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (slider) slider?.next();
+    }, 5000);
+
+    return () => clearInterval(intervalId); // This is important
+  }, [slider]);
 
   return (
     <DribbbleComponent>
@@ -68,11 +102,11 @@ const Dribbble = (props: Fields) => {
       {loading && <Skeleton height="3.5" width="16" />}
       {error && <Error error={error} />}
       {hasShots && (
-        <Carousel {...carouselSettings} >
-          {shots.map(shot => (
+        <div ref={ref} className="keen-slider">
+          {doubledShots.map(shot => (
             <Shot key={String(shot.id)} {...shot} />
           ))}
-        </Carousel>
+        </div>
       )}
     </DribbbleComponent>
   );
@@ -88,7 +122,7 @@ const Shot = (props: ShotProps) => {
   // Set the mouseOver to true on mouse over
   const handleHover = () => setMouseOver(true);
 
-  let classList: string = `dribble__shot`;
+  let classList: string = `keen-slider__slide dribble__shot`;
   if (mouseOver) classList += ` dribbble__shot--animate`;
 
   return (

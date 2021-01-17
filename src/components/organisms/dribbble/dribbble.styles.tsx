@@ -43,10 +43,6 @@ const DribbbleComponent = styled.section`
     width: 100%;
   }
 
-  .slick-list {
-    overflow: visible;
-  }
-
   .dribbble__shots {
     align-items: flex-start;
     display: flex;
@@ -151,41 +147,18 @@ const DribbbleComponent = styled.section`
     }
   }
 
-  .slick-slider {
-    padding: 0 0 8px;
-    width: 100%;
-
+  .keen-slider {
     cursor: grab;
+
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    overflow: visible;
+    position: relative;
+    width: 100vw;
   }
 
-  .slick-list {
-    margin: 0 -16px;
-  }
-
-  .slick-slide {
-    padding: 0 16px;
-
-    @media ${device?.md} {
-      padding: 16px;
-    }
-  }
-
-  .slick-track {
-    display: flex;
-
-    .slick-slide {
-      height: auto;
-
-      > div {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-
-        > * {
-          flex: 1;
-        }
-      }
-    }
+  .keen-slider__slide {
+    overflow: visible;
   }
 `;
 

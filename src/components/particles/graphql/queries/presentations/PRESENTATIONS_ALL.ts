@@ -1,7 +1,7 @@
 import { MediaFragment } from '../../fragments/general/media';
 
-export const PRESENTATIONS_ALL = /* GraphQL */ `
-  query PresentationsAll {
+export const PRESENTATIONS_ALL: string = /* GraphQL */ `
+  query PRESENTATIONS_ALL {
     events {
       nodes {
         id

@@ -22,8 +22,8 @@ import paragraph from './css/base/paragraph';
 import table from './css/base/table';
 import video from './css/base/video';
 
+import carousel from './css/components/carousel';
 import mailtoui from './css/components/mailtoui';
-import slick from './css/components/slick';
 import wrapper from './css/components/wrapper';
 
 import wpImage from './css/components/wordpress/image';
@@ -55,8 +55,8 @@ const GlobalStyle = createGlobalStyle`
 	${table};
 	${video};
 
+	${carousel};
 	${mailtoui};
-	${slick};
 	${wrapper};
 
 	${wpImage};

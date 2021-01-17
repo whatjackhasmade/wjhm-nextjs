@@ -1,9 +1,18 @@
 {
-  "autoPlay": true,
-  "infiniteLoop": true,
-  "showArrows": false,
-  "showIndicators": true,
-  "stopOnHover": true,
-  "swipeable": true,
-  "transitionTime": 500
+  "centered": false,
+  "controls": false,
+  "dragSpeed": 1,
+  "duration": 500,
+  "loop": true,
+  "resetSlide": true,
+  "rtl": false,
+  "rubberband": true,
+  "slidesPerView": 1,
+  "spacing": 16,
+  "vertical": false,
+  "breakpoints": {
+    "(min-width: 720px)": {
+      "slidesPerView": 5
+    }
+  }
 }
