@@ -32,6 +32,7 @@ const Github = (props: GithubProps) => {
           src="https://ghchart.rshah.org/whatjackhasmade"
           width={702}
         />
+        <span className="hidden">View my Github profile</span>
       </a>
       {content && <div>{parseHTML(content)}</div>}
     </GithubComponent>

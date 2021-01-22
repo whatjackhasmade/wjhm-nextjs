@@ -141,6 +141,7 @@ const Shot = (props: ShotProps) => {
       onMouseLeave={handleHover}
     >
       <a className="dribbble__shot__thumbnail" href={htmlURL} rel="noopener noreferrer" target="_blank">
+        <span className="hidden">View {title} on Dribbble</span>
         <IconDribbble className="dribbble__shot__logo" />
         <SmartImage
           alt={title}
