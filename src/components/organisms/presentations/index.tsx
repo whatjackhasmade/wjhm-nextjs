@@ -59,6 +59,22 @@ const Presentations: React.FC<Props> = (props: Props) => {
     return () => clearInterval(intervalId); // This is important
   }, [slider]);
 
+  const events = React.useMemo(() => {
+    if (!hasPresentations) return [];
+
+    return presentations.map(presentation => {
+      const title = presentation?.title;
+      const venue = presentation?.PostTypeEventFields?.venue;
+
+      let uid: string = `${title}`;
+      if (venue) uid += `-${venue}`;
+      if (!venue) uid += `-${generateID()}`;
+
+      const event = { ...presentation, uid };
+      return event;
+    });
+  }, [hasPresentations, presentations]);
+
   return (
     <PresentationsComponent>
       <Intro heading="Event Presentations" marginReduced={true} subheading="Touring the south coast">
@@ -67,24 +83,9 @@ const Presentations: React.FC<Props> = (props: Props) => {
         {loading && <p>Loading events...</p>}
       </Intro>
       <div ref={ref} className="keen-slider">
-        {React.useMemo(() => {
-          if (!hasPresentations) return null;
-
-          return (
-            <React.Fragment>
-              {presentations.map(event => {
-                const title = event?.title;
-                const venue = event?.PostTypeEventFields?.venue;
-
-                let key: string = `${title}`;
-                if (venue) key += `-${venue}`;
-                if (!venue) key += `-${generateID()}`;
-
-                return <Presentation {...event} key={key} />;
-              })}
-            </React.Fragment>
-          );
-        }, [hasPresentations, presentations])}
+        {events.map(event => {
+          return <Presentation {...event} key={event.uid} />;
+        })}
       </div>
     </PresentationsComponent>
   );
@@ -92,10 +93,7 @@ const Presentations: React.FC<Props> = (props: Props) => {
 
 const Presentation = (props: Event) => {
   const featuredImage = props?.featuredImage?.node;
-  const PostTypeEventFields = props?.PostTypeEventFields;
   const title = props?.title;
-
-  const venue = PostTypeEventFields?.venue;
 
   const classList: string = `keen-slider__slide presentations__event`;
 
@@ -103,7 +101,6 @@ const Presentation = (props: Event) => {
     <div className={classList}>
       <SmartImage className="presentations__event__thumbnail" height={302} width={453} {...featuredImage} alt={title} />
       <div className="presentations__event__meta">
-        <h5 className="subheading">{venue}</h5>
         <h3>{title}</h3>
       </div>
     </div>

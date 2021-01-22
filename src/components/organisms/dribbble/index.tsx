@@ -85,8 +85,13 @@ const Dribbble = (props: Fields) => {
   const { data, error, isLoading: loading } = useQuery(`callGetAllDribbble`, callGetAllDribbble);
   const shots: ShotProps[] = data;
   const hasShots: boolean = data?.length > 0;
+
   const doubledShots = React.useMemo(() => {
-    return hasShots ? [...shots, ...shots.map(s => ({ ...s, id: generateID() }))] : [];
+    if (!hasShots) return [];
+
+    const doubled = [...shots, ...shots];
+    const doubledUID = doubled.map(shot => ({ ...shot, uid: generateID() }));
+    return doubledUID;
   }, [hasShots, shots]);
 
   React.useEffect(() => {
@@ -107,7 +112,7 @@ const Dribbble = (props: Fields) => {
       {hasShots && (
         <div ref={ref} className="keen-slider">
           {doubledShots.map(shot => (
-            <Shot key={String(shot.id)} {...shot} />
+            <Shot {...shot} key={shot.uid} />
           ))}
         </div>
       )}
