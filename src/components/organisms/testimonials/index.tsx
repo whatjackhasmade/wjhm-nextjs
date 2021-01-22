@@ -68,7 +68,7 @@ const Testimonials: React.FC<Props> = (props: Props) => {
 const TestimonialImage: React.FC<SingleItem> = (props: SingleItem) => {
   const { author, media } = props;
 
-  return <SmartImage {...media} alt={author} className="keen-slider__slide" height={406} width={723} />;
+  return <SmartImage {...media} alt={author} className="keen-slider__slide" height={406} width={723} threshold={200} />;
 };
 
 const TestimonialInfo: React.FC<SingleItem> = (props: SingleItem) => {
