@@ -116,7 +116,7 @@ const TestimonialsComponent = styled.section`
     font-size: 14px;
     line-height: 22px;
 
-    color: #c4c4c4;
+    color: #ebebeb;
   }
 
   .testimonial__logo {
