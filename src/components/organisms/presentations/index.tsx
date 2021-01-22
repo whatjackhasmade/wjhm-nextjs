@@ -5,6 +5,7 @@ import { useKeenSlider } from 'keen-slider/react';
 import PresentationsComponent from './presentation.styles';
 
 import { callGetAllPresentations } from 'wjhm';
+import { generateID } from 'wjhm';
 import { parseHTML } from 'wjhm';
 
 import { SmartImage } from 'wjhm';
@@ -66,15 +67,24 @@ const Presentations: React.FC<Props> = (props: Props) => {
         {loading && <p>Loading events...</p>}
       </Intro>
       <div ref={ref} className="keen-slider">
-        {hasPresentations &&
-          presentations.map(event => {
-            const title = event?.title;
-            const venue = event?.PostTypeEventFields?.venue;
+        {React.useMemo(() => {
+          if (!hasPresentations) return null;
 
-            const key: string = `${title}-${venue}`;
+          return (
+            <React.Fragment>
+              {presentations.map(event => {
+                const title = event?.title;
+                const venue = event?.PostTypeEventFields?.venue;
 
-            return <Presentation {...event} key={key} />;
-          })}
+                let key: string = `${title}`;
+                if (venue) key += `-${venue}`;
+                if (!venue) key += `-${generateID()}`;
+
+                return <Presentation {...event} key={key} />;
+              })}
+            </React.Fragment>
+          );
+        }, [hasPresentations, presentations])}
       </div>
     </PresentationsComponent>
   );

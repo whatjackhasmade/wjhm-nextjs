@@ -33,6 +33,9 @@ const Row: React.FC<Props> = (props: Props) => {
   let ext = null;
   if (hasMedia) ext = media.mediaItemUrl.substr(media.mediaItemUrl.lastIndexOf(`.`) + 1);
 
+  const heading = content.match('<?h[1-6]>(.*?)</?h[1-6]>')?.[1];
+  const headingText = heading?.replace(/(<([^>]+)>)/gi, '');
+
   return (
     <RowComponent align={align} className={classList} ref={ref}>
       <div className="row__column">
@@ -41,6 +44,7 @@ const Row: React.FC<Props> = (props: Props) => {
             {link && (
               <Link href={link}>
                 <RowMedia media={media} ext={ext} />
+                <span className="hidden">Read more on {headingText}</span>
               </Link>
             )}
             {!link && <RowMedia media={media} ext={ext} />}
