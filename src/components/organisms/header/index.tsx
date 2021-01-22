@@ -45,6 +45,7 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
       <div className="header__contents">
         <Link to="/" className="header__logo">
           <Logo />
+          <span className="hidden">Homepage</span>
         </Link>
         {hasItems && (
           <nav className={menuOpen ? `header__menu--show` : undefined}>

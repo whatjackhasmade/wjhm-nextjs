@@ -61,7 +61,11 @@ const HeroComponent = styled.section`
     }
   }
 
+  h2,
+  h3,
   h4 {
+    margin-bottom: 0;
+
     font-size: 18px;
     font-weight: 500;
     line-height: 28px;
@@ -70,11 +74,28 @@ const HeroComponent = styled.section`
   }
 
   .hero__contents {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
     margin: var(--contents-margin);
     max-width: var(--contents-max-width);
     position: relative;
     width: 100%;
     z-index: 3;
+
+    > * {
+      order: 1;
+    }
+
+    > h2,
+    > h3,
+    > h4 {
+      order: 0;
+    }
+
+    p {
+      margin-top: 0;
+    }
   }
 
   .hero__wrapper {
