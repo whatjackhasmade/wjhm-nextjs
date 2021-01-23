@@ -40,6 +40,7 @@ export default function MyApp(props: MyAppProps) {
   const { Component, pageProps } = props;
 
   return (
+    // @ts-ignore
     <QueryClientProvider client={client}>
       <ThemeProvider theme={ThemeDefault}>
         <GlobalStyle />
