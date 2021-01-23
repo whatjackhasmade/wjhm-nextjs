@@ -85,14 +85,6 @@ const Dribbble = (props: Fields) => {
   const shots: ShotProps[] = data;
   const hasShots: boolean = data?.length > 0;
 
-  let doubledShots = [];
-
-  if (hasShots) {
-    const doubled = [...shots, ...shots];
-    const doubledUID = doubled.map((shot, i) => ({ ...shot, uid: `shot-${i}` }));
-    doubledShots = doubledUID;
-  }
-
   React.useEffect(() => {
     const intervalId = setInterval(() => {
       if (slider) slider?.next();
@@ -110,8 +102,8 @@ const Dribbble = (props: Fields) => {
       {error && <Error error={error} />}
       {hasShots && (
         <div ref={ref} className="keen-slider">
-          {doubledShots.map(shot => (
-            <Shot {...shot} key={shot.uid} />
+          {shots.map(shot => (
+            <Shot {...shot} key={shot.id} />
           ))}
         </div>
       )}
