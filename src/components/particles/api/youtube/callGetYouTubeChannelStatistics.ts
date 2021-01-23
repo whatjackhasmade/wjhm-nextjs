@@ -1,4 +1,4 @@
-export interface Response {
+export interface CallGetYouTubeChannelStatisticsResponse {
   kind: string;
   etag: string;
   pageInfo: {
@@ -21,7 +21,7 @@ export interface Response {
 const GAPI = process.env.NEXT_PUBLIC_GOOGLE_API;
 const channelID = `UCIOm-HME4V_STS9yWM5aXIg`;
 
-export const callGetYouTubeChannelStatistics = async (): Promise<Response> => {
+export const callGetYouTubeChannelStatistics = async (): Promise<CallGetYouTubeChannelStatisticsResponse> => {
   const youtubeURL: string = encodeURI(
     `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelID}&key=${GAPI}`,
   );

@@ -65,7 +65,7 @@ export interface PageInfo {
   resultsPerPage: number;
 }
 
-export interface Response {
+export interface CallGetYouTubeChannelVideosResponse {
   kind: string;
   etag: string;
   nextPageToken: string;
@@ -76,7 +76,7 @@ export interface Response {
 const GAPI = process.env.NEXT_PUBLIC_GOOGLE_API;
 const playlistUploadsID = `UUIOm-HME4V_STS9yWM5aXIg`;
 
-export const callGetYouTubeChannelVideos = async (count?: number): Promise<Response> => {
+export const callGetYouTubeChannelVideos = async (count?: number): Promise<CallGetYouTubeChannelVideosResponse> => {
   let max = 12;
   if (count) max = count;
 
