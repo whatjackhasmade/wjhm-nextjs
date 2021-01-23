@@ -16,7 +16,10 @@ const GithubComponent = styled.section`
   }
 
   .github__calendar {
+    display: block;
     margin: 32px auto;
+    max-width: 700px;
+    width: 100%;
   }
 
   .intro {

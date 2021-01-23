@@ -32,7 +32,6 @@ const Presentations: React.FC<Props> = (props: Props) => {
     rtl: false,
     rubberband: true,
     slidesPerView: 1,
-    spacing: 24,
     vertical: false,
     breakpoints: {
       '(min-width: 500px)': {
@@ -58,20 +57,6 @@ const Presentations: React.FC<Props> = (props: Props) => {
     return () => clearInterval(intervalId); // This is important
   }, [slider]);
 
-  const events = !hasPresentations
-    ? []
-    : presentations.map((presentation, i) => {
-        const title = presentation?.title;
-        const venue = presentation?.PostTypeEventFields?.venue;
-
-        let uid: string = `${title}`;
-        if (venue) uid += `-${venue}`;
-        if (!venue) uid += `-${i}`;
-
-        const event = { ...presentation, uid };
-        return event;
-      });
-
   return (
     <PresentationsComponent>
       <Intro heading="Event Presentations" marginReduced={true} subheading="Touring the south coast">
@@ -80,9 +65,10 @@ const Presentations: React.FC<Props> = (props: Props) => {
         {loading && <p>Loading events...</p>}
       </Intro>
       <div ref={ref} className="keen-slider">
-        {events.map(event => {
-          return <Presentation {...event} key={event.uid} />;
-        })}
+        {hasPresentations &&
+          presentations.map((event, i) => {
+            return <Presentation {...event} key={`event-${event.title}-${i}`} />;
+          })}
       </div>
     </PresentationsComponent>
   );
@@ -98,7 +84,7 @@ const Presentation = (props: Event) => {
     <div className={classList}>
       <SmartImage className="presentations__event__thumbnail" height={302} width={453} {...featuredImage} alt={title} />
       <div className="presentations__event__meta">
-        <h3>{title}</h3>
+        <h3 className="h5">{title}</h3>
       </div>
     </div>
   );

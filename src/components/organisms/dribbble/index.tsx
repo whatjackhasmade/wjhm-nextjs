@@ -63,7 +63,6 @@ const Dribbble = (props: Fields) => {
     rtl: false,
     rubberband: true,
     slidesPerView: 1,
-    spacing: 24,
     vertical: false,
     breakpoints: {
       '(min-width: 500px)': {
@@ -121,7 +120,7 @@ const Shot = (props: ShotProps) => {
   // Set the mouseOver to true on mouse over
   const handleHover = () => setMouseOver(true);
 
-  let classList: string = `keen-slider__slide dribble__shot`;
+  let classList: string = `keen-slider__slide dribbble__shot`;
   if (mouseOver) classList += ` dribbble__shot--animate`;
 
   return (

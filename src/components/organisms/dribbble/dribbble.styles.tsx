@@ -62,10 +62,12 @@ const DribbbleComponent = styled.section`
     }
   }
 
-  .dribble__shot {
+  .dribbble__shot {
     --shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 
-    border-radius: 3px;
+    border-radius: 0 0 3px 3px;
+    margin: 0 12px;
+
     position: relative;
 
     background-color: var(--offWhite);
@@ -127,24 +129,6 @@ const DribbbleComponent = styled.section`
     background: #ea4c89;
     border-radius: 50%;
     fill: #c32361;
-  }
-
-  .dribbble__shot {
-    border-radius: 0 0 3px 3px;
-
-    background: ${props => props.white};
-    box-shadow: 0px 2px 6px rgba(20, 18, 19, 0.1);
-    transition: 0.2s all ease;
-
-    &:active,
-    &:focus,
-    &:hover {
-      box-shadow: 0px 2px 10px rgba(20, 18, 19, 0.3);
-    }
-
-    + .dribbble__shot {
-      margin-left: 32px;
-    }
   }
 
   .keen-slider {
