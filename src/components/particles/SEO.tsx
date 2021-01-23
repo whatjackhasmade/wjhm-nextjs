@@ -87,13 +87,29 @@ const SEO = (props: SEOProps) => {
       <title>{name}</title>
       <meta name="description" content={description} />
       <meta name="image" content={image} />
+      <meta name="application-name" content="WhatJackHasMade" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+      <meta name="apple-mobile-web-app-title" content="WhatJackHasMade" />
+      <meta name="format-detection" content="telephone=no" />
+
       <link rel="icon" href="/images/favicon/favicon.ico" />
+      <link rel="shortcut icon" href="/images/favicon/favicon.ico" />
       <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png" />
       <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png" />
       <link rel="manifest" href="/images/favicon/site.webmanifest" />
-      <meta name="msapplication-TileColor" content="#de402f" />
-      <meta name="theme-color" content="#de402f" />
+      <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+
+      <meta name="msapplication-TileColor" content="#0652DD" />
+      <meta name="theme-color" content="#0652DD" />
+      <meta name="msapplication-config" content="/images/icons/browserconfig.xml" />
+      <meta name="msapplication-tap-highlight" content="no" />
+
+      <meta
+        name="viewport"
+        content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+      />
 
       {/* Schema.org tags */}
       <script type="application/ld+json">{JSON.stringify(schemaOrgJSONLD)}</script>
@@ -107,8 +123,8 @@ const SEO = (props: SEOProps) => {
 
       {/* Twitter Card tags */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content={url} />
-      <meta name="twitter:creator" content={`makeupandmane`} />
+      <meta name="twitter:url" content={url} />
+      <meta name="twitter:creator" content="@whatjackhasmade" />
       <meta name="twitter:title" content={safeTwitterTitle} />
       <meta name="twitter:description" content={safeTwitterDesc} />
       <meta name="twitter:image" content={safeTwitterImage} />

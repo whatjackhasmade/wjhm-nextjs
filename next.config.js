@@ -1,8 +1,10 @@
 const path = require(`path`);
+const withPWA = require(`next-pwa`);
 
+// other next config
 const buildPath = stringDirectory => path.resolve(__dirname + `/` + stringDirectory);
 
-module.exports = {
+module.exports = withPWA({
   images: {
     domains: [
       `cdn.dribbble.com`,
@@ -11,6 +13,12 @@ module.exports = {
       `whatjackhasmade-london.storage.googleapis.com`,
       `wjhm.noface.app`,
     ],
+  },
+  pwa: {
+    dest: `public`,
+    disable: process.env.NODE_ENV === `development`,
+    register: true,
+    sw: `service-worker.js`,
   },
   trailingSlash: true,
   webpack: config => {
@@ -30,4 +38,4 @@ module.exports = {
 
     return config;
   },
-};
+});
