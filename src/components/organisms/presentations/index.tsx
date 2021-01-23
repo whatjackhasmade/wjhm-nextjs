@@ -5,7 +5,6 @@ import { useKeenSlider } from 'keen-slider/react';
 import PresentationsComponent from './presentation.styles';
 
 import { callGetAllPresentations } from 'wjhm';
-import { generateID } from 'wjhm';
 import { parseHTML } from 'wjhm';
 
 import { SmartImage } from 'wjhm';
@@ -59,21 +58,19 @@ const Presentations: React.FC<Props> = (props: Props) => {
     return () => clearInterval(intervalId); // This is important
   }, [slider]);
 
-  const events = React.useMemo(() => {
-    if (!hasPresentations) return [];
+  const events = !hasPresentations
+    ? []
+    : presentations.map((presentation, i) => {
+        const title = presentation?.title;
+        const venue = presentation?.PostTypeEventFields?.venue;
 
-    return presentations.map(presentation => {
-      const title = presentation?.title;
-      const venue = presentation?.PostTypeEventFields?.venue;
+        let uid: string = `${title}`;
+        if (venue) uid += `-${venue}`;
+        if (!venue) uid += `-${i}`;
 
-      let uid: string = `${title}`;
-      if (venue) uid += `-${venue}`;
-      if (!venue) uid += `-${generateID()}`;
-
-      const event = { ...presentation, uid };
-      return event;
-    });
-  }, [hasPresentations, presentations]);
+        const event = { ...presentation, uid };
+        return event;
+      });
 
   return (
     <PresentationsComponent>

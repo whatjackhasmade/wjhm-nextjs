@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useKeenSlider } from 'keen-slider/react';
 
-import { generateID } from 'wjhm';
 import { parseHTML } from 'wjhm';
 
 import DribbbleComponent from './dribbble.styles';
@@ -86,13 +85,13 @@ const Dribbble = (props: Fields) => {
   const shots: ShotProps[] = data;
   const hasShots: boolean = data?.length > 0;
 
-  const doubledShots = React.useMemo(() => {
-    if (!hasShots) return [];
+  let doubledShots = [];
 
+  if (hasShots) {
     const doubled = [...shots, ...shots];
-    const doubledUID = doubled.map(shot => ({ ...shot, uid: generateID() }));
-    return doubledUID;
-  }, [hasShots, shots]);
+    const doubledUID = doubled.map((shot, i) => ({ ...shot, uid: `shot-${i}` }));
+    doubledShots = doubledUID;
+  }
 
   React.useEffect(() => {
     const intervalId = setInterval(() => {
