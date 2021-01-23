@@ -3,6 +3,7 @@ import Router from 'next/router';
 import NProgress from 'nprogress';
 import { ThemeProvider } from 'styled-components';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { persistWithLocalStorage } from 'react-query/persist-localstorage-experimental';
 
 import { GlobalStyle } from 'wjhm';
 import { ThemeDefault } from 'wjhm';
@@ -18,13 +19,28 @@ declare type MyAppProps = {
   pageProps: any;
 };
 
-const queryClient = new QueryClient();
+const SECOND = 1000;
+const MINUTE = 60 * SECOND;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
+
+const isDevelopment = process.env.NODE_ENV === `development`;
+const cacheTime = isDevelopment ? 5 * MINUTE : 1 * DAY;
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      cacheTime,
+    },
+  },
+});
+const client = persistWithLocalStorage(queryClient);
 
 export default function MyApp(props: MyAppProps) {
   const { Component, pageProps } = props;
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={client}>
       <ThemeProvider theme={ThemeDefault}>
         <GlobalStyle />
         <Component {...pageProps} />
