@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import Head from 'next/head';
 
 import { htmlDecode } from 'wjhm';
@@ -86,7 +87,7 @@ const SEO = (props: SEOProps) => {
       <title>{name}</title>
       <meta name="description" content={description} />
       <meta name="image" content={image} />
-      <link rel="icon" href="/favicon.ico" />
+      <link rel="icon" href="/images/favicon/favicon.ico" />
       <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png" />
       <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png" />
