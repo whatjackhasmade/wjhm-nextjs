@@ -43,12 +43,11 @@ const convertACFProps = component => {
 declare type Props = { blocks: Block[] | Maybe<ExtendedBlock>[]; innerBlocks?: Block[] | Maybe<ExtendedBlock>[] };
 
 const ComponentParser = (props: Props) => {
-  const componentLookup = (component, index: number, isCol: boolean = false) => {
+  const componentLookup = (component, index: number) => {
     const { name, originalContent } = component;
     const Component = components[name];
 
     const key = `component-${generateID()}`;
-    if (isCol) component.attributes = { ...component.attributes, autoplay: false };
 
     if (!Component && !originalContent) return null;
     if (!Component && originalContent) return <React.Fragment key={key}>{parseHTML(originalContent)}</React.Fragment>;
@@ -74,7 +73,7 @@ const ComponentParser = (props: Props) => {
           if (!hasInner) return <div className="column" key={key} />;
           return (
             <div className="column" key={key}>
-              {b.innerBlocks.map(inner => componentLookup(inner, i, true))}
+              {b.innerBlocks.map(inner => componentLookup(inner, i))}
             </div>
           );
         })}
@@ -101,6 +100,7 @@ const ComponentParser = (props: Props) => {
   };
 
   const { blocks, innerBlocks } = props;
+
   const noBlocks = !blocks && !innerBlocks;
   if (noBlocks) return null;
 

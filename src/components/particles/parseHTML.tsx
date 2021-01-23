@@ -65,7 +65,11 @@ const isString = val => typeof val === `string` || val instanceof String;
 const parseHTML = (html: string) => {
   if (!html) return html;
   if (!isString(html)) return html;
-  const clean = parser(html, config);
+  const htmlCDN = html.replace(
+    `https://wjhm.noface.app/app/uploads`,
+    `https://whatjackhasmade-london.storage.googleapis.com/wp-content/uploads`,
+  );
+  const clean = parser(htmlCDN, config);
   return decodeHTML(clean);
 };
 
