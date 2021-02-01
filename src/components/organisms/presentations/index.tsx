@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useQuery } from 'react-query';
-import { useKeenSlider } from 'keen-slider/react';
 
 import PresentationsComponent from './presentation.styles';
 
@@ -22,41 +21,6 @@ const Presentations: React.FC<Props> = (props: Props) => {
   const presentations = data;
   const hasPresentations: boolean = presentations?.length > 0;
 
-  const [ref, slider] = useKeenSlider<HTMLDivElement>({
-    centered: false,
-    controls: false,
-    dragSpeed: 1,
-    duration: 1000,
-    loop: true,
-    resetSlide: true,
-    rtl: false,
-    rubberband: true,
-    slidesPerView: 1,
-    vertical: false,
-    breakpoints: {
-      '(min-width: 500px)': {
-        slidesPerView: 3,
-      },
-      '(min-width: 1000px)': {
-        slidesPerView: 4,
-      },
-      '(min-width: 1200px)': {
-        slidesPerView: 6,
-      },
-      '(min-width: 1440px)': {
-        slidesPerView: 8,
-      },
-    },
-  });
-
-  React.useEffect(() => {
-    const intervalId = setInterval(() => {
-      if (slider) slider?.next();
-    }, 5000);
-
-    return () => clearInterval(intervalId); // This is important
-  }, [slider]);
-
   return (
     <PresentationsComponent>
       <Intro heading="Event Presentations" marginReduced={true} subheading="Touring the south coast">
@@ -64,12 +28,13 @@ const Presentations: React.FC<Props> = (props: Props) => {
         {error && <Error error={error} />}
         {loading && <p>Loading events...</p>}
       </Intro>
-      <div ref={ref} className="keen-slider">
-        {hasPresentations &&
-          presentations.map((event, i) => {
+      {hasPresentations && (
+        <div className="presentations__events">
+          {presentations.map((event, i) => {
             return <Presentation {...event} key={`event-${event.title}-${i}`} />;
           })}
-      </div>
+        </div>
+      )}
     </PresentationsComponent>
   );
 };
@@ -78,7 +43,7 @@ const Presentation = (props: Event) => {
   const featuredImage = props?.featuredImage?.node;
   const title = props?.title;
 
-  const classList: string = `keen-slider__slide presentations__event`;
+  const classList: string = `presentations__event`;
 
   return (
     <div className={classList}>

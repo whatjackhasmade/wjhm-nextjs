@@ -30,7 +30,18 @@ const PresentationsComponent = styled.section`
     height: 100%;
     position: relative;
     left: 0;
+    margin-left: calc(-50vw + 50% + 32px);
+    margin-right: calc(-50vw + 50% + 32px);
+    overflow: visible;
+    padding: 48px 0 24px;
+    position: relative;
     top: 0;
+    overflow-y: hidden;
+    overflow-x: visible;
+    scroll-snap-type: x mandatory;
+
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
 
     a {
       display: block;
@@ -67,10 +78,18 @@ const PresentationsComponent = styled.section`
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
     border-radius: 0 0 3px 3px;
+    flex-shrink: 0;
     margin: 0 12px;
+    margin-left: 0;
+    position: relative;
+    width: 240px;
 
     background-color: var(--white);
     box-shadow: var(--shadow);
+  }
+
+  .presentations__event + .presentations__event {
+    margin-left: 12px;
   }
 
   .subheading {

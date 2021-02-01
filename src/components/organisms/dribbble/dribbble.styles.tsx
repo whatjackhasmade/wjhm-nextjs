@@ -48,9 +48,19 @@ const DribbbleComponent = styled.section`
     display: flex;
     flex: 1;
     height: 100%;
-    position: relative;
     left: 0;
+    margin-left: calc(-50vw + 50% + 32px);
+    margin-right: calc(-50vw + 50% + 32px);
+    overflow: visible;
+    padding: 48px 0 24px;
+    position: relative;
     top: 0;
+    overflow-y: hidden;
+    overflow-x: visible;
+    scroll-snap-type: x mandatory;
+
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
 
     a {
       display: block;
@@ -66,9 +76,11 @@ const DribbbleComponent = styled.section`
     --shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 
     border-radius: 0 0 3px 3px;
+    flex-shrink: 0;
     margin: 0 12px;
-
+    margin-left: 0;
     position: relative;
+    width: 240px;
 
     background-color: var(--offWhite);
     box-shadow: var(--shadow);
@@ -83,6 +95,10 @@ const DribbbleComponent = styled.section`
       background-color: var(--white);
       transform: translateY(-5px) scale(1.05);
     }
+  }
+
+  .dribbble__shot + .dribbble__shot {
+    margin-left: 12px;
   }
 
   @media ${device?.md} {
@@ -133,12 +149,6 @@ const DribbbleComponent = styled.section`
 
   .keen-slider {
     cursor: grab;
-
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    overflow: visible;
-    position: relative;
-    width: 100vw;
   }
 
   .keen-slider__slide {

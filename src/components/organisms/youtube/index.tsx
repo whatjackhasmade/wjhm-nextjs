@@ -123,7 +123,7 @@ const Videos: React.FC<VideosProps> = (props: VideosProps) => {
 
   return (
     <React.Fragment>
-      {loading && <Skeletons count={count} />}
+      {loading === true && <Skeletons count={count} />}
       {hasVideos && spreadVideos.map(video => <Video key={video.snippet.resourceId.videoId} {...video} />)}
     </React.Fragment>
   );
