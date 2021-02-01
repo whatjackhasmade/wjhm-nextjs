@@ -31,7 +31,7 @@ const client = new QueryClient();
 
 persistWithLocalStorage(client, {
   localStorageKey: `REACT_QUERY_OFFLINE_CACHE`,
-  throttleTime: 1000,
+  throttleTime: 1 * SECOND,
   maxAge,
   buster: ``,
 });
