@@ -25,16 +25,16 @@ const HOUR = 60 * MINUTE;
 const DAY = 24 * HOUR;
 
 const isDevelopment = process.env.NODE_ENV === `development`;
-const cacheTime = isDevelopment ? 5 * MINUTE : 1 * DAY;
+const maxAge = isDevelopment ? 5 * MINUTE : 1 * DAY;
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      cacheTime,
-    },
-  },
+const client = new QueryClient();
+
+persistWithLocalStorage(client, {
+  localStorageKey: `REACT_QUERY_OFFLINE_CACHE`,
+  throttleTime: 1000,
+  maxAge,
+  buster: ``,
 });
-const client = persistWithLocalStorage(queryClient);
 
 export default function MyApp(props: MyAppProps) {
   const { Component, pageProps } = props;
