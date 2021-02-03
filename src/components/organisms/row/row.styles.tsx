@@ -125,13 +125,9 @@ const RowComponent = styled.section`
       opacity: 1;
       transform: translateX(0px);
 
-      .row__media {
-        span,
-        img,
-        video {
-          opacity: 1;
-          transform: translateX(0%);
-        }
+      .row__media__content {
+        opacity: 1;
+        transform: translateX(0%);
       }
     }
 
@@ -147,15 +143,13 @@ const RowComponent = styled.section`
 
     .row__media {
       overflow: hidden;
+    }
 
-      span,
-      img,
-      video {
-        opacity: 0;
-        transform: ${props => (props.align === `right` ? `translateX(-100%)` : `translateX(100%)`)};
-        transition: 1s all ease !important;
-        transition-delay: 0.4s !important;
-      }
+    .row__media__content {
+      opacity: 0;
+      transform: ${props => (props.align === `right` ? `translateX(-100%)` : `translateX(100%)`)};
+      transition: 1s all ease !important;
+      transition-delay: 0.4s !important;
     }
   }
 `;

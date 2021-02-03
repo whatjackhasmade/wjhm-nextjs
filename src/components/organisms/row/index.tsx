@@ -69,8 +69,10 @@ const RowMedia = (props: RowMediaProps) => {
 
   return (
     <div className="row__media">
-      {!isVideo && <SmartImage width={723} height={406} {...media} />}
-      {isVideo && <video src={src} muted={true} autoPlay={true} loop={true} />}
+      <div className="row__media__content">
+        {!isVideo && <SmartImage width={723} height={406} {...media} />}
+        {isVideo && <video src={src} muted={true} autoPlay={true} loop={true} />}
+      </div>
     </div>
   );
 };
