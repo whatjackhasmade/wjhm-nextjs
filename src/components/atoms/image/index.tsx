@@ -31,9 +31,13 @@ export const SmartImage: React.FC<ImageProps> = (props: ImageProps) => {
       const isAbove = Number(image.width) >= Number(width);
       return isAbove;
     });
+    const hasLargestNeeded = Boolean(largestNeeded);
 
-    if (largestNeeded) src = largestNeeded.sourceUrl;
-    if (!largestNeeded) src = sizes[sizes.length - 1].sourceUrl;
+    if (hasLargestNeeded) src = largestNeeded.sourceUrl;
+
+    if (!hasLargestNeeded) {
+      src = sizes[sizes.length - 1].sourceUrl;
+    }
   }
 
   const percentage = (Number(height) / Number(width)) * 100;

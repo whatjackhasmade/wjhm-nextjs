@@ -9,11 +9,19 @@ export const getSizes = (media: MediaItem): MediaSizeQuery[] => {
   const sizes = mediaDetails?.sizes;
   if (!sizes) return null;
 
-  const hasSizes = sizes.length > 0;
+  const hasSizes: boolean = sizes.length > 0;
   if (!hasSizes) return null;
 
-  const toSort = [...sizes];
-  const sortedSizes = toSort.sort((a, b) => Number(b.width) - Number(a.width));
+  const entries = Object.values(media);
+
+  const toFilter = [...sizes];
+  const filteredSizes = toFilter.filter(size => {
+    const source = size.sourceUrl;
+    const isValidSource = entries.some(entry => String(entry) === source);
+    return isValidSource;
+  });
+
+  const sortedSizes = filteredSizes.sort((a, b) => Number(b.width) - Number(a.width));
 
   const smartSizes = sortedSizes.map((curr: MediaSizeQuery, i, array) => {
     const end = i + 1 === array.length;
