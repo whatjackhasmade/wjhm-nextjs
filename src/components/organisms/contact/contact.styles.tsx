@@ -21,6 +21,13 @@ const ContactComponent = styled.section`
     text-align: center;
   }
 
+  fieldset {
+    border: 0;
+    margin: 0;
+    min-width: 0;
+    padding: 0.01em 0 0 0;
+  }
+
   .contact__wrapper {
     display: flex;
     flex-direction: column;

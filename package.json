@@ -39,13 +39,13 @@
     "vercel:sitemap": "node src/node/generation/createSitemap.ts"
   },
   "dependencies": {
-    "@formcarry/react": "^1.0.2",
     "dayjs": "^1.10.4",
     "fetchql": "^3.0.0",
     "html-react-parser": "^1.2.3",
     "next": "^10.0.6",
     "next-pwa": "^5.0.4",
     "nprogress": "^0.2.0",
+    "postmark": "^2.7.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-grid-system": "^7.1.1",

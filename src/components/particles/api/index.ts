@@ -1,4 +1,5 @@
 export * from './case';
+export * from './contact';
 export * from './dribbble';
 export * from './menu';
 export * from './post';
