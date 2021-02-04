@@ -19,6 +19,7 @@ const Contact: React.FC = () => {
 
     const data = new URLSearchParams();
 
+    // @ts-ignore
     for (const pair of new FormData(form)) {
       data.append(pair[0], pair[1]);
     }
