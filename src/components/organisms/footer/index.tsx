@@ -23,7 +23,7 @@ const Footer: React.FC<FooterProps> = (props: FooterProps) => {
     <FooterComponent>
       <div className="footer__contents">
         <nav className="footer__cta">
-          <a className="mailtoui" href="mailto:jack@noface.co.uk">
+          <a href="mailto:jack@noface.co.uk">
             <div className="footer__arrow" />
             <div className="footer__cta__content">
               <span className="footer__tagline">Always available for a chat</span>
@@ -33,9 +33,7 @@ const Footer: React.FC<FooterProps> = (props: FooterProps) => {
         </nav>
         <nav className="footer__contact">
           <a href="tel:07776 812750">07776 812750</a>
-          <a className="mailtoui" href="mailto:jack@noface.co.uk">
-            jack@noface.co.uk
-          </a>
+          <a href="mailto:jack@noface.co.uk">jack@noface.co.uk</a>
         </nav>
         <nav className="footer__social">
           <a href="https://twitter.com/whatjackhasmade" rel="noopener noreferrer" target="_blank">

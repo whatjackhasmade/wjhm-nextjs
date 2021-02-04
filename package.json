@@ -43,7 +43,6 @@
     "dayjs": "^1.10.4",
     "fetchql": "^3.0.0",
     "html-react-parser": "^1.2.3",
-    "mailtoui": "^1.0.3",
     "next": "^10.0.6",
     "next-pwa": "^5.0.4",
     "nprogress": "^0.2.0",

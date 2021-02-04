@@ -54,11 +54,7 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
             ))}
           </nav>
         )}
-        {hasItems && (
-          <a className="mailtoui" href={lastItem.url}>
-            {lastItem.label}
-          </a>
-        )}
+        {hasItems && <a href={lastItem.url}>{lastItem.label}</a>}
         <button onClick={handleClick}>
           <span>{menuOpen ? `Close` : `Open`} Menu</span>
           <span> Navigation</span>

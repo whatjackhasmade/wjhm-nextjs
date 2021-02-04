@@ -22,7 +22,6 @@ import paragraph from './css/base/paragraph';
 import table from './css/base/table';
 import video from './css/base/video';
 
-import mailtoui from './css/components/mailtoui';
 import wrapper from './css/components/wrapper';
 
 import wpImage from './css/components/wordpress/image';
@@ -54,7 +53,6 @@ const GlobalStyle = createGlobalStyle`
 	${table};
 	${video};
 
-	${mailtoui};
 	${wrapper};
 
 	${wpImage};
