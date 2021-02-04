@@ -1,4 +1,4 @@
-import { useKeenSlider } from 'keen-slider/react';
+import * as React from 'react';
 
 import { AngleRight } from '../../atoms/icons/solid';
 
@@ -9,33 +9,34 @@ import { SmartImage } from 'wjhm';
 import type { AcfTestimonialsBlock_Testimonialsfields as Props } from 'wjhmtypes';
 import type { AcfTestimonialsBlock_Testimonialsfields_Testimonials as SingleItem } from 'wjhmtypes';
 
+declare type SingleItemExtended = SingleItem & { current: number; finalIndex: number; index: number };
+
 const Testimonials: React.FC<Props> = (props: Props) => {
-  const { testimonials } = props;
+  const { testimonials: initial } = props;
+  const propLength = initial?.length;
 
-  const hasTestimonials: boolean = testimonials?.length > 0;
-  const hasNavigation: boolean = testimonials?.length > 1;
+  // Used to prevent only two items in the testimonials
+  const shouldDuplicate = propLength === 2;
+  let testimonials = initial;
+  if (shouldDuplicate) testimonials = [...initial, ...initial];
 
-  const sliderSettings = {
-    centered: false,
-    controls: false,
-    dragSpeed: 1,
-    duration: 1000,
-    loop: true,
-    resetSlide: true,
-    rtl: false,
-    rubberband: false,
-    slidesPerView: 1,
-    spacing: 0,
-    vertical: false,
-  };
+  const [current, setCurrent] = React.useState<number>(0);
 
-  const [refSliderImages, sliderImages] = useKeenSlider<HTMLDivElement>(sliderSettings);
-  const [refSliderTestimonials, sliderTestimonials] = useKeenSlider<HTMLDivElement>(sliderSettings);
+  const refImages = React.useRef(null);
+  const refQuotes = React.useRef(null);
+
+  const length: number = testimonials?.length;
+  const finalIndex: number = length - 1;
+  const hasTestimonials: boolean = length > 0;
+  const hasNavigation: boolean = length > 1;
 
   const nextTestimonial = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (e) e.preventDefault();
-    if (sliderImages) sliderImages?.next();
-    if (sliderTestimonials) sliderTestimonials?.next();
+
+    const isEnd: boolean = current === finalIndex;
+
+    if (isEnd) setCurrent(0);
+    if (!isEnd) setCurrent(current + 1);
   };
 
   if (!hasTestimonials) return null;
@@ -43,9 +44,9 @@ const Testimonials: React.FC<Props> = (props: Props) => {
   return (
     <TestimonialsComponent>
       <div className="testimonial__media">
-        <div ref={refSliderImages} className="keen-slider">
-          {testimonials.map(t => (
-            <TestimonialImage {...t} key={`${t?.author}-image`} />
+        <div ref={refImages} className="testimonials__images">
+          {testimonials.map((t, i) => (
+            <TestimonialImage {...t} key={`${t?.author}-image`} current={current} finalIndex={finalIndex} index={i} />
           ))}
         </div>
       </div>
@@ -55,9 +56,9 @@ const Testimonials: React.FC<Props> = (props: Props) => {
         </button>
       )}
       <div className="testimonials">
-        <div ref={refSliderTestimonials} className="keen-slider">
-          {testimonials.map(t => (
-            <TestimonialInfo {...t} key={`${t?.author}-content`} />
+        <div ref={refQuotes} className="testimonials__quotes">
+          {testimonials.map((t, i) => (
+            <TestimonialInfo {...t} key={`${t?.author}-content`} current={current} finalIndex={finalIndex} index={i} />
           ))}
         </div>
       </div>
@@ -65,14 +66,26 @@ const Testimonials: React.FC<Props> = (props: Props) => {
   );
 };
 
-const TestimonialImage: React.FC<SingleItem> = (props: SingleItem) => {
-  const { author, media } = props;
+const TestimonialImage: React.FC<SingleItemExtended> = (props: SingleItemExtended) => {
+  const { author, current, index, media } = props;
 
-  return <SmartImage {...media} alt={author} className="keen-slider__slide" height={406} width={723} threshold={200} />;
+  const prevIndex = current - 1;
+  const nextIndex = current + 1;
+
+  const isCurrent: boolean = index === current;
+  const isPrevious: boolean = index === prevIndex;
+  const isNext: boolean = index === nextIndex;
+
+  let classList = `testimonial__image slide`;
+  if (isCurrent) classList += ` slide--active`;
+  if (isPrevious) classList += ` slide--previous`;
+  if (isNext) classList += ` slide--next`;
+
+  return <SmartImage {...media} alt={author} className={classList} height={406} width={723} threshold={200} />;
 };
 
-const TestimonialInfo: React.FC<SingleItem> = (props: SingleItem) => {
-  const { author, logo, role, testimonial } = props;
+const TestimonialInfo: React.FC<SingleItemExtended> = (props: SingleItemExtended) => {
+  const { author, current, index, logo, role, testimonial } = props;
 
   let alt: string = author + ` logo`;
   if (logo?.altText) alt = logo.altText;
@@ -82,8 +95,20 @@ const TestimonialInfo: React.FC<SingleItem> = (props: SingleItem) => {
 
   const hasImage: boolean = src !== ``;
 
+  const prevIndex = current - 1;
+  const nextIndex = current + 1;
+
+  const isCurrent: boolean = index === current;
+  const isPrevious: boolean = index === prevIndex;
+  const isNext: boolean = index === nextIndex;
+
+  let classList = `testimonial slide`;
+  if (isCurrent) classList += ` slide--active`;
+  if (isPrevious) classList += ` slide--previous`;
+  if (isNext) classList += ` slide--next`;
+
   return (
-    <div className="keen-slider__slide testimonial">
+    <div className={classList}>
       <header className="testimonial__header">
         <div>
           <h3 className="testimonial__author">{author}</h3>

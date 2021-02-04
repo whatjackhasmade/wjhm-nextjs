@@ -102,20 +102,6 @@ const PresentationsComponent = styled.section`
     line-height: 1.2;
     text-transform: uppercase;
   }
-
-  .keen-slider {
-    cursor: grab;
-
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    overflow: visible;
-    position: relative;
-    width: 100vw;
-  }
-
-  .keen-slider__slide {
-    overflow: visible;
-  }
 `;
 
 export default PresentationsComponent;

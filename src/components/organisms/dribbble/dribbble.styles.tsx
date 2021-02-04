@@ -146,14 +146,6 @@ const DribbbleComponent = styled.section`
     border-radius: 50%;
     fill: #c32361;
   }
-
-  .keen-slider {
-    cursor: grab;
-  }
-
-  .keen-slider__slide {
-    overflow: visible;
-  }
 `;
 
 export default DribbbleComponent;

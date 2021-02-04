@@ -17,7 +17,6 @@ declare type PostTemplateProps = any;
 
 const PostTemplate = (props: PostTemplateProps) => {
   const { blocks, content, date, PostFields, title } = props;
-  console.log(blocks);
   const relatedPosts = PostFields?.relatedPosts;
   const learn = null;
   const lessons = learn?.items;

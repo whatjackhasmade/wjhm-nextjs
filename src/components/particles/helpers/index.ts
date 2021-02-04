@@ -16,37 +16,39 @@ export { prettyDate } from './prettyDate';
 export { slugify } from './slugify';
 export { windowAvailable } from './windowAvailable';
 
-export function randomID() {
+export function randomID(): string {
   return Math.random().toString(36).substring(7);
 }
 
-export function removeDimensions(html) {
+export function removeDimensions(html: string): string {
   if (!html) return null;
   html = html.replace(/width="[^"]*"/g, ``);
   html = html.replace(/height="[^"]*"/g, ``);
   return html;
 }
 
-export function removeOrphans(html) {
+export function removeOrphans(html: string): string {
   if (!html) return null;
   return html.replace(/([^]*)$/, ` $1`);
 }
 
-export function slugTitle(html) {
+export function slugTitle(html: string): string {
   if (!html) return null;
-  html = html.replace(`-`, ` `);
-  html = html.toLowerCase().split(` `);
-  for (let i = 0; i < html.length; i++) {
+  const htmlNoHyphan: string = html.replace(`-`, ` `);
+  const htmlArray: string[] = htmlNoHyphan.toLowerCase().split(` `);
+
+  for (let i = 0; i < htmlArray.length; i++) {
     // You do not need to check if i is larger than splitStr length, as your for does that for you
     // Assign it back to the array
-    html[i] = html[i].charAt(0).toUpperCase() + html[i].substring(1);
+    htmlArray[i] = htmlArray[i].charAt(0).toUpperCase() + htmlArray[i].substring(1);
   }
+
   // Directly return the joined string
-  return html.join(` `);
+  return htmlArray.join(` `);
 }
 
-export function youtubeID(url) {
+export function youtubeID(url: string): string {
   const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
   const match = url.match(regExp);
-  return match && match[7].length === 11 ? match[7] : false;
+  return match && match[7].length === 11 ? match[7] : ``;
 }

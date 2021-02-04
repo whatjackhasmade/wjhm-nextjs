@@ -22,7 +22,6 @@ import paragraph from './css/base/paragraph';
 import table from './css/base/table';
 import video from './css/base/video';
 
-import carousel from './css/components/carousel';
 import mailtoui from './css/components/mailtoui';
 import wrapper from './css/components/wrapper';
 
@@ -55,7 +54,6 @@ const GlobalStyle = createGlobalStyle`
 	${table};
 	${video};
 
-	${carousel};
 	${mailtoui};
 	${wrapper};
 
