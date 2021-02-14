@@ -6,6 +6,10 @@ import { Base } from 'wjhm';
 
 import { getStaticPropsNode as getStaticProps } from 'wjhm';
 
+import type { CaseStudy } from 'wjhmtypes';
+import type { Post } from 'wjhmtypes';
+import type { Page } from 'wjhmtypes';
+
 import type { RootQueryToCaseStudyConnection } from 'wjhmtypes';
 import type { RootQueryToPostConnection } from 'wjhmtypes';
 import type { RootQueryToPageConnection } from 'wjhmtypes';
@@ -21,14 +25,18 @@ export async function getStaticPaths() {
     const { data }: { data: Node[] } = await requestor.query({ operationName: `NODES_ALL`, query: NODES_ALL });
     const nestedNodes = Object.entries(data).map(([k, v]) => v.nodes);
     // @ts-ignore
-    const nodes = nestedNodes.flat();
+    const nodes: NodeSingle[] = nestedNodes.flat();
 
     // Remove Homepage
     const validNodes = nodes.filter(n => {
-      const { isFrontPage, uri } = n;
-      const isAnIndex = uri === `/posts/`;
-      const notFrontPage = isFrontPage !== true;
-      const isValid = notFrontPage && !isAnIndex;
+      // @ts-ignore
+      const isFrontPage = n?.isFrontPage;
+      const uri = n?.uri;
+
+      const isAnIndex: boolean = uri === `/posts/`;
+      const notFrontPage: boolean = isFrontPage !== true;
+      const isValid: boolean = notFrontPage && !isAnIndex;
+
       return isValid;
     });
 
