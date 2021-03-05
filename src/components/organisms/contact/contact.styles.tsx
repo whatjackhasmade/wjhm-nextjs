@@ -28,6 +28,10 @@ const ContactComponent = styled.section`
     padding: 0.01em 0 0 0;
   }
 
+  legend {
+    display: none;
+  }
+
   .contact__wrapper {
     display: flex;
     flex-direction: column;

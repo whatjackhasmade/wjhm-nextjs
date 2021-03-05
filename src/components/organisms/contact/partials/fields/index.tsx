@@ -17,7 +17,8 @@ const ContactForm = (props: ContactFormProps) => {
 
   return (
     <ContactFormComponent className={classList} name="contact" method="POST" onSubmit={onSubmit}>
-      <fieldset aria-busy={loading} disabled={loading}>
+      <fieldset aria-busy={loading} aria-label="contact form" disabled={loading}>
+        <legend>Get in Touch</legend>
         <input type="hidden" name="_gotcha" />
         <div className="row">
           <div className="col">
