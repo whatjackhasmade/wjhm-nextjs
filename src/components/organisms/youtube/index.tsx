@@ -139,6 +139,7 @@ const Video = (props: YouTubeVideo) => {
   return (
     <div className="youtube__video" title={title}>
       <a href={href} rel="noopener noreferrer" target="_blank">
+        <span className="hidden">View {title} on YouTube</span>
         <div className="youtube__video__thumbnail">
           <SmartImage alt={title} src={thumbnail} width={1920} height={1080} />
         </div>
