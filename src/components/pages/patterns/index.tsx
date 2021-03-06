@@ -41,7 +41,7 @@ const StyledOne = styled.div`
 
     border-radius: 9000px;
     width: 200px;
-    height: 200px; /* as the half of the width */
+    height: 200px;
     border: var(--border) solid black;
 
     clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0% 100%);
@@ -74,6 +74,12 @@ const StyledOne = styled.div`
   }
 `;
 
+export interface CSSProperties extends React.CSSProperties {
+  '--border'?: string;
+  '--scale'?: number;
+  '--scaleSeconds'?: string;
+}
+
 const n = 20; // Or something else
 
 const One = () => {
@@ -89,7 +95,11 @@ const One = () => {
             const large = rounded * 10;
             const border = 50 / large;
 
-            const style = { '--border': `${border}px`, '--scale': rounded, '--scaleSeconds': `${rounded}s` };
+            const style: CSSProperties = {
+              '--border': `${border}px`,
+              '--scale': rounded,
+              '--scaleSeconds': `${rounded}s`,
+            };
 
             return <div className="cell" key={i} style={style}></div>;
           })}
