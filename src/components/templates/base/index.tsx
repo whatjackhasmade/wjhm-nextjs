@@ -37,7 +37,7 @@ const Base = (props: BaseProps) => {
       <div className="wrapper">
         <Header />
         <main>{hasChildren && children}</main>
-        <InnerContent {...props} />
+        {!hasChildren && <InnerContent {...props} />}
         {includeContact && <Contact />}
         <Footer />
       </div>
@@ -74,7 +74,7 @@ const InnerContent: React.FC<any> = (props: any) => {
 
   return (
     <main>
-      {!hasHeadingOne && <h1 className="hidden">{decodedTitle}</h1>}
+      {!hasHeadingOne && decodedTitle && <h1 className="hidden">{decodedTitle}</h1>}
       {innerContents}
     </main>
   );
