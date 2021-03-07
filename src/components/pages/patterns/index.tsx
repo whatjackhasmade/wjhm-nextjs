@@ -23,11 +23,13 @@ const Patterns = (props: PatternsProps) => {
 };
 
 const StyledOne = styled.div`
+  background-color: #e07d3c;
+  padding: 200px 0;
+
   .grid {
     align-items: center;
     display: flex;
     justify-content: center;
-    margin: 200px auto;
   }
 
   .grid__contents {
@@ -42,12 +44,12 @@ const StyledOne = styled.div`
     border-radius: 9000px;
     width: 200px;
     height: 200px;
-    border: var(--border) solid black;
+    border: var(--border) solid white;
 
-    clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0% 100%);
+    clip-path: polygon(0 0%, 100% 0%, 100% 50%, 0% 50%);
 
+    animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
     animation-name: animationRotation;
-    animation-delay: var(--scaleSeconds);
     animation-duration: 8s;
     animation-direction: forwards;
     animation-iteration-count: infinite;
@@ -65,22 +67,24 @@ const StyledOne = styled.div`
     0% {
       transform: scale(var(--scale)) rotate(0deg);
     }
-    50% {
-      transform: scale(var(--scale)) rotate(360deg);
+    99.99% {
+      transform: scale(var(--scale)) rotate(var(--rotation));
     }
     100% {
-      transform: scale(var(--scale)) rotate(360deg);
+      transform: scale(var(--scale)) rotate(var(--rotation));
     }
   }
 `;
 
 export interface CSSProperties extends React.CSSProperties {
   '--border'?: string;
+  '--position'?: number;
+  '--rotation'?: string;
   '--scale'?: number;
   '--scaleSeconds'?: string;
 }
 
-const n = 20; // Or something else
+const n = 18; // Or something else
 
 const One = () => {
   return (
@@ -89,14 +93,16 @@ const One = () => {
         <div className="grid__contents">
           {[...Array(n)].map((e, i) => {
             const position = i + 1;
-            const scale = position * 0.1;
+            const scale = 2 - position * 0.1;
             const rounded = Math.round(scale * 10) / 10;
 
             const large = rounded * 10;
-            const border = 50 / large;
+            const border = 120 / large;
 
             const style: CSSProperties = {
               '--border': `${border}px`,
+              '--position': position,
+              '--rotation': `${position * 360}deg`,
               '--scale': rounded,
               '--scaleSeconds': `${rounded}s`,
             };

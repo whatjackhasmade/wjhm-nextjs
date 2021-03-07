@@ -1989,7 +1989,8 @@
 		<lastmod>2019-03-30T11:27:07+00:00</lastmod>
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/08/photo-1417551471850-924c48abad50-1.jpg</image:loc>
-			<image:title><![CDATA[photo-1417551471850-924c48abad50]]></image:title>
+			<image:title><![CDATA[Accessibility Sign Airport]]></image:title>
+			<image:caption><![CDATA[Airport sign with gender icons, disability icon, baby changing room icon and arrow point right to direct customers]]></image:caption>
 		</image:image>
 		<image:image>
 			<image:loc>https://wjhm.noface.app/app/uploads/2016/08/NVDAlogo-1.png</image:loc>
@@ -2967,6 +2968,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/wp-content/uploads/2021/02/hqdefault.jpg</image:loc>
 			<image:title><![CDATA[hqdefault]]></image:title>
+			<image:caption><![CDATA[Featured image from YouTube, Jack in bottom right with majority of screen code example]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2994,7 +2996,8 @@
 		<lastmod>2021-03-01T20:51:58+00:00</lastmod>
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/wp-content/uploads/2021/02/Screenshot-2021-02-28-at-18.56.44.jpg</image:loc>
-			<image:title><![CDATA[Screenshot-2021-02-28-at-18.56.44]]></image:title>
+			<image:title><![CDATA[Close-up of Jack's eyes post-injection, one eye is read with a misshapen pupil]]></image:title>
+			<image:caption><![CDATA[Close-up of Jack's eyes post-injection, one eye is read with a misshapen pupil]]></image:caption>
 		</image:image>
 	</url>
 </urlset>
