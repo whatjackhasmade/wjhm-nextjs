@@ -21,12 +21,12 @@ const PatternsTwo = (props: PatternsTwoProps) => {
   return (
     <Base {...allProps}>
       <Link href="/patterns">Patterns</Link>
-      <One />
+      <Two />
     </Base>
   );
 };
 
-const StyledOne = styled.div`
+const StyledTwo = styled.div`
   .controls {
     display: flex;
 
@@ -124,9 +124,9 @@ interface CSSProperties extends React.CSSProperties {
 
 const n = 10; // Or something else
 
-const One = () => {
-  const [accent, setAccent] = React.useState<string>(`#b4ffd4`);
-  const [background, setBackground] = React.useState<string>(`#ff4a00`);
+const Two = () => {
+  const [accent, setAccent] = React.useState<string>(`#00ffeb`);
+  const [background, setBackground] = React.useState<string>(`#5400ff`);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -150,7 +150,7 @@ const One = () => {
 
   return (
     <React.Fragment>
-      <StyledOne style={style}>
+      <StyledTwo style={style}>
         <div className="controls">
           <div>
             <label htmlFor="accent">Accent</label>
@@ -166,6 +166,7 @@ const One = () => {
             <div className="grid__contents">
               {[...Array(n)].map((e, i) => {
                 const position = i + 1;
+                const key = `two-pattern-${position}`;
 
                 const delayNumber: number = 1 - position * 0.1;
                 const delayRounded: number = round(delayNumber);
@@ -191,12 +192,12 @@ const One = () => {
                   '--scale': scaleRounded,
                 };
 
-                return <div className="cell" key={i} style={style}></div>;
+                return <div className="cell" key={key} style={style}></div>;
               })}
             </div>
           </div>
         </div>
-      </StyledOne>
+      </StyledTwo>
     </React.Fragment>
   );
 };
