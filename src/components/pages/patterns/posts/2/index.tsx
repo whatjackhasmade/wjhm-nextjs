@@ -5,11 +5,11 @@ import { Link } from 'wjhm';
 
 import { Base } from 'wjhm';
 
-declare type PatternsOneProps = {
+declare type PatternsTwoProps = {
   posts: any[];
 };
 
-const PatternsOne = (props: PatternsOneProps) => {
+const PatternsTwo = (props: PatternsTwoProps) => {
   const seo = null;
 
   const allProps = {
@@ -172,5 +172,5 @@ const One = () => {
   );
 };
 
-export { PatternsOne };
-export default PatternsOne;
+export { PatternsTwo };
+export default PatternsTwo;
