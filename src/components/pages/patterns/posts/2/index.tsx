@@ -61,19 +61,19 @@ const StyledOne = styled.div`
     display: flex;
     justify-content: center;
 
-    border-radius: 9000px;
-    width: 200px;
-    height: 200px;
-    border: var(--border) solid var(--accent);
+    border-radius: 50%;
+    width: 3px;
+    height: 3px;
+    background-color: var(--accent);
 
-    clip-path: polygon(0 0%, 100% 0%, 100% 50%, 0% 50%);
-
-    animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+    animation-timing-function: ease;
+    animation-delay: var(--delay);
     animation-name: animationRotation;
-    animation-duration: 8s;
+    animation-duration: var(--duration);
     animation-direction: forwards;
     animation-iteration-count: infinite;
 
+    opacity: var(--opacity);
     transform: scale(var(--scale)) rotate(0deg);
   }
 
@@ -85,13 +85,25 @@ const StyledOne = styled.div`
 
   @keyframes animationRotation {
     0% {
+      border-radius: 50%;
       transform: scale(var(--scale)) rotate(0deg);
     }
-    99.99% {
-      transform: scale(var(--scale)) rotate(var(--rotation));
+    20% {
+      border-radius: 40%;
+    }
+    40% {
+      transform: scale(calc(var(--scale) * 2)) rotate(var(--rotationMid));
+    }
+    50% {
+      border-radius: 40%;
+    }
+    80% {
+      border-radius: 50%;
+      transform: scale(var(--scale)) rotate(var(--rotationEnd));
     }
     100% {
-      transform: scale(var(--scale)) rotate(var(--rotation));
+      border-radius: 50%;
+      transform: scale(var(--scale)) rotate(var(--rotationEnd));
     }
   }
 `;
@@ -100,17 +112,21 @@ export interface CSSProperties extends React.CSSProperties {
   '--accent'?: string;
   '--background'?: string;
   '--border'?: string;
+  '--delay'?: string;
+  '--duration'?: string;
+  '--opacity'?: number;
   '--position'?: number;
-  '--rotation'?: string;
+  '--rotationEnd'?: string;
+  '--rotationMid'?: string;
   '--scale'?: number;
   '--scaleSeconds'?: string;
 }
 
-const n = 18; // Or something else
+const n = 10; // Or something else
 
 const One = () => {
-  const [accent, setAccent] = React.useState<string>(`#ffffff`);
-  const [background, setBackground] = React.useState<string>(`#e07d3c`);
+  const [accent, setAccent] = React.useState<string>(`#000000`);
+  const [background, setBackground] = React.useState<string>(`#ffffff`);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -130,6 +146,8 @@ const One = () => {
     '--background': background,
   };
 
+  const round = val => Math.round(val * 10) / 10;
+
   return (
     <React.Fragment>
       <StyledOne style={style}>
@@ -148,18 +166,29 @@ const One = () => {
             <div className="grid__contents">
               {[...Array(n)].map((e, i) => {
                 const position = i + 1;
-                const scale = 2 - position * 0.1;
-                const rounded = Math.round(scale * 10) / 10;
 
-                const large = rounded * 10;
-                const border = 120 / large;
+                const delayNumber: number = 1 - position * 0.1;
+                const delayRounded: number = round(delayNumber);
+                const delay: string = `${delayRounded}s`;
+
+                const durationMax: number = 5;
+                const durationTotal: number = durationMax;
+
+                const duration: string = `${durationTotal}s`;
+
+                const opacity = 0.17;
+
+                const scale = 1 + position * 8;
+                const scaleRounded = round(scale);
 
                 const style: CSSProperties = {
-                  '--border': `${border}px`,
+                  '--delay': delay,
+                  '--duration': duration,
+                  '--opacity': opacity,
+                  '--rotationMid': `-${position * 45}deg`,
+                  '--rotationEnd': `-${position * 90}deg`,
                   '--position': position,
-                  '--rotation': `${position * 360}deg`,
-                  '--scale': rounded,
-                  '--scaleSeconds': `${rounded}s`,
+                  '--scale': scaleRounded,
                 };
 
                 return <div className="cell" key={i} style={style}></div>;
