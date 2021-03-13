@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import StyledSkeleton from './skeleton.styles';
 
-export interface CSSProperties extends React.CSSProperties {
+interface CSSProperties extends React.CSSProperties {
   height?: string | number;
   width?: string | number;
 }

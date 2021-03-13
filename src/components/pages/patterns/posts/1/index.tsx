@@ -96,7 +96,7 @@ const StyledOne = styled.div`
   }
 `;
 
-export interface CSSProperties extends React.CSSProperties {
+interface CSSProperties extends React.CSSProperties {
   '--accent'?: string;
   '--background'?: string;
   '--border'?: string;

@@ -20,7 +20,7 @@ declare type Props = HeroProps & {
   maxWidth?: string;
 };
 
-export interface CSSProperties extends React.CSSProperties {
+interface CSSProperties extends React.CSSProperties {
   background?: string;
   height?: string;
 }

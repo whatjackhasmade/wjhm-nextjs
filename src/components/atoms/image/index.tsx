@@ -6,7 +6,7 @@ import { getSizes } from './getSizes';
 
 import StyledImage from './image.styles';
 
-export interface CSSProperties extends React.CSSProperties {
+interface CSSProperties extends React.CSSProperties {
   height?: number;
   width?: number;
 }
