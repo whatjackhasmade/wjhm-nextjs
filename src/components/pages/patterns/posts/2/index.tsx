@@ -125,8 +125,8 @@ export interface CSSProperties extends React.CSSProperties {
 const n = 10; // Or something else
 
 const One = () => {
-  const [accent, setAccent] = React.useState<string>(`#000000`);
-  const [background, setBackground] = React.useState<string>(`#ffffff`);
+  const [accent, setAccent] = React.useState<string>(`#b4ffd4`);
+  const [background, setBackground] = React.useState<string>(`#ff4a00`);
 
   const handleChange = e => {
     const { name, value } = e.target;

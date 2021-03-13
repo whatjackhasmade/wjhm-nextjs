@@ -19,6 +19,7 @@ const Patterns = (props: PatternsProps) => {
   return (
     <Base {...allProps}>
       <Link href="/patterns/1">One</Link>
+      <Link href="/patterns/2">Two</Link>
     </Base>
   );
 };
