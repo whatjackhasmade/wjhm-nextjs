@@ -9,6 +9,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/03/47433908222_10e900c974_o.jpg</image:loc>
 			<image:title><![CDATA[47433908222_10e900c974_o]]></image:title>
+			<image:caption><![CDATA[A man standing in front of a building]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -25,6 +26,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/03/47433908222_10e900c974_o.jpg</image:loc>
 			<image:title><![CDATA[47433908222_10e900c974_o]]></image:title>
+			<image:caption><![CDATA[A man standing in front of a building]]></image:caption>
 		</image:image>
 	</url>
 </urlset>

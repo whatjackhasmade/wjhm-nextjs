@@ -58,6 +58,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/05/Easy-Google-Fonts-Thumbnail.jpg</image:loc>
 			<image:title><![CDATA[easy-google-fonts-thumbnail]]></image:title>
+			<image:caption><![CDATA[Title card reads "Easy Google Fonts, WordPress Plugins"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -66,6 +67,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/05/WS-Custom-Login-Thumbnail.jpg</image:loc>
 			<image:title><![CDATA[ws-custom-login-thumbnail]]></image:title>
+			<image:caption><![CDATA[Title card reads "WS Custom Login, WordPress Plugins"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -74,6 +76,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/05/Google-XML-Sitemaps-Thumbail.jpg</image:loc>
 			<image:title><![CDATA[google-xml-sitemaps-thumbail]]></image:title>
+			<image:caption><![CDATA[Title card reads "Google XML Sitemaps, WordPress Plugins"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -82,6 +85,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/05/WP-DB-Backup-Thumbnail.jpg</image:loc>
 			<image:title><![CDATA[wp-db-backup-thumbnail]]></image:title>
+			<image:caption><![CDATA[Title card reads "WP-DB-Backup, WordPress Plugins"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -90,6 +94,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/05/WP-Our-Team-Thumbnail.jpg</image:loc>
 			<image:title><![CDATA[wp-our-team-thumbnail]]></image:title>
+			<image:caption><![CDATA[Title card reads "WP Our Team, WordPress Plugins"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -98,6 +103,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/05/Jssor-Slider-Thumbnail.jpg</image:loc>
 			<image:title><![CDATA[jssor-slider-thumbnail]]></image:title>
+			<image:caption><![CDATA[Title card reads "Jssor Slider, WordPress Plugins"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -106,6 +112,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/05/RealFaviconGenerator.jpg</image:loc>
 			<image:title><![CDATA[realfavicongenerator]]></image:title>
+			<image:caption><![CDATA[Title card reads "Real Favicon Generator, WordPress Plugins"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -150,6 +157,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/04/Designing-for-Web-Devices-or-Screen-Sizes.jpg</image:loc>
 			<image:title><![CDATA[designing-for-web-devices-or-screen-sizes]]></image:title>
+			<image:caption><![CDATA[Title card reads "Designing For Web Devices or Screen Sizes"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -167,6 +175,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/03/Ep1.-Thumnail-Intro-to-the-series.jpg</image:loc>
 			<image:title><![CDATA[ep1-thumnail-intro-to-the-series]]></image:title>
+			<image:caption><![CDATA[Title card reads "CSS3, Ep1. Intro To The Series"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -193,6 +202,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/03/Ep7.-Thumnail-Commenting-Your-Code.jpg</image:loc>
 			<image:title><![CDATA[ep7-thumnail-commenting-your-code]]></image:title>
+			<image:caption><![CDATA[HTML, Ep.7 Commenting Your Code]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -264,6 +274,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/10/CSS-Shorts-CSS-Circles-Thumbnail.jpg</image:loc>
 			<image:title><![CDATA[css-shorts-css-circles-thumbnail]]></image:title>
+			<image:caption><![CDATA[Title card reads "CSS Shorts, CSS Circles"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -272,6 +283,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/10/Materialette-Thumbnail.jpg</image:loc>
 			<image:title><![CDATA[materialette-thumbnail]]></image:title>
+			<image:caption><![CDATA[Title card reads "Materialette"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -338,6 +350,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/05/Rebuild-1-Thumbnail.jpg</image:loc>
 			<image:title><![CDATA[Rebuild-1-Thumbnail]]></image:title>
+			<image:caption><![CDATA[Table Of Contents- Running Tests - Part 1]]></image:caption>
 		</image:image>
 		<image:image>
 			<image:loc>https://wjhm.noface.app/app/uploads/2017/05/Original-WJHM-Ligthouse-Test.png</image:loc>
@@ -352,6 +365,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/05/Rebuild-2-Thumbnail.jpg</image:loc>
 			<image:title><![CDATA[Rebuild-2-Thumbnail]]></image:title>
+			<image:caption><![CDATA[Goals &amp; Agenda - Part 1]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -360,6 +374,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/05/Rebuild-4-Thumbnail.jpg</image:loc>
 			<image:title><![CDATA[Rebuild-4-Thumbnail]]></image:title>
+			<image:caption><![CDATA[Plugins, Part 4]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -368,6 +383,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/05/Rebuild-6-Thumbnail.jpg</image:loc>
 			<image:title><![CDATA[Rebuild-6-Thumbnail]]></image:title>
+			<image:caption><![CDATA[Mobile First, Part 6]]></image:caption>
 		</image:image>
 		<image:image>
 			<image:loc>https://wjhm.noface.app/app/uploads/2017/05/Average-time-spent-browsing-on-a-smartphone.jpg</image:loc>
@@ -391,6 +407,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/05/Rebuild-3-Thumbnail.jpg</image:loc>
 			<image:title><![CDATA[Rebuild-3-Thumbnail]]></image:title>
+			<image:caption><![CDATA[Setting Up a Blank Canvas - Part 3]]></image:caption>
 		</image:image>
 		<image:image>
 			<image:loc>https://wjhm.noface.app/app/uploads/2017/05/Rebuild_Part_3_Scripts.png</image:loc>
@@ -402,6 +419,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/05/Rebuild-7-Thumbnail.jpg</image:loc>
 			<image:title><![CDATA[Rebuild-7-Thumbnail]]></image:title>
+			<image:caption><![CDATA[Laptops and PC's, Part 7]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -410,6 +428,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/05/Rebuild-10-Thumbnail.jpg</image:loc>
 			<image:title><![CDATA[Rebuild-10-Thumbnail]]></image:title>
+			<image:caption><![CDATA[Getting it Live, Part 10]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -418,6 +437,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/05/Rebuild-5-Thumbnail.jpg</image:loc>
 			<image:title><![CDATA[Rebuild-5-Thumbnail]]></image:title>
+			<image:caption><![CDATA[Automation, Part 5]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -426,6 +446,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/05/Rebuild-9-Thumbnail.jpg</image:loc>
 			<image:title><![CDATA[Rebuild-9-Thumbnail]]></image:title>
+			<image:caption><![CDATA[Tests and Comparison, Part 9]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -434,6 +455,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/05/Rebuild-8-Thumbnail.jpg</image:loc>
 			<image:title><![CDATA[Rebuild-8-Thumbnail]]></image:title>
+			<image:caption><![CDATA[Cross Compatible, Part 8]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -491,6 +513,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/02/Thumbnail-Online-Resources.jpg</image:loc>
 			<image:title><![CDATA[Thumbnail---Online-Resources]]></image:title>
+			<image:caption><![CDATA[Title card reads "Starting Class, Online Resources"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -499,6 +522,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/06/Small-Text-Thumb-1.jpg</image:loc>
 			<image:title><![CDATA[small-text-thumb]]></image:title>
+			<image:caption><![CDATA[Title card reads "Colour Themes, Adobe Illustrator Tutorial"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -507,6 +531,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/02/Thumbnail-Atom-Text-Editor.jpg</image:loc>
 			<image:title><![CDATA[Thumbnail---Atom-Text-Editor]]></image:title>
+			<image:caption><![CDATA[Title card reads "Starting Class, Atom Text Editor"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -515,6 +540,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/06/Thumbail.jpg</image:loc>
 			<image:title><![CDATA[thumbail]]></image:title>
+			<image:caption><![CDATA[Title card reads "CSS Secrets, Reset Anchor Styles"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -584,6 +610,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/02/camera-thumbnail-ep-5.png</image:loc>
 			<image:title><![CDATA[camera-thumbnail-ep-5]]></image:title>
+			<image:caption><![CDATA[Making a Responsive Photography Portfolio Website, Ep.5]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -619,6 +646,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/02/Image-Compression-Thumbnail.jpg</image:loc>
 			<image:title><![CDATA[Image-Compression-Thumbnail]]></image:title>
+			<image:caption><![CDATA[Title card reads "Growing Class, Image Compression"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -627,6 +655,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/06/Small-Text-Thumb-2.jpg</image:loc>
 			<image:title><![CDATA[small-text-thumb]]></image:title>
+			<image:caption><![CDATA[Title card reads "Hexagon Logo, Adobe Illustrator Tutorial"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -635,6 +664,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/02/Thumbnail-Browser-Compatibility.jpg</image:loc>
 			<image:title><![CDATA[Thumbnail---Browser-Compatibility]]></image:title>
+			<image:caption><![CDATA[Title card reads "Starting Class, Browser Compatibility"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -668,6 +698,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/07/Small-Text-Thumb.jpg</image:loc>
 			<image:title><![CDATA[small-text-thumb]]></image:title>
+			<image:caption><![CDATA[Title card reads "Transform Tool, Adobe Illustrator Tutorial"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -676,6 +707,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/06/Small-Text-Thumb.jpg</image:loc>
 			<image:title><![CDATA[small-text-thumb]]></image:title>
+			<image:caption><![CDATA[Title card reads "Edit Colours, Adobe Illustrator Tutorial"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -684,6 +716,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/04/Thumbail-1.jpg</image:loc>
 			<image:title><![CDATA[thumbail]]></image:title>
+			<image:caption><![CDATA[Title card reads "CSS Secrets, !Important"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -692,6 +725,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/04/Thumbail.jpg</image:loc>
 			<image:title><![CDATA[thumbail]]></image:title>
+			<image:caption><![CDATA[Title card reads "CSS Secrets, Box Sizing"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -700,6 +734,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/04/Ep7.-The-Box-Model-PREVIEW.jpg</image:loc>
 			<image:title><![CDATA[ep7-the-box-model-preview]]></image:title>
+			<image:caption><![CDATA[Title card reads "CSS3, Ep.7 The Box Model"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -720,6 +755,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/02/Thumbnail-Velocity.jpg</image:loc>
 			<image:title><![CDATA[Thumbnail---Velocity]]></image:title>
+			<image:caption><![CDATA[Title card reads "Starting Class, Velocity"]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -743,6 +779,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2015/11/DSC9937-1.jpg</image:loc>
 			<image:title><![CDATA[dsc9937]]></image:title>
+			<image:caption><![CDATA[Gym app on a phone in a boxing environment]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -855,7 +892,8 @@
 		<lastmod>2017-06-10T10:58:23+00:00</lastmod>
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/07/Daily-UI-005-App-Icon-1.jpg</image:loc>
-			<image:title><![CDATA[daily-ui-005-app-icon]]></image:title>
+			<image:title><![CDATA[Clock icon on square with rounded corners]]></image:title>
+			<image:caption><![CDATA[Clock icon on square with rounded corners]]></image:caption>
 		</image:image>
 		<image:image>
 			<image:loc>https://wjhm.noface.app/app/uploads/2016/07/Daily-UI-005-App-Icon-1.jpg</image:loc>
@@ -893,6 +931,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/07/Daily-UI-008-404-Error-Page-1.jpg</image:loc>
 			<image:title><![CDATA[daily-ui-008-404-error-page]]></image:title>
+			<image:caption><![CDATA[404 page design, with text that reads "the page you were looking for does not exist or can not be found."]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -984,6 +1023,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2015/12/burger-buns-1.jpg</image:loc>
 			<image:title><![CDATA[burger-buns]]></image:title>
+			<image:caption><![CDATA[Logo signature read "Burger Buns, est. 1953"]]></image:caption>
 		</image:image>
 		<image:image>
 			<image:loc>https://wjhm.noface.app/app/uploads/2015/12/Burger-Buns-02-1.png</image:loc>
@@ -1007,6 +1047,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/01/Responsive-Design-Report-Cover-1.png</image:loc>
 			<image:title><![CDATA[responsive-design-report-cover]]></image:title>
+			<image:caption><![CDATA[Title "Response Design Report" With three device illustrations]]></image:caption>
 		</image:image>
 		<image:image>
 			<image:loc>https://wjhm.noface.app/app/uploads/2016/01/Responsive-Design-Report-Cover-1.png</image:loc>
@@ -1019,6 +1060,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2015/12/sea.jpg</image:loc>
 			<image:title><![CDATA[sea]]></image:title>
+			<image:caption><![CDATA[Water next to the ocean]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -1063,6 +1105,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/03/2013-03-21-16-02-09-v2-1.jpg</image:loc>
 			<image:title><![CDATA[2013-03-21-16-02-09-v2]]></image:title>
+			<image:caption><![CDATA[Six competitors standing for a photo at the WorldSkills UK - Wales Website Design Comeptition, holding their respective trophies]]></image:caption>
 		</image:image>
 		<image:image>
 			<image:loc>https://wjhm.noface.app/app/uploads/2016/03/2013-03-21-16-02-09-v2-1.jpg</image:loc>
@@ -1125,6 +1168,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/09/Etch.jpg</image:loc>
 			<image:title><![CDATA[etch]]></image:title>
+			<image:caption><![CDATA[A group of people sitting at a table in a room]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -1133,6 +1177,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/06/Winchester-Creatives-June-2017-Jack-Davies-Featured-Image.jpg</image:loc>
 			<image:title><![CDATA[Winchester-Creatives-June-2017-Jack-Davies-Featured-Image]]></image:title>
+			<image:caption><![CDATA[A man standing in front of a table]]></image:caption>
 		</image:image>
 		<image:image>
 			<image:loc>https://wjhm.noface.app/app/uploads/2017/06/Winchester-Creatives-June-2017-Jack-Davies-e1496781888711.jpg</image:loc>
@@ -1144,6 +1189,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/09/Cs5AQx0WAAAykmF.jpg</image:loc>
 			<image:title><![CDATA[cs5aqx0waaaykmf]]></image:title>
+			<image:caption><![CDATA[A man holding a sign]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -1544,6 +1590,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/06/Enabling-WebP-Wordpress-Editor.png</image:loc>
 			<image:title><![CDATA[Enabling-WebP-Wordpress-Editor]]></image:title>
+			<image:caption><![CDATA[WordPress logo and WebP Logo]]></image:caption>
 		</image:image>
 		<image:image>
 			<image:loc>https://wjhm.noface.app/app/uploads/2017/06/JPG-vs-WebP.png</image:loc>
@@ -1572,6 +1619,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/06/DBjr1ILVwAAVZSr.png</image:loc>
 			<image:title><![CDATA[DBjr1ILVwAAVZSr]]></image:title>
+			<image:caption><![CDATA[Share Up Logo]]></image:caption>
 		</image:image>
 		<image:image>
 			<image:loc>https://wjhm.noface.app/app/uploads/2017/06/Ben-Joy-Shareup.jpg</image:loc>
@@ -1586,6 +1634,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/09/Gutenberg-Featured-Image.png</image:loc>
 			<image:title><![CDATA[Gutenberg-Featured-Image]]></image:title>
+			<image:caption><![CDATA[Letter G]]></image:caption>
 		</image:image>
 		<image:image>
 			<image:loc>https://wjhm.noface.app/app/uploads/2017/09/Gutenberg-WordPress-Editor.jpg</image:loc>
@@ -1597,6 +1646,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2018/09/20180920_215944.jpg</image:loc>
 			<image:title><![CDATA[20180920_215944]]></image:title>
+			<image:caption><![CDATA[A screen shot of a computer monitor sitting on top of a table]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -1624,6 +1674,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2015/11/River-Woods-Small-1.jpg</image:loc>
 			<image:title><![CDATA[river-woods-small]]></image:title>
+			<image:caption><![CDATA[A lake surrounded by green grass and a body of water]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -1656,6 +1707,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2015/11/DSC_0115.jpg</image:loc>
 			<image:title><![CDATA[dsc_0115]]></image:title>
+			<image:caption><![CDATA[A close up of a flower]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -1713,6 +1765,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2015/12/Book-Cover-1.jpg</image:loc>
 			<image:title><![CDATA[book-cover]]></image:title>
+			<image:caption><![CDATA[Title "Is Flat Design Here To Stay?" with checkered pattern background]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -1721,6 +1774,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/01/MOO-Card-Landscape-Template_CS4-01-1.png</image:loc>
 			<image:title><![CDATA[moo-card-landscape-template_cs4-01]]></image:title>
+			<image:caption><![CDATA[Letters J and D]]></image:caption>
 		</image:image>
 		<image:image>
 			<image:loc>https://wjhm.noface.app/app/uploads/2016/01/MOO-Card-Landscape-Template_CS4-01-1.png</image:loc>
@@ -1746,6 +1800,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/02/animating-x.jpg</image:loc>
 			<image:title><![CDATA[animating-x]]></image:title>
+			<image:caption><![CDATA[An open laptop computer sitting on top of a table]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -1795,6 +1850,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/03/Sunset-1.jpg</image:loc>
 			<image:title><![CDATA[sunset]]></image:title>
+			<image:caption><![CDATA[A crane next to a body of water with a sunset in the background]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -1838,6 +1894,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/03/Vintage-Ensembles-Logo-01-1.png</image:loc>
 			<image:title><![CDATA[vintage-ensembles-logo-01]]></image:title>
+			<image:caption><![CDATA[Text "Vintage Ensembles" on dark background]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -1846,6 +1903,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/04/IMG_0915-1.jpg</image:loc>
 			<image:title><![CDATA[img_0915]]></image:title>
+			<image:caption><![CDATA[Brown dog leaping into a pond]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -1898,6 +1956,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/06/Picture-13-1.jpg</image:loc>
 			<image:title><![CDATA[picture-13]]></image:title>
+			<image:caption><![CDATA[Paint mixed on paper]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -1915,6 +1974,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/06/Clz2Q9BVYAA4PCX-1.jpg</image:loc>
 			<image:title><![CDATA[clz2q9bvyaa4pcx]]></image:title>
+			<image:caption><![CDATA[Jack with 4 aspiring developers taking a selfie, with a photoshoped man added to the background]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2003,6 +2063,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/10/Thumbail.jpg</image:loc>
 			<image:title><![CDATA[thumbail]]></image:title>
+			<image:caption><![CDATA[CSS Secrets - ch Unit]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2040,6 +2101,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/11/Digital_Day_8.jpg</image:loc>
 			<image:title><![CDATA[digital_day_8]]></image:title>
+			<image:caption><![CDATA[Two men standing in a room]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2048,6 +2110,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/12/Flexible-WAMP-Apache-Vhosts.png</image:loc>
 			<image:title><![CDATA[flexible-wamp-apache-vhosts]]></image:title>
+			<image:caption><![CDATA[Title card reads "Flexible WAMP Apache VHosts"]]></image:caption>
 		</image:image>
 		<image:image>
 			<image:loc>https://wjhm.noface.app/app/uploads/2016/12/Folder-WAMP.png</image:loc>
@@ -2089,6 +2152,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2016/12/4be._DSC_0749.jpg</image:loc>
 			<image:title><![CDATA[4be-_dsc_0749]]></image:title>
+			<image:caption><![CDATA[A group of people sitting at a table in a room]]></image:caption>
 		</image:image>
 		<image:image>
 			<image:loc>https://wjhm.noface.app/app/uploads/2016/12/20161114_184622.jpg</image:loc>
@@ -2191,6 +2255,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/01/Crisp-Janabelle.jpg</image:loc>
 			<image:title><![CDATA[Crisp-Janabelle]]></image:title>
+			<image:caption><![CDATA[Berries and branches on a scanner bed]]></image:caption>
 		</image:image>
 		<image:image>
 			<image:loc>https://wjhm.noface.app/app/uploads/2017/01/Crisp-Janabelle.jpg</image:loc>
@@ -2308,6 +2373,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/02/IMG_0029.jpg</image:loc>
 			<image:title><![CDATA[IMG_0029]]></image:title>
+			<image:caption><![CDATA[A close up of a green traffic light at night]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2316,6 +2382,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/02/Reasons.London.jpg</image:loc>
 			<image:title><![CDATA[Reasons.London]]></image:title>
+			<image:caption><![CDATA[Advert, reads "Old St, London - Feb 16th - 2017, Reason.London - Design, Code &amp; Create]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2324,6 +2391,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/02/DSC00130.jpg</image:loc>
 			<image:title><![CDATA[DSC00130]]></image:title>
+			<image:caption><![CDATA[A group of people sitting at a desk in an office]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2332,6 +2400,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/02/IMG_9997.jpg</image:loc>
 			<image:title><![CDATA[IMG_9997]]></image:title>
+			<image:caption><![CDATA[A man standing in front of a crowd]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2417,6 +2486,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2017/04/wpbournemouth-meetup-event-2017-april-jack-davies.jpg</image:loc>
 			<image:title><![CDATA[wpbournemouth-meetup-event-2017-april-jack-davies]]></image:title>
+			<image:caption><![CDATA[A house that is parked on the side of a building]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2450,6 +2520,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/03/john-schnobrich-520022-unsplash-e1553721665325.jpg</image:loc>
 			<image:title><![CDATA[john-schnobrich-520022-unsplash]]></image:title>
+			<image:caption><![CDATA[A person using a laptop computer]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2466,6 +2537,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/04/20190330_163143.jpg</image:loc>
 			<image:title><![CDATA[20190330_163143]]></image:title>
+			<image:caption><![CDATA[A group of people sitting at a table in front of a crowd]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2483,6 +2555,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/05/kaleidico-754525-unsplash.jpg</image:loc>
 			<image:title><![CDATA[kaleidico-754525-unsplash]]></image:title>
+			<image:caption><![CDATA[A man standing next to a laptop]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2491,6 +2564,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/05/D6wrf81XYAAPDpr.jpg</image:loc>
 			<image:title><![CDATA[D6wrf81XYAAPDpr]]></image:title>
+			<image:caption><![CDATA[A group of people sitting at a table]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2499,6 +2573,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/05/bonneval-sebastien-1508412-unsplash.jpg</image:loc>
 			<image:title><![CDATA[bonneval-sebastien-1508412-unsplash]]></image:title>
+			<image:caption><![CDATA[Text, letter]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2507,6 +2582,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/05/med-badr-chemmaoui-630239-unsplash.jpg</image:loc>
 			<image:title><![CDATA[med-badr-chemmaoui-630239-unsplash]]></image:title>
+			<image:caption><![CDATA[Text, letter]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2515,6 +2591,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/04/daniel-mccullough-348488-unsplash.jpg</image:loc>
 			<image:title><![CDATA[daniel-mccullough-348488-unsplash]]></image:title>
+			<image:caption><![CDATA[A man using a laptop computer sitting on top of a wooden table]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2523,6 +2600,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/10/hello-i-m-nik-1vcdRrWAt-o-unsplash.jpg</image:loc>
 			<image:title><![CDATA[hello-i-m-nik-1vcdRrWAt-o-unsplash]]></image:title>
+			<image:caption><![CDATA[A group of colorful balloons]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2768,6 +2846,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/11/noor-younis-mId2gG0a9GU-unsplash.jpg</image:loc>
 			<image:title><![CDATA[noor-younis-mId2gG0a9GU-unsplash]]></image:title>
+			<image:caption><![CDATA[A clock in the middle of a watch]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2776,6 +2855,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/10/filiberto-santillan-1HCb2gPk3ik-unsplash.jpg</image:loc>
 			<image:title><![CDATA[filiberto-santillan-1HCb2gPk3ik-unsplash]]></image:title>
+			<image:caption><![CDATA[Text]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2784,6 +2864,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/10/m-b-m-ZzOa5G8hSPI-unsplash.jpg</image:loc>
 			<image:title><![CDATA[m-b-m-ZzOa5G8hSPI-unsplash]]></image:title>
+			<image:caption><![CDATA[A screen shot of a computer]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2792,6 +2873,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/09/stephen-monroe-yg8Cz-i5U30-unsplash.jpg</image:loc>
 			<image:title><![CDATA[stephen-monroe-yg8Cz-i5U30-unsplash]]></image:title>
+			<image:caption><![CDATA[Map]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2800,6 +2882,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/09/paulius-dragunas-uw_NWjC1mBE-unsplash.jpg</image:loc>
 			<image:title><![CDATA[paulius-dragunas-uw_NWjC1mBE-unsplash]]></image:title>
+			<image:caption><![CDATA[A circuit board]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2824,6 +2907,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/11/francisco-jacquier-iv6Xbp11olc-unsplash-1.jpg</image:loc>
 			<image:title><![CDATA[francisco-jacquier-iv6Xbp11olc-unsplash (1)]]></image:title>
+			<image:caption><![CDATA[A close up of a toy]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2832,6 +2916,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2020/01/Storybook-Atomic-Design-Atomic-Design-Principles.jpg</image:loc>
 			<image:title><![CDATA[Storybook - Atomic Design - Atomic Design Principles]]></image:title>
+			<image:caption><![CDATA[A man wearing glasses and smiling at the camera]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2896,6 +2981,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/12/Storybook-Atomic-Design-Building-Our-Navigation.jpg</image:loc>
 			<image:title><![CDATA[Storybook - Atomic Design - Building Our Navigation]]></image:title>
+			<image:caption><![CDATA[A man wearing glasses and looking at the camera]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2904,6 +2990,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2020/01/Storybook-Atomic-Design-1.10.-Building-Our-Footer.jpg</image:loc>
 			<image:title><![CDATA[Storybook &amp; Atomic Design - 1.10. - Building Our Footer]]></image:title>
+			<image:caption><![CDATA[A man wearing glasses and smiling at the camera]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -2920,6 +3007,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2020/01/Storybook-Atomic-Design-Course-Overview.jpg</image:loc>
 			<image:title><![CDATA[Storybook - Atomic Design - Course Overview]]></image:title>
+			<image:caption><![CDATA[A man wearing glasses and smiling at the camera]]></image:caption>
 		</image:image>
 	</url>
 	<url>

@@ -10,6 +10,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/05/thiago-barletta-717501-unsplash.jpg</image:loc>
 			<image:title><![CDATA[thiago-barletta-717501-unsplash]]></image:title>
+			<image:caption><![CDATA[A person cutting a piece of paper]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -26,6 +27,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/04/sharegrid-474299-unsplash.jpg</image:loc>
 			<image:title><![CDATA[sharegrid-474299-unsplash]]></image:title>
+			<image:caption><![CDATA[A close up of electronics]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -34,6 +36,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/05/brooke-lark-609899-unsplash.jpg</image:loc>
 			<image:title><![CDATA[brooke-lark-609899-unsplash]]></image:title>
+			<image:caption><![CDATA[A woman using a tablet to search for images]]></image:caption>
 		</image:image>
 	</url>
 	<url>
@@ -60,6 +63,7 @@
 		<image:image>
 			<image:loc>https://whatjackhasmade-london.storage.googleapis.com/app/uploads/2019/04/alvaro-cvg-455239-unsplash.jpg</image:loc>
 			<image:title><![CDATA[alvaro-cvg-455239-unsplash]]></image:title>
+			<image:caption><![CDATA[A group of people at a wedding letting going of wedding balloons]]></image:caption>
 		</image:image>
 	</url>
 </urlset>
